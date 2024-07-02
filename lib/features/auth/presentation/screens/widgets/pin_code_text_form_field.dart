@@ -1,20 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:flutter/material.dart';
-import 'package:pinput/pinput.dart';
-import 'package:smart_auth/smart_auth.dart';
+import "package:flutter/material.dart";
+import "package:halla/generated/l10n.dart";
+import "package:pinput/pinput.dart";
+import "package:smart_auth/smart_auth.dart";
 
-import 'package:halla/core/theme/app_colors.dart';
-import 'package:halla/features/auth/presentation/screens/sign%20in/bodys/sms_retriever_impl.dart';
+import "package:halla/core/theme/app_colors.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/bodys/sms_retriever_impl.dart";
 
 class CustomPinCodeField extends StatefulWidget {
   final TextEditingController pinController;
   const CustomPinCodeField({
-    super.key,
-    required this.pinController,
+    required this.pinController, super.key,
   });
 
   @override
   State<CustomPinCodeField> createState() => _CustomPinCodeFieldState();
+ 
 }
 
 class _CustomPinCodeFieldState extends State<CustomPinCodeField> {
@@ -39,11 +40,11 @@ class _CustomPinCodeFieldState extends State<CustomPinCodeField> {
 
   @override
   Widget build(BuildContext context) {
-    final focusedBorderColor = AppColors.primary;
-    const fillColor = Color.fromRGBO(243, 246, 249, 0);
-    final borderColor = AppColors.gray;
+    final Color focusedBorderColor = AppColors.primary;
+    const Color fillColor = Color.fromRGBO(243, 246, 249, 0);
+    final Color borderColor = AppColors.gray;
 
-    final defaultPinTheme = PinTheme(
+    final PinTheme defaultPinTheme = PinTheme(
       width: 56,
       height: 56,
       textStyle: TextStyle(
@@ -63,20 +64,18 @@ class _CustomPinCodeFieldState extends State<CustomPinCodeField> {
         focusNode: focusNode,
         defaultPinTheme: defaultPinTheme,
         length: 6,
-        separatorBuilder: (index) => const SizedBox(width: 8),
-        validator: (value) {
-          return value?.length == 6 ? null : 'Pin is incorrect';
-        },
+        separatorBuilder: (int index) => const SizedBox(width: 8),
+        validator: (String? value) => value?.length == 6 ? null : S.of(context).pinIsIncorrect,
         hapticFeedbackType: HapticFeedbackType.lightImpact,
-        onCompleted: (pin) {
-          debugPrint('onCompleted: $pin');
+        onCompleted: (String pin) {
+          debugPrint("onCompleted: $pin");
         },
-        onChanged: (value) {
-          debugPrint('onChanged: $value');
+        onChanged: (String value) {
+          debugPrint("onChanged: $value");
         },
         cursor: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
+          children: <Widget>[
             Container(
               margin: const EdgeInsets.only(bottom: 9),
               width: 22,
@@ -104,4 +103,5 @@ class _CustomPinCodeFieldState extends State<CustomPinCodeField> {
       ),
     );
   }
+ 
 }

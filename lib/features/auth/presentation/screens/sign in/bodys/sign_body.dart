@@ -1,13 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:halla/core/common/app_images.dart';
-import 'package:halla/core/theme/app_colors.dart';
-import 'package:halla/core/theme/theme.dart';
-import 'package:halla/core/utils/routting.dart';
-import 'package:halla/features/auth/presentation/screens/log%20in/login_screen.dart';
-import 'package:halla/features/auth/presentation/screens/sign%20in/pin_code_screen.dart';
-import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:halla/core/common/app_images.dart";
+import "package:halla/core/theme/app_colors.dart";
+import "package:halla/core/theme/theme.dart";
+import "package:halla/core/utils/routting.dart";
+import "package:halla/features/auth/presentation/screens/log%20in/login_screen.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/pin_code_screen.dart";
+import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
+import "package:halla/generated/l10n.dart";
 
 class SignBody extends StatefulWidget {
   const SignBody({super.key});
@@ -17,7 +18,7 @@ class SignBody extends StatefulWidget {
 }
 
 class _SignBodyState extends State<SignBody> {
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -48,14 +49,13 @@ class _SignBodyState extends State<SignBody> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Form(
+  Widget build(BuildContext context) => Form(
       key: formKey,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
-          children: [
+          children: <Widget>[
             SvgPicture.asset(
               AppImages.signVector,
               height: 200.h,
@@ -67,11 +67,11 @@ class _SignBodyState extends State<SignBody> {
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
+                  children: <Widget>[
                     CustomTextFormField(
                       control: emailController,
                       focusNode: emailFocus,
-                      hintText: "Email",
+                      hintText: S.of(context).email,
                       prefixIcon: Icons.email_outlined,
                       keyboardType: TextInputType.emailAddress,
                       onEditingComplete: () =>
@@ -83,7 +83,7 @@ class _SignBodyState extends State<SignBody> {
                     CustomTextFormField(
                       control: phoneController,
                       focusNode: phoneFocus,
-                      hintText: "Phone",
+                      hintText: S.of(context).phone,
                       prefixIcon: Icons.phone_outlined,
                       keyboardType: TextInputType.phone,
                       onEditingComplete: () =>
@@ -95,7 +95,7 @@ class _SignBodyState extends State<SignBody> {
                     CustomTextFormField(
                       control: passwordController,
                       focusNode: passwordFocus,
-                      hintText: "Password",
+                      hintText: S.of(context).password,
                       prefixIcon: Icons.lock_outlined,
                       suffixIcon: Icons.remove_red_eye_outlined,
                       obscureText: true,
@@ -108,7 +108,7 @@ class _SignBodyState extends State<SignBody> {
                     CustomTextFormField(
                       control: confirmPasswordController,
                       focusNode: confirmPasswordFocus,
-                      hintText: "Confirm Password",
+                      hintText: S.of(context).confirmPassword,
                       prefixIcon: Icons.lock_outlined,
                       suffixIcon: Icons.remove_red_eye_outlined,
                       obscureText: true,
@@ -122,7 +122,7 @@ class _SignBodyState extends State<SignBody> {
                         // TODO: register Sign in
                         navigatePush(context, const PinCodeScreen());
                       },
-                      child: const Text("Register"),
+                      child: Text(S.of(context).register),
                     ),
                     SizedBox(
                       height: 15.h,
@@ -133,7 +133,7 @@ class _SignBodyState extends State<SignBody> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
+                      children: <Widget>[
                         _iconsSouxile(
                           image: AppImages.facebookIcon,
                           onTap: () {
@@ -162,11 +162,12 @@ class _SignBodyState extends State<SignBody> {
                               fontSize: 16.sp,
                               color: AppColors.gray,
                             ),
-                            children: [
-                              const TextSpan(
-                                  text: "Already I have An Acount ? "),
+                            children: <InlineSpan>[
                               TextSpan(
-                                text: 'Login.',
+                                text: S.of(context).alreadyIHaveAnAcount,
+                              ),
+                              TextSpan(
+                                text: S.of(context).login,
                                 style: TextStyle(
                                   fontSize: 16.sp,
                                   color: AppColors.primary,
@@ -188,12 +189,9 @@ class _SignBodyState extends State<SignBody> {
         ),
       ),
     );
-  }
 
-  Widget _or() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
+  Widget _or() => Row(
+      children: <Widget>[
         Expanded(
           child: Container(
             height: 2,
@@ -207,7 +205,7 @@ class _SignBodyState extends State<SignBody> {
           width: 15.w,
         ),
         Text(
-          "OR",
+          S.of(context).or,
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: AppColors.gray,
               ),
@@ -226,13 +224,11 @@ class _SignBodyState extends State<SignBody> {
         ),
       ],
     );
-  }
 
   Widget _iconsSouxile({
     required String image,
     required Function() onTap,
-  }) {
-    return GestureDetector(
+  }) => GestureDetector(
       onTap: onTap,
       child: Container(
         width: 50.w,
@@ -245,9 +241,8 @@ class _SignBodyState extends State<SignBody> {
           borderRadius: BorderRadius.all(Radius.circular(8.w)),
         ),
         child: SvgPicture.asset(
-          image.toString(),
+          image,
         ),
       ),
     );
-  }
-}
+ }

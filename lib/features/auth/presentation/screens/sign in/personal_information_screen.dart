@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:halla/core/common/app_images.dart';
-import 'package:halla/core/theme/app_colors.dart';
-import 'package:halla/core/theme/theme.dart';
-import 'package:halla/features/auth/presentation/screens/sign%20in/bodys/custom_birthday_field.dart';
-import 'package:halla/features/auth/presentation/screens/sign%20in/bodys/custom_nationality_field.dart';
-import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:halla/core/common/app_images.dart";
+import "package:halla/core/theme/app_colors.dart";
+import "package:halla/core/theme/theme.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/bodys/custom_birthday_field.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/bodys/custom_company_field.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/bodys/custom_nationality_field.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/bodys/custom_social_media_field.dart";
+import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
+import "package:halla/generated/l10n.dart";
 
 class PersonalInformationScreen extends StatefulWidget {
   const PersonalInformationScreen({super.key});
@@ -16,7 +19,7 @@ class PersonalInformationScreen extends StatefulWidget {
 }
 
 class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController dateOfBirthController = TextEditingController();
   final TextEditingController nationalityController = TextEditingController();
@@ -36,18 +39,17 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
       TextEditingController();
   final TextEditingController socialTwitterController = TextEditingController();
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       body: SafeArea(
         child: Stack(
-          children: [
+          children: <Widget>[
             Align(
               alignment: AlignmentDirectional.bottomCenter,
               child: Container(
                 width: double.maxFinite,
                 height: 1.sh,
                 decoration: BoxDecoration(
-                  boxShadow: [
+                  boxShadow: <BoxShadow>[
                     BoxShadow(
                       color: AppColors.primary.withOpacity(0.1),
                       blurRadius: 1.sh,
@@ -65,27 +67,28 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
             Form(
               key: formKey,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: SingleChildScrollView(
                   child: Column(
-                    children: [
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
                       SizedBox(
                         height: 25.h,
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                          children: <Widget>[
                             Text(
-                              'Personal \nInformation',
+                              S.of(context).personalNinformation,
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                             GestureDetector(
                               onTap: () {
                                 //TODO: make the Skip on tap that is navigate to the home screen
                               },
-                              child: Container(
+                              child: DecoratedBox(
                                 decoration: BoxDecoration(
                                   border: Border(
                                     bottom: BorderSide(
@@ -94,7 +97,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                                   ),
                                 ),
                                 child: Text(
-                                  'Skip',
+                                  S.of(context).skip,
                                   style: Theme.of(context)
                                       .textTheme
                                       .bodyMedium!
@@ -105,45 +108,49 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                           ],
                         ),
                       ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
                       CustomTextFormField(
                         control: nameController,
-                        hintText: "Full Name",
+                        hintText: S.of(context).fullName,
                         prefixIcon: Icons.person_2_outlined,
                       ),
                       SizedBox(
-                        height: 10.h,
+                        height: 20.h,
                       ),
                       BirthdayPickerTextField(
-                          controller: dateOfBirthController),
+                          controller: dateOfBirthController,),
                       SizedBox(
-                        height: 10.h,
+                        height: 20.h,
                       ),
                       CustomNationalityField(controller: nationalityController),
-                      CustomTextFormField(
-                        control: nationalityController,
-                        hintText: "Nationality",
-                        prefixIcon: AppImages.nationalityIcon,
-                        prefixIconIsImage: true,
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      CustomSocialMediaField(
+                        socialFacebookController: socialFacebookController,
+                        socialInstagramController: socialInstagramController,
+                        socialLinkedinController: socialLinkedinController,
+                        socialTwitterController: socialTwitterController,
                       ),
                       SizedBox(
-                        height: 10.h,
+                        height: 5.h,
                       ),
-                      CustomTextFormField(
-                        control: nameController,
-                        hintText: "Full Name",
-                        prefixIcon: Icons.person_2_outlined,
-                      ),
-                      SizedBox(
-                        height: 10.h,
-                      ),
-                      CustomTextFormField(
-                        control: nameController,
-                        hintText: "Full Name",
-                        prefixIcon: Icons.person_2_outlined,
+                      CustomCompanyField(
+                        companyNameController: companyNameController,
+                        companyPhoneController: companyPhoneController,
+                        companyWebsiteController: companyWebsiteController,
+                        companyPositonController: companyPositonController,
                       ),
                       SizedBox(
-                        height: 10.h,
+                        height: 20.h,
                       ),
+                      ElevatedButton(
+                          onPressed: () {
+                            //TODO: Make the upload the user data
+                          },
+                          child: Text(S.of(context).next),),
                     ],
                   ),
                 ),
@@ -153,5 +160,4 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
         ),
       ),
     );
-  }
-}
+ }

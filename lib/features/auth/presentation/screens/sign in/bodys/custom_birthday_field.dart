@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
+import 'package:halla/generated/l10n.dart';
 
 class BirthdayPickerTextField extends StatefulWidget {
   final TextEditingController controller;
@@ -40,7 +41,7 @@ class _BirthdayPickerTextFieldState extends State<BirthdayPickerTextField> {
       child: IgnorePointer(
         child: CustomTextFormField(
           control: widget.controller,
-          hintText: "Data Of Birth",
+          hintText: S.of(context).dataOfBirth,
           prefixIcon: Icons.calendar_today_outlined,
         ),
       ),

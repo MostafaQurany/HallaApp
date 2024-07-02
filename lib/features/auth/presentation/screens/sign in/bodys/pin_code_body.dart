@@ -1,11 +1,12 @@
-import 'dart:async';
+import "dart:async";
 
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:halla/core/theme/app_colors.dart';
-import 'package:halla/core/utils/routting.dart';
-import 'package:halla/features/auth/presentation/screens/sign%20in/personal_information_screen.dart';
-import 'package:halla/features/auth/presentation/screens/widgets/pin_code_text_form_field.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:halla/core/theme/app_colors.dart";
+import "package:halla/core/utils/routting.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/personal_information_screen.dart";
+import "package:halla/features/auth/presentation/screens/widgets/pin_code_text_form_field.dart";
+import "package:halla/generated/l10n.dart";
 
 class PinCodeBody extends StatefulWidget {
   const PinCodeBody({super.key});
@@ -16,14 +17,14 @@ class PinCodeBody extends StatefulWidget {
 
 class _PinCodeBodyState extends State<PinCodeBody> {
   final TextEditingController pinController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  static const maxSeconds = 60; // Set the countdown duration in seconds
+  static const int maxSeconds = 60; // Set the countdown duration in seconds
   int seconds = maxSeconds;
   Timer? timer;
 
   void startTimer() {
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       setState(() {
         if (seconds > 0) {
           seconds--;
@@ -57,12 +58,11 @@ class _PinCodeBodyState extends State<PinCodeBody> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
+  Widget build(BuildContext context) => Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+      children: <Widget>[
         Text(
-          "Please enter verification code \nSent to your phone number.",
+          S.of(context).pleaseEnterVerificationCodeNsentToYourPhoneNumber,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: AppColors.gray,
               ),
@@ -85,24 +85,24 @@ class _PinCodeBodyState extends State<PinCodeBody> {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: <Widget>[
             GestureDetector(
               onTap: () {
                 if (seconds == 0) {
                   resetTimer();
                 }
               },
-              child: Container(
+              child: DecoratedBox(
                 decoration: BoxDecoration(
                     border: Border(
                   bottom: BorderSide(
                     color: AppColors.gray,
                   ),
-                )),
+                ),),
                 child: Text(
-                  "Resend Code",
+                  S.of(context).resendCode,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: seconds == 0 ? AppColors.primary : AppColors.gray),
+                      color: seconds == 0 ? AppColors.primary : AppColors.gray,),
                 ),
               ),
             ),
@@ -112,20 +112,20 @@ class _PinCodeBodyState extends State<PinCodeBody> {
                   .textTheme
                   .bodyMedium!
                   .copyWith(color: AppColors.primary),
-            )
+            ),
           ],
         ),
         SizedBox(
           height: 30.h,
         ),
         ElevatedButton(
-            onPressed: () {
-              // TODO : make the validator of the sms
-              navigatePushReplaceRemoveAll(
-                  context, const PersonalInformationScreen());
-            },
-            child: const Text("Verified"))
+          onPressed: () {
+            // TODO : make the validator of the sms
+            navigatePushReplaceRemoveAll(
+                context, const PersonalInformationScreen(),);
+          },
+          child: Text(S.of(context).verified),
+        ),
       ],
     );
-  }
-}
+ }

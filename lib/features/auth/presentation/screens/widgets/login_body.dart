@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:halla/core/common/app_images.dart';
-import 'package:halla/core/theme/app_colors.dart';
-import 'package:halla/core/theme/theme.dart';
-import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:flutter_svg/flutter_svg.dart";
+import "package:halla/core/common/app_images.dart";
+import "package:halla/core/theme/app_colors.dart";
+import "package:halla/core/theme/theme.dart";
+import "package:halla/core/utils/validation.dart";
+import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
+import "package:halla/generated/l10n.dart";
 
 class LoginBody extends StatefulWidget {
   const LoginBody({super.key});
@@ -14,7 +16,7 @@ class LoginBody extends StatefulWidget {
 }
 
 class _LoginBodyState extends State<LoginBody> {
-  final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -36,15 +38,14 @@ class _LoginBodyState extends State<LoginBody> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Form(
+  Widget build(BuildContext context) => Form(
       key: formKey,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+            children: <Widget>[
               SizedBox(
                 height: 40.h,
               ),
@@ -57,10 +58,11 @@ class _LoginBodyState extends State<LoginBody> {
               ),
               CustomTextFormField(
                 control: emailController,
-                hintText: "Email",
+                hintText: S.of(context).email,
                 prefixIcon: Icons.email_outlined,
                 keyboardType: TextInputType.emailAddress,
                 focusNode: emailFocus,
+                fieldType: FieldType.email,
                 onEditingComplete: () =>
                     FocusScope.of(context).requestFocus(passwordFocus),
               ),
@@ -69,19 +71,24 @@ class _LoginBodyState extends State<LoginBody> {
               ),
               CustomTextFormField(
                 control: passwordController,
-                hintText: "Password",
+                hintText: S.of(context).password,
                 prefixIcon: Icons.lock_outlined,
                 suffixIcon: Icons.remove_red_eye_outlined,
                 obscureText: true,
                 focusNode: passwordFocus,
+                fieldType: FieldType.password,
                 onEditingComplete: () => FocusScope.of(context).unfocus(),
               ),
               SizedBox(
                 height: 15.h,
               ),
               ElevatedButton(
-                onPressed: () {},
-                child: const Text("Login"),
+                onPressed: () {
+                  if(formKey.currentState!.validate()){
+                    //TODO: Login to Home 
+                  }
+                },
+                child: Text(S.of(context).login),
               ),
               SizedBox(
                 height: 15.h,
@@ -92,7 +99,7 @@ class _LoginBodyState extends State<LoginBody> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
+                children: <Widget>[
                   _iconsSouxile(
                     image: AppImages.facebookIcon,
                     onTap: () {
@@ -125,7 +132,7 @@ class _LoginBodyState extends State<LoginBody> {
                             : AppImages.nfcIconDark,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(
@@ -140,10 +147,10 @@ class _LoginBodyState extends State<LoginBody> {
                         fontSize: 16.sp,
                         color: AppColors.gray,
                       ),
-                      children: [
-                        const TextSpan(text: "I Don't Have an Account ? "),
+                      children: <InlineSpan>[
+                         TextSpan(text: S.of(context).iDontHaveAnAccount),
                         TextSpan(
-                          text: 'Register.',
+                          text: S.of(context).register,
                           style: TextStyle(
                             fontSize: 16.sp,
                             color: AppColors.primary,
@@ -162,12 +169,9 @@ class _LoginBodyState extends State<LoginBody> {
         ),
       ),
     );
-  }
 
-  Widget _or() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
+  Widget _or() => Row(
+      children: <Widget>[
         Expanded(
           child: Container(
             height: 2,
@@ -181,7 +185,7 @@ class _LoginBodyState extends State<LoginBody> {
           width: 15.w,
         ),
         Text(
-          "OR",
+          S.of(context).or,
           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                 color: AppColors.gray,
               ),
@@ -200,13 +204,11 @@ class _LoginBodyState extends State<LoginBody> {
         ),
       ],
     );
-  }
 
   Widget _iconsSouxile({
     required String image,
     required Function() onTap,
-  }) {
-    return GestureDetector(
+  }) => GestureDetector(
       onTap: onTap,
       child: Container(
         width: 50.w,
@@ -219,9 +221,8 @@ class _LoginBodyState extends State<LoginBody> {
           borderRadius: BorderRadius.all(Radius.circular(8.w)),
         ),
         child: SvgPicture.asset(
-          image.toString(),
+          image,
         ),
       ),
     );
-  }
-}
+ }

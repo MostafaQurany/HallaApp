@@ -1,9 +1,11 @@
-/// AuthRepository is an abstract class defining the contract for operations
-/// related to data within the domain layer.
-/// Concrete implementations of this repository interface will be provided
-/// in the data layer to interact with specific data sources (e.g., API, database).
+import 'package:fpdart/fpdart.dart';
+import 'package:halla/core/domain/entities/user.dart';
+import 'package:halla/core/error/failure.dart';
+
 abstract class AuthRepository {
-
-
-
+  Future<Either<Failure, User>> signInWithEmailPassword({
+    required String email,
+    required String password,
+  });
+  
 }

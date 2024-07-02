@@ -1,8 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class SocialMedia {
-  final String facebook; 
-  final String instagram; 
-  final String linkedin; 
+  final String facebook;
+  final String instagram;
+  final String linkedin;
   final String twitter;
   SocialMedia({
     required this.facebook,
@@ -10,5 +9,4 @@ class SocialMedia {
     required this.linkedin,
     required this.twitter,
   });
-
 }

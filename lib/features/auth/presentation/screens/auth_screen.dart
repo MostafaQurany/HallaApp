@@ -1,38 +1,38 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:halla/core/common/app_images.dart';
-import 'package:halla/core/theme/theme.dart';
-import 'package:halla/core/utils/routting.dart';
-import 'package:halla/features/auth/presentation/screens/log%20in/login_screen.dart';
-import 'package:halla/features/auth/presentation/screens/widgets/guest_button.dart';
-import 'package:halla/features/auth/presentation/screens/widgets/register_button.dart';
+import "package:flutter/material.dart";
+import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:halla/core/common/app_images.dart";
+import "package:halla/core/theme/theme.dart";
+import "package:halla/core/utils/routting.dart";
+import "package:halla/features/auth/presentation/screens/log%20in/login_screen.dart";
+import "package:halla/features/auth/presentation/screens/widgets/guest_button.dart";
+import "package:halla/features/auth/presentation/screens/widgets/register_button.dart";
+import "package:halla/generated/l10n.dart";
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
 
   @override
-  Widget build(context) {
-    return Scaffold(
+  Widget build(BuildContext  context) => Scaffold(
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: <Widget>[
             const GuestButton(),
             Expanded(
               child: Stack(
-                children: [
+                children: <Widget>[
                   Image(
                     image: AssetImage(AppTheme.isLight(context)
                         ? AppImages.registertionBackgroundlight
-                        : AppImages.registertionBackgroundDark),
+                        : AppImages.registertionBackgroundDark,),
                     fit: BoxFit.fill,
                     width: 1.sw,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
+                      children: <Widget>[
                         SizedBox(
                           height: 25.h,
                         ),
@@ -51,7 +51,9 @@ class AuthScreen extends StatelessWidget {
                           onPressed: () {
                             navigatePush(context, const LoginScreen());
                           },
-                          child: const Text("Login"),
+                          child: Text(S
+                          
+                          .of(context).login,),
                         ),
                         SizedBox(
                           height: 10.h,
@@ -62,7 +64,7 @@ class AuthScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -70,5 +72,4 @@ class AuthScreen extends StatelessWidget {
         ),
       ),
     );
-  }
 }
