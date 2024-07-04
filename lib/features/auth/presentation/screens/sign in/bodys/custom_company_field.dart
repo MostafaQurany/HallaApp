@@ -8,7 +8,11 @@ import "package:halla/generated/l10n.dart";
 
 class CustomCompanyField extends StatefulWidget {
   const CustomCompanyField({
-    required this.companyNameController, required this.companyPhoneController, required this.companyWebsiteController, required this.companyPositonController, super.key,
+    required this.companyNameController,
+    required this.companyPhoneController,
+    required this.companyWebsiteController,
+    required this.companyPositonController,
+    super.key,
   });
   final TextEditingController companyNameController;
   final TextEditingController companyPhoneController;
@@ -17,7 +21,7 @@ class CustomCompanyField extends StatefulWidget {
 
   @override
   State<CustomCompanyField> createState() => _CustomCompanyFieldState();
- }
+}
 
 class _CustomCompanyFieldState extends State<CustomCompanyField>
     with TickerProviderStateMixin {
@@ -69,107 +73,110 @@ class _CustomCompanyFieldState extends State<CustomCompanyField>
 
   @override
   Widget build(BuildContext context) => Column(
-      children: <Widget>[
-        GestureDetector(
-          onTap: _toggleExpanded,
-          child: Container(
-            width: 1.sw,
-            height: 45.h,
-            decoration: BoxDecoration(
-              color: Theme.of(context).inputDecorationTheme.fillColor,
-              borderRadius: BorderRadius.circular(16.w),
-              border: Border.all(
-                color: _isExpanded
-                    ? AppColors.primary
-                    : Theme.of(context)
-                        .inputDecorationTheme
-                        .border!
-                        .borderSide
-                        .color,
+        children: <Widget>[
+          GestureDetector(
+            onTap: _toggleExpanded,
+            child: Container(
+              width: 1.sw,
+              height: 45.h,
+              decoration: BoxDecoration(
+                color: Theme.of(context).inputDecorationTheme.fillColor,
+                borderRadius: BorderRadius.circular(16.w),
+                border: Border.all(
+                  color: _isExpanded
+                      ? AppColors.primary
+                      : Theme.of(context)
+                          .inputDecorationTheme
+                          .border!
+                          .borderSide
+                          .color,
+                ),
+              ),
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  ImageIcon(
+                    AssetImage(AppImages.companyIcon),
+                    color: AppColors.gray,
+                    size: 32.sp,
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Expanded(
+                    child: Text(
+                      S.of(context).company,
+                      maxLines: 1,
+                      style: _isExpanded
+                          ? Theme.of(context).textTheme.bodyMedium!
+                          : Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: AppColors.gray),
+                    ),
+                  ),
+                  Icon(
+                    _isExpanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    color: AppColors.gray,
+                  ),
+                ],
               ),
             ),
-            padding: const EdgeInsets.all(8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                ImageIcon(
-                  AssetImage(AppImages.companyIcon),
-                  color: AppColors.gray,
-                  size: 32.sp,
-                ),
-                SizedBox(
-                  width: 10.w,
-                ),
-                Expanded(
-                  child: Text(
-                    S.of(context).company,
-                    maxLines: 1,
-                    style: _isExpanded
-                        ? Theme.of(context).textTheme.bodyMedium!
-                        : Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(color: AppColors.gray),
+          ),
+          SizedBox(
+            height: 15.h,
+          ),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: AppTheme.isLight(context)
+                  ? AppColors.white
+                  : AppColors.blackLight,
+              borderRadius: BorderRadius.circular(16.w),
+            ),
+            child: SizeTransition(
+              sizeFactor: _animationController
+                  .drive(CurveTween(curve: Curves.easeInOut)),
+              axisAlignment: 1,
+              child: Column(
+                children: <Widget>[
+                  CustomTextFormField(
+                    control: widget.companyNameController,
+                    hintText: S.of(context).name,
+                    focusNode: companyNameFocus,
+                    keyboardType: TextInputType.name,
+                    onEditingComplete: () =>
+                        FocusScope.of(context).requestFocus(companyPhoneFocus),
                   ),
-                ),
-                Icon(
-                  _isExpanded
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
-                  color: AppColors.gray,
-                ),
-              ],
+                  CustomTextFormField(
+                    control: widget.companyPhoneController,
+                    hintText: S.of(context).phone,
+                    focusNode: companyPhoneFocus,
+                    keyboardType: TextInputType.phone,
+                    onEditingComplete: () => FocusScope.of(context)
+                        .requestFocus(companyWebsiteFocus),
+                  ),
+                  CustomTextFormField(
+                    control: widget.companyWebsiteController,
+                    hintText: S.of(context).website,
+                    focusNode: companyWebsiteFocus,
+                    keyboardType: TextInputType.emailAddress,
+                    onEditingComplete: () => FocusScope.of(context)
+                        .requestFocus(companyPositonFocus),
+                  ),
+                  CustomTextFormField(
+                    control: widget.companyPositonController,
+                    hintText: S.of(context).positon,
+                    keyboardType: TextInputType.name,
+                    focusNode: companyPositonFocus,
+                    onEditingComplete: () => FocusScope.of(context).unfocus(),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          height: 15.h,
-        ),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: AppTheme.isLight(context)
-                ? AppColors.white
-                : AppColors.blackLight,
-            borderRadius: BorderRadius.circular(16.w),
-          ),
-          child: SizeTransition(
-            sizeFactor:
-                _animationController.drive(CurveTween(curve: Curves.easeInOut)),
-            axisAlignment: 1,
-            child: Column(
-              children: <Widget>[
-                CustomTextFormField(
-                  control: widget.companyNameController,
-                  hintText: S.of(context).name,
-                  focusNode: companyNameFocus,
-                  onEditingComplete: () =>
-                      FocusScope.of(context).requestFocus(companyPhoneFocus),
-                ),
-                CustomTextFormField(
-                  control: widget.companyPhoneController,
-                  hintText: S.of(context).phone,
-                  focusNode: companyPhoneFocus,
-                  onEditingComplete: () =>
-                      FocusScope.of(context).requestFocus(companyWebsiteFocus),
-                ),
-                CustomTextFormField(
-                  control: widget.companyWebsiteController,
-                  hintText: S.of(context).website,
-                  focusNode: companyWebsiteFocus,
-                  onEditingComplete: () =>
-                      FocusScope.of(context).requestFocus(companyPositonFocus),
-                ),
-                CustomTextFormField(
-                  control: widget.companyPositonController,
-                  hintText: S.of(context).positon,
-                  focusNode: companyPositonFocus,
-                  onEditingComplete: () => FocusScope.of(context).unfocus(),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-
+        ],
+      );
 }

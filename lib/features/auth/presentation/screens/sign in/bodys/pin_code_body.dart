@@ -7,6 +7,7 @@ import "package:halla/core/common/domain/entities/user.dart";
 import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/personal_information_screen.dart";
 import "package:halla/features/auth/presentation/screens/widgets/pin_code_text_form_field.dart";
 import "package:halla/generated/l10n.dart";
@@ -87,10 +88,22 @@ class _PinCodeBodyState extends State<PinCodeBody> {
               );
         }
         if (state is AuthUploadSuccess) {
-          navigatePushReplaceRemoveAll(
-            context,
-            const PersonalInformationScreen(),
-          );
+          context.read<AuthBloc>().add(
+                GetIsNfcAvailableEvent(),
+              );
+        }
+        if (state is GetIsNfcAvailableState) {
+          if (state.isAvailable) {
+            navigatePushReplaceRemoveAll(
+              context,
+              const NfcWriteScreen(),
+            );
+          } else {
+            navigatePushReplaceRemoveAll(
+              context,
+              const PersonalInformationScreen(),
+            );
+          }
         }
       },
       builder: (context, state) {

@@ -7,6 +7,7 @@ import "package:halla/core/common/presentation/cubit/user_cubit.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/screens/auth_screen.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
 import "package:halla/generated/l10n.dart";
 import "package:halla/init_dependencies.main.dart";
 
@@ -16,6 +17,7 @@ void main() async {
   await Firebase.initializeApp();
   // dependencies
   await initDependencies();
+  // run
   runApp(
     MultiBlocProvider(
       providers: [
@@ -45,8 +47,8 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
           ],
           supportedLocales: S.delegate.supportedLocales,
-          theme: AppTheme.lightTheme,
-          home: const AuthScreen(),
+          theme: AppTheme.darkTheme,
+          home: const NfcWriteScreen(),
         ),
       );
 }

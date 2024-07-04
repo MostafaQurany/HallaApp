@@ -50,6 +50,9 @@ dependencies:
   flutter_bloc: ^8.1.6
   meta: ^1.12.0
   cloud_firestore: ^5.0.2
+  lottie: ^3.1.2
+  nfc_manager: ^3.5.0
+  encrypt: ^5.0.3
   
 
 dev_dependencies:

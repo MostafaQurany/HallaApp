@@ -41,6 +41,8 @@ class AppImages {
   
   static String companyIcon =
       _imageName("company_icon.png");
+  static String nfcWriteLotte =
+      _imageName("nfc_write_lotte.json");
 
   static String _imageName(String name) => "assets/images/$name";
 }

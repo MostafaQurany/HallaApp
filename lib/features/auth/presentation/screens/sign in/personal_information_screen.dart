@@ -129,7 +129,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                                         S.of(context).skip,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .bodyMedium!
+                                            .bodyLarge!
                                             .copyWith(color: AppColors.primary),
                                       ),
                                     ),
@@ -144,6 +144,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                               control: nameController,
                               hintText: S.of(context).fullName,
                               prefixIcon: Icons.person_2_outlined,
+                              keyboardType: TextInputType.name,
                             ),
                             SizedBox(
                               height: 20.h,

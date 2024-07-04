@@ -25,9 +25,13 @@ final class AuthSentSmsCodeEvent extends AuthEvent {
 
   AuthSentSmsCodeEvent({required this.smsCode});
 }
+
 final class AuthUploadUserEvent extends AuthEvent {
   final User user;
 
   AuthUploadUserEvent({required this.user});
-
 }
+
+//nfc
+
+final class GetIsNfcAvailableEvent extends AuthEvent {}

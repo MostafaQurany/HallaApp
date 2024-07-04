@@ -28,3 +28,9 @@ final class AuthFailure extends AuthState {
     required this.message,
   });
 }
+
+// nfc
+class GetIsNfcAvailableState extends AuthState {
+  final bool isAvailable;
+  GetIsNfcAvailableState(this.isAvailable);
+}

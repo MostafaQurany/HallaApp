@@ -1,4 +1,8 @@
 import 'package:get_it/get_it.dart';
+import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
+import 'package:halla/core/common/data/repositories/common_repositories_impl.dart';
+import 'package:halla/core/common/domain/repositories/common_repositories.dart';
+import 'package:halla/core/common/domain/usecase/get_is_nfc_available.dart';
 import 'package:halla/core/common/presentation/cubit/user_cubit.dart';
 import 'package:halla/features/auth/data/data_sources/auth_data_source.dart';
 import 'package:halla/features/auth/data/data_sources/data_base_source.dart';
@@ -14,12 +18,35 @@ import 'package:halla/features/auth/presentation/blocs/auth bloc/auth_bloc.dart'
 final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
-  _initAuth();
-
   // core
-  serviceLocator.registerLazySingleton(
-    () => UserCubit(),
-  );
+  _initCommon();
+
+  // featuers
+  _initAuth();
+}
+
+_initCommon() {
+  serviceLocator
+    // Data Source
+    ..registerLazySingleton<NfcDataSource>(
+      () => NfcDataSourceImpl(),
+    )
+    // Repository
+    ..registerFactory<CommonRepositories>(
+      () => CommonRepositoriesImpl(
+        serviceLocator(),
+      ),
+    )
+    // UseCase
+    ..registerFactory(
+      () => GetIsNfcAvailable(
+        serviceLocator(),
+      ),
+    )
+    // bloc
+    ..registerLazySingleton(
+      () => UserCubit(),
+    );
 }
 
 _initAuth() {
@@ -73,6 +100,7 @@ _initAuth() {
         sentSmsCodeUsecase: serviceLocator(),
         getUserUsecase: serviceLocator(),
         uploadUserUsecase: serviceLocator(),
+        getIsNfcAvailable: serviceLocator(),
       ),
     );
 }
