@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+
 class Company {
   final String name;
   final String phoneNumber;
@@ -12,4 +12,9 @@ class Company {
     required this.position,
   });
 
+
+  @override
+  String toString() {
+    return 'Company(name: $name, phoneNumber: $phoneNumber, website: $website, position: $position)';
+  }
 }

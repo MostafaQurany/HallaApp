@@ -1,5 +1,5 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:halla/core/domain/entities/user.dart';
+import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/error/failure.dart';
 
 abstract class AuthRepository {
@@ -7,5 +7,21 @@ abstract class AuthRepository {
     required String email,
     required String password,
   });
-  
+
+  Future<Either<Failure, String>> getSmsCode({
+    required String phoneNumber,
+  });
+ 
+  Future<Either<Failure, User >> sentSmsCode({
+    required String smsCode,
+    required String verificationId,
+  });
+ 
+  Future<Either<Failure, User >> uploadUser({
+    required User user,
+  });
+  Future<Either<Failure, User >> getUser({
+    required User user,
+  });
+
 }

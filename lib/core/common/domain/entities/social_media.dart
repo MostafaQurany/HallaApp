@@ -1,3 +1,4 @@
+
 class SocialMedia {
   final String facebook;
   final String instagram;
@@ -9,4 +10,9 @@ class SocialMedia {
     required this.linkedin,
     required this.twitter,
   });
+
+  @override
+  String toString() {
+    return 'SocialMedia(facebook: $facebook, instagram: $instagram, linkedin: $linkedin, twitter: $twitter)';
+  }
 }

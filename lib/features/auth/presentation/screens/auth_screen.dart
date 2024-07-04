@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:halla/core/common/app_images.dart";
+import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/features/auth/presentation/screens/log%20in/login_screen.dart";

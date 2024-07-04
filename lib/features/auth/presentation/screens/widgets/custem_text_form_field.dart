@@ -3,11 +3,10 @@ import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:halla/core/utils/validation.dart";
 
-
 class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final TextEditingController control;
-  final  prefixIcon;
+  final prefixIcon;
   final bool prefixIconIsImage;
   final IconData? suffixIcon;
   final TextInputType? keyboardType;
@@ -16,9 +15,12 @@ class CustomTextFormField extends StatefulWidget {
   final VoidCallback? suffixOnTap;
   final FocusNode? focusNode;
   final FieldType fieldType;
+  final String confirmPassword;
 
   const CustomTextFormField({
-    required this.control, required this.hintText, super.key,
+    required this.control,
+    required this.hintText,
+    super.key,
     this.prefixIcon,
     this.onEditingComplete,
     this.suffixIcon,
@@ -28,20 +30,16 @@ class CustomTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.prefixIconIsImage = false,
     this.fieldType = FieldType.none,
+    this.confirmPassword = '',
   });
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
- 
 }
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool obscureText;
 
-  
-  
-  
-  
   String? validate(String? value) {
     switch (widget.fieldType) {
       case FieldType.email:
@@ -51,7 +49,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       case FieldType.password:
         return MyValidation.passwordValidator(value);
       case FieldType.text:
-        return MyValidation.textValidator(value);  
+        return MyValidation.textValidator(value);
+      case FieldType.phone:
+        return MyValidation.phoneNumberValidator(value);
+      case FieldType.confPasword:
+        return MyValidation.confirmPasswordValidate(
+            value, widget.confirmPassword);
       case FieldType.none:
         return null;
     }
@@ -65,10 +68,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   void dispose() {
-    widget.focusNode?.dispose();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +78,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       controller: widget.control,
       focusNode: widget.focusNode,
       style: Theme.of(context).textTheme.bodyMedium,
-      obscureText: widget.obscureText,
+      obscureText: obscureText,
       keyboardType: TextInputType.emailAddress,
       onEditingComplete: widget.onEditingComplete,
       decoration: InputDecoration(
@@ -95,18 +96,24 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 color: theme.prefixIconColor,
               ),
         suffixIcon: IconButton(
-          onPressed: widget.suffixOnTap ??
-              () {
-                setState(() {
-                  obscureText = !obscureText;
-                });
-              },
-          icon: Icon(widget.suffixIcon),
+          onPressed: widget.suffixIcon == Icons.remove_red_eye_outlined
+              ? () {
+                  setState(() {
+                    obscureText = !obscureText;
+                  });
+                }
+              : widget.suffixOnTap,
+          icon: Icon(
+            widget.suffixIcon == Icons.remove_red_eye_outlined
+                ? obscureText
+                    ? Icons.remove_red_eye_outlined
+                    : Icons.remove_red_eye
+                : widget.suffixIcon,
+          ),
           color: !widget.obscureText ? theme.iconColor : theme.suffixIconColor,
         ),
       ),
       validator: validate,
     );
   }
- 
 }

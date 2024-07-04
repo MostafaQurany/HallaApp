@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCVyJpyYkDvVQ0yW-jp9PVXr0WCyuRYXgY',
-    appId: '1:58856844270:android:d3a0367a6d012e8aa43cff',
+    appId: '1:58856844270:android:3e41bec128bd2526a43cff',
     messagingSenderId: '58856844270',
     projectId: 'halla-ca',
     storageBucket: 'halla-ca.appspot.com',
@@ -63,6 +63,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '58856844270',
     projectId: 'halla-ca',
     storageBucket: 'halla-ca.appspot.com',
+    androidClientId: '58856844270-b5gbi7nmhrpcao7hhfnced718n5ebvcb.apps.googleusercontent.com',
+    iosClientId: '58856844270-3sv4im9uicuvi86op1fcvrabbcc3vl0i.apps.googleusercontent.com',
     iosBundleId: 'com.example.hallaCa',
   );
+
 }

@@ -1,11 +1,11 @@
-import 'package:halla/core/domain/entities/company.dart';
+import 'package:halla/core/common/domain/entities/company.dart';
 
-class CompanyModel extends Company{
+class CompanyModel extends Company {
   CompanyModel({
-    required super.name,
-    required super.phoneNumber,
-    required super.website,
-    required super.position,
+    super.name = '',
+    super.phoneNumber = '',
+    super.website = '',
+    super.position = '',
   });
 
   CompanyModel copyWith({
@@ -21,6 +21,7 @@ class CompanyModel extends Company{
       position: position ?? this.position,
     );
   }
+
   Map<String, dynamic> toMap() {
     return {
       'name': name,
@@ -36,6 +37,14 @@ class CompanyModel extends Company{
       phoneNumber: map['phoneNumber'] as String,
       website: map['website'] as String,
       position: map['position'] as String,
+    );
+  }
+  factory CompanyModel.fromCompany(Company company) {
+    return CompanyModel(
+      name:  company.name,
+      phoneNumber:company.phoneNumber,
+      website:company.website,
+      position:company.phoneNumber,
     );
   }
 }

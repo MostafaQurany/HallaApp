@@ -1,4 +1,4 @@
-import 'package:halla/core/domain/entities/user.dart';
+import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/features/auth/data/models/company_model.dart';
 import 'package:halla/features/auth/data/models/social_media_model.dart';
 
@@ -9,12 +9,12 @@ class UserModel extends User {
   @override
   final CompanyModel company;
   UserModel({
-    required super.id,
-    required super.email,
-    required super.fullName,
-    required super.primePhone,
-    required super.dateOfBirth,
-    required super.nationality,
+    super.id = '',
+    super.email = '',
+    super.fullName = '',
+    super.primePhone = '',
+    super.dateOfBirth = '',
+    super.nationality = '',
     required this.socialMedia,
     required this.company,
   }) : super(socialMedia: socialMedia, company: company);
@@ -41,7 +41,7 @@ class UserModel extends User {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'id': id,
       'email': email,
@@ -54,7 +54,7 @@ class UserModel extends User {
     };
   }
 
-  factory UserModel.fromMap(Map<String, dynamic> map) {
+  factory UserModel.fromJson(Map<String, dynamic> map) {
     return UserModel(
       id: map['id'] as String,
       email: map['email'] as String,
@@ -65,6 +65,18 @@ class UserModel extends User {
       socialMedia:
           SocialMediaModel.fromMap(map['socialMedia'] as Map<String, dynamic>),
       company: CompanyModel.fromMap(map['company'] as Map<String, dynamic>),
+    );
+  }
+  factory UserModel.fromUser(User user) {
+    return UserModel(
+      id: user.id,
+      email: user.email,
+      fullName: user.fullName,
+      primePhone: user.primePhone,
+      dateOfBirth: user.dateOfBirth,
+      nationality: user.nationality,
+      socialMedia: SocialMediaModel.fromSocialMedia(user.socialMedia),
+      company: CompanyModel.fromCompany(user.company),
     );
   }
 }

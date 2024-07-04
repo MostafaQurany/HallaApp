@@ -8,11 +8,11 @@ class BirthdayPickerTextField extends StatefulWidget {
   const BirthdayPickerTextField({super.key, required this.controller});
 
   @override
-  _BirthdayPickerTextFieldState createState() =>
-      _BirthdayPickerTextFieldState();
+  BirthdayPickerTextFieldState createState() =>
+      BirthdayPickerTextFieldState();
 }
 
-class _BirthdayPickerTextFieldState extends State<BirthdayPickerTextField> {
+class BirthdayPickerTextFieldState extends State<BirthdayPickerTextField> {
   DateTime? _selectedDate;
 
   Future<void> _selectDate(BuildContext context) async {

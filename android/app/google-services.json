@@ -7,12 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:58856844270:android:d3a0367a6d012e8aa43cff",
+        "mobilesdk_app_id": "1:58856844270:android:fa7fa58dcbfd021ba43cff",
         "android_client_info": {
-          "package_name": "com.hallacaa.app"
+          "package_name": "com.example.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "58856844270-1qi9d68ntovksc13fs36f3eocs7h62c1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCVyJpyYkDvVQ0yW-jp9PVXr0WCyuRYXgY"
@@ -20,7 +25,99 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58856844270-1qi9d68ntovksc13fs36f3eocs7h62c1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "58856844270-3sv4im9uicuvi86op1fcvrabbcc3vl0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hallaCa"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58856844270:android:3e41bec128bd2526a43cff",
+        "android_client_info": {
+          "package_name": "com.example.halla_ca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58856844270-1qi9d68ntovksc13fs36f3eocs7h62c1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVyJpyYkDvVQ0yW-jp9PVXr0WCyuRYXgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58856844270-1qi9d68ntovksc13fs36f3eocs7h62c1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "58856844270-3sv4im9uicuvi86op1fcvrabbcc3vl0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hallaCa"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:58856844270:android:d3a0367a6d012e8aa43cff",
+        "android_client_info": {
+          "package_name": "com.hallacaa.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "58856844270-b5gbi7nmhrpcao7hhfnced718n5ebvcb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hallacaa.app",
+            "certificate_hash": "2dd83da972dae2a18e4da16341fbd3cd8bac5a23"
+          }
+        },
+        {
+          "client_id": "58856844270-1qi9d68ntovksc13fs36f3eocs7h62c1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVyJpyYkDvVQ0yW-jp9PVXr0WCyuRYXgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "58856844270-1qi9d68ntovksc13fs36f3eocs7h62c1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "58856844270-3sv4im9uicuvi86op1fcvrabbcc3vl0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hallaCa"
+              }
+            }
+          ]
         }
       }
     }

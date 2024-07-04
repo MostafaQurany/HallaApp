@@ -1,15 +1,13 @@
-import 'package:halla/core/domain/entities/social_media.dart';
+import 'package:halla/core/common/domain/entities/social_media.dart';
 
 class SocialMediaModel extends SocialMedia {
   SocialMediaModel({
-    required super.facebook,
-    required super.instagram,
-    required super.linkedin,
-    required super.twitter,
+    super.facebook = '',
+    super.instagram = '',
+    super.linkedin = '',
+    super.twitter = '',
   });
 
-
-  
   SocialMediaModel copyWith({
     String? facebook,
     String? instagram,
@@ -39,6 +37,14 @@ class SocialMediaModel extends SocialMedia {
       instagram: map['instagram'] as String,
       linkedin: map['linkedin'] as String,
       twitter: map['twitter'] as String,
+    );
+  }
+  factory SocialMediaModel.fromSocialMedia(SocialMedia socialMedia) {
+    return SocialMediaModel(
+      facebook: socialMedia.facebook,
+      instagram: socialMedia.instagram,
+      linkedin: socialMedia.linkedin,
+      twitter: socialMedia.twitter,
     );
   }
 }

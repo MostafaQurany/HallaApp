@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:halla/core/common/app_images.dart";
+import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
@@ -54,7 +54,7 @@ class _CustomCompanyFieldState extends State<CustomCompanyField>
   }
 
   void _toggleExpanded() {
-    if (WidgetsBinding.instance.window.viewInsets.bottom > 0.0) {
+    if (View.of(context).viewInsets.bottom > 0.0) {
       FocusScope.of(context).unfocus();
     }
     setState(() {
