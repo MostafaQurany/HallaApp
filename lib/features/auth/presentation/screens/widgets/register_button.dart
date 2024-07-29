@@ -16,7 +16,7 @@ class RegisterButton extends StatelessWidget {
         side: BorderSide(color: AppColors.primary),
       ),
       onPressed: () {
-        navigatePush(context, const SignScreen());
+       AppNavigator. navigatePush(context, const SignScreen());
       },
       child: Text(S.of(context).registerNow),
     );

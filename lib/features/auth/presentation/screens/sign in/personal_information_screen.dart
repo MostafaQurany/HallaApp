@@ -4,16 +4,17 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:halla/core/common/domain/entities/company.dart";
 import "package:halla/core/common/domain/entities/social_media.dart";
 import "package:halla/core/common/domain/entities/user.dart";
-import "package:halla/core/common/presentation/cubit/user_cubit.dart";
+import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
 import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
-import "package:halla/features/auth/presentation/screens/sign%20in/bodys/custom_birthday_field.dart";
-import "package:halla/features/auth/presentation/screens/sign%20in/bodys/custom_company_field.dart";
-import "package:halla/features/auth/presentation/screens/sign%20in/bodys/custom_nationality_field.dart";
-import "package:halla/features/auth/presentation/screens/sign%20in/bodys/custom_social_media_field.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_birthday_field.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_company_field.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_nationality_field.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_social_media_field.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/widgets/phones_widget.dart";
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
 import "package:halla/features/home/presentation/screens/home_screen.dart";
 import "package:halla/generated/l10n.dart";
@@ -46,6 +47,9 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   final TextEditingController socialLinkedinController =
       TextEditingController();
   final TextEditingController socialTwitterController = TextEditingController();
+
+  final GlobalKey<PhonesWidgetState> phonesWidgetKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: SafeArea(
@@ -72,13 +76,44 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   ),
                 ),
               ),
+              Positioned(
+                top: 25.h,
+                right: 25.h,
+                child: GestureDetector(
+                  onTap: () {
+                    AppNavigator.navigatePushReplaceRemoveAll(
+                      context,
+                      const HomeScreen(),
+                    );
+                  },
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    ),
+                    child: Text(
+                      S.of(context).skip,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyLarge!
+                          .copyWith(color: AppColors.primary),
+                    ),
+                  ),
+                ),
+              ),
               BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
                   if (state is AuthFailure) {
                     //TODO: show snak bar
                   }
-                  if (state is AuthUploadSuccess) {
-                    navigatePushReplaceRemoveAll(context, const HomeScreen());
+                  if (state is AuthPersonalInfoSuccess) {
+                    AppNavigator.navigatePushReplaceRemoveAll(
+                      context,
+                      const HomeScreen(),
+                    );
                   }
                 },
                 builder: (context, state) {
@@ -98,44 +133,9 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                             SizedBox(
                               height: 25.h,
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Text(
-                                    S.of(context).personalNinformation,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headlineSmall,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      navigatePushReplaceRemoveAll(
-                                        context,
-                                        const HomeScreen(),
-                                      );
-                                    },
-                                    child: DecoratedBox(
-                                      decoration: BoxDecoration(
-                                        border: Border(
-                                          bottom: BorderSide(
-                                            color: AppColors.primary,
-                                          ),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        S.of(context).skip,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyLarge!
-                                            .copyWith(color: AppColors.primary),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            Text(
+                              S.of(context).personalNinformation,
+                              style: Theme.of(context).textTheme.headlineSmall,
                             ),
                             SizedBox(
                               height: 20.h,
@@ -148,6 +148,9 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                             ),
                             SizedBox(
                               height: 20.h,
+                            ),
+                            PhonesWidget(
+                              key: phonesWidgetKey,
                             ),
                             BirthdayPickerTextField(
                               controller: dateOfBirthController,
@@ -189,7 +192,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                                 if (formKey.currentState!.validate()) {
                                   User user = _featchData();
                                   context.read<AuthBloc>().add(
-                                        AuthUploadUserEvent(user: user),
+                                        AuthPersonalInfoEvent(user: user),
                                       );
                                 }
                               },
@@ -207,7 +210,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
         ),
       );
 
-  _featchData() {
+  User _featchData() {
     Company company = Company(
       name: companyNameController.text,
       phoneNumber: companyPhoneController.text,
@@ -220,26 +223,30 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
       linkedin: socialLinkedinController.text,
       twitter: socialTwitterController.text,
     );
+    List<String> phoneNumbers = phonesWidgetKey.currentState?.getPhones() ?? [];
     User? user;
     UserState userState = context.read<UserCubit>().state;
     if (userState is UserLoggedIn) {
       user = User(
-        id: userState.user.id,
-        email: userState.user.email,
+        id: userState.user!.id,
+        email: userState.user!.email,
         fullName: nameController.text.isNotEmpty
             ? nameController.text
-            : userState.user.fullName,
-        primePhone: userState.user.primePhone,
+            : userState.user!.fullName,
+        primePhone: userState.user!.primePhone,
         dateOfBirth: dateOfBirthController.text.isNotEmpty
             ? dateOfBirthController.text
-            : userState.user.dateOfBirth,
+            : userState.user!.dateOfBirth,
         nationality: nationalityController.text.isNotEmpty
             ? nationalityController.text
-            : userState.user.nationality,
+            : userState.user!.nationality,
+        pinCode: userState.user!.pinCode,
+        nfcList: userState.user!.nfcList,
         socialMedia: socialMedia,
         company: company,
+        phones: phoneNumbers,
       );
     }
-    return user;
+    return user!;
   }
 }

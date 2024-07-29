@@ -1,0 +1,35 @@
+import 'package:get_it/get_it.dart';
+import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
+import 'package:halla/core/common/data/repositories/common_repositories_impl.dart';
+import 'package:halla/core/common/domain/repositories/common_repositories.dart';
+import 'package:halla/core/common/domain/usecase/get_guest.dart';
+import 'package:halla/core/common/domain/usecase/get_is_nfc_available.dart';
+import 'package:halla/core/common/domain/usecase/get_is_nfc_open.dart';
+import 'package:halla/core/common/domain/usecase/is_guest_exit.dart';
+import 'package:halla/core/common/domain/usecase/is_guest_update.dart';
+import 'package:halla/core/common/domain/usecase/log_in_guest.dart';
+import 'package:halla/core/common/domain/usecase/read_from_nfc.dart';
+import 'package:halla/core/common/domain/usecase/write_on_nfc.dart';
+import 'package:halla/core/common/presentation/cubit/theme/cubit/brightness_cubit.dart';
+import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
+import 'package:halla/features/auth/data/data_sources/auth_data_source.dart';
+import 'package:halla/core/common/data/data%20source/data_base_source.dart';
+import 'package:halla/features/auth/data/repositories/auth_repository_impl.dart';
+import 'package:halla/features/auth/domain/repositories/auth_repository.dart';
+import 'package:halla/features/auth/domain/usecases/get_sms_code_usecase.dart';
+import 'package:halla/core/common/domain/usecase/get_user_usecase.dart';
+import 'package:halla/features/auth/domain/usecases/google_login.dart';
+import 'package:halla/features/auth/domain/usecases/link_with_email_pincode.dart';
+import 'package:halla/features/auth/domain/usecases/log_in_with_email_password.dart';
+import 'package:halla/features/auth/domain/usecases/sent_sms_code_usecase.dart';
+import 'package:halla/features/auth/domain/usecases/sign_in_with_email_password_usecase.dart';
+import 'package:halla/core/common/domain/usecase/upload_user_usecase.dart';
+import 'package:halla/features/auth/presentation/blocs/auth bloc/auth_bloc.dart';
+import 'package:halla/features/contacts/data/data_sources/contacts_data_source.dart';
+import 'package:halla/features/contacts/data/data_sources/contacts_local_data_source.dart';
+import 'package:halla/features/contacts/data/repositories/contacts_repository_impl.dart';
+import 'package:halla/features/contacts/domain/repositories/contacts_repository.dart';
+import 'package:halla/features/contacts/presentation/blocs/bloc/contacts_bloc.dart';
+
+
+part 'init_dependencies.main.dart';

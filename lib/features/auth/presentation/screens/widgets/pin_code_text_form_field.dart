@@ -9,13 +9,15 @@ import "package:halla/features/auth/presentation/screens/sign%20in/bodys/sms_ret
 
 class CustomPinCodeField extends StatefulWidget {
   final TextEditingController pinController;
+  final String? Function(String?)? validator;
   const CustomPinCodeField({
-    required this.pinController, super.key,
+    required this.pinController,
+    this.validator,
+    super.key,
   });
 
   @override
   State<CustomPinCodeField> createState() => _CustomPinCodeFieldState();
- 
 }
 
 class _CustomPinCodeFieldState extends State<CustomPinCodeField> {
@@ -65,7 +67,9 @@ class _CustomPinCodeFieldState extends State<CustomPinCodeField> {
         defaultPinTheme: defaultPinTheme,
         length: 6,
         separatorBuilder: (int index) => const SizedBox(width: 8),
-        validator: (String? value) => value?.length == 6 ? null : S.of(context).pinIsIncorrect,
+        validator: widget.validator ??
+            (String? value) =>
+                value?.length == 6 ? null : S.of(context).pinIsIncorrect,
         hapticFeedbackType: HapticFeedbackType.lightImpact,
         onCompleted: (String pin) {
           debugPrint("onCompleted: $pin");
@@ -103,5 +107,4 @@ class _CustomPinCodeFieldState extends State<CustomPinCodeField> {
       ),
     );
   }
- 
 }

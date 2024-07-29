@@ -2,15 +2,19 @@
 import 'package:halla/core/common/domain/entities/company.dart';
 import 'package:halla/core/common/domain/entities/social_media.dart';
 
+
 class User {
-  final String id;
-  final String email;
-  final String fullName;
-  final String primePhone;
-  final String dateOfBirth;
-  final String nationality;
-  final SocialMedia socialMedia;
-  final Company company;
+  String id;
+  String email;
+  String fullName;
+  String primePhone;
+  String dateOfBirth;
+  String nationality;
+  String pinCode;
+  List<String> phones;
+  List<String> nfcList;
+  SocialMedia socialMedia;
+  Company company;
   User({
     required this.id,
     required this.email,
@@ -18,12 +22,15 @@ class User {
     required this.primePhone,
     required this.dateOfBirth,
     required this.nationality,
+    required this.pinCode,
+    required this.nfcList,
+    required this.phones,
     required this.socialMedia,
     required this.company,
   });
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, fullName: $fullName, primePhone: $primePhone, dateOfBirth: $dateOfBirth, nationality: $nationality, socialMedia: ${socialMedia.toString()}, company: ${company.toString()})';
+    return 'User(id: $id, email: $email, fullName: $fullName, primePhone: $primePhone, dateOfBirth: $dateOfBirth, nationality: $nationality, pinCode: $pinCode, nfcList: $nfcList, socialMedia: ${socialMedia.toString()}, company: ${company.toString()})';
   }
 }

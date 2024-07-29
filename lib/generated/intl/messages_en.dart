@@ -27,9 +27,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "company": MessageLookupByLibrary.simpleMessage("Company"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "contactList": MessageLookupByLibrary.simpleMessage("Contact List"),
         "dataOfBirth": MessageLookupByLibrary.simpleMessage("Data Of Birth"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "enterPinCodePassword":
+            MessageLookupByLibrary.simpleMessage("Enter PIN - Code Password"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
+        "forgetPassword":
+            MessageLookupByLibrary.simpleMessage("Forget Password ?"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "guest": MessageLookupByLibrary.simpleMessage("Guest"),
         "iDontHaveAnAccount": MessageLookupByLibrary.simpleMessage(
@@ -40,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "open": MessageLookupByLibrary.simpleMessage("Open"),
         "or": MessageLookupByLibrary.simpleMessage("OR"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "personalNinformation":
@@ -51,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Please enter verification code \n Sent to your phone number."),
         "positon": MessageLookupByLibrary.simpleMessage("Positon"),
+        "putNfcTag": MessageLookupByLibrary.simpleMessage("Put NFC Tag"),
         "register": MessageLookupByLibrary.simpleMessage("Register."),
         "registerNow": MessageLookupByLibrary.simpleMessage("Register Now"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
@@ -61,6 +68,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "verificationCode":
             MessageLookupByLibrary.simpleMessage("Verification Code"),
         "verified": MessageLookupByLibrary.simpleMessage("Verified"),
-        "website": MessageLookupByLibrary.simpleMessage("Website")
+        "website": MessageLookupByLibrary.simpleMessage("Website"),
+        "welcomeToHallaYourPinCodeForLoginIsStateguestpincode":
+            MessageLookupByLibrary.simpleMessage(
+                "Welcome to Halla, Your PIN code for login is \${state.guest!.pinCode}. Keep it secure and don\'t share it with anyone.")
       };
 }

@@ -3,14 +3,18 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:halla/core/constants/app_images.dart";
+import "package:halla/core/constants/constants.dart";
 import "package:halla/core/theme/app_colors.dart";
-import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/core/utils/validation.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/screens/log%20in/login_screen.dart";
-import "package:halla/features/auth/presentation/screens/sign%20in/pin_code_screen.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
+import "package:halla/features/auth/presentation/screens/sign%20in/sms_code_screen.dart";
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
+import "package:halla/features/auth/presentation/screens/widgets/google_button.dart";
+import "package:halla/features/auth/presentation/screens/widgets/social_icon.dart";
+import "package:halla/features/home/presentation/screens/home_screen.dart";
 import "package:halla/generated/l10n.dart";
 
 class SignBody extends StatefulWidget {
@@ -61,7 +65,7 @@ class _SignBodyState extends State<SignBody> {
         child: Column(
           children: <Widget>[
             SvgPicture.asset(
-              AppImages.signVector,
+              AppImages.signVectorSvg,
               height: 200.h,
             ),
             SizedBox(
@@ -71,7 +75,6 @@ class _SignBodyState extends State<SignBody> {
               listener: (context, state) {
                 if (state is AuthFailure) {
                   // TODO:show snake pare
-                  print(state.message);
                 }
                 if (state is AuthSuccess) {
                   context.read<AuthBloc>().add(
@@ -88,16 +91,25 @@ class _SignBodyState extends State<SignBody> {
                       );
                 }
                 if (state is AuthGetCodeSmsSiccessState) {
-                  navigatePush(
+                  AppNavigator.navigatePush(
                       context,
-                      PinCodeScreen(
+                      SmsCodeScreen(
                         phoneNumber: phoneController.text.trim(),
                       ));
+                }
+                if (state is AuthGoogleState) {
+                  if (state.isExit) {
+                    AppNavigator.navigatePushReplaceRemoveAll(
+                        context, const HomeScreen());
+                  } else {
+                    AppNavigator.navigatePushReplaceRemoveAll(
+                        context, const NfcWriteScreen());
+                  }
                 }
               },
               builder: (context, state) {
                 if (state is AuthLoading) {
-                  return const CircularProgressIndicator();
+                  return const Center(child: CircularProgressIndicator());
                 }
                 return Expanded(
                   child: SingleChildScrollView(
@@ -154,6 +166,9 @@ class _SignBodyState extends State<SignBody> {
                           obscureText: true,
                           onEditingComplete: () =>
                               FocusScope.of(context).unfocus(),
+                          onChanged: (p0) {
+                            setState(() {});
+                          },
                         ),
                         SizedBox(
                           height: 15.h,
@@ -165,6 +180,7 @@ class _SignBodyState extends State<SignBody> {
                                     AuthSignUp(
                                       email: emailController.text.trim(),
                                       password: passwordController.text.trim(),
+                                      pinCode: AppConstants.generatePinCode(),
                                     ),
                                   );
                             }
@@ -181,18 +197,11 @@ class _SignBodyState extends State<SignBody> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            _iconsSouxile(
-                              image: AppImages.facebookIcon,
-                              onTap: () {
-                                // ToDo : login FaceBook
-                              },
+                            SocialIcon(
+                              image: AppImages.facebookIconSvg,
+                              onTap: () {},
                             ),
-                            _iconsSouxile(
-                              image: AppImages.googleIcon,
-                              onTap: () {
-                                // ToDo : login google
-                              },
-                            ),
+                            const GoogleButton(),
                           ],
                         ),
                         SizedBox(
@@ -200,7 +209,8 @@ class _SignBodyState extends State<SignBody> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            navigatePushReplace(context, const LoginScreen());
+                            AppNavigator.navigatePushReplace(
+                                context, const LoginScreen());
                           },
                           child: Center(
                             child: RichText(
@@ -273,27 +283,5 @@ class _SignBodyState extends State<SignBody> {
             ),
           ),
         ],
-      );
-
-  Widget _iconsSouxile({
-    required String image,
-    required Function() onTap,
-  }) =>
-      GestureDetector(
-        onTap: onTap,
-        child: Container(
-          width: 50.w,
-          height: 50.w,
-          padding: EdgeInsets.all(10.w),
-          decoration: BoxDecoration(
-            color: AppTheme.isLight(context)
-                ? AppColors.primaryObesty
-                : AppColors.blackLight,
-            borderRadius: BorderRadius.all(Radius.circular(8.w)),
-          ),
-          child: SvgPicture.asset(
-            image,
-          ),
-        ),
       );
 }

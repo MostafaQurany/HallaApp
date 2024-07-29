@@ -8,7 +8,7 @@ class AppColors {
   static Color primeScaffold = const Color.fromARGB(255, 236, 241, 236);
   static Color primary = const Color(0xff17A261);
   static Color primaryObesty = const Color(0xffC5E3C6);
-  static Color gray = const Color(0xff989898);
+  static Color gray = Color.fromARGB(255, 177, 176, 176);
   static Color errorLight = const Color(0xffFDF2F0);
   static Color errorDark = const Color(0xff892525);
   static Color errorborder = const Color(0xffFF0000);

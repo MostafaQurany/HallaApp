@@ -6,7 +6,7 @@ import "package:halla/core/utils/validation.dart";
 class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final TextEditingController control;
-  final prefixIcon;
+  final dynamic prefixIcon;
   final bool prefixIconIsImage;
   final IconData? suffixIcon;
   final TextInputType? keyboardType;
@@ -16,6 +16,7 @@ class CustomTextFormField extends StatefulWidget {
   final FocusNode? focusNode;
   final FieldType fieldType;
   final String confirmPassword;
+  final void Function(String)? onChanged;
 
   const CustomTextFormField({
     required this.control,
@@ -31,6 +32,7 @@ class CustomTextFormField extends StatefulWidget {
     this.prefixIconIsImage = false,
     this.fieldType = FieldType.none,
     this.confirmPassword = '',
+    this.onChanged,
   });
 
   @override
@@ -79,7 +81,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       focusNode: widget.focusNode,
       style: Theme.of(context).textTheme.bodyMedium,
       obscureText: obscureText,
-      keyboardType: TextInputType.emailAddress,
+      keyboardType: widget.keyboardType,
       onEditingComplete: widget.onEditingComplete,
       decoration: InputDecoration(
         hintText: widget.hintText,
@@ -114,6 +116,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         ),
       ),
       validator: validate,
+      onChanged: widget.onChanged,
     );
   }
 }

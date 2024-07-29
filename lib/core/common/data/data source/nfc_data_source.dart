@@ -2,20 +2,20 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:halla/core/error/failure.dart';
-import 'package:halla/core/utils/encryption.dart';
+import 'package:halla/core/common/data/models/nfc_message_model.dart';
+import 'package:halla/core/error/server_exception.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
-enum NfcEnumState {
+enum NfcUse {
   success,
   fail,
-  error,
 }
 
 abstract interface class NfcDataSource {
   Future<bool> getNFCIsAvailable();
   Future<bool> getNFCIsOpen();
-  Future<void> writeOnNfc(String message);
+  Future<NfcUse> write(NfcMessageModel nfcMessage);
+  Future<NfcMessageModel> read();
 }
 
 class NfcDataSourceImpl implements NfcDataSource {
@@ -23,7 +23,6 @@ class NfcDataSourceImpl implements NfcDataSource {
 
   final NfcManager _nfcManager = NfcManager.instance;
 
-  final EncryptedBackend _encryptedBackend = EncryptedBackendImpl();
 
   final ValueNotifier<dynamic> _result = ValueNotifier<dynamic>(null);
 
@@ -43,51 +42,49 @@ class NfcDataSourceImpl implements NfcDataSource {
   }
 
   @override
-  Future<NfcEnumState> writeOnNfc(String message) async {
-    final completer = Completer<NfcEnumState>();
+  Future<NfcUse> write(NfcMessageModel nfcMessage) async {
+    final completer = Completer<NfcUse>();
+    final messageEncrypted = nfcMessage.toDecrypt();
+    final records = <NdefRecord>[
+      NdefRecord.createText(messageEncrypted),
+    ];
     _nfcManager.startSession(onDiscovered: (NfcTag tag) async {
       final ndef = Ndef.from(tag);
-      if (ndef == null || !ndef.isWritable) {
-        _nfcManager.stopSession(errorMessage: _result.value);
-        completer.completeError('Nfc is not ndef writable');
-        throw Failure('Nfc is not ndef writable');
-      }
-      final messageEncrypted = _encryptedBackend.encrypted(message);
-      final records = <NdefRecord>[
-        NdefRecord.createText(messageEncrypted),
-      ];
       try {
-        await ndef.write(NdefMessage(records));
+        await ndef?.write(NdefMessage(records));
         _nfcManager.stopSession();
-        completer.complete(NfcEnumState.success);
+        completer.complete(NfcUse.success);
       } catch (error) {
         _nfcManager.stopSession(errorMessage: _result.value.toString());
         completer.completeError(error);
-        throw Exception(error);
+        throw ServerException(error.toString());
       }
     });
     return completer.future;
   }
 
-  Future<NfcEnumState> read() async {
-    final completer = Completer<NfcEnumState>();
+  @override
+  Future<NfcMessageModel> read() async {
+    final Completer<NfcMessageModel> completer = Completer<NfcMessageModel>();
     try {
       await _nfcManager.startSession(onDiscovered: (NfcTag tag) async {
-        final uint8List = Uint8List.fromList(
-            tag.data['ndef']['cachedMessage']['records'][0]['payload']);
-        data = String.fromCharCodes(uint8List).substring(3);
-        _nfcManager.stopSession();
-        completer.complete(NfcEnumState.success);
+        try {
+          final uint8List = Uint8List.fromList(
+              tag.data['ndef']['cachedMessage']['records'][0]['payload']);
+          data = String.fromCharCodes(uint8List).substring(3);
+          completer.complete(NfcMessageModel.fromDecrypt(data ?? ''));
+        } catch (error) {
+          completer.completeError(ServerException(error.toString()));
+        } finally {
+          _nfcManager.stopSession();
+        }
       });
+      return completer.future;
     } catch (error) {
       _nfcManager.stopSession();
-      completer.completeError(error);
-      throw Exception(error);
+      throw ServerException(error.toString());
     }
-    return completer.future;
   }
-
-
 
   Future<void> update(String message) async {
     _nfcManager.startSession(onDiscovered: (NfcTag tag) async {

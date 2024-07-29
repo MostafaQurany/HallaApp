@@ -30,15 +30,25 @@ class MainActivity: FlutterActivity(){
                 val ifNFCIsAvailable = getIfNFCIsAvailable()
                 result.success(ifNFCIsAvailable)
             }
+           else if (call.method == "getMacAddress") {
+                val macAddress = getSerialNumber()
+                result.success(macAddress)
+            }
             else {
                 result.notImplemented()
             }
         }
     }
-       private fun getIfNFCIsAvailable(): Boolean {
+    private fun getIfNFCIsAvailable(): Boolean {
 
         val nfcAdapter = NfcAdapter.getDefaultAdapter(this)
 
         return nfcAdapter != null
+    
+    }
+    
+    private fun getSerialNumber(): String {
+        val mId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        return  mId
     }
 }

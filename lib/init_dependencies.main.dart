@@ -1,19 +1,4 @@
-import 'package:get_it/get_it.dart';
-import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
-import 'package:halla/core/common/data/repositories/common_repositories_impl.dart';
-import 'package:halla/core/common/domain/repositories/common_repositories.dart';
-import 'package:halla/core/common/domain/usecase/get_is_nfc_available.dart';
-import 'package:halla/core/common/presentation/cubit/user_cubit.dart';
-import 'package:halla/features/auth/data/data_sources/auth_data_source.dart';
-import 'package:halla/features/auth/data/data_sources/data_base_source.dart';
-import 'package:halla/features/auth/data/repositories/auth_repository_impl.dart';
-import 'package:halla/features/auth/domain/repositories/auth_repository.dart';
-import 'package:halla/features/auth/domain/usecases/get_sms_code_usecase.dart';
-import 'package:halla/features/auth/domain/usecases/get_user_usecase.dart';
-import 'package:halla/features/auth/domain/usecases/sent_sms_code_usecase.dart';
-import 'package:halla/features/auth/domain/usecases/sign_in_with_email_password_usecase.dart';
-import 'package:halla/features/auth/domain/usecases/upload_user_usecase.dart';
-import 'package:halla/features/auth/presentation/blocs/auth bloc/auth_bloc.dart';
+part of 'init_dependencies_map.dart';
 
 final serviceLocator = GetIt.instance;
 
@@ -23,6 +8,8 @@ Future<void> initDependencies() async {
 
   // featuers
   _initAuth();
+
+  _initContact();
 }
 
 _initCommon() {
@@ -35,17 +22,56 @@ _initCommon() {
     ..registerFactory<CommonRepositories>(
       () => CommonRepositoriesImpl(
         serviceLocator(),
+        serviceLocator(),
       ),
     )
     // UseCase
     ..registerFactory(
-      () => GetIsNfcAvailable(
+      () => GetIsNfcAvailableUsecase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetIsNfcOpenUsecase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => WriteOnNfcUsecase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => ReadFromNfc(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => LogInGuest(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetGuest(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => IsGuestUpdate(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => IsGuestExit(
         serviceLocator(),
       ),
     )
     // bloc
     ..registerLazySingleton(
       () => UserCubit(),
+    )
+    ..registerLazySingleton(
+      () => BrightnessCubit(),
     );
 }
 
@@ -91,16 +117,64 @@ _initAuth() {
         serviceLocator(),
       ),
     )
+    ..registerFactory(
+      () => LogInWithEmailPassword(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GoogleLogin(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => LinkWithEmailPincode(
+        serviceLocator(),
+      ),
+    )
+
     // bloc
     ..registerLazySingleton(
       () => AuthBloc(
-        userCubit: serviceLocator(),
-        signInWithEmailPassword: serviceLocator(),
-        getSmsCodeUsecase: serviceLocator(),
-        sentSmsCodeUsecase: serviceLocator(),
-        getUserUsecase: serviceLocator(),
-        uploadUserUsecase: serviceLocator(),
-        getIsNfcAvailable: serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
       ),
+    );
+}
+
+_initContact() {
+  serviceLocator
+    // Data Source
+    ..registerFactory<ContactsDataSource>(
+      () => ContactsDataSourceImpl(),
+    )
+    ..registerFactory<ContactsLocalDataSource>(
+      () => ContactsLocalDataSourceImpl(),
+    )
+    // Repository
+    ..registerFactory<ContactsRepository>(
+      () => ContactsRepositoryImpl(
+        serviceLocator(),
+      ),
+    )
+    // UseCase
+
+    // bloc
+    ..registerLazySingleton(
+      () => ContactsBloc(),
     );
 }

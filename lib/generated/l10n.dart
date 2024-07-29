@@ -369,6 +369,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter PIN - Code Password`
+  String get enterPinCodePassword {
+    return Intl.message(
+      'Enter PIN - Code Password',
+      name: 'enterPinCodePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Forget Password ?`
+  String get forgetPassword {
+    return Intl.message(
+      'Forget Password ?',
+      name: 'forgetPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Put NFC Tag`
+  String get putNfcTag {
+    return Intl.message(
+      'Put NFC Tag',
+      name: 'putNfcTag',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open`
+  String get open {
+    return Intl.message(
+      'Open',
+      name: 'open',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to Halla, Your PIN code for login is ${state.guest!.pinCode}. Keep it secure and don't share it with anyone.`
+  String get welcomeToHallaYourPinCodeForLoginIsStateguestpincode {
+    return Intl.message(
+      'Welcome to Halla, Your PIN code for login is \${state.guest!.pinCode}. Keep it secure and don\'t share it with anyone.',
+      name: 'welcomeToHallaYourPinCodeForLoginIsStateguestpincode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact List`
+  String get contactList {
+    return Intl.message(
+      'Contact List',
+      name: 'contactList',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

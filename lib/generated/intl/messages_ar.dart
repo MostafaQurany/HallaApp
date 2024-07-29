@@ -27,9 +27,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "company": MessageLookupByLibrary.simpleMessage("شركة"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
+        "contactList": MessageLookupByLibrary.simpleMessage("Contact List"),
         "dataOfBirth": MessageLookupByLibrary.simpleMessage("بيانات الولادة"),
         "email": MessageLookupByLibrary.simpleMessage("بريد إلكتروني"),
+        "enterPinCodePassword":
+            MessageLookupByLibrary.simpleMessage("Enter PIN - Code Password"),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
+        "forgetPassword":
+            MessageLookupByLibrary.simpleMessage("Forget Password ?"),
         "fullName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
         "guest": MessageLookupByLibrary.simpleMessage("ضيف"),
         "iDontHaveAnAccount":
@@ -40,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "name": MessageLookupByLibrary.simpleMessage("اسم"),
         "nationality": MessageLookupByLibrary.simpleMessage("جنسية"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
+        "open": MessageLookupByLibrary.simpleMessage("Open"),
         "or": MessageLookupByLibrary.simpleMessage("أو"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
         "personalNinformation":
@@ -50,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "الرجاء إدخال رمز التحقق \n المرسلة إلى رقم هاتفك."),
         "positon": MessageLookupByLibrary.simpleMessage("بوسيتون"),
+        "putNfcTag": MessageLookupByLibrary.simpleMessage("Put NFC Tag"),
         "register": MessageLookupByLibrary.simpleMessage("يسجل."),
         "registerNow": MessageLookupByLibrary.simpleMessage("سجل الان"),
         "resendCode": MessageLookupByLibrary.simpleMessage("أعد إرسال الرمز"),
@@ -60,6 +67,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "twitter": MessageLookupByLibrary.simpleMessage("Twitter"),
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "verified": MessageLookupByLibrary.simpleMessage("تم التحقق"),
-        "website": MessageLookupByLibrary.simpleMessage("موقع إلكتروني")
+        "website": MessageLookupByLibrary.simpleMessage("موقع إلكتروني"),
+        "welcomeToHallaYourPinCodeForLoginIsStateguestpincode":
+            MessageLookupByLibrary.simpleMessage(
+                "Welcome to Halla, Your PIN code for login is \${state.guest!.pinCode}. Keep it secure and don\'t share it with anyone.")
       };
 }

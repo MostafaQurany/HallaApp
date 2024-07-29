@@ -1,0 +1,11 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meta/meta.dart';
+
+part 'contacts_event.dart';
+part 'contacts_state.dart';
+
+class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
+  ContactsBloc() : super(ContactsInitial()) {
+    on<ContactsEvent>((event, emit) {});
+  }
+}

@@ -6,7 +6,9 @@ sealed class UserState {}
 final class UserInitial extends UserState {}
 
 final class UserLoggedIn extends UserState {
-  final User user;
+  final User? user;
+  final Guest? guest;
+  final bool isUser;
 
-  UserLoggedIn(this.user);
+  UserLoggedIn({this.user, this.guest, required this.isUser});
 }

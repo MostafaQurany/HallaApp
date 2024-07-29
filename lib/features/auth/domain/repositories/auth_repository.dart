@@ -11,17 +11,21 @@ abstract class AuthRepository {
   Future<Either<Failure, String>> getSmsCode({
     required String phoneNumber,
   });
- 
-  Future<Either<Failure, User >> sentSmsCode({
+
+  Future<Either<Failure, User>> sentSmsCode({
     required String smsCode,
     required String verificationId,
   });
- 
-  Future<Either<Failure, User >> uploadUser({
-    required User user,
-  });
-  Future<Either<Failure, User >> getUser({
-    required User user,
+
+
+  Future<Either<Failure, User>> logInWithEmailPassword({
+    required String email,
+    required String password,
   });
 
+  Future<Either<Failure, Map<String, dynamic>>> googleLogIn();
+
+  Future<Either<Failure, void>> linkWlinkWithEmailPassword(
+    User user,
+  );
 }

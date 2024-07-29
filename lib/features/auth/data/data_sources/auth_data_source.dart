@@ -1,12 +1,14 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:halla/core/error/server_exception.dart';
-import 'package:halla/features/auth/data/models/company_model.dart';
-import 'package:halla/features/auth/data/models/social_media_model.dart';
-import 'package:halla/features/auth/data/models/user_model.dart';
+import 'package:halla/core/common/data/models/company_model.dart';
+import 'package:halla/core/common/data/models/social_media_model.dart';
+import 'package:halla/core/common/data/models/user_model.dart';
 
 abstract interface class AuthDataSource {
+  // sign in
   Future<UserModel> signInWithEmailPassword({
     required String email,
     required String password,
@@ -14,19 +16,34 @@ abstract interface class AuthDataSource {
   Future<String> signInWithPhone({
     required String phoneNumber,
   });
-
   Future<UserModel> linkPhoneWithEmail({
     required String smsCode,
     required String verificationId,
   });
+  // login
+  Future<UserModel> logInWithEmailPassword({
+    required String email,
+    required String password,
+  });
+
+  // social
+  Future<UserModel> googleLogIn();
+
+  Future<void> linkWithEmailPassword({
+    required UserModel user,
+  });
+
+ 
 }
 
 class AuthDataSourceImpl implements AuthDataSource {
   final firebaseAuth = FirebaseAuth.instance;
 
   @override
-  Future<UserModel> signInWithEmailPassword(
-      {required String email, required String password}) async {
+  Future<UserModel> signInWithEmailPassword({
+    required String email,
+    required String password,
+  }) async {
     try {
       final UserCredential credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -36,6 +53,7 @@ class AuthDataSourceImpl implements AuthDataSource {
       return UserModel(
         id: credential.user!.uid,
         email: email,
+        nfcList: [],
         company: CompanyModel(),
         socialMedia: SocialMediaModel(),
       );
@@ -57,9 +75,7 @@ class AuthDataSourceImpl implements AuthDataSource {
       await firebaseAuth.verifyPhoneNumber(
         phoneNumber: _phoneHandler(phoneNumber),
         timeout: const Duration(seconds: 60),
-        verificationCompleted: (PhoneAuthCredential phoneAuthCredential) {
-          
-        },
+        verificationCompleted: (PhoneAuthCredential phoneAuthCredential) {},
         verificationFailed: (FirebaseAuthException error) {
           throw ServerException(error.message.toString());
         },
@@ -99,6 +115,7 @@ class AuthDataSourceImpl implements AuthDataSource {
         id: credential.user!.uid,
         email: credential.user!.email.toString(),
         primePhone: credential.user!.phoneNumber.toString(),
+        nfcList: [],
         company: CompanyModel(),
         socialMedia: SocialMediaModel(),
       );
@@ -116,4 +133,72 @@ class AuthDataSourceImpl implements AuthDataSource {
       return phone;
     }
   }
+
+  // login
+  @override
+  Future<UserModel> logInWithEmailPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final UserCredential credential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return UserModel(
+        id: credential.user!.uid,
+        email: email,
+        nfcList: [],
+        company: CompanyModel(),
+        socialMedia: SocialMediaModel(),
+      );
+    } on FirebaseException catch (e) {
+      throw ServerException(e.message.toString());
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  // social
+  @override
+  Future<UserModel> googleLogIn() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      final UserCredential userCredential =
+          await firebaseAuth.signInWithCredential(credential);
+      return UserModel(
+        id: userCredential.user!.uid,
+        email: userCredential.user!.email!,
+        nfcList: [],
+        company: CompanyModel(),
+        socialMedia: SocialMediaModel(),
+      );
+    } on FirebaseException catch (e) {
+      throw ServerException(e.message.toString());
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> linkWithEmailPassword({required UserModel user}) async {
+    try {
+      final AuthCredential passwordCredential = EmailAuthProvider.credential(
+          email: user.email, password: user.pinCode);
+      await firebaseAuth.currentUser!.linkWithCredential(passwordCredential);
+    } on FirebaseException catch (e) {
+      throw ServerException(e.message.toString());
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+  
+  
 }

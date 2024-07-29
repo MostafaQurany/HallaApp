@@ -3,17 +3,12 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/theme/theme.dart";
-import "package:halla/features/auth/presentation/screens/widgets/login_body.dart";
+import "package:halla/features/auth/presentation/screens/log%20in/bodys/login_body.dart";
 import "package:halla/generated/l10n.dart";
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(

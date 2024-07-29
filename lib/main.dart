@@ -1,19 +1,74 @@
+import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:halla/core/common/presentation/cubit/user_cubit.dart";
+import "package:halla/core/common/data/models/company_model.dart";
+import "package:halla/core/common/data/models/social_media_model.dart";
+import "package:halla/core/common/domain/entities/company.dart";
+import "package:halla/core/common/domain/entities/social_media.dart";
+import "package:halla/core/common/presentation/cubit/theme/cubit/brightness_cubit.dart";
+import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
+import "package:halla/core/constants/constants.dart";
 import "package:halla/core/theme/theme.dart";
+import "package:halla/core/utils/bloc_observer.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/screens/auth_screen.dart";
-import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
+import "package:halla/features/contacts/data/data_sources/contacts_local_data_source.dart";
+import "package:halla/features/contacts/data/models/contact_adapter.dart";
+import "package:halla/features/contacts/data/models/contact_model.dart";
 import "package:halla/generated/l10n.dart";
-import "package:halla/init_dependencies.main.dart";
+import "package:halla/init_dependencies_map.dart";
+import "package:hive_flutter/hive_flutter.dart";
+import "package:hydrated_bloc/hydrated_bloc.dart";
+
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //firebase
+  // bloc
+  Bloc.observer = MyBlocObserver();
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getTemporaryDirectory(),
+  );
+  // hive
+  await Hive.initFlutter();
+  Hive.registerAdapter(ContactAdapterA());
+  Hive.registerAdapter(SocialMediaAdapterA());
+  Hive.registerAdapter(CompanyAdapterA());
+
+  Box b = await Hive.openBox<ContactAdapter>(AppConstants.boxName);
+  List<ContactAdapter> contactAdapters = [];
+
+  for (int i = 0; i < 5; i++) {
+    ContactAdapter contactAdapter = ContactAdapter(
+      id: 'id$i',
+      fullName: 'fullName$i',
+      primePhone: 'primePhone$i',
+      dateOfBirth: 'dateOfBirth$i',
+      nationality: 'nationality$i',
+      phones: ['phone1$i', 'phone2$i'],
+      nfcList: ['nfc1$i', 'nfc2$i'],
+      socialMedia: SocialMedia(
+        facebook: 'facebook$i',
+        instagram: 'instagram$i',
+        linkedin: 'linkedin$i',
+        twitter: 'twitter$i',
+      ),
+      company: Company(
+        name: 'companyName$i',
+        phoneNumber: 'companyPhoneNumber$i',
+        website: 'companyWebsite$i',
+        position: 'companyPosition$i',
+      ),
+      addTime: Timestamp.now(),
+    );
+
+    contactAdapters.add(contactAdapter);
+  }
+  b.addAll(contactAdapters);
+  // firebase
   await Firebase.initializeApp();
   // dependencies
   await initDependencies();
@@ -22,7 +77,8 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => serviceLocator<UserCubit>()),
-        BlocProvider(create: (context) => serviceLocator<AuthBloc>())
+        BlocProvider(create: (context) => serviceLocator<BrightnessCubit>()),
+        BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
       ],
       child: const MyApp(),
     ),
@@ -36,19 +92,27 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: (_, Widget? child) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: "Halla",
-          locale: const Locale("en"),
-          localizationsDelegates: const <LocalizationsDelegate>[
-            S.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: S.delegate.supportedLocales,
-          theme: AppTheme.darkTheme,
-          home: const NfcWriteScreen(),
+        builder: (_, Widget? child) => BlocBuilder<BrightnessCubit, Brightness>(
+          builder: (context, state) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: "Halla",
+              locale: const Locale("en"),
+              localizationsDelegates: const <LocalizationsDelegate>[
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: S.delegate.supportedLocales,
+              theme: state == Brightness.light
+                  ? AppTheme.darkTheme
+                  : AppTheme.lightTheme,
+              themeMode:
+                  state == Brightness.light ? ThemeMode.light : ThemeMode.dark,
+              home: const AuthScreen(),
+            );
+          },
         ),
       );
 }

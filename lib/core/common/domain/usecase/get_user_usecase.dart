@@ -1,20 +1,20 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
+import 'package:halla/core/common/domain/repositories/common_repositories.dart';
 import 'package:halla/core/error/failure.dart';
 import 'package:halla/core/usecase/usecase.dart';
-import 'package:halla/features/auth/domain/repositories/auth_repository.dart';
 
 class GetUserUsecase implements UseCase<User, GetUserParams> {
-  final AuthRepository authRepository;
-  GetUserUsecase(this.authRepository);
+  final CommonRepositories commonRepositories;
+  GetUserUsecase(this.commonRepositories);
   @override
   Future<Either<Failure, User>> call(GetUserParams params) async {
-    return await authRepository.uploadUser(user: params.user);
+    return await commonRepositories.getUser(userId: params.userId);
   }
 }
 
 class GetUserParams {
-  final User user;
+  final String userId;
 
-  GetUserParams({required this.user});
+  GetUserParams({required this.userId});
 }

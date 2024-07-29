@@ -1,6 +1,6 @@
 import 'package:halla/core/common/domain/entities/user.dart';
-import 'package:halla/features/auth/data/models/company_model.dart';
-import 'package:halla/features/auth/data/models/social_media_model.dart';
+import 'package:halla/core/common/data/models/company_model.dart';
+import 'package:halla/core/common/data/models/social_media_model.dart';
 
 class UserModel extends User {
   @override
@@ -15,6 +15,9 @@ class UserModel extends User {
     super.primePhone = '',
     super.dateOfBirth = '',
     super.nationality = '',
+    super.pinCode = '',
+    super.phones = const [],
+    super.nfcList = const [],
     required this.socialMedia,
     required this.company,
   }) : super(socialMedia: socialMedia, company: company);
@@ -26,6 +29,9 @@ class UserModel extends User {
     String? primePhone,
     String? dateOfBirth,
     String? nationality,
+    String? pinCode,
+    List<String>? phones,
+    List<String>? nfcList,
     SocialMediaModel? socialMedia,
     CompanyModel? company,
   }) {
@@ -36,6 +42,9 @@ class UserModel extends User {
       primePhone: primePhone ?? this.primePhone,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       nationality: nationality ?? this.nationality,
+      pinCode: pinCode ?? this.pinCode,
+      phones: phones ?? this.phones,
+      nfcList: nfcList ?? this.nfcList,
       socialMedia: socialMedia ?? this.socialMedia,
       company: company ?? this.company,
     );
@@ -49,6 +58,9 @@ class UserModel extends User {
       'primePhone': primePhone,
       'dateOfBirth': dateOfBirth,
       'nationality': nationality,
+      'pinCode': pinCode,
+      'phones': phones,
+      'nfcList': nfcList,
       'socialMedia': socialMedia.toMap(),
       'company': company.toMap(),
     };
@@ -62,6 +74,10 @@ class UserModel extends User {
       primePhone: map['primePhone'] as String,
       dateOfBirth: map['dateOfBirth'] as String,
       nationality: map['nationality'] as String,
+      pinCode: map['pinCode'] as String,
+      phones: (map['phones'] as List<dynamic>).map((e) => e as String).toList(),
+      nfcList:
+          (map['nfcList'] as List<dynamic>).map((e) => e as String).toList(),
       socialMedia:
           SocialMediaModel.fromMap(map['socialMedia'] as Map<String, dynamic>),
       company: CompanyModel.fromMap(map['company'] as Map<String, dynamic>),
@@ -75,6 +91,9 @@ class UserModel extends User {
       primePhone: user.primePhone,
       dateOfBirth: user.dateOfBirth,
       nationality: user.nationality,
+      pinCode: user.pinCode,
+      phones: user.phones,
+      nfcList: user.nfcList,
       socialMedia: SocialMediaModel.fromSocialMedia(user.socialMedia),
       company: CompanyModel.fromCompany(user.company),
     );

@@ -1,6 +1,10 @@
-class Constants {
+import 'dart:math';
 
- static List<String> nationalities = <String>[
+import 'package:flutter/services.dart';
+
+class AppConstants {
+  static String guest = "Guest";
+  static List<String> nationalities = <String>[
     "Afghan",
     "Albanian",
     "Algerian",
@@ -194,5 +198,22 @@ class Constants {
     "Zambian",
     "Zimbabwean",
   ];
-  
-} 
+  static String userCollection = 'users';
+  static String boxName = "Contacts";
+  static String generatePinCode() {
+    final random = Random();
+    String pinCode = '';
+    for (int i = 0; i < 6; i++) {
+      pinCode += random.nextInt(10).toString();
+    }
+    return pinCode;
+  }
+
+  static Future<String> getGuestId() async {
+    const channel = MethodChannel('Back_End_Channel');
+    final returnValue = await channel.invokeMethod<String>('getMacAddress');
+    return "$guest${returnValue ?? ''}";
+  }
+
+  var contacts = [];
+}

@@ -3,7 +3,6 @@ import "dart:async";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:halla/core/common/domain/entities/user.dart";
 import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
@@ -12,15 +11,15 @@ import "package:halla/features/auth/presentation/screens/sign%20in/personal_info
 import "package:halla/features/auth/presentation/screens/widgets/pin_code_text_form_field.dart";
 import "package:halla/generated/l10n.dart";
 
-class PinCodeBody extends StatefulWidget {
+class SmsCodeBody extends StatefulWidget {
   final String phoneNumber;
-  const PinCodeBody({required this.phoneNumber, super.key});
+  const SmsCodeBody({required this.phoneNumber, super.key});
 
   @override
-  State<PinCodeBody> createState() => _PinCodeBodyState();
+  State<SmsCodeBody> createState() => _SmsCodeBodyState();
 }
 
-class _PinCodeBodyState extends State<PinCodeBody> {
+class _SmsCodeBodyState extends State<SmsCodeBody> {
   final TextEditingController pinController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -68,22 +67,12 @@ class _PinCodeBodyState extends State<PinCodeBody> {
       listener: (context, state) {
         if (state is AuthFailure) {
           // TODO:show snake pare
-          print(state.message);
         }
         if (state is AuthSuccess) {
-          User user = User(
-            id: state.user.id,
-            email: state.user.email,
-            fullName: state.user.fullName,
-            primePhone: widget.phoneNumber,
-            dateOfBirth: state.user.dateOfBirth,
-            nationality: state.user.nationality,
-            socialMedia: state.user.socialMedia,
-            company: state.user.company,
-          );
+          state.user.primePhone = widget.phoneNumber;
           context.read<AuthBloc>().add(
                 AuthUploadUserEvent(
-                  user: user,
+                  user: state.user,
                 ),
               );
         }
@@ -94,12 +83,12 @@ class _PinCodeBodyState extends State<PinCodeBody> {
         }
         if (state is GetIsNfcAvailableState) {
           if (state.isAvailable) {
-            navigatePushReplaceRemoveAll(
+            AppNavigator.navigatePushReplaceRemoveAll(
               context,
               const NfcWriteScreen(),
             );
           } else {
-            navigatePushReplaceRemoveAll(
+            AppNavigator.navigatePushReplaceRemoveAll(
               context,
               const PersonalInformationScreen(),
             );

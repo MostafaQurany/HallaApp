@@ -1,16 +1,36 @@
 import "package:flutter/material.dart";
 
-int _time = 500;
-const Offset begin = Offset(1, 0);
-const Offset end = Offset.zero;
-const Cubic curve = Curves.easeInOutCirc;
-final Animatable<Offset> tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+class AppNavigator {
+  static navigatePushReplace(BuildContext context, Widget page) {
+    Navigator.of(context).pushReplacement(_animation(page));
+  }
 
-void navigatePushReplace(BuildContext context, Widget page) {
-  Navigator.of(context).pushReplacement(
-    PageRouteBuilder(
-      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) => page,
-      transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+  static void navigatePushReplaceRemoveAll(
+    BuildContext context,
+    Widget page,
+  ) {
+    Navigator.of(context).pushAndRemoveUntil(
+      _animation(page),
+      (Route route) => false,
+    );
+  }
+
+  static void navigatePush(BuildContext context, Widget page) {
+    Navigator.of(context).push(_animation(page));
+  }
+
+  static _animation(Widget page) {
+    const int time = 500;
+    final Animatable<Offset> tween =
+        Tween(begin: const Offset(1, 0), end: Offset.zero).chain(
+      CurveTween(curve: Curves.easeInOutCirc),
+    );
+    return PageRouteBuilder(
+      pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) =>
+          page,
+      transitionsBuilder: (BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation, Widget child) {
         final Animation<Offset> offsetAnimation = animation.drive(tween);
 
         return SlideTransition(
@@ -18,43 +38,7 @@ void navigatePushReplace(BuildContext context, Widget page) {
           child: child,
         );
       },
-      transitionDuration: Duration(milliseconds: _time),
-    ),
-  );
-}
-
-void navigatePushReplaceRemoveAll(
-    BuildContext context, Widget page,) {
-  Navigator.of(context).pushAndRemoveUntil(
-    PageRouteBuilder(
-      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) => page,
-      transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-        final Animation<Offset> offsetAnimation = animation.drive(tween);
-
-        return SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        );
-      },
-      transitionDuration: Duration(milliseconds: _time),
-    ),
-    (Route route) => false,
-  );
-}
-
-void navigatePush(BuildContext context, Widget page) {
-  Navigator.of(context).push(
-    PageRouteBuilder(
-      pageBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) => page,
-      transitionsBuilder: (BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
-        final Animation<Offset> offsetAnimation = animation.drive(tween);
-
-        return SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        );
-      },
-      transitionDuration: Duration(milliseconds: _time),
-    ),
-  );
+      transitionDuration: const Duration(milliseconds: time),
+    );
+  }
 }

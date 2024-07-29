@@ -30,5 +30,11 @@
   "next": "التالي",
   "verificationCode": "رمز التحقق",
   "personalNinformation": "Personal \nInformation",
-  "skip": "Skip"
+  "skip": "Skip",
+  "enterPinCodePassword": "Enter PIN - Code Password",
+  "forgetPassword": "Forget Password ?",
+  "putNfcTag": "Put NFC Tag",
+  "open": "Open",
+  "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": "Welcome to Halla, Your PIN code for login is ${state.guest!.pinCode}. Keep it secure and don't share it with anyone.",
+  "contactList": "Contact List"
 }
