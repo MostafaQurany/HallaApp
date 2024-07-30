@@ -24,7 +24,12 @@ class _HeaderContactScreenState extends State<HeaderContactScreen> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppTheme.isLight(context) ? null : AppColors.blackLight,
+        borderRadius: const BorderRadius.only(
+          bottomLeft: Radius.circular(16),
+          bottomRight: Radius.circular(16),
+        ),
+        color:
+            AppTheme.isLight(context) ? AppColors.white : AppColors.blackLight,
       ),
       padding: EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 16),
       child: SafeArea(
@@ -38,7 +43,6 @@ class _HeaderContactScreenState extends State<HeaderContactScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const DownloadContactIcon(),
-                const Spacer(),
                 Text(
                   S.of(context).contactList,
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(

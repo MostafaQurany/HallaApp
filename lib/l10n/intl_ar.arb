@@ -36,5 +36,6 @@
   "putNfcTag": "Put NFC Tag",
   "open": "Open",
   "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": "Welcome to Halla, Your PIN code for login is ${state.guest!.pinCode}. Keep it secure and don't share it with anyone.",
-  "contactList": "Contact List"
+  "contactList": "Contact List",
+  "logOut": "Log Out"
 }

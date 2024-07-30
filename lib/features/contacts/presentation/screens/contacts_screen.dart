@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:halla/features/contacts/data/models/contact_model.dart';
 import 'package:halla/features/contacts/presentation/screens/contact_card.dart';
-import 'package:halla/features/contacts/presentation/screens/widget/header_contact_screen.dart';
+import 'package:halla/features/contacts/presentation/screens/components/header_contact_screen.dart';
+import 'package:halla/features/home/presentation/screens/components/end_spacer_sized_box.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class ContactsScreen extends StatelessWidget {
@@ -32,6 +33,7 @@ class ContactsScreen extends StatelessWidget {
                 }
               },
             ),
+            const EndSpacerSizedBox(),
           ],
         ),
       ),

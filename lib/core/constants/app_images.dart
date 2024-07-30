@@ -54,5 +54,17 @@ class AppImages {
   static String contactBNBIcon = _imageName("contactBNB.png");
   static String homeBNBIcon = _imageName("homeBNB.png");
 
+  static String profilePlaceholder = _imageName("profile_placeholder.png");
+
+  static String showPinCode = _imageName("show_pin_code.png");
+  static String hidePinCode = _imageName("hide_pin_code.png");
+
+  static String settingsIcon = _imageName("settings_icon.png");
+  static String promotionsIcon = _imageName("promotions_icon.png");
+  static String personalIcon = _imageName("personal_icon.png");
+  static String logOutIcon = _imageName("log_out_icon.png");
+  static String customerServiceIcon = _imageName("customer_service_icon.png");
+  static String pincodeChangeIcon = _imageName("pincode_change_icon.png");
+
   static String _imageName(String name) => "assets/images/$name";
 }

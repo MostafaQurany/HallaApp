@@ -41,6 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ليس لدي حساب؟"),
         "instagram": MessageLookupByLibrary.simpleMessage("Instagram"),
         "linkedin": MessageLookupByLibrary.simpleMessage("Linkedin"),
+        "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
         "name": MessageLookupByLibrary.simpleMessage("اسم"),
         "nationality": MessageLookupByLibrary.simpleMessage("جنسية"),

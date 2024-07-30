@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
+import 'package:halla/core/theme/theme.dart';
 import 'package:halla/features/contacts/presentation/screens/contacts_screen.dart';
 import 'package:halla/features/home/presentation/screens/home_screen.dart';
+import 'package:halla/features/profile/presentation/screens/profile_screen.dart';
 
 class HomeLayout extends StatefulWidget {
   const HomeLayout({super.key});
@@ -16,7 +19,7 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
   final List<Widget> _screens = [
     const HomeScreen(),
     const ContactsScreen(),
-    const HomeScreen(),
+    const ProfileScreen(),
   ];
 
   late AnimationController _animationController;
@@ -37,60 +40,49 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.transparent,
-      body: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 400),
-        child: _screens[_selectedIndex],
-      ),
-      bottomNavigationBar: ClipRRect(
-        borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(20.0),
-          topRight: Radius.circular(20.0),
-        ),
-        child: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          selectedItemColor: AppColors.primary,
-          backgroundColor: AppColors.blackLight,
-          elevation: 0,
-          onTap: _onItemTapped,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  return ImageIcon(
-                    AssetImage(AppImages.homeBNBIcon),
-                    size: _selectedIndex == 0 ? _animation.value : 20,
-                  );
-                },
+      body: Stack(
+        children: [
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 400),
+            child: _screens[_selectedIndex],
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(25.0),
+                  topRight: Radius.circular(25.0),
+                ),
+                color: AppTheme.isLight(context)
+                    ? AppColors.white
+                    : AppColors.blackLight,
               ),
-              label: _selectedIndex == 0 ? '' : 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  return ImageIcon(
-                    AssetImage(AppImages.contactBNBIcon),
-                    size: _selectedIndex == 1 ? _animation.value : 20,
-                  );
-                },
+              width: 1.sw,
+              height: 70.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _bottomNavigationItem(
+                    icon: AppImages.homeBNBIcon,
+                    name: 'Home',
+                    index: 0,
+                  ),
+                  _bottomNavigationItem(
+                    icon: AppImages.contactBNBIcon,
+                    name: 'Contact',
+                    index: 1,
+                  ),
+                  _bottomNavigationItem(
+                    icon: AppImages.profileBNBIcon,
+                    name: 'Profile',
+                    index: 2,
+                  ),
+                ],
               ),
-              label: _selectedIndex == 1 ? '' : 'Contact',
             ),
-            BottomNavigationBarItem(
-              icon: AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  return ImageIcon(
-                    AssetImage(AppImages.profileBNBIcon),
-                    size: _selectedIndex == 2 ? _animation.value : 20,
-                  );
-                },
-              ),
-              label: _selectedIndex == 2 ? '' : 'Profile',
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -104,5 +96,39 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
         _animationController.reverse();
       }
     });
+  }
+
+  _bottomNavigationItem({
+    required String icon,
+    required String name,
+    required int index,
+  }) {
+    return GestureDetector(
+      onTap: () => _onItemTapped(index),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          AnimatedBuilder(
+            animation: _animation,
+            builder: (context, child) {
+              return ImageIcon(
+                AssetImage(icon),
+                color: _selectedIndex == index ? AppColors.primary : null,
+                size: _selectedIndex == index ? _animation.value : 20,
+              );
+            },
+          ),
+          if (_selectedIndex == index)
+            Text(
+              name,
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  color: _selectedIndex == index
+                      ? AppColors.primary
+                      : AppColors.black),
+            ),
+        ],
+      ),
+    );
   }
 }
