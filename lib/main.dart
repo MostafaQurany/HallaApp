@@ -12,9 +12,8 @@ import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/bloc_observer.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
-import "package:halla/features/auth/presentation/screens/auth_screen.dart";
 import "package:halla/features/contacts/data/models/contact_model.dart";
-import "package:halla/features/home/presentation/screens/home_screen.dart";
+import "package:halla/features/home/presentation/screens/home_layout.dart";
 
 import "package:halla/generated/l10n.dart";
 import "package:halla/init_dependencies_map.dart";
@@ -95,7 +94,7 @@ class MyApp extends StatelessWidget {
                   : AppTheme.lightTheme,
               themeMode:
                   state == Brightness.light ? ThemeMode.light : ThemeMode.dark,
-              home: const HomeScreen(),
+              home: const HomeLayout(),
             );
           },
         ),

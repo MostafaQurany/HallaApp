@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/features/contacts/data/models/contact_model.dart';
 import 'package:halla/features/contacts/presentation/screens/contact_card.dart';
 import 'package:halla/features/contacts/presentation/screens/widget/header_contact_screen.dart';

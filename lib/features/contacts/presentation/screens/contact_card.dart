@@ -78,7 +78,7 @@ class _ContactCardState extends State<ContactCard>
                     ),
                   ),
                   Text(
-                    widget.contact.fullName ?? "Full Name ",
+                    widget.contact.fullName,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: 16.sp,

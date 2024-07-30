@@ -50,5 +50,9 @@ class AppImages {
   static String redHeard = _imageName("red_heard.png");
   static String shareContact = _imageName("share_contact.png");
 
+  static String profileBNBIcon = _imageName("profileBNB.png");
+  static String contactBNBIcon = _imageName("contactBNB.png");
+  static String homeBNBIcon = _imageName("homeBNB.png");
+
   static String _imageName(String name) => "assets/images/$name";
 }
