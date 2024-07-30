@@ -2,25 +2,60 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:halla/core/common/data/models/company_model.dart';
 import 'package:halla/core/common/data/models/social_media_model.dart';
 import 'package:halla/features/contacts/domain/entities/contact.dart';
-
-class ContactModel extends Contact {
+import 'package:hive_flutter/hive_flutter.dart';
+part 'contact_model.g.dart';
+@HiveType(typeId: 1)
+class ContactModel extends Contact with HiveObjectMixin {
+  @HiveField(0)
+  @override
+  final String id;
+  @HiveField(1)
+  @override
+  final Timestamp addTime;
+  @HiveField(2)
+  @override
+  final String fullName;
+  @HiveField(3)
+  @override
+  final String primePhone;
+  @HiveField(4)
+  @override
+  final String dateOfBirth;
+  @HiveField(5)
+  @override
+  final String nationality;
+  @HiveField(6)
+  @override
+  final List<String> phones;
+  @HiveField(7)
   @override
   final SocialMediaModel socialMedia;
 
+  @HiveField(8)
   @override
   final CompanyModel company;
 
   ContactModel({
-    required super.id,
-    required super.addTime,
-    required super.fullName,
-    required super.primePhone,
-    required super.dateOfBirth,
-    required super.nationality,
-    required super.phones,
+    required this.id,
+    required this.addTime,
+    required this.fullName,
+    required this.primePhone,
+    required this.dateOfBirth,
+    required this.nationality,
+    required this.phones,
     required this.socialMedia,
     required this.company,
-  }) : super(socialMedia: socialMedia, company: company);
+  }) : super(
+          id: id,
+          addTime: addTime,
+          dateOfBirth: dateOfBirth,
+          fullName: fullName,
+          nationality: nationality,
+          phones: phones,
+          primePhone: primePhone,
+          socialMedia: socialMedia,
+          company: company,
+        );
 
   ContactModel copyWith({
     String? id,

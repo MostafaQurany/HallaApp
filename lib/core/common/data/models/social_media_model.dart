@@ -1,12 +1,32 @@
 import 'package:halla/core/common/domain/entities/social_media.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+part 'social_media_model.g.dart';
+@HiveType(typeId: 3)
+class SocialMediaModel extends SocialMedia with HiveObjectMixin {
+  @HiveField(0)
+  @override
+  final String facebook;
+  @HiveField(1)
+  @override
+  final String instagram;
+  @HiveField(2)
+  @override
+  final String linkedin;
+  @HiveField(3)
+  @override
+  final String twitter;
 
-class SocialMediaModel extends SocialMedia {
   SocialMediaModel({
-    super.facebook = '',
-    super.instagram = '',
-    super.linkedin = '',
-    super.twitter = '',
-  });
+    this.facebook = '',
+    this.instagram = '',
+    this.linkedin = '',
+    this.twitter = '',
+  }) : super(
+          facebook: facebook,
+          instagram: instagram,
+          linkedin: linkedin,
+          twitter: twitter,
+        );
 
   SocialMediaModel copyWith({
     String? facebook,

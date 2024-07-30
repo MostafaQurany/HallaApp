@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:halla/core/constants/constants.dart';
-import 'package:halla/features/contacts/data/models/contact_adapter.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:halla/features/contacts/data/models/contact_model.dart';
+import 'package:halla/features/contacts/presentation/screens/contact_card.dart';
 import 'package:halla/features/contacts/presentation/screens/widget/header_contact_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -10,33 +11,30 @@ class ContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          const HeaderContactScreen(),
-          FutureBuilder(
-            future: Hive.openBox<ContactAdapterA>(AppConstants.boxName),
-            builder: (context, snapshot) {
-              return ValueListenableBuilder(
-                valueListenable: Hive.box<ContactAdapterA>(AppConstants.boxName)
-                    .listenable(),
-                builder: (context, Box<ContactAdapterA> box, _) {
-                  if (box.values.isEmpty) {
-                    return const Text('data is empty');
-                  } else {
-                    return ListView.builder(
-                      itemCount: box.values.length,
-                      itemBuilder: (context, index) {
-                        return const ListTile(
-                          title: Text("ss"),
-                        );
-                      },
-                    );
-                  }
-                },
-              );
-            },
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const HeaderContactScreen(),
+            ValueListenableBuilder(
+              valueListenable:
+                  Hive.box<ContactModel>('ContactModelBox').listenable(),
+              builder: (context, Box<ContactModel> box, _) {
+                if (box.values.isEmpty) {
+                  return const Text('data is empty');
+                } else {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: box.values.length,
+                    itemBuilder: (context, index) {
+                      return ContactCard(contact: box.values.elementAt(index));
+                    },
+                  );
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

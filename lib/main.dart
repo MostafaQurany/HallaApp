@@ -6,18 +6,16 @@ import "package:flutter_localizations/flutter_localizations.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:halla/core/common/data/models/company_model.dart";
 import "package:halla/core/common/data/models/social_media_model.dart";
-import "package:halla/core/common/domain/entities/company.dart";
-import "package:halla/core/common/domain/entities/social_media.dart";
+import "package:halla/core/common/data/models/time_stamp.g.dart";
 import "package:halla/core/common/presentation/cubit/theme/cubit/brightness_cubit.dart";
 import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
-import "package:halla/core/constants/constants.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/bloc_observer.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/screens/auth_screen.dart";
-import "package:halla/features/contacts/data/data_sources/contacts_local_data_source.dart";
-import "package:halla/features/contacts/data/models/contact_adapter.dart";
 import "package:halla/features/contacts/data/models/contact_model.dart";
+import "package:halla/features/home/presentation/screens/home_screen.dart";
+
 import "package:halla/generated/l10n.dart";
 import "package:halla/init_dependencies_map.dart";
 import "package:hive_flutter/hive_flutter.dart";
@@ -34,40 +32,27 @@ void main() async {
   );
   // hive
   await Hive.initFlutter();
-  Hive.registerAdapter(ContactAdapterA());
-  Hive.registerAdapter(SocialMediaAdapterA());
-  Hive.registerAdapter(CompanyAdapterA());
-
-  Box b = await Hive.openBox<ContactAdapter>(AppConstants.boxName);
-  List<ContactAdapter> contactAdapters = [];
-
-  for (int i = 0; i < 5; i++) {
-    ContactAdapter contactAdapter = ContactAdapter(
-      id: 'id$i',
-      fullName: 'fullName$i',
-      primePhone: 'primePhone$i',
-      dateOfBirth: 'dateOfBirth$i',
-      nationality: 'nationality$i',
-      phones: ['phone1$i', 'phone2$i'],
-      nfcList: ['nfc1$i', 'nfc2$i'],
-      socialMedia: SocialMedia(
-        facebook: 'facebook$i',
-        instagram: 'instagram$i',
-        linkedin: 'linkedin$i',
-        twitter: 'twitter$i',
+  Hive.registerAdapter(ContactModelAdapter());
+  Hive.registerAdapter(CompanyModelAdapter());
+  Hive.registerAdapter(SocialMediaModelAdapter());
+  Hive.registerAdapter(TimestampAdapter());
+  Box b = await Hive.openBox<ContactModel>('ContactModelBox');
+  for (var i in [1, 2, 3, 4, 5, 67, 84, 82, 75, 34]) {
+    b.put(
+      i,
+      ContactModel(
+        id: i.toString(),
+        addTime: Timestamp.now(),
+        fullName: 'fullName',
+        primePhone: 'primePhone',
+        dateOfBirth: 'dateOfBirth',
+        nationality: 'nationality',
+        phones: ['111'],
+        socialMedia: SocialMediaModel(),
+        company: CompanyModel(),
       ),
-      company: Company(
-        name: 'companyName$i',
-        phoneNumber: 'companyPhoneNumber$i',
-        website: 'companyWebsite$i',
-        position: 'companyPosition$i',
-      ),
-      addTime: Timestamp.now(),
     );
-
-    contactAdapters.add(contactAdapter);
   }
-  b.addAll(contactAdapters);
   // firebase
   await Firebase.initializeApp();
   // dependencies
@@ -110,7 +95,7 @@ class MyApp extends StatelessWidget {
                   : AppTheme.lightTheme,
               themeMode:
                   state == Brightness.light ? ThemeMode.light : ThemeMode.dark,
-              home: const AuthScreen(),
+              home: const HomeScreen(),
             );
           },
         ),

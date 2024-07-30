@@ -169,10 +169,40 @@ _initContact() {
     ..registerFactory<ContactsRepository>(
       () => ContactsRepositoryImpl(
         serviceLocator(),
+        serviceLocator(),
       ),
     )
     // UseCase
-
+    ..registerFactory(
+      () => AddContactListServerUseCase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => AddContactServerUseCase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => DeleteContactServerUseCase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetBoxListenableUseCase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetContactListLocalUseCase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetContactLocalUseCase(
+        serviceLocator(),
+      ),
+    )
     // bloc
     ..registerLazySingleton(
       () => ContactsBloc(),

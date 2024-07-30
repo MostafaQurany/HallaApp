@@ -3,9 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
+import 'package:halla/features/contacts/domain/entities/contact.dart';
 
 class ContactCard extends StatefulWidget {
-  const ContactCard({super.key});
+  final Contact contact;
+  const ContactCard({
+    super.key,
+    required this.contact,
+  });
 
   @override
   State<ContactCard> createState() => _ContactCardState();
@@ -73,7 +78,7 @@ class _ContactCardState extends State<ContactCard>
                     ),
                   ),
                   Text(
-                    "Full Name ",
+                    widget.contact.fullName ?? "Full Name ",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: 16.sp,
@@ -122,37 +127,7 @@ class _ContactCardState extends State<ContactCard>
                             color: AppColors.gray,
                             size: 32.sp,
                           ),
-                          const Text("Maneger"),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          ImageIcon(
-                            AssetImage(AppImages.companyIcon),
-                            color: AppColors.gray,
-                            size: 32.sp,
-                          ),
-                          const Text("Maneger"),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          ImageIcon(
-                            AssetImage(AppImages.companyIcon),
-                            color: AppColors.gray,
-                            size: 32.sp,
-                          ),
-                          const Text("Maneger"),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          ImageIcon(
-                            AssetImage(AppImages.companyIcon),
-                            color: AppColors.gray,
-                            size: 32.sp,
-                          ),
-                          const Text("Maneger"),
+                          Text(widget.contact.company.position),
                         ],
                       ),
                     ],
