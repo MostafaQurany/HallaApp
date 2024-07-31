@@ -16,6 +16,7 @@ import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custo
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_social_media_field.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/phones_widget.dart";
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
+import "package:halla/features/home/presentation/screens/home_layout.dart";
 import "package:halla/features/home/presentation/screens/home_screen.dart";
 import "package:halla/generated/l10n.dart";
 
@@ -83,7 +84,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   onTap: () {
                     AppNavigator.navigatePushReplaceRemoveAll(
                       context,
-                      const HomeScreen(),
+                      const HomeLayout(),
                     );
                   },
                   child: DecoratedBox(
@@ -112,7 +113,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   if (state is AuthPersonalInfoSuccess) {
                     AppNavigator.navigatePushReplaceRemoveAll(
                       context,
-                      const HomeScreen(),
+                      const HomeLayout(),
                     );
                   }
                 },

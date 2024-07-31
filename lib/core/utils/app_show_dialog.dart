@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:halla/core/constants/app_images.dart';
+import 'package:lottie/lottie.dart';
 
 class AppShowDialog {
   static scaleAlertDialog(BuildContext context, Widget page) {
@@ -19,6 +21,18 @@ class AppShowDialog {
         return AlertDialog(
           content: page,
         );
+      },
+    );
+  }
+
+  static loading(
+    BuildContext context,
+  ) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) {
+        return Center(child: Lottie.asset(AppImages.loadingLottie));
       },
     );
   }

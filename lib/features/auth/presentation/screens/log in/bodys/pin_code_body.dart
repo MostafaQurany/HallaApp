@@ -48,7 +48,8 @@ class _PinCodeBodyState extends State<PinCodeBody> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                    height: 160.h, child: Lottie.asset(AppImages.pinCodeLotte)),
+                    height: 160.h,
+                    child: Lottie.asset(AppImages.pinCodeLottie)),
                 Form(
                   key: formKey,
                   child: CustomPinCodeField(

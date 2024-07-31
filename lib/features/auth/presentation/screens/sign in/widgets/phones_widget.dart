@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_phone_field.dart';
 
 class PhonesWidget extends StatefulWidget {
@@ -22,8 +23,8 @@ class PhonesWidgetState extends State<PhonesWidget> {
   @override
   void initState() {
     super.initState();
-    phonesController[phoneId[0]] = TextEditingController(
-        text: /*UserCubit.get(context).user?.primePhone  */ '01149075894');
+    phonesController[phoneId[0]] =
+        TextEditingController(text: UserCubit.get(context).user?.primePhone);
   }
 
   @override

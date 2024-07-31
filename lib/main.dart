@@ -12,8 +12,11 @@ import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/bloc_observer.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
+import "package:halla/features/auth/presentation/screens/auth_screen.dart";
 import "package:halla/features/contacts/data/models/contact_model.dart";
+import "package:halla/features/contacts/presentation/blocs/bloc/contacts_bloc.dart";
 import "package:halla/features/home/presentation/screens/home_layout.dart";
+import "package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart";
 
 import "package:halla/generated/l10n.dart";
 import "package:halla/init_dependencies_map.dart";
@@ -35,23 +38,6 @@ void main() async {
   Hive.registerAdapter(CompanyModelAdapter());
   Hive.registerAdapter(SocialMediaModelAdapter());
   Hive.registerAdapter(TimestampAdapter());
-  Box b = await Hive.openBox<ContactModel>('ContactModelBox');
-  for (var i in [1, 2, 3, 4, 5, 67, 84, 82, 75, 34]) {
-    b.put(
-      i,
-      ContactModel(
-        id: i.toString(),
-        addTime: Timestamp.now(),
-        fullName: 'fullName',
-        primePhone: 'primePhone',
-        dateOfBirth: 'dateOfBirth',
-        nationality: 'nationality',
-        phones: ['111'],
-        socialMedia: SocialMediaModel(),
-        company: CompanyModel(),
-      ),
-    );
-  }
   // firebase
   await Firebase.initializeApp();
   // dependencies
@@ -63,6 +49,8 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<UserCubit>()),
         BlocProvider(create: (context) => serviceLocator<BrightnessCubit>()),
         BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
+        BlocProvider(create: (context) => serviceLocator<ContactsBloc>()),
+        BlocProvider(create: (context) => serviceLocator<ProfileBloc>()),
       ],
       child: const MyApp(),
     ),
@@ -94,7 +82,7 @@ class MyApp extends StatelessWidget {
                   : AppTheme.lightTheme,
               themeMode:
                   state == Brightness.light ? ThemeMode.light : ThemeMode.dark,
-              home: const HomeLayout(),
+              home: const AuthScreen(),
             );
           },
         ),

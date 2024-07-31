@@ -54,7 +54,9 @@ class ContactsDataSourceImpl implements ContactsDataSource {
       ContactModel contactModel =
           await getContact(userId: userId, contactId: contactId);
       await _localDataSource.addContact(
-          userId: userId, contactModel: contactModel);
+        userId: userId,
+        contactModel: contactModel,
+      );
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {

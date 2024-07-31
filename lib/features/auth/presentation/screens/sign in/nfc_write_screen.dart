@@ -52,7 +52,10 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            context.read<AuthBloc>().closeNfcStatusStream();
+            Navigator.pop(context);
+          },
           icon: const Icon(Icons.arrow_back_ios_outlined),
         ),
         actions: [
@@ -60,6 +63,8 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
             padding: const EdgeInsets.all(8.0),
             child: TextButton(
               onPressed: () {
+                context.read<AuthBloc>().closeNfcStatusStream();
+
                 AppNavigator.navigatePushReplaceRemoveAll(
                   context,
                   const PersonalInformationScreen(),
@@ -114,6 +119,8 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
           }
 
           if (state is AuthUploadSuccess) {
+            context.read<AuthBloc>().closeNfcStatusStream();
+
             AppNavigator.navigatePushReplaceRemoveAll(
               context,
               const PersonalInformationScreen(),
@@ -152,7 +159,7 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
                     width: 1.sw,
                     height: 0.5.sh,
                     child: Lottie.asset(
-                      AppImages.nfcWriteLotte,
+                      AppImages.nfcWriteLottie,
                     ),
                   ),
                   ElevatedButton(

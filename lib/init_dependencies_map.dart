@@ -36,6 +36,10 @@ import 'package:halla/features/contacts/domain/usecases/get_box_listenable_use_c
 import 'package:halla/features/contacts/domain/usecases/get_contact_list_local_use_case.dart';
 import 'package:halla/features/contacts/domain/usecases/get_contact_local_use_case.dart';
 import 'package:halla/features/contacts/presentation/blocs/bloc/contacts_bloc.dart';
+import 'package:halla/features/profile/data/data_sources/profile_data_source.dart';
+import 'package:halla/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:halla/features/profile/domain/repositories/profile_repository.dart';
+import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
 
 
 part 'init_dependencies.main.dart';

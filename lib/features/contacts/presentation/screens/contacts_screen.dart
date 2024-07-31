@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/features/contacts/data/models/contact_model.dart';
+import 'package:halla/features/contacts/presentation/blocs/bloc/contacts_bloc.dart';
 import 'package:halla/features/contacts/presentation/screens/contact_card.dart';
 import 'package:halla/features/contacts/presentation/screens/components/header_contact_screen.dart';
 import 'package:halla/features/home/presentation/screens/components/end_spacer_sized_box.dart';
@@ -11,30 +14,40 @@ class ContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const HeaderContactScreen(),
-            ValueListenableBuilder(
-              valueListenable:
-                  Hive.box<ContactModel>('ContactModelBox').listenable(),
-              builder: (context, Box<ContactModel> box, _) {
-                if (box.values.isEmpty) {
-                  return const Text('data is empty');
-                } else {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: box.values.length,
-                    itemBuilder: (context, index) {
-                      return ContactCard(contact: box.values.elementAt(index));
-                    },
-                  );
-                }
-              },
-            ),
-            const EndSpacerSizedBox(),
-          ],
+      body: BlocListener<ContactsBloc, ContactsState>(
+        listener: (context, state) {
+          if (state is ContactsLoadingState) {
+            AppShowDialog.loading(context);
+          } else if (state is AddContactSuccessfully) {
+            Navigator.pop(context);
+          }
+        },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const HeaderContactScreen(),
+              ValueListenableBuilder(
+                valueListenable:
+                    Hive.box<ContactModel>('ContactModelBox').listenable(),
+                builder: (context, Box<ContactModel> box, _) {
+                  if (box.values.isEmpty) {
+                    return const Text('data is empty');
+                  } else {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: box.values.length,
+                      itemBuilder: (context, index) {
+                        return ContactCard(
+                            contact: box.values.elementAt(index));
+                      },
+                    );
+                  }
+                },
+              ),
+              const EndSpacerSizedBox(),
+            ],
+          ),
         ),
       ),
     );

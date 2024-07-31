@@ -40,7 +40,7 @@ class NfcButton extends StatelessWidget {
                         S.of(context).putNfcTag,
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
-                      Lottie.asset(AppImages.nfcLoginLotte),
+                      Lottie.asset(AppImages.nfcLoginLottie),
                       BlocBuilder<AuthBloc, AuthState>(
                         builder: (context, state) {
                           if (state is NfcState) {

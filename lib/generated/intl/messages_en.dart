@@ -62,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("Register."),
         "registerNow": MessageLookupByLibrary.simpleMessage("Register Now"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
+        "scanQrcodeToAddContact":
+            MessageLookupByLibrary.simpleMessage("Scan Qr-Code to add contact"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "socialMedia": MessageLookupByLibrary.simpleMessage("Social Media"),

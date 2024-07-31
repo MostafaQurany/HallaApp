@@ -439,6 +439,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Scan Qr-Code to add contact`
+  String get scanQrcodeToAddContact {
+    return Intl.message(
+      'Scan Qr-Code to add contact',
+      name: 'scanQrcodeToAddContact',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

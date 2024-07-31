@@ -4,6 +4,7 @@ import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/features/profile/presentation/screens/widgets/custom_share_contact_icon.dart';
 
 class ContactCard extends StatefulWidget {
   final Contact contact;
@@ -100,11 +101,7 @@ class _ContactCardState extends State<ContactCard>
                   SizedBox(
                     width: 15.w,
                   ),
-                  ImageIcon(
-                    AssetImage(
-                      AppImages.shareContact,
-                    ),
-                  ),
+                  CustomShareContactIcon(userId: widget.contact.id),
                 ],
               ),
               DecoratedBox(

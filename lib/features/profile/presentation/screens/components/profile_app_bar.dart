@@ -1,9 +1,13 @@
-import 'package:flutter/material.dart';
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:halla/core/common/domain/entities/user.dart';
+import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
+
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
+import 'package:halla/features/profile/presentation/screens/widgets/custom_share_contact_icon.dart';
 
 class ProfileAppBar extends StatefulWidget {
   const ProfileAppBar({super.key});
@@ -14,6 +18,13 @@ class ProfileAppBar extends StatefulWidget {
 
 class _ProfileAppBarState extends State<ProfileAppBar> {
   bool showPinCode = false;
+  User? user;
+  @override
+  void initState() {
+    super.initState();
+    user = UserCubit.get(context).user;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -32,7 +43,7 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
             SizedBox(
               width: 200.w,
               child: Text(
-                "qmostafa200@gmail.com",
+                user?.fullName ?? 'Guest',
                 style: Theme.of(context).textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -63,27 +74,20 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
                           ),
                         ),
                   ImageFiltered(
-                      imageFilter: ImageFilter.blur(
-                        sigmaX: (showPinCode) ? 0 : 6,
-                        sigmaY: (showPinCode) ? 0 : 4,
-                      ),
-                      child: const Text("000000")),
+                    imageFilter: ImageFilter.blur(
+                      sigmaX: (showPinCode) ? 0 : 6,
+                      sigmaY: (showPinCode) ? 0 : 4,
+                    ),
+                    child: Text(user?.pinCode ?? '000000'),
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
-        IconButton(
-          onPressed: () {
-            //TODO :- show qr code
-          },
-          icon: ImageIcon(
-            AssetImage(
-              AppImages.shareContact,
-            ),
-            color: AppColors.primary,
-            size: 18.sp,
-          ),
+        CustomShareContactIcon(
+          userId: user?.id ?? '',
+          iconColor: AppColors.primary,
         ),
       ],
     );

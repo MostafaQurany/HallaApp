@@ -1,11 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/constants/app_images.dart';
-import 'package:halla/core/theme/app_colors.dart';
-import 'package:halla/core/theme/theme.dart';
+import 'package:halla/core/utils/routting.dart';
+import 'package:halla/features/auth/presentation/screens/auth_screen.dart';
 import 'package:halla/features/home/presentation/screens/components/end_spacer_sized_box.dart';
+import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
 import 'package:halla/features/profile/presentation/screens/components/profile_app_bar.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_profile_buttom.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_profile_log_out_buttom.dart';
@@ -66,7 +66,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(
                 height: 10.h,
               ),
-              const CustomProfileLogOutButtom(),
+              BlocListener<ProfileBloc, ProfileState>(
+                listener: (context, state) {
+                  if (state is LogOutSuccesState) {
+                    AppNavigator.navigatePushReplaceRemoveAll(
+                      context,
+                      const AuthScreen(),
+                    );
+                  }
+                },
+                child: CustomProfileLogOutButtom(
+                  onTap: () {
+                    context.read<ProfileBloc>().add(LogOutEvent());
+                  },
+                ),
+              ),
               const EndSpacerSizedBox(),
             ],
           ),

@@ -19,7 +19,7 @@ class ShowGuestPinCode extends StatelessWidget {
             return Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Lottie.asset(AppImages.welcomePinCodeLotte),
+                Lottie.asset(AppImages.welcomePinCodeLottie),
                 Text(
                   """
 Welcome to Halla,

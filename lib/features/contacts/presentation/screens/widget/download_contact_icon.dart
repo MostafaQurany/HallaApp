@@ -36,7 +36,7 @@ class _DownloadContactIconState extends State<DownloadContactIcon>
       alignment: Alignment.center,
       children: [
         Lottie.asset(
-          AppImages.downloadContactIcons,
+          AppImages.downloadContactIconsLottie,
           controller: _controller,
           onLoaded: (composition) {
             _controller.duration = composition.duration;

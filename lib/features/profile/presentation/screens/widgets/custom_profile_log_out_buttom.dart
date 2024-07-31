@@ -1,12 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:halla/generated/l10n.dart';
 
 class CustomProfileLogOutButtom extends StatefulWidget {
-  const CustomProfileLogOutButtom({super.key});
+  final Function()? onTap;
+  const CustomProfileLogOutButtom({
+    super.key,
+    this.onTap,
+  });
 
   @override
   State<CustomProfileLogOutButtom> createState() =>
@@ -17,7 +23,7 @@ class _CustomProfileLogOutButtomState extends State<CustomProfileLogOutButtom> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: widget.onTap,
       child: Container(
         height: 50.h,
         decoration: BoxDecoration(

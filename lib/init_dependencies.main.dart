@@ -10,6 +10,8 @@ Future<void> initDependencies() async {
   _initAuth();
 
   _initContact();
+
+  _initProfile();
 }
 
 _initCommon() {
@@ -205,6 +207,34 @@ _initContact() {
     )
     // bloc
     ..registerLazySingleton(
-      () => ContactsBloc(),
+      () => ContactsBloc(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+      ),
+    );
+}
+
+_initProfile() {
+  serviceLocator
+    // Data Source
+    ..registerFactory<ProfileDataSource>(
+      () => ProfileDataSourceImpl(),
+    )
+
+    // Repository
+    ..registerFactory<ProfileRepository>(
+      () => ProfileRepositoryImpl(
+        serviceLocator(),
+      ),
+    )
+    // UseCase
+
+    // bloc
+    ..registerLazySingleton(
+      () => ProfileBloc(),
     );
 }

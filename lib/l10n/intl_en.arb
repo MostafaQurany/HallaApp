@@ -37,5 +37,6 @@
   "open": "Open",
   "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": "Welcome to Halla, Your PIN code for login is ${state.guest!.pinCode}. Keep it secure and don't share it with anyone.",
   "contactList": "Contact List",
-  "logOut": "Log Out"
+  "logOut": "Log Out",
+  "scanQrcodeToAddContact": "Scan Qr-Code to add contact"
 }
