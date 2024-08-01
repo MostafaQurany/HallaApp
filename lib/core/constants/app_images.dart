@@ -19,7 +19,6 @@ class AppImages {
   static String socialMediaIcon = _imageName("social_media_icon.png");
   static String searchPngIcon = _imageName("search.png");
   static String companyIcon = _imageName("company_icon.png");
-  static String contactListEmpty = _imageName("contact_list_empty.png");
   static String emptyHeart = _imageName("empty_heart.png");
   static String redHeard = _imageName("red_heard.png");
   static String shareContact = _imageName("share_contact.png");
@@ -35,6 +34,7 @@ class AppImages {
   static String logOutIcon = _imageName("log_out_icon.png");
   static String customerServiceIcon = _imageName("customer_service_icon.png");
   static String pincodeChangeIcon = _imageName("pincode_change_icon.png");
+  static String contactListEmpty = _imageName("no_contact.png");
 
   // svg
   static String loginVectorSvg = _svgName("login_vector.svg");

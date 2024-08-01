@@ -1,1 +1,1 @@
-enum UserType { user, guest }
+

@@ -57,7 +57,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc(
       // cubit
       UserCubit userCubit,
-      
+
       // auth email_password
       SignInWithEmailPasswordUsecase signInWithEmailPassword,
       LogInWithEmailPassword logInWithEmailPassword,
@@ -164,6 +164,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthLoading());
 
     final res = await _googleLogin(NoParams());
+
     await res.fold(
       (l) {
         emit(AuthFailure(message: l.message));
@@ -172,20 +173,27 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (r) async {
         bool isExit = r['isExit'];
         User user = r['user'];
-        final linkRes =
-            await _linkWithEmailPincode(LinkWithEmailPincodePeram(user: user));
-        await linkRes.fold(
-          (l) {
-            emit(AuthFailure(message: l.message));
-            return Future.value();
-          },
-          (r) async {
-            _userCubit.updateUser(user: user);
-            emit(
-              AuthGoogleState(user: user, isExit: isExit),
-            );
-          },
-        );
+        if (isExit) {
+          _userCubit.updateUser(user: user);
+          emit(
+            AuthGoogleState(user: user, isExit: isExit),
+          );
+        } else {
+          final linkRes = await _linkWithEmailPincode(
+              LinkWithEmailPincodePeram(user: user));
+          await linkRes.fold(
+            (l) {
+              emit(AuthFailure(message: l.message));
+              return Future.value();
+            },
+            (r) async {
+              _userCubit.updateUser(user: user);
+              emit(
+                AuthGoogleState(user: user, isExit: isExit),
+              );
+            },
+          );
+        }
       },
     );
   }
@@ -433,7 +441,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                   (r) {
                     _userCubit.updateUser(
                       guest: r,
-                      userType: UserType.guest,
                     );
                     emit(LogInGuestSucces(r));
                   },
@@ -450,7 +457,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             (r) {
               _userCubit.updateUser(
                 guest: r,
-                userType: UserType.guest,
               );
               emit(CreatNewGuestSucces(r));
             },

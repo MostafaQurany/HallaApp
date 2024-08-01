@@ -34,7 +34,7 @@ abstract class ContactsLocalDataSource {
 }
 
 class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
-  final String _boxName = AppConstants.boxName;
+  final String _boxName = AppConstants.contactBox;
 
   @override
   Future<void> addContact({

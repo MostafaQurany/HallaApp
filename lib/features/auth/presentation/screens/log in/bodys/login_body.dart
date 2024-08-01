@@ -12,6 +12,7 @@ import "package:halla/features/auth/presentation/screens/log%20in/widgets/nfc_bu
 import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
 import "package:halla/features/auth/presentation/screens/widgets/google_button.dart";
+import "package:halla/features/home/presentation/screens/home_layout.dart";
 import "package:halla/features/home/presentation/screens/home_screen.dart";
 import "package:halla/generated/l10n.dart";
 
@@ -57,7 +58,7 @@ class _LoginBodyState extends State<LoginBody> {
           if (state is AuthGoogleState) {
             if (state.isExit) {
               AppNavigator.navigatePushReplaceRemoveAll(
-                  context, const HomeScreen());
+                  context, const HomeLayout());
             } else {
               AppNavigator.navigatePushReplaceRemoveAll(
                   context, const NfcWriteScreen());
