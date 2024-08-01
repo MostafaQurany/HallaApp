@@ -28,21 +28,6 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     on<AddContactServerEvent>(
       _onAddContactServerEvent,
     );
-    on<ContactsEvent>(
-      (event, emit) {},
-    );
-    on<ContactsEvent>(
-      (event, emit) {},
-    );
-    on<ContactsEvent>(
-      (event, emit) {},
-    );
-    on<ContactsEvent>(
-      (event, emit) {},
-    );
-    on<ContactsEvent>(
-      (event, emit) {},
-    );
   }
 
   _onAddContactServerEvent(

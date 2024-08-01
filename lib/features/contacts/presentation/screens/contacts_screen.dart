@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:lottie/lottie.dart';
+
+import 'package:halla/core/constants/app_images.dart';
+import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/features/contacts/data/models/contact_model.dart';
 import 'package:halla/features/contacts/presentation/blocs/bloc/contacts_bloc.dart';
-import 'package:halla/features/contacts/presentation/screens/contact_card.dart';
 import 'package:halla/features/contacts/presentation/screens/components/header_contact_screen.dart';
+import 'package:halla/features/contacts/presentation/screens/contact_card.dart';
 import 'package:halla/features/home/presentation/screens/components/end_spacer_sized_box.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class ContactsScreen extends StatelessWidget {
   const ContactsScreen({super.key});
@@ -26,20 +31,38 @@ class ContactsScreen extends StatelessWidget {
           child: Column(
             children: [
               const HeaderContactScreen(),
-              ValueListenableBuilder(
-                valueListenable:
-                    Hive.box<ContactModel>('ContactModelBox').listenable(),
-                builder: (context, Box<ContactModel> box, _) {
-                  if (box.values.isEmpty) {
-                    return const Text('data is empty');
+              FutureBuilder(
+                future: Hive.openBox<ContactModel>(AppConstants.contactBox),
+                builder: (context, box) {
+                  if (box.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: Lottie.asset(AppImages.loadingLottie),
+                    );
                   } else {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: box.values.length,
-                      itemBuilder: (context, index) {
-                        return ContactCard(
-                            contact: box.values.elementAt(index));
+                    return ValueListenableBuilder(
+                      valueListenable:
+                          Hive.box<ContactModel>(AppConstants.contactBox)
+                              .listenable(),
+                      builder: (context, Box<ContactModel> box, _) {
+                        if (box.values.isEmpty) {
+                          return SizedBox(
+                            height: 0.4.sh,
+                            child: Image(
+                              image: AssetImage(AppImages.contactListEmpty),
+                              fit: BoxFit.contain,
+                            ),
+                          );
+                        } else {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: box.values.length,
+                            itemBuilder: (context, index) {
+                              return ContactCard(
+                                  contact: box.values.elementAt(index));
+                            },
+                          );
+                        }
                       },
                     );
                   }

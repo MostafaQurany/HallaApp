@@ -199,7 +199,9 @@ class AppConstants {
     "Zimbabwean",
   ];
   static String userCollection = 'users';
-  static String boxName = "Contacts";
+  static String contactBox = "ContactsBox";
+  static String userBox = "UserBox";
+  static String userLoginId = "UserLoginId";
   static String generatePinCode() {
     final random = Random();
     String pinCode = '';
