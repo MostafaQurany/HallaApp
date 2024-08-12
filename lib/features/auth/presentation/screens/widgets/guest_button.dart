@@ -41,6 +41,7 @@ class GuestButton extends StatelessWidget {
                     ? AppColors.primary
                     : AppColors.white,
               ),
+              
             ),
             onPressed: () {
               context.read<AuthBloc>().add(AuthLogInGuestEvent());

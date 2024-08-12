@@ -17,7 +17,6 @@ import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custo
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/phones_widget.dart";
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
 import "package:halla/features/home/presentation/screens/home_layout.dart";
-import "package:halla/features/home/presentation/screens/home_screen.dart";
 import "package:halla/generated/l10n.dart";
 
 class PersonalInformationScreen extends StatefulWidget {

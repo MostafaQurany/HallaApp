@@ -13,7 +13,6 @@ import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_scr
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
 import "package:halla/features/auth/presentation/screens/widgets/google_button.dart";
 import "package:halla/features/home/presentation/screens/home_layout.dart";
-import "package:halla/features/home/presentation/screens/home_screen.dart";
 import "package:halla/generated/l10n.dart";
 
 class LoginBody extends StatefulWidget {
@@ -50,7 +49,7 @@ class _LoginBodyState extends State<LoginBody> {
         listener: (context, state) {
           if (state is AuthSuccess) {
             AppNavigator.navigatePushReplaceRemoveAll(
-                context, const HomeScreen());
+                context, const HomeLayout());
           }
           if (state is AuthFailure) {
             print(state.message);

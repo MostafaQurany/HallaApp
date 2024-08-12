@@ -8,6 +8,11 @@ class AddContactServerEvent extends ContactsEvent {
   final String contactId;
   AddContactServerEvent({
     required this.userId,
-    required this.contactId ,
+    required this.contactId,
   });
+}
+
+class GetContactsListEvent extends ContactsEvent {
+  final String userId;
+  GetContactsListEvent({required this.userId});
 }

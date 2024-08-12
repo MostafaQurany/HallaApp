@@ -15,7 +15,6 @@ import "package:halla/features/auth/presentation/screens/widgets/custem_text_for
 import "package:halla/features/auth/presentation/screens/widgets/google_button.dart";
 import "package:halla/features/auth/presentation/screens/widgets/social_icon.dart";
 import "package:halla/features/home/presentation/screens/home_layout.dart";
-import "package:halla/features/home/presentation/screens/home_screen.dart";
 import "package:halla/generated/l10n.dart";
 
 class SignBody extends StatefulWidget {

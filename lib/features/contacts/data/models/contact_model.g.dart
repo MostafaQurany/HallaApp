@@ -17,15 +17,15 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ContactModel(
-      id: fields[0] as String,
-      addTime: fields[1] as Timestamp,
-      fullName: fields[2] as String,
-      primePhone: fields[3] as String,
-      dateOfBirth: fields[4] as String,
-      nationality: fields[5] as String,
-      phones: (fields[6] as List).cast<String>(),
-      socialMedia: fields[7] as SocialMediaModel,
-      company: fields[8] as CompanyModel,
+      idModel: fields[0] as String,
+      addTimeModel: fields[1] as Timestamp,
+      fullNameModel: fields[2] as String,
+      primePhoneModel: fields[3] as String,
+      dateOfBirthModel: fields[4] as String,
+      nationalityModel: fields[5] as String,
+      phonesModel: (fields[6] as List).cast<String>(),
+      socialMediaModel: fields[7] as SocialMediaModel,
+      companyModel: fields[8] as CompanyModel,
     );
   }
 
@@ -34,23 +34,23 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
     writer
       ..writeByte(9)
       ..writeByte(0)
-      ..write(obj.id)
+      ..write(obj.idModel)
       ..writeByte(1)
-      ..write(obj.addTime)
+      ..write(obj.addTimeModel)
       ..writeByte(2)
-      ..write(obj.fullName)
+      ..write(obj.fullNameModel)
       ..writeByte(3)
-      ..write(obj.primePhone)
+      ..write(obj.primePhoneModel)
       ..writeByte(4)
-      ..write(obj.dateOfBirth)
+      ..write(obj.dateOfBirthModel)
       ..writeByte(5)
-      ..write(obj.nationality)
+      ..write(obj.nationalityModel)
       ..writeByte(6)
-      ..write(obj.phones)
+      ..write(obj.phonesModel)
       ..writeByte(7)
-      ..write(obj.socialMedia)
+      ..write(obj.socialMediaModel)
       ..writeByte(8)
-      ..write(obj.company);
+      ..write(obj.companyModel);
   }
 
   @override

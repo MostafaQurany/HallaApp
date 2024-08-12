@@ -7,7 +7,7 @@ import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/pin_code_text_form_field.dart';
-import 'package:halla/features/home/presentation/screens/home_screen.dart';
+import 'package:halla/features/home/presentation/screens/home_layout.dart';
 import 'package:halla/generated/l10n.dart';
 import 'package:lottie/lottie.dart';
 
@@ -95,7 +95,7 @@ class _PinCodeBodyState extends State<PinCodeBody> {
                   listener: (context, state) {
                     if (state is AuthGetUserSuccess) {
                       AppNavigator.navigatePushReplaceRemoveAll(
-                          context, const HomeScreen());
+                          context, const HomeLayout());
                     }
                   },
                   builder: (context, state) {
@@ -118,7 +118,7 @@ class _PinCodeBodyState extends State<PinCodeBody> {
                                 );
                           } else {
                             AppNavigator.navigatePush(
-                                context, const HomeScreen());
+                                context, const HomeLayout());
                           }
                         }
                       },

@@ -1,19 +1,21 @@
-import "package:cloud_firestore/cloud_firestore.dart";
 import "package:firebase_core/firebase_core.dart";
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import "package:halla/core/common/data/models/company_model.dart";
 import "package:halla/core/common/data/models/social_media_model.dart";
 import "package:halla/core/common/data/models/time_stamp.g.dart";
 import "package:halla/core/common/presentation/cubit/theme/cubit/brightness_cubit.dart";
 import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
+import "package:halla/core/constants/constants.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/bloc_observer.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/screens/auth_screen.dart";
 import "package:halla/features/contacts/data/models/contact_model.dart";
+import "package:halla/features/contacts/domain/entities/contact.dart";
 import "package:halla/features/contacts/presentation/blocs/bloc/contacts_bloc.dart";
 import "package:halla/features/home/presentation/screens/home_layout.dart";
 import "package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart";
@@ -33,7 +35,9 @@ void main() async {
     storageDirectory: await getTemporaryDirectory(),
   );
   // hive
-  await Hive.initFlutter();
+  await Hive.initFlutter(
+    
+  );
   Hive.registerAdapter(ContactModelAdapter());
   Hive.registerAdapter(CompanyModelAdapter());
   Hive.registerAdapter(SocialMediaModelAdapter());
@@ -75,6 +79,7 @@ class MyApp extends StatelessWidget {
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
                 GlobalCupertinoLocalizations.delegate,
+                RefreshLocalizations.delegate,
               ],
               supportedLocales: S.delegate.supportedLocales,
               theme: state == Brightness.light
