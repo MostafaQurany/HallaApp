@@ -84,7 +84,7 @@ class MyApp extends StatelessWidget {
                 RefreshLocalizations.delegate,
               ],
               supportedLocales: S.delegate.supportedLocales,
-              theme: state == Brightness.light
+              theme: state != Brightness.light
                   ? AppTheme.darkTheme
                   : AppTheme.lightTheme,
               themeMode:
@@ -93,6 +93,7 @@ class MyApp extends StatelessWidget {
                 contact: Contact(
                   id: "12365",
                   fullName: "asdasdasd",
+                  email: "asdasdasd",
                   primePhone: "01015089201",
                   phones: [
                     '01156065655',

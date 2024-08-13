@@ -37,6 +37,7 @@ class AppImages {
   static String contactListEmpty = _imageName("no_contact.png");
   static String googleIcon = _imageName("google_icon.png");
   static String facebookIcon = _imageName("facebook_icon.png");
+  static String messageIcon = _imageName("message_icon.png");
 
   // svg
   static String loginVectorSvg = _svgName("login_vector.svg");

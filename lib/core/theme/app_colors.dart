@@ -18,4 +18,5 @@ class AppColors {
   static Color errorIconDark = const Color(0xff1D0C05);
   static Color errorDarkBackground = const Color(0xffDB0100);
   static Color errorborder = const Color(0xffFF0000);
+  static Color darkFill = const Color(0xff2C2C2C);
 }

@@ -18,38 +18,41 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
     };
     return ContactModel(
       idModel: fields[0] as String,
-      addTimeModel: fields[1] as Timestamp,
-      fullNameModel: fields[2] as String,
-      primePhoneModel: fields[3] as String,
-      dateOfBirthModel: fields[4] as String,
-      nationalityModel: fields[5] as String,
-      phonesModel: (fields[6] as List).cast<String>(),
-      socialMediaModel: fields[7] as SocialMediaModel,
-      companyModel: fields[8] as CompanyModel,
+      addTimeModel: fields[2] as Timestamp,
+      fullNameModel: fields[3] as String,
+      primePhoneModel: fields[4] as String,
+      dateOfBirthModel: fields[5] as String,
+      nationalityModel: fields[6] as String,
+      phonesModel: (fields[7] as List).cast<String>(),
+      socialMediaModel: fields[8] as SocialMediaModel,
+      companyModel: fields[9] as CompanyModel,
+      emailModel: fields[1] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ContactModel obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.idModel)
       ..writeByte(1)
-      ..write(obj.addTimeModel)
+      ..write(obj.emailModel)
       ..writeByte(2)
-      ..write(obj.fullNameModel)
+      ..write(obj.addTimeModel)
       ..writeByte(3)
-      ..write(obj.primePhoneModel)
+      ..write(obj.fullNameModel)
       ..writeByte(4)
-      ..write(obj.dateOfBirthModel)
+      ..write(obj.primePhoneModel)
       ..writeByte(5)
-      ..write(obj.nationalityModel)
+      ..write(obj.dateOfBirthModel)
       ..writeByte(6)
-      ..write(obj.phonesModel)
+      ..write(obj.nationalityModel)
       ..writeByte(7)
-      ..write(obj.socialMediaModel)
+      ..write(obj.phonesModel)
       ..writeByte(8)
+      ..write(obj.socialMediaModel)
+      ..writeByte(9)
       ..write(obj.companyModel);
   }
 

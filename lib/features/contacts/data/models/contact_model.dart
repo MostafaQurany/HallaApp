@@ -12,20 +12,22 @@ class ContactModel extends Contact with HiveObjectMixin {
   @HiveField(0)
   final String idModel;
   @HiveField(1)
-  final Timestamp addTimeModel;
+  final String emailModel;
   @HiveField(2)
-  final String fullNameModel;
+  final Timestamp addTimeModel;
   @HiveField(3)
-  final String primePhoneModel;
+  final String fullNameModel;
   @HiveField(4)
-  final String dateOfBirthModel;
+  final String primePhoneModel;
   @HiveField(5)
-  final String nationalityModel;
+  final String dateOfBirthModel;
   @HiveField(6)
-  final List<String> phonesModel;
+  final String nationalityModel;
   @HiveField(7)
-  final SocialMediaModel socialMediaModel;
+  final List<String> phonesModel;
   @HiveField(8)
+  final SocialMediaModel socialMediaModel;
+  @HiveField(9)
   final CompanyModel companyModel;
 
   ContactModel({
@@ -38,6 +40,7 @@ class ContactModel extends Contact with HiveObjectMixin {
     required this.phonesModel,
     required this.socialMediaModel,
     required this.companyModel,
+    required this.emailModel,
   }) : super(
           id: idModel,
           addTime: addTimeModel,
@@ -48,11 +51,13 @@ class ContactModel extends Contact with HiveObjectMixin {
           primePhone: primePhoneModel,
           socialMedia: socialMediaModel,
           company: companyModel,
+          email: emailModel,
         );
 
   ContactModel copyWith({
     String? id,
     String? fullName,
+    String? email,
     String? primePhone,
     String? dateOfBirth,
     String? nationality,
@@ -71,6 +76,7 @@ class ContactModel extends Contact with HiveObjectMixin {
       phonesModel: phones ?? phonesModel,
       socialMediaModel: socialMedia ?? socialMediaModel,
       companyModel: company ?? companyModel,
+      emailModel: email ?? emailModel,
     );
   }
 
@@ -79,6 +85,7 @@ class ContactModel extends Contact with HiveObjectMixin {
       'id': idModel,
       'addTime': addTimeModel,
       'fullName': fullNameModel,
+      'email': emailModel,
       'primePhone': primePhoneModel,
       'dateOfBirth': dateOfBirthModel,
       'nationality': nationalityModel,
@@ -92,6 +99,7 @@ class ContactModel extends Contact with HiveObjectMixin {
     return ContactModel(
       primePhoneModel: json['primePhone'] ?? '',
       nationalityModel: json['nationality'] ?? '',
+      emailModel: json['email'] ?? '',
       phonesModel: List<String>.from(json['phones']),
       fullNameModel: json['fullName'] ?? '',
       companyModel: CompanyModel.fromMap(json['company']),
@@ -109,6 +117,7 @@ class ContactModel extends Contact with HiveObjectMixin {
       primePhoneModel: user.primePhone,
       dateOfBirthModel: user.dateOfBirth,
       nationalityModel: user.nationality,
+      emailModel: user.email,
       phonesModel: user.phones,
       socialMediaModel: SocialMediaModel.fromSocialMedia(user.socialMedia),
       companyModel: CompanyModel.fromCompany(user.company),
@@ -120,6 +129,7 @@ class ContactModel extends Contact with HiveObjectMixin {
       'id': idModel,
       'addTime': addTimeModel.millisecondsSinceEpoch,
       'fullName': fullNameModel,
+      'email': emailModel,
       'primePhone': primePhoneModel,
       'dateOfBirth': dateOfBirthModel,
       'nationality': nationalityModel,
@@ -130,7 +140,7 @@ class ContactModel extends Contact with HiveObjectMixin {
   }
 
   factory ContactModel.fromJsonHive(String jsonString) {
-    Map<String,dynamic> json = jsonDecode(jsonString) ;
+    Map<String, dynamic> json = jsonDecode(jsonString);
     return ContactModel(
       primePhoneModel: json['primePhone'] ?? '',
       nationalityModel: json['nationality'] ?? '',
@@ -139,12 +149,11 @@ class ContactModel extends Contact with HiveObjectMixin {
       companyModel: CompanyModel.fromMap(json['company']),
       dateOfBirthModel: json['dateOfBirth'] ?? '',
       idModel: json['id'] ?? '',
+      emailModel: json['email'] ?? '',
       socialMediaModel: SocialMediaModel.fromMap(json['socialMedia']),
       addTimeModel: Timestamp.fromMillisecondsSinceEpoch(
         json['addTime'],
-      ), 
+      ),
     );
   }
-
-
 }
