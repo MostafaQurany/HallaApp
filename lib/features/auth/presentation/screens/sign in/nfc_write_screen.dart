@@ -51,13 +51,10 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            context.read<AuthBloc>().closeNfcStatusStream();
-            Navigator.pop(context);
-          },
-          icon: const Icon(Icons.arrow_back_ios_outlined),
+        title: const Text(
+          "Put NFC Tag",
         ),
+        centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -120,7 +117,6 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
 
           if (state is AuthUploadSuccess) {
             context.read<AuthBloc>().closeNfcStatusStream();
-
             AppNavigator.navigatePushReplaceRemoveAll(
               context,
               const PersonalInformationScreen(),
@@ -144,16 +140,11 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   CustomNfcCloseError(
                     animationOffset: _animationOffset,
                     slideTransitionController: _slideTransitionController,
-                  ),
-                  Text(
-                    "Put NFC Tag",
-                    style: Theme.of(context).textTheme.headlineSmall,
-                    textAlign: TextAlign.center,
                   ),
                   SizedBox(
                     width: 1.sw,
@@ -161,16 +152,6 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
                     child: Lottie.asset(
                       AppImages.nfcWriteLottie,
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context.read<AuthBloc>().add(
-                            WriteOnNfcEvent(
-                              nfcMessage: nfcMessage!,
-                            ),
-                          );
-                    },
-                    child: const Text("Open"),
                   ),
                 ],
               ),

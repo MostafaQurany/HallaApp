@@ -17,10 +17,10 @@ class CompanyModelAdapter extends TypeAdapter<CompanyModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CompanyModel(
-      name: fields[0] as String,
-      phoneNumber: fields[1] as String,
-      website: fields[2] as String,
-      position: fields[3] as String,
+      nameModel: fields[0] as String,
+      phoneNumberModel: fields[1] as String,
+      websiteModel: fields[2] as String,
+      positionModel: fields[3] as String,
     );
   }
 
@@ -29,13 +29,13 @@ class CompanyModelAdapter extends TypeAdapter<CompanyModel> {
     writer
       ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.nameModel)
       ..writeByte(1)
-      ..write(obj.phoneNumber)
+      ..write(obj.phoneNumberModel)
       ..writeByte(2)
-      ..write(obj.website)
+      ..write(obj.websiteModel)
       ..writeByte(3)
-      ..write(obj.position);
+      ..write(obj.positionModel);
   }
 
   @override

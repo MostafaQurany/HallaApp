@@ -8,6 +8,7 @@ import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/screens/log%20in/pin_code_screen.dart";
+import "package:halla/features/auth/presentation/screens/widgets/social_icon.dart";
 import "package:halla/generated/l10n.dart";
 import "package:lottie/lottie.dart";
 
@@ -16,7 +17,10 @@ class NfcButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return SocialIcon(
+      isSvg: false,
+      image:
+          AppTheme.isLight(context) ? AppImages.nfcIcon : AppImages.nfcIconDark,
       onTap: () {
         showDialog(
           context: context,
@@ -69,6 +73,9 @@ class NfcButton extends StatelessWidget {
           },
         );
       },
+    );
+    GestureDetector(
+      onTap: () {},
       child: Container(
         width: 50.w,
         height: 50.w,

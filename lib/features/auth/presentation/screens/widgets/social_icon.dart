@@ -6,9 +6,15 @@ import 'package:halla/core/theme/theme.dart';
 
 class SocialIcon extends StatelessWidget {
   final String image;
+  final bool isSvg;
   final Function() onTap;
 
-  const SocialIcon({super.key, required this.image, required this.onTap});
+  const SocialIcon({
+    super.key,
+    required this.image,
+    required this.onTap,
+    this.isSvg = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +30,13 @@ class SocialIcon extends StatelessWidget {
               : AppColors.blackLight,
           borderRadius: BorderRadius.all(Radius.circular(8.w)),
         ),
-        child: SvgPicture.asset(
-          image,
-        ),
+        child: (isSvg)
+            ? SvgPicture.asset(
+                image,
+              )
+            : Image(
+                image: AssetImage(image),
+              ),
       ),
     );
   }

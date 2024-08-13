@@ -1,6 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:halla/core/usecase/usecase.dart';
 import 'package:halla/core/utils/encryption.dart';
+import 'package:halla/features/contacts/data/models/contact_model.dart';
+import 'package:halla/features/contacts/domain/entities/contact.dart';
 import 'package:halla/features/contacts/domain/usecases/imports.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meta/meta.dart';
 
 part 'contacts_event.dart';
@@ -28,13 +33,16 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     on<AddContactServerEvent>(
       _onAddContactServerEvent,
     );
+    on<GetContactsListEvent>(
+      _onGetContactsListEvent,
+    );
   }
 
   _onAddContactServerEvent(
     AddContactServerEvent event,
     Emitter<ContactsState> emit,
   ) async {
-    emit(ContactsLoadingState());
+    emit(AddContactsLoadingState());
     final res = await _addContactServerUseCase(
       AddContactServerPram(
         userId: event.userId,
@@ -43,10 +51,47 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     );
     res.fold(
       (l) {
-        emit(ContactsErorrState(l.message));
+        emit(AddContactsErorrState(l.message));
       },
       (r) {
         emit(AddContactSuccessfully());
+      },
+    );
+  }
+
+  _onGetContactsListEvent(
+    GetContactsListEvent event,
+    Emitter<ContactsState> emit,
+  ) async {
+    emit(GetContactsLoadingState());
+    final res = await _getContactListLocalUseCase(
+      GetContactListLocalPram(
+        userId: event.userId,
+      ),
+    );
+    res.fold(
+      (l) {
+        emit(GetContactsErorrState(l.message));
+      },
+      (r) {
+        emit(GetContactsSuccessfully(contacts: r));
+      },
+    );
+  }
+
+  Future<ValueListenable<Box<Map>>?> getValueListenableBox() async {
+    return await _getBoxListenableUseCase(
+      NoParams(),
+    ).then(
+      (value) {
+        return value.fold(
+          (l) {
+            return null;
+          },
+          (r) {
+            return r;
+          },
+        );
       },
     );
   }

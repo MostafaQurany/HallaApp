@@ -17,35 +17,45 @@ class GuestButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
+        if (state is AuthLoading) {
+          AppShowDialog.loading(context);
+        }
+        if (state is AuthFailure) {
+          Navigator.pop(context);
+        }
         if (state is LogInGuestSucces) {
+          Navigator.pop(context);
           AppNavigator.navigatePush(context, const PinCodeScreen());
         }
         if (state is CreatNewGuestSucces) {
+          Navigator.pop(context);
           AppShowDialog.scaleAlertDialog(context, const ShowGuestPinCode());
         }
       },
       builder: (context, state) {
-        return Padding(
-          padding: EdgeInsets.only(right: 8.0.w, left: 8.0.w, top: 8.h),
-          child: ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.transparent,
-              foregroundColor: AppTheme.isLight(context)
-                  ? AppColors.primary
-                  : AppColors.white,
-              shadowColor: AppColors.transparent,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(1.sw)),
-              side: BorderSide(
-                color: AppTheme.isLight(context)
-                    ? AppColors.primary
-                    : AppColors.white,
-              ),
+        return GestureDetector(
+          onTap: () {
+            context.read<AuthBloc>().add(AuthLogInGuestEvent());
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(1.sw),
+                border: Border.all(
+                  color: AppTheme.isLight(context)
+                      ? AppColors.primary
+                      : AppColors.white,
+                )),
+            margin: EdgeInsets.only(right: 0.1.sw, left: 0.03.sw, top: 0.03.sw),
+            padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 8.w),
+            child: Text(
+              S.of(context).guest,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    color: AppTheme.isLight(context)
+                        ? AppColors.primary
+                        : AppColors.white,
+                  ),
             ),
-            onPressed: () {
-              context.read<AuthBloc>().add(AuthLogInGuestEvent());
-            },
-            child: Text(S.of(context).guest),
           ),
         );
       },

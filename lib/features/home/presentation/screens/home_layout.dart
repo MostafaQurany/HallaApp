@@ -22,18 +22,26 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
     const ProfileScreen(),
   ];
 
-  late AnimationController _animationController;
-  late Animation<double> _animation;
+  late AnimationController _iconAnimationController;
+  late Tween<double> _iconTween;
+  late Animation<double> _iconAnimation;
 
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 600),
+
+    _iconAnimationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    _animation =
-        Tween<double>(begin: 20, end: 30).animate(_animationController);
+    _iconTween = Tween<double>(begin: 20, end: 24);
+    _iconAnimation = _iconTween.animate(_iconAnimationController);
+  }
+
+  @override
+  void dispose() {
+    _iconAnimationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -42,9 +50,9 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
       backgroundColor: AppColors.transparent,
       body: Stack(
         children: [
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 400),
-            child: _screens[_selectedIndex],
+          IndexedStack(
+            index: _selectedIndex,
+            children: _screens,
           ),
           Positioned(
             bottom: 0,
@@ -90,11 +98,7 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      if (_selectedIndex == index) {
-        _animationController.forward();
-      } else {
-        _animationController.reverse();
-      }
+      _iconAnimationController.forward();
     });
   }
 
@@ -110,12 +114,12 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AnimatedBuilder(
-            animation: _animation,
+            animation: _iconAnimation,
             builder: (context, child) {
               return ImageIcon(
                 AssetImage(icon),
                 color: _selectedIndex == index ? AppColors.primary : null,
-                size: _selectedIndex == index ? _animation.value : 20,
+                size: _selectedIndex == index ? _iconAnimation.value : 20,
               );
             },
           ),

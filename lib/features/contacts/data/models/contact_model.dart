@@ -1,131 +1,150 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:halla/core/common/data/models/company_model.dart';
 import 'package:halla/core/common/data/models/social_media_model.dart';
 import 'package:halla/features/contacts/domain/entities/contact.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 part 'contact_model.g.dart';
+
 @HiveType(typeId: 1)
 class ContactModel extends Contact with HiveObjectMixin {
   @HiveField(0)
-  @override
-  final String id;
+  final String idModel;
   @HiveField(1)
-  @override
-  final Timestamp addTime;
+  final Timestamp addTimeModel;
   @HiveField(2)
-  @override
-  final String fullName;
+  final String fullNameModel;
   @HiveField(3)
-  @override
-  final String primePhone;
+  final String primePhoneModel;
   @HiveField(4)
-  @override
-  final String dateOfBirth;
+  final String dateOfBirthModel;
   @HiveField(5)
-  @override
-  final String nationality;
+  final String nationalityModel;
   @HiveField(6)
-  @override
-  final List<String> phones;
+  final List<String> phonesModel;
   @HiveField(7)
-  @override
-  final SocialMediaModel socialMedia;
-
+  final SocialMediaModel socialMediaModel;
   @HiveField(8)
-  @override
-  final CompanyModel company;
+  final CompanyModel companyModel;
 
   ContactModel({
-    required this.id,
-    required this.addTime,
-    required this.fullName,
-    required this.primePhone,
-    required this.dateOfBirth,
-    required this.nationality,
-    required this.phones,
-    required this.socialMedia,
-    required this.company,
+    required this.idModel,
+    required this.addTimeModel,
+    required this.fullNameModel,
+    required this.primePhoneModel,
+    required this.dateOfBirthModel,
+    required this.nationalityModel,
+    required this.phonesModel,
+    required this.socialMediaModel,
+    required this.companyModel,
   }) : super(
-          id: id,
-          addTime: addTime,
-          dateOfBirth: dateOfBirth,
-          fullName: fullName,
-          nationality: nationality,
-          phones: phones,
-          primePhone: primePhone,
-          socialMedia: socialMedia,
-          company: company,
+          id: idModel,
+          addTime: addTimeModel,
+          dateOfBirth: dateOfBirthModel,
+          fullName: fullNameModel,
+          nationality: nationalityModel,
+          phones: phonesModel,
+          primePhone: primePhoneModel,
+          socialMedia: socialMediaModel,
+          company: companyModel,
         );
 
   ContactModel copyWith({
     String? id,
-    String? email,
     String? fullName,
     String? primePhone,
     String? dateOfBirth,
     String? nationality,
-    String? pinCode,
     Timestamp? addTime,
     List<String>? phones,
-    List<String>? nfcList,
     SocialMediaModel? socialMedia,
     CompanyModel? company,
   }) {
     return ContactModel(
-      id: id ?? this.id,
-      addTime: addTime ?? this.addTime,
-      fullName: fullName ?? this.fullName,
-      primePhone: primePhone ?? this.primePhone,
-      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
-      nationality: nationality ?? this.nationality,
-      phones: phones ?? this.phones,
-      socialMedia: socialMedia ?? this.socialMedia,
-      company: company ?? this.company,
+      idModel: id ?? idModel,
+      addTimeModel: addTime ?? addTimeModel,
+      fullNameModel: fullName ?? fullNameModel,
+      primePhoneModel: primePhone ?? primePhoneModel,
+      dateOfBirthModel: dateOfBirth ?? dateOfBirthModel,
+      nationalityModel: nationality ?? nationalityModel,
+      phonesModel: phones ?? phonesModel,
+      socialMediaModel: socialMedia ?? socialMediaModel,
+      companyModel: company ?? companyModel,
     );
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'addTime': addTime,
-      'email': email,
-      'fullName': fullName,
-      'primePhone': primePhone,
-      'dateOfBirth': dateOfBirth,
-      'nationality': nationality,
-      'pinCode': pinCode,
+      'id': idModel,
+      'addTime': addTimeModel,
+      'fullName': fullNameModel,
+      'primePhone': primePhoneModel,
+      'dateOfBirth': dateOfBirthModel,
+      'nationality': nationalityModel,
       'phones': phones,
-      'nfcList': nfcList,
-      'socialMedia': socialMedia.toMap(),
-      'company': company.toMap(),
+      'socialMedia': socialMediaModel.toMap(),
+      'company': companyModel.toMap(),
     };
   }
 
-  factory ContactModel.fromJson(Map<String, dynamic> map) {
+  factory ContactModel.fromMap(Map<String, dynamic> json) {
     return ContactModel(
-      id: map['id'] as String,
-      addTime: map['addTime'] as Timestamp,
-      fullName: map['fullName'] as String,
-      primePhone: map['primePhone'] as String,
-      dateOfBirth: map['dateOfBirth'] as String,
-      nationality: map['nationality'] as String,
-      phones: (map['phones'] as List<dynamic>).map((e) => e as String).toList(),
-      socialMedia:
-          SocialMediaModel.fromMap(map['socialMedia'] as Map<String, dynamic>),
-      company: CompanyModel.fromMap(map['company'] as Map<String, dynamic>),
+      primePhoneModel: json['primePhone'] ?? '',
+      nationalityModel: json['nationality'] ?? '',
+      phonesModel: List<String>.from(json['phones']),
+      fullNameModel: json['fullName'] ?? '',
+      companyModel: CompanyModel.fromMap(json['company']),
+      dateOfBirthModel: json['dateOfBirth'] ?? '',
+      idModel: json['id'] ?? '',
+      socialMediaModel: SocialMediaModel.fromMap(json['socialMedia']),
+      addTimeModel: json['addTime'],
     );
   }
   factory ContactModel.fromContact(Contact user) {
     return ContactModel(
-      id: user.id,
-      addTime: user.addTime,
-      fullName: user.fullName,
-      primePhone: user.primePhone,
-      dateOfBirth: user.dateOfBirth,
-      nationality: user.nationality,
-      phones: user.phones,
-      socialMedia: SocialMediaModel.fromSocialMedia(user.socialMedia),
-      company: CompanyModel.fromCompany(user.company),
+      idModel: user.id,
+      addTimeModel: user.addTime,
+      fullNameModel: user.fullName,
+      primePhoneModel: user.primePhone,
+      dateOfBirthModel: user.dateOfBirth,
+      nationalityModel: user.nationality,
+      phonesModel: user.phones,
+      socialMediaModel: SocialMediaModel.fromSocialMedia(user.socialMedia),
+      companyModel: CompanyModel.fromCompany(user.company),
     );
   }
+
+  String toJsonHive() {
+    return jsonEncode({
+      'id': idModel,
+      'addTime': addTimeModel.millisecondsSinceEpoch,
+      'fullName': fullNameModel,
+      'primePhone': primePhoneModel,
+      'dateOfBirth': dateOfBirthModel,
+      'nationality': nationalityModel,
+      'phones': phonesModel,
+      'socialMedia': socialMediaModel.toMap(),
+      'company': companyModel.toMap(),
+    });
+  }
+
+  factory ContactModel.fromJsonHive(String jsonString) {
+    Map<String,dynamic> json = jsonDecode(jsonString) ;
+    return ContactModel(
+      primePhoneModel: json['primePhone'] ?? '',
+      nationalityModel: json['nationality'] ?? '',
+      phonesModel: List<String>.from(json['phones']),
+      fullNameModel: json['fullName'] ?? '',
+      companyModel: CompanyModel.fromMap(json['company']),
+      dateOfBirthModel: json['dateOfBirth'] ?? '',
+      idModel: json['id'] ?? '',
+      socialMediaModel: SocialMediaModel.fromMap(json['socialMedia']),
+      addTimeModel: Timestamp.fromMillisecondsSinceEpoch(
+        json['addTime'],
+      ), 
+    );
+  }
+
+
 }

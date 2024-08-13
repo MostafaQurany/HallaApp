@@ -40,19 +40,34 @@ class ContactsDataSourceImpl implements ContactsDataSource {
     required String userId,
     required String contactId,
   }) async {
-    final contactMap = {
-      'id': contactId,
-      'time': FieldValue.serverTimestamp(),
-    };
     try {
+      Map<String, dynamic> contactMap = await _firestore
+          .collection(AppConstants.userCollection)
+          .doc(userId)
+          .get(const GetOptions(
+            source: Source.serverAndCache,
+          ))
+          .then(
+        (DocumentSnapshot<Map<String, dynamic>> value) {
+          print(value.data());
+          return value.data()!['contacts'] ?? {};
+        },
+      );
+      if (contactMap.containsKey(contactId)) {
+        throw ServerException("User is Exsit.");
+      }
+      contactMap[contactId] = Timestamp.now();
       await _firestore
           .collection(AppConstants.userCollection)
           .doc(userId)
           .update({
-        'contacts': FieldValue.arrayUnion([contactMap]),
+        'contacts': contactMap,
       });
-      ContactModel contactModel =
-          await getContact(userId: userId, contactId: contactId);
+      ContactModel contactModel = await getContact(
+        userId: userId,
+        contactId: contactId,
+      );
+
       await _localDataSource.addContact(
         userId: userId,
         contactModel: contactModel,
@@ -101,17 +116,21 @@ class ContactsDataSourceImpl implements ContactsDataSource {
     required String contactId,
   }) async {
     try {
-      Map<String, dynamic> contactMap = await _firestore
+      Map<String, dynamic> userContact = await _firestore
           .collection(AppConstants.userCollection)
           .doc(userId)
           .get()
-          .then((doc) => doc.get('contacts'))
-          .then((contactList) =>
-              contactList.firstWhere((contact) => contact['id'] == contactId));
+          .then(
+            (value) => value.data()!['contacts'] ?? {},
+          );
 
-      final contactModel = await _getContactModel(contactMap['id']);
-
-      return contactModel;
+      if (userContact.containsKey(contactId)) {
+        final contactModel =
+            await _getContactModel(contactId, userContact[contactId]);
+        return contactModel;
+      } else {
+        throw ServerException("No Contact");
+      }
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {
@@ -132,7 +151,7 @@ class ContactsDataSourceImpl implements ContactsDataSource {
 
       final contactModelList = await contactList
           .map((Map<String, dynamic> contactMap) async =>
-              await _getContactModel(contactMap['id']))
+              await _getContactModel(contactMap['id'], Timestamp.now()))
           .toList();
 
       return contactModelList;
@@ -143,7 +162,10 @@ class ContactsDataSourceImpl implements ContactsDataSource {
     }
   }
 
-  Future<ContactModel> _getContactModel(String contactId) async {
+  Future<ContactModel> _getContactModel(
+    String contactId,
+    Timestamp timestamp,
+  ) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> contactDocumentSnapshot =
           await _firestore
@@ -151,13 +173,17 @@ class ContactsDataSourceImpl implements ContactsDataSource {
               .doc(contactId)
               .get();
       if (contactDocumentSnapshot.data() != null) {
-        return ContactModel.fromJson(contactDocumentSnapshot.data()!);
+        Map<String, dynamic> map = contactDocumentSnapshot.data()!;
+        map["addTime"] = timestamp;
+        ContactModel contactModel = ContactModel.fromMap(map);
+        return contactModel;
       } else {
         throw ServerException("No Contact");
       }
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {
+      print(e);
       throw ServerException(e.toString());
     }
   }

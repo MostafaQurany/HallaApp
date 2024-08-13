@@ -1,31 +1,28 @@
 import 'package:halla/core/common/domain/entities/social_media.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 part 'social_media_model.g.dart';
+
 @HiveType(typeId: 3)
 class SocialMediaModel extends SocialMedia with HiveObjectMixin {
   @HiveField(0)
-  @override
-  final String facebook;
+  final String facebookModel;
   @HiveField(1)
-  @override
-  final String instagram;
+  final String instagramModel;
   @HiveField(2)
-  @override
-  final String linkedin;
+  final String linkedinModel;
   @HiveField(3)
-  @override
-  final String twitter;
+  final String twitterModel;
 
   SocialMediaModel({
-    this.facebook = '',
-    this.instagram = '',
-    this.linkedin = '',
-    this.twitter = '',
+    this.facebookModel = '',
+    this.instagramModel = '',
+    this.linkedinModel = '',
+    this.twitterModel = '',
   }) : super(
-          facebook: facebook,
-          instagram: instagram,
-          linkedin: linkedin,
-          twitter: twitter,
+          facebook: facebookModel,
+          instagram: instagramModel,
+          linkedin: linkedinModel,
+          twitter: twitterModel,
         );
 
   SocialMediaModel copyWith({
@@ -35,10 +32,10 @@ class SocialMediaModel extends SocialMedia with HiveObjectMixin {
     String? twitter,
   }) {
     return SocialMediaModel(
-      facebook: facebook ?? this.facebook,
-      instagram: instagram ?? this.instagram,
-      linkedin: linkedin ?? this.linkedin,
-      twitter: twitter ?? this.twitter,
+      facebookModel: facebook ?? this.facebook,
+      instagramModel: instagram ?? this.instagram,
+      linkedinModel: linkedin ?? this.linkedin,
+      twitterModel: twitter ?? this.twitter,
     );
   }
 
@@ -53,18 +50,18 @@ class SocialMediaModel extends SocialMedia with HiveObjectMixin {
 
   factory SocialMediaModel.fromMap(Map<String, dynamic> map) {
     return SocialMediaModel(
-      facebook: map['facebook'] as String,
-      instagram: map['instagram'] as String,
-      linkedin: map['linkedin'] as String,
-      twitter: map['twitter'] as String,
+      facebookModel: map['facebook'] as String,
+      instagramModel: map['instagram'] as String,
+      linkedinModel: map['linkedin'] as String,
+      twitterModel: map['twitter'] as String,
     );
   }
   factory SocialMediaModel.fromSocialMedia(SocialMedia socialMedia) {
     return SocialMediaModel(
-      facebook: socialMedia.facebook,
-      instagram: socialMedia.instagram,
-      linkedin: socialMedia.linkedin,
-      twitter: socialMedia.twitter,
+      facebookModel: socialMedia.facebook,
+      instagramModel: socialMedia.instagram,
+      linkedinModel: socialMedia.linkedin,
+      twitterModel: socialMedia.twitter,
     );
   }
 }

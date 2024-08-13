@@ -54,7 +54,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
   // local
 
   @override
-  Future<Either<Failure, ValueListenable<Box<Map<String, Contact>>>>>
+  Future<Either<Failure, ValueListenable<Box<Map>>>>
       getBoxListenable() async {
     try {
       final res = await local.getContactModelBoxListenable();

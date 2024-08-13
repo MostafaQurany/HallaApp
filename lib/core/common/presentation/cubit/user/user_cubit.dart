@@ -9,33 +9,19 @@ class UserCubit extends Cubit<UserState> {
   UserCubit() : super(UserInitial());
 
   User? user;
-  Guest? guest;
-  bool _isUser = true;
 
   static UserCubit get(BuildContext context) => BlocProvider.of(context);
 
   void updateUser({
     User? user,
-    Guest? guest,
   }) {
-    if (user == null && guest == null) {
+    if (user == null) {
       emit(UserInitial());
-    } else if (user != null && guest == null) {
+    } else {
       this.user = user;
-      _isUser = true;
       emit(UserLoggedIn(
         user: user,
-        isUser: true,
-      ));
-    } else if (user == null && guest != null) {
-      this.guest = guest;
-      _isUser = false;
-      emit(UserLoggedIn(
-        guest: guest,
-        isUser: false,
       ));
     }
   }
-
-  get isUser => _isUser;
 }

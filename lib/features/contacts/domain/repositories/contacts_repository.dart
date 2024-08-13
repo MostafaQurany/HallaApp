@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/error/failure.dart';
+import 'package:halla/features/contacts/data/models/contact_model.dart';
 import 'package:halla/features/contacts/domain/entities/contact.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -12,7 +13,9 @@ abstract class ContactsRepository {
   Future<Either<Failure, List<Contact>>> getContactListLocal({
     required String userId,
   });
-  Future<Either<Failure, ValueListenable<Box<Map<String, Contact>>>>>
+  Future<
+          Either<Failure,
+              ValueListenable<Box<Map>>>>
       getBoxListenable();
 // loacl
   // Future<Either<Failure, void>> addContactLocal({
