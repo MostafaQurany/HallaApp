@@ -22,13 +22,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 18.h),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 15.h),
           child: ListView(
             children: [
-              SizedBox(
-                height: 45.h,
-              ),
               const ProfileAppBar(),
               SizedBox(
                 height: 30.h,
@@ -64,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onTap: () {},
               ),
               SizedBox(
-                height: 10.h,
+                height: 5.h,
               ),
               BlocListener<ProfileBloc, ProfileState>(
                 listener: (context, state) {

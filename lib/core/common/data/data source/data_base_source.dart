@@ -114,9 +114,9 @@ class DataBaseSourceImpl implements DataBaseSource {
         return getGuest();
       } else {
         GuestModel guestModel = GuestModel(
-          id: await AppConstants.getGuestId(),
-          name: "Guest",
-          pinCode: AppConstants.generatePinCode(),
+          idGuest: await AppConstants.getGuestId(),
+          fullNameGuest: "Guest",
+          pinCodeGuest: AppConstants.generatePinCode(),
         );
         await _firestore
             .collection(_userCollection)
@@ -141,6 +141,7 @@ class DataBaseSourceImpl implements DataBaseSource {
               .collection(_userCollection)
               .doc(await AppConstants.getGuestId())
               .get();
+      print(documentSnapshot.data()!);
       return GuestModel.fromMap(documentSnapshot.data()!);
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());

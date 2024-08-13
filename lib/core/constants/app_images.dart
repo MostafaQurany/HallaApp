@@ -35,12 +35,12 @@ class AppImages {
   static String customerServiceIcon = _imageName("customer_service_icon.png");
   static String pincodeChangeIcon = _imageName("pincode_change_icon.png");
   static String contactListEmpty = _imageName("no_contact.png");
+  static String googleIcon = _imageName("google_icon.png");
+  static String facebookIcon = _imageName("facebook_icon.png");
 
   // svg
   static String loginVectorSvg = _svgName("login_vector.svg");
   static String signVectorSvg = _svgName("sign_vector.svg");
-  static String facebookIconSvg = _svgName("facebook_icon.svg");
-  static String googleIconSvg = _svgName("google_icon.svg");
 
   //lottie
   static String nfcWriteLottie = _lottieName("nfc_write_lotte.json");
@@ -50,7 +50,6 @@ class AppImages {
   static String downloadContactIconsLottie =
       _lottieName("download_contact_icons.json");
   static String loadingLottie = _lottieName("loading_lottie.json");
-
   static String _imageName(String name) => "assets/images/$name";
   static String _svgName(String name) => "assets/svg/$name";
   static String _lottieName(String name) => "assets/lottie/$name";

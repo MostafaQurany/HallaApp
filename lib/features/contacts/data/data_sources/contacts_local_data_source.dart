@@ -5,7 +5,7 @@ import 'package:halla/features/contacts/data/models/contact_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class ContactsLocalDataSource {
-  Future<ValueListenable<Box<Map<String, ContactModel>>>>
+  Future<ValueListenable<Box<Map>>>
       getContactModelBoxListenable();
 
   Future<void> addContact({
@@ -42,16 +42,19 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
     required ContactModel contactModel,
   }) async {
     try {
-      final box = await Hive.openBox<Map<String, ContactModel>>(_boxName);
+      final box = await _getBoxContact();
       final contactMap = box.get(userId);
+      print(contactMap);
       if (contactMap != null) {
-        contactMap[contactModel.id] = contactModel;
+        contactMap[contactModel.id] = contactModel.toJsonHive();
         await box.put(userId, contactMap);
       } else {
-        final newContactMap = {contactModel.id: contactModel};
+        final newContactMap = {contactModel.id: contactModel.toJsonHive()};
         await box.put(userId, newContactMap);
       }
+      print(contactMap);
     } catch (e) {
+      print(e);
       throw ServerException(e.toString());
     }
   }
@@ -62,19 +65,18 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
     required List<ContactModel> contactList,
   }) async {
     try {
-      final box = await Hive.openBox<Map<String, ContactModel>>(_boxName);
+      final box = await _getBoxContact();
       final contactMap = box.get(userId);
       if (contactMap != null) {
         for (final contact in contactList) {
-          contactMap[contact.id] = contact;
+          contactMap[contact.id] = contact.toJsonHive();
         }
         await box.put(userId, contactMap);
       } else {
-        Map<String, ContactModel> newContactMap =
-            contactList.fold({}, (map, contact) {
-          map[contact.id] = contact;
-          return map;
-        });
+        Map<String, String> newContactMap = {};
+        for (var element in contactList) {
+          newContactMap[element.id] = element.toJsonHive();
+        }
         await box.put(userId, newContactMap);
       }
     } catch (e) {
@@ -88,7 +90,7 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
     required ContactModel contactModel,
   }) async {
     try {
-      final box = await Hive.openBox<Map<String, ContactModel>>(_boxName);
+      final box = await _getBoxContact();
       final contactMap = box.get(userId);
       if (contactMap != null) {
         contactMap.remove(contactModel.id);
@@ -105,10 +107,10 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
     required String contactId,
   }) async {
     try {
-      final box = await Hive.openBox<Map<String, ContactModel>>(_boxName);
+      final box = await _getBoxContact();
       final contactMap = box.get(userId);
       if (contactMap != null && contactMap[contactId] != null) {
-        return contactMap[contactId]!;
+        return ContactModel.fromJsonHive(contactMap[contactId]!);
       } else {
         throw ServerException("Can't find the contact");
       }
@@ -122,16 +124,18 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
     required String userId,
   }) async {
     try {
-      final box = await Hive.openBox<Map<String, ContactModel>>(_boxName);
+      final box = await _getBoxContact();
       final contactMap = box.get(userId);
       if (contactMap != null) {
         List<ContactModel> contactModelList = [];
         for (var k in contactMap.keys) {
-          contactModelList.add(contactMap[k]!);
+          contactModelList.add(ContactModel.fromJsonHive(contactMap[k]!));
         }
         return contactModelList;
       } else {
-        throw ServerException("Can't find the contacts");
+        Map<String, String> newContactMap = {};
+        await box.put(userId, newContactMap);
+        return [];
       }
     } catch (e) {
       throw ServerException(e.toString());
@@ -139,9 +143,17 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
   }
 
   @override
-  Future<ValueListenable<Box<Map<String, ContactModel>>>>
+  Future<ValueListenable<Box<Map>>>
       getContactModelBoxListenable() async {
-    final box = await Hive.openBox<Map<String, ContactModel>>(_boxName);
+    final box = await _getBoxContact();
     return box.listenable();
+  }
+
+  Future<Box<Map>> _getBoxContact() async {
+    if (Hive.isBoxOpen(_boxName)) {
+      return Hive.box<Map>(_boxName);
+    } else {
+      return await Hive.openBox<Map>(_boxName);
+    }
   }
 }

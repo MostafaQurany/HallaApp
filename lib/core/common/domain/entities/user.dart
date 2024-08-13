@@ -2,7 +2,6 @@
 import 'package:halla/core/common/domain/entities/company.dart';
 import 'package:halla/core/common/domain/entities/social_media.dart';
 
-
 class User {
   String id;
   String email;
@@ -15,6 +14,7 @@ class User {
   List<String> nfcList;
   SocialMedia socialMedia;
   Company company;
+  bool isGuest;
   User({
     required this.id,
     required this.email,
@@ -27,6 +27,7 @@ class User {
     required this.phones,
     required this.socialMedia,
     required this.company,
+    this.isGuest = false,
   });
 
   @override

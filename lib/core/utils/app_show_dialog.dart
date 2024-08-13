@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:halla/core/constants/app_images.dart';
+import 'package:halla/core/theme/app_colors.dart';
+import 'package:halla/core/theme/theme.dart';
 import 'package:lottie/lottie.dart';
 
 class AppShowDialog {
@@ -32,7 +34,19 @@ class AppShowDialog {
       context: context,
       barrierDismissible: false,
       builder: (context) {
-        return Center(child: Lottie.asset(AppImages.loadingLottie));
+        return PopScope(
+          canPop: false,
+          child: Center(
+              child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: AppTheme.isLight(context)
+                        ? AppColors.white
+                        : AppColors.blackLight,
+                  ),
+                  padding: const EdgeInsets.all(16),
+                  child: Lottie.asset(AppImages.loadingLottie))),
+        );
       },
     );
   }

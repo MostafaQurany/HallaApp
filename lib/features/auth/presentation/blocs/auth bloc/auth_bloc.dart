@@ -1,29 +1,29 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:meta/meta.dart';
+
 import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
 import 'package:halla/core/common/domain/entities/guest.dart';
 import 'package:halla/core/common/domain/entities/nfc_message.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/common/domain/usecase/get_is_nfc_available.dart';
 import 'package:halla/core/common/domain/usecase/get_is_nfc_open.dart';
+import 'package:halla/core/common/domain/usecase/get_user_usecase.dart';
 import 'package:halla/core/common/domain/usecase/is_guest_exit.dart';
 import 'package:halla/core/common/domain/usecase/is_guest_update.dart';
 import 'package:halla/core/common/domain/usecase/log_in_guest.dart';
 import 'package:halla/core/common/domain/usecase/read_from_nfc.dart';
+import 'package:halla/core/common/domain/usecase/upload_user_usecase.dart';
 import 'package:halla/core/common/domain/usecase/write_on_nfc.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/core/usecase/usecase.dart';
-import 'package:halla/core/utils/enums.dart';
 import 'package:halla/features/auth/domain/usecases/get_sms_code_usecase.dart';
-import 'package:halla/core/common/domain/usecase/get_user_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/google_login.dart';
 import 'package:halla/features/auth/domain/usecases/link_with_email_pincode.dart';
 import 'package:halla/features/auth/domain/usecases/log_in_with_email_password.dart';
 import 'package:halla/features/auth/domain/usecases/sent_sms_code_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/sign_in_with_email_password_usecase.dart';
-import 'package:halla/core/common/domain/usecase/upload_user_usecase.dart';
-import 'package:meta/meta.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -440,7 +440,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                   },
                   (r) {
                     _userCubit.updateUser(
-                      guest: r,
+                      user: r,
                     );
                     emit(LogInGuestSucces(r));
                   },
@@ -456,7 +456,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             },
             (r) {
               _userCubit.updateUser(
-                guest: r,
+                user: r,
               );
               emit(CreatNewGuestSucces(r));
             },

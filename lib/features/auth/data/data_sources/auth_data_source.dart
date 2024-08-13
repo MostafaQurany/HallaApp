@@ -32,8 +32,6 @@ abstract interface class AuthDataSource {
   Future<void> linkWithEmailPassword({
     required UserModel user,
   });
-
- 
 }
 
 class AuthDataSourceImpl implements AuthDataSource {
@@ -176,6 +174,8 @@ class AuthDataSourceImpl implements AuthDataSource {
       return UserModel(
         id: userCredential.user!.uid,
         email: userCredential.user!.email!,
+        fullName: userCredential.user!.displayName ?? '',
+        primePhone: userCredential.user!.phoneNumber ?? '',
         nfcList: [],
         company: CompanyModel(),
         socialMedia: SocialMediaModel(),
@@ -199,6 +199,4 @@ class AuthDataSourceImpl implements AuthDataSource {
       throw ServerException(e.toString());
     }
   }
-  
-  
 }

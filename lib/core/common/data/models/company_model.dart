@@ -5,27 +5,23 @@ part 'company_model.g.dart';
 @HiveType(typeId: 2)
 class CompanyModel extends Company with HiveObjectMixin {
   @HiveField(0)
-  @override
-  final String name;
+  final String nameModel;
   @HiveField(1)
-  @override
-  final String phoneNumber;
+  final String phoneNumberModel;
   @HiveField(2)
-  @override
-  final String website;
+  final String websiteModel;
   @HiveField(3)
-  @override
-  final String position;
+  final String positionModel;
   CompanyModel({
-    this.name = '',
-    this.phoneNumber = '',
-    this.website = '',
-    this.position = '',
+    this.nameModel = '',
+    this.phoneNumberModel = '',
+    this.websiteModel = '',
+    this.positionModel = '',
   }) : super(
-          name: name,
-          phoneNumber: phoneNumber,
-          position: position,
-          website: website,
+          name: nameModel,
+          phoneNumber: phoneNumberModel,
+          position: positionModel,
+          website: websiteModel,
         );
 
   CompanyModel copyWith({
@@ -35,10 +31,10 @@ class CompanyModel extends Company with HiveObjectMixin {
     String? position,
   }) {
     return CompanyModel(
-      name: name ?? this.name,
-      phoneNumber: phoneNumber ?? this.phoneNumber,
-      website: website ?? this.website,
-      position: position ?? this.position,
+      nameModel: name ?? this.name,
+      phoneNumberModel: phoneNumber ?? this.phoneNumber,
+      websiteModel: website ?? this.website,
+      positionModel: position ?? this.position,
     );
   }
 
@@ -53,19 +49,19 @@ class CompanyModel extends Company with HiveObjectMixin {
 
   factory CompanyModel.fromMap(Map<String, dynamic> map) {
     return CompanyModel(
-      name: map['name'] as String,
-      phoneNumber: map['phoneNumber'] as String,
-      website: map['website'] as String,
-      position: map['position'] as String,
+      nameModel: map['name'] as String,
+      phoneNumberModel: map['phoneNumber'] as String,
+      websiteModel: map['website'] as String,
+      positionModel: map['position'] as String,
     );
   }
 
   factory CompanyModel.fromCompany(Company company) {
     return CompanyModel(
-      name: company.name,
-      phoneNumber: company.phoneNumber,
-      website: company.website,
-      position: company.phoneNumber,
+      nameModel: company.name,
+      phoneNumberModel: company.phoneNumber,
+      websiteModel: company.website,
+      positionModel: company.phoneNumber,
     );
   }
 }

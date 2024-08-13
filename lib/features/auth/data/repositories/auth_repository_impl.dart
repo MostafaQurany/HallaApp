@@ -93,14 +93,12 @@ class AuthRepositoryImpl implements AuthRepository {
       // == get user
       if (isUserExit) {
         res = await dataBaseSource.getUser(userModel.id);
-        print("isUserExit = $res");
       }
       // == create new user
       else {
         userModel.pinCode = AppConstants.generatePinCode();
         res = await dataBaseSource.uploadUser(userModel);
       }
-      print("google data = = ${res.toString()}");
       return right({
         "user": res,
         "isExit": isUserExit,

@@ -18,11 +18,11 @@ class ProfileAppBar extends StatefulWidget {
 
 class _ProfileAppBarState extends State<ProfileAppBar> {
   bool showPinCode = false;
-  User? user;
+  late User user;
   @override
   void initState() {
     super.initState();
-    user = UserCubit.get(context).user;
+    user = UserCubit.get(context).user!;
   }
 
   @override
@@ -31,64 +31,69 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         CircleAvatar(
-          radius: 33.w,
+          radius: 30.w,
           backgroundImage: AssetImage(
             AppImages.profilePlaceholder,
           ),
+          backgroundColor: Colors.transparent,
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 200.w,
-              child: Text(
-                user?.fullName ?? 'Guest',
+        Expanded(
+          flex: 5,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                user.fullName,
                 style: Theme.of(context).textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
                 softWrap: true,
               ),
-            ),
-            SizedBox(
-              height: 5.h,
-            ),
-            SizedBox(
-              width: 100.w,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  (showPinCode)
-                      ? GestureDetector(
-                          onTap: _changeShowPinCode,
-                          child: Image.asset(
-                            AppImages.hidePinCode,
-                            height: 16.h,
-                          ),
-                        )
-                      : GestureDetector(
-                          onTap: _changeShowPinCode,
-                          child: Image.asset(
-                            AppImages.showPinCode,
-                            height: 16.h,
-                          ),
-                        ),
-                  ImageFiltered(
-                    imageFilter: ImageFilter.blur(
-                      sigmaX: (showPinCode) ? 0 : 6,
-                      sigmaY: (showPinCode) ? 0 : 4,
-                    ),
-                    child: Text(user?.pinCode ?? '000000'),
-                  ),
-                ],
+              SizedBox(
+                height: 5.h,
               ),
+              SizedBox(
+                width: 100.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    (showPinCode)
+                        ? GestureDetector(
+                            onTap: _changeShowPinCode,
+                            child: Image.asset(
+                              AppImages.hidePinCode,
+                              height: 16.h,
+                            ),
+                          )
+                        : GestureDetector(
+                            onTap: _changeShowPinCode,
+                            child: Image.asset(
+                              AppImages.showPinCode,
+                              height: 16.h,
+                            ),
+                          ),
+                    ImageFiltered(
+                      imageFilter: ImageFilter.blur(
+                        sigmaX: (showPinCode) ? 0 : 6,
+                        sigmaY: (showPinCode) ? 0 : 4,
+                      ),
+                      child: Text(user.pinCode),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        if (!user.isGuest)
+          Expanded(
+            flex: 1,
+            child: CustomShareContactIcon(
+              userId: user.id,
+              iconColor: AppColors.primary,
             ),
-          ],
-        ),
-        CustomShareContactIcon(
-          userId: user?.id ?? '',
-          iconColor: AppColors.primary,
-        ),
+          ),
       ],
     );
   }

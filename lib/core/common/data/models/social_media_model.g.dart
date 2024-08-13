@@ -17,10 +17,10 @@ class SocialMediaModelAdapter extends TypeAdapter<SocialMediaModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return SocialMediaModel(
-      facebook: fields[0] as String,
-      instagram: fields[1] as String,
-      linkedin: fields[2] as String,
-      twitter: fields[3] as String,
+      facebookModel: fields[0] as String,
+      instagramModel: fields[1] as String,
+      linkedinModel: fields[2] as String,
+      twitterModel: fields[3] as String,
     );
   }
 
@@ -29,13 +29,13 @@ class SocialMediaModelAdapter extends TypeAdapter<SocialMediaModel> {
     writer
       ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.facebook)
+      ..write(obj.facebookModel)
       ..writeByte(1)
-      ..write(obj.instagram)
+      ..write(obj.instagramModel)
       ..writeByte(2)
-      ..write(obj.linkedin)
+      ..write(obj.linkedinModel)
       ..writeByte(3)
-      ..write(obj.twitter);
+      ..write(obj.twitterModel);
   }
 
   @override

@@ -64,9 +64,7 @@ class QrCodeScanState extends State<QrCodeScan> {
       _controller = controller;
       _controller.scannedDataStream.listen((scanData) {
         _controller.pauseCamera();
-        String userId = UserCubit.get(context).isUser()
-            ? UserCubit.get(context).user!.id
-            : "";
+        String userId = UserCubit.get(context).user!.id;
         EncryptedBackend encryptedBackend = EncryptedBackendImpl();
         Navigator.pop(context);
         context.read<ContactsBloc>().add(

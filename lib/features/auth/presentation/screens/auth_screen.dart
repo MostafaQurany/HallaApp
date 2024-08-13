@@ -14,67 +14,72 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const GuestButton(),
-              Expanded(
-                flex: 1,
-                child: Stack(
-                  children: <Widget>[
-                    SizedBox(
-                      width: 1.sw,
-                      child: Image(
-                        image: AssetImage(
-                          AppTheme.isLight(context)
-                              ? AppImages.registertionBackgroundlight
-                              : AppImages.registertionBackgroundDark,
-                        ),
-                        fit: BoxFit.fill,
+          child: SizedBox(
+            height: 1.sh,
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 0,
+                  child: SizedBox(
+                    width: 1.sw,
+                    height: 0.89.sh,
+                    child: Image(
+                      image: AssetImage(
+                        AppTheme.isLight(context)
+                            ? AppImages.registertionBackgroundlight
+                            : AppImages.registertionBackgroundDark,
                       ),
+                      fit: BoxFit.fill,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: ListView(
-                        physics: const RangeMaintainingScrollPhysics(),
-                        children: <Widget>[
-                          SizedBox(
-                            height: 25.h,
-                          ),
-                          Image(
-                            image: AssetImage(AppImages.registertionVector),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          const Text(
-                            "Lorem sdflk nfjkn lkadsgijouasdhf iladjsbf idfubghasdijfb edlfijhbv hjsdfghjbsd dsfkjb sd fsbhj l dhnjfs djhfb lsnbdf jhdfb hjilg",
-                            textAlign: TextAlign.center,
-                          ),
-                          const Spacer(),
-                          ElevatedButton(
-                            onPressed: () {
-                              AppNavigator.navigatePush(
-                                  context, const LoginScreen());
-                            },
-                            child: Text(
-                              S.of(context).login,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          const RegisterButton(),
-                          SizedBox(
-                            height: 60.h,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Column(
+                          children: [
+                            Image(
+                              image: AssetImage(AppImages.registertionVector),
+                              height: 0.4.sh,
+                            ),
+                            const Text(
+                              "Lorem sdflk nfjkn lkadsgijouasdhf iladjsbf idfubghasdijfb edlfijhbv hjsdfghjbsd dsfkjb sd fsbhj l dhnjfs djhfb lsnbdf jhdfb hjilg",
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                AppNavigator.navigatePush(
+                                    context, const LoginScreen());
+                              },
+                              child: Text(
+                                S.of(context).login,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 15.h,
+                            ),
+                            const RegisterButton(),
+                            SizedBox(
+                              height: 30.h,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const GuestButton(),
+              ],
+            ),
           ),
         ),
       );
