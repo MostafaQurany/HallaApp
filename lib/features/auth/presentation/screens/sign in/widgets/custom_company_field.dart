@@ -127,7 +127,7 @@ class _CustomCompanyFieldState extends State<CustomCompanyField>
             ),
           ),
           SizedBox(
-            height: 15.h,
+            height: 10.h,
           ),
           DecoratedBox(
             decoration: BoxDecoration(
@@ -150,6 +150,9 @@ class _CustomCompanyFieldState extends State<CustomCompanyField>
                     onEditingComplete: () =>
                         FocusScope.of(context).requestFocus(companyPhoneFocus),
                   ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
                   CustomTextFormField(
                     control: widget.companyPhoneController,
                     hintText: S.of(context).phone,
@@ -157,6 +160,9 @@ class _CustomCompanyFieldState extends State<CustomCompanyField>
                     keyboardType: TextInputType.phone,
                     onEditingComplete: () => FocusScope.of(context)
                         .requestFocus(companyWebsiteFocus),
+                  ),
+                  SizedBox(
+                    height: 5.h,
                   ),
                   CustomTextFormField(
                     control: widget.companyWebsiteController,
@@ -166,12 +172,18 @@ class _CustomCompanyFieldState extends State<CustomCompanyField>
                     onEditingComplete: () => FocusScope.of(context)
                         .requestFocus(companyPositonFocus),
                   ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
                   CustomTextFormField(
                     control: widget.companyPositonController,
                     hintText: S.of(context).positon,
                     keyboardType: TextInputType.name,
                     focusNode: companyPositonFocus,
                     onEditingComplete: () => FocusScope.of(context).unfocus(),
+                  ),
+                  SizedBox(
+                    height: 5.h,
                   ),
                 ],
               ),

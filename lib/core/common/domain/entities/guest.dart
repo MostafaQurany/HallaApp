@@ -1,18 +1,45 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-class Guest {
-  final String id;
-  final String name;
-  final String pinCode;
+import 'package:halla/core/common/domain/entities/company.dart';
+import 'package:halla/core/common/domain/entities/social_media.dart';
+import 'package:halla/core/common/domain/entities/user.dart';
+import 'package:halla/features/auth/presentation/screens/widgets/social_icon.dart';
+
+class Guest extends User {
+  final String idGuest;
+  final String upgradedId;
+  final String fullNameGuest;
+  final String pinCodeGuest;
   final bool isUpGraded;
-  final String uId;
+
   Guest({
-    required this.id,
-    required this.name,
-    required this.pinCode,
+    required this.idGuest,
+    required this.fullNameGuest,
+    required this.pinCodeGuest,
     this.isUpGraded = false,
-    this.uId = '',
-  });
-
-
+    this.upgradedId = '',
+  }) : super(
+          id: idGuest,
+          email: '',
+          fullName: fullNameGuest,
+          primePhone: '',
+          dateOfBirth: '',
+          nationality: '',
+          pinCode: pinCodeGuest,
+          nfcList: [],
+          phones: [],
+          isGuest: true,
+          socialMedia: SocialMedia(
+            facebook: '',
+            instagram: '',
+            linkedin: '',
+            twitter: '',
+          ),
+          company: Company(
+            name: '',
+            phoneNumber: '',
+            website: '',
+            position: '',
+          ),
+        );
 }

@@ -5,6 +5,7 @@ import "package:flutter_svg/flutter_svg.dart";
 import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/constants/constants.dart";
 import "package:halla/core/theme/app_colors.dart";
+import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/core/utils/validation.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
@@ -12,6 +13,7 @@ import "package:halla/features/auth/presentation/screens/log%20in/login_screen.d
 import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/sms_code_screen.dart";
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
+import "package:halla/features/auth/presentation/screens/widgets/facebook_button.dart";
 import "package:halla/features/auth/presentation/screens/widgets/google_button.dart";
 import "package:halla/features/auth/presentation/screens/widgets/social_icon.dart";
 import "package:halla/features/home/presentation/screens/home_layout.dart";
@@ -73,7 +75,12 @@ class _SignBodyState extends State<SignBody> {
             ),
             BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
+                if (state is AuthLoading) {
+                  AppShowDialog.loading(context);
+                }
                 if (state is AuthFailure) {
+                  Navigator.pop(context);
+
                   // TODO:show snake pare
                 }
                 if (state is AuthSuccess) {
@@ -108,9 +115,6 @@ class _SignBodyState extends State<SignBody> {
                 }
               },
               builder: (context, state) {
-                if (state is AuthLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                }
                 return Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -194,14 +198,11 @@ class _SignBodyState extends State<SignBody> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            SocialIcon(
-                              image: AppImages.facebookIconSvg,
-                              onTap: () {},
-                            ),
-                            const GoogleButton(),
+                            FacebookButton(),
+                            GoogleButton(),
                           ],
                         ),
                         SizedBox(

@@ -4,45 +4,45 @@ import 'package:halla/core/common/domain/entities/guest.dart';
 
 class GuestModel extends Guest {
   GuestModel({
-    required super.id,
-    required super.name,
-    required super.pinCode,
+    required super.idGuest,
+    required super.fullNameGuest,
+    required super.pinCodeGuest,
     super.isUpGraded,
-    super.uId,
+    super.upgradedId,
   });
   GuestModel copyWith({
     String? id,
-    String? name,
+    String? fullNameGuest,
     String? pinCode,
     bool? isUpGraded,
-    String? uId,
+    String? upgradedId,
   }) {
     return GuestModel(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      pinCode: pinCode ?? this.pinCode,
+      idGuest: id ?? this.id,
+      fullNameGuest: fullNameGuest ?? this.fullNameGuest,
+      pinCodeGuest: pinCode ?? this.pinCode,
       isUpGraded: isUpGraded ?? this.isUpGraded,
-      uId: uId ?? this.uId,
+      upgradedId: upgradedId ?? this.upgradedId,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': id,
-      'name': name,
-      'pinCode': pinCode,
+      'id': idGuest,
+      'name': fullNameGuest,
+      'pinCode': pinCodeGuest,
       'isUpGraded': isUpGraded,
-      'uId': uId,
+      'upgradedId': upgradedId,
     };
   }
 
   factory GuestModel.fromMap(Map<String, dynamic> map) {
     return GuestModel(
-      id: map['id'] as String,
-      name: map['name'] as String,
-      pinCode: map['pinCode'] as String,
+      idGuest: map['id'] as String,
+      fullNameGuest: map['name'] as String,
+      pinCodeGuest: map['pinCode'] as String,
       isUpGraded: map['isUpGraded'] as bool,
-      uId: map['uId'] as String,
+      upgradedId: map['upgradedId'] as String,
     );
   }
 
@@ -50,29 +50,4 @@ class GuestModel extends Guest {
 
   factory GuestModel.fromJson(String source) =>
       GuestModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() {
-    return 'Guest(id: $id, name: $name, pinCode: $pinCode, isUpGraded: $isUpGraded, uId: $uId)';
-  }
-
-  @override
-  bool operator ==(covariant GuestModel other) {
-    if (identical(this, other)) return true;
-
-    return other.id == id &&
-        other.name == name &&
-        other.pinCode == pinCode &&
-        other.isUpGraded == isUpGraded &&
-        other.uId == uId;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        name.hashCode ^
-        pinCode.hashCode ^
-        isUpGraded.hashCode ^
-        uId.hashCode;
-  }
 }

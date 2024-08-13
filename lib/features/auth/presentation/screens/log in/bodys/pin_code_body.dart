@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
+import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/pin_code_text_form_field.dart';
@@ -28,10 +29,7 @@ class _PinCodeBodyState extends State<PinCodeBody> {
   @override
   void initState() {
     super.initState();
-    UserState userState = context.read<UserCubit>().state;
-    if (userState is UserLoggedIn) {
-      pinCode = userState.guest!.pinCode;
-    }
+    pinCode = UserCubit.get(context).user!.pinCode;
   }
 
   @override
@@ -93,17 +91,18 @@ class _PinCodeBodyState extends State<PinCodeBody> {
                 ),
                 BlocConsumer<AuthBloc, AuthState>(
                   listener: (context, state) {
+                    if (state is AuthLoading) {
+                      AppShowDialog.loading(context);
+                    }
                     if (state is AuthGetUserSuccess) {
                       AppNavigator.navigatePushReplaceRemoveAll(
                           context, const HomeLayout());
                     }
+                    if (state is AuthFailure) {
+                      Navigator.pop(context);
+                    }
                   },
                   builder: (context, state) {
-                    if (state is AuthLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
                     return ElevatedButton(
                       onPressed: () {
                         if (formKey.currentState!.validate()) {

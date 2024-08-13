@@ -440,7 +440,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                   },
                   (r) {
                     _userCubit.updateUser(
-                      guest: r,
+                      user: r,
                     );
                     emit(LogInGuestSucces(r));
                   },
@@ -456,7 +456,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             },
             (r) {
               _userCubit.updateUser(
-                guest: r,
+                user: r,
               );
               emit(CreatNewGuestSucces(r));
             },

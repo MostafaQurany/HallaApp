@@ -5,12 +5,14 @@ import "package:flutter_svg/flutter_svg.dart";
 import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/theme/theme.dart";
+import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/core/utils/validation.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/screens/log%20in/widgets/nfc_button.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
+import "package:halla/features/auth/presentation/screens/widgets/facebook_button.dart";
 import "package:halla/features/auth/presentation/screens/widgets/google_button.dart";
 import "package:halla/features/home/presentation/screens/home_layout.dart";
 import "package:halla/generated/l10n.dart";
@@ -47,11 +49,15 @@ class _LoginBodyState extends State<LoginBody> {
   @override
   Widget build(BuildContext context) => BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
+          if (state is AuthLoading) {
+            AppShowDialog.loading(context);
+          }
           if (state is AuthSuccess) {
             AppNavigator.navigatePushReplaceRemoveAll(
                 context, const HomeLayout());
           }
           if (state is AuthFailure) {
+            Navigator.pop(context);
             print(state.message);
           }
           if (state is AuthGoogleState) {
@@ -65,11 +71,6 @@ class _LoginBodyState extends State<LoginBody> {
           }
         },
         builder: (context, state) {
-          if (state is AuthLoading) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
           return Form(
             key: formKey,
             child: Padding(
@@ -134,17 +135,12 @@ class _LoginBodyState extends State<LoginBody> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        _iconsSouxile(
-                          image: AppImages.facebookIconSvg,
-                          onTap: () {
-                            // ToDo : login FaceBook
-                          },
-                        ),
-                        const GoogleButton(),
-                        const NfcButton(),
+                        FacebookButton(),
+                        GoogleButton(),
+                        NfcButton(),
                       ],
                     ),
                     SizedBox(

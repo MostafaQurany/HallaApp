@@ -15,28 +15,26 @@ class ShowGuestPinCode extends StatelessWidget {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
         if (state is UserLoggedIn) {
-          if (!state.isUser) {
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Lottie.asset(AppImages.welcomePinCodeLottie),
-                Text(
-                  """
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lottie.asset(AppImages.welcomePinCodeLottie),
+              Text(
+                """
 Welcome to Halla,
-Your PIN code for login is ${state.guest!.pinCode}.
+Your PIN code for login is ${state.user!.pinCode}.
 Keep it secure and don't share it with anyone.""",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                  textAlign: TextAlign.justify,
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      AppNavigator.navigatePushReplaceRemoveAll(
-                          context, const HomeLayout());
-                    },
-                    child: Text(S.of(context).next)),
-              ],
-            );
-          }
+                style: Theme.of(context).textTheme.bodyLarge,
+                textAlign: TextAlign.justify,
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    AppNavigator.navigatePushReplaceRemoveAll(
+                        context, const HomeLayout());
+                  },
+                  child: Text(S.of(context).next)),
+            ],
+          );
         }
         return const SizedBox.shrink();
       },

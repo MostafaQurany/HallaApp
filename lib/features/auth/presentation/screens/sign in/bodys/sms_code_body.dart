@@ -4,6 +4,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:halla/core/theme/app_colors.dart";
+import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
@@ -65,7 +66,11 @@ class _SmsCodeBodyState extends State<SmsCodeBody> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
+        if (state is AuthLoading) {
+          AppShowDialog.loading(context);
+        }
         if (state is AuthFailure) {
+          Navigator.pop(context);
           // TODO:show snake pare
         }
         if (state is AuthSuccess) {
@@ -171,20 +176,18 @@ class _SmsCodeBodyState extends State<SmsCodeBody> {
             SizedBox(
               height: 30.h,
             ),
-            (state is AuthLoading)
-                ? const Center(child: CircularProgressIndicator())
-                : ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        context.read<AuthBloc>().add(
-                              AuthSentSmsCodeEvent(
-                                smsCode: pinController.text.trim(),
-                              ),
-                            );
-                      }
-                    },
-                    child: Text(S.of(context).verified),
-                  ),
+            ElevatedButton(
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  context.read<AuthBloc>().add(
+                        AuthSentSmsCodeEvent(
+                          smsCode: pinController.text.trim(),
+                        ),
+                      );
+                }
+              },
+              child: Text(S.of(context).verified),
+            ),
           ],
         );
       },

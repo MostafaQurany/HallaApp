@@ -8,6 +8,7 @@ import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
 import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/theme/theme.dart";
+import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_birthday_field.dart";
@@ -106,7 +107,12 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
               ),
               BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
+                  if (state is AuthLoading) {
+                    AppShowDialog.loading(context);
+                  }
                   if (state is AuthFailure) {
+                    Navigator.pop(context);
+
                     //TODO: show snak bar
                   }
                   if (state is AuthPersonalInfoSuccess) {
@@ -117,11 +123,6 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   }
                 },
                 builder: (context, state) {
-                  if (state is AuthLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
                   return Form(
                     key: formKey,
                     child: Padding(

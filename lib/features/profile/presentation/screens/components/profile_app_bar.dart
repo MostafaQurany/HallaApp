@@ -18,16 +18,15 @@ class ProfileAppBar extends StatefulWidget {
 
 class _ProfileAppBarState extends State<ProfileAppBar> {
   bool showPinCode = false;
-  User? user;
+  late User user;
   @override
   void initState() {
     super.initState();
-    user = UserCubit.get(context).user;
+    user = UserCubit.get(context).user!;
   }
 
   @override
   Widget build(BuildContext context) {
-    user!.id = '0scUQ8KkcySnE5F5edDia1uP6r82';
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -45,7 +44,7 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                user?.fullName ?? 'Guest',
+                user.fullName,
                 style: Theme.of(context).textTheme.bodyMedium,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
@@ -79,7 +78,7 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
                         sigmaX: (showPinCode) ? 0 : 6,
                         sigmaY: (showPinCode) ? 0 : 4,
                       ),
-                      child: Text(user?.pinCode ?? '000000'),
+                      child: Text(user.pinCode),
                     ),
                   ],
                 ),
@@ -87,13 +86,14 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
             ],
           ),
         ),
-        Expanded(
-          flex: 1,
-          child: CustomShareContactIcon(
-            userId: user?.id ?? '',
-            iconColor: AppColors.primary,
+        if (!user.isGuest)
+          Expanded(
+            flex: 1,
+            child: CustomShareContactIcon(
+              userId: user.id,
+              iconColor: AppColors.primary,
+            ),
           ),
-        ),
       ],
     );
   }

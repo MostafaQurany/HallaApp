@@ -40,6 +40,7 @@ class _CustomNfcCloseErrorState extends State<CustomNfcCloseError> {
             borderRadius: BorderRadius.circular(5.w),
           ),
           padding: EdgeInsetsDirectional.symmetric(horizontal: 6.w),
+          margin: EdgeInsets.only(top: 50.h, bottom: 50.h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -63,21 +64,6 @@ class _CustomNfcCloseErrorState extends State<CustomNfcCloseError> {
                             color: AppColors.gray,
                             fontSize: 15.sp,
                           ),
-                    ),
-                  ),
-                  Container(
-                    width: 2,
-                    height: 40.h,
-                    decoration: BoxDecoration(
-                      color: AppColors.gray,
-                      borderRadius: BorderRadius.circular(5.w),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.remove_circle_outline_sharp,
-                      color: AppColors.gray,
                     ),
                   ),
                 ],

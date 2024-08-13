@@ -4,16 +4,16 @@ import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/social_icon.dart';
 
-class GoogleButton extends StatelessWidget {
-  const GoogleButton({super.key});
+class FacebookButton extends StatelessWidget {
+  const FacebookButton({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SocialIcon(
-      image: AppImages.googleIcon,
+      image: AppImages.facebookIcon,
       isSvg: false,
       onTap: () {
-        context.read<AuthBloc>().add(AuthGoogle());
+        // ToDo :- implement
       },
     );
   }

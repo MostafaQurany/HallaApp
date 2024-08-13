@@ -31,9 +31,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
   @override
   void initState() {
     super.initState();
-    userId = UserCubit.get(context).isUser
-        ? UserCubit.get(context).user!.id
-        : UserCubit.get(context).guest!.id;
+    userId = UserCubit.get(context).user!.id;
   }
 
   @override

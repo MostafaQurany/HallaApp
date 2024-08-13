@@ -7,9 +7,12 @@ import "package:halla/features/auth/presentation/screens/widgets/custem_text_for
 import "package:halla/generated/l10n.dart";
 
 class CustomSocialMediaField extends StatefulWidget {
-
   const CustomSocialMediaField({
-    required this.socialFacebookController, required this.socialInstagramController, required this.socialLinkedinController, required this.socialTwitterController, super.key,
+    required this.socialFacebookController,
+    required this.socialInstagramController,
+    required this.socialLinkedinController,
+    required this.socialTwitterController,
+    super.key,
   });
   final TextEditingController socialFacebookController;
   final TextEditingController socialInstagramController;
@@ -17,7 +20,7 @@ class CustomSocialMediaField extends StatefulWidget {
   final TextEditingController socialTwitterController;
   @override
   State<CustomSocialMediaField> createState() => _CustomSocialMediaFieldState();
-  }
+}
 
 class _CustomSocialMediaFieldState extends State<CustomSocialMediaField>
     with TickerProviderStateMixin {
@@ -68,106 +71,118 @@ class _CustomSocialMediaFieldState extends State<CustomSocialMediaField>
 
   @override
   Widget build(BuildContext context) => Column(
-      children: <Widget>[
-        GestureDetector(
-          onTap: _toggleExpanded,
-          child: Container(
-            width: 1.sw,
-            height: 45.h,
-            decoration: BoxDecoration(
-              color: Theme.of(context).inputDecorationTheme.fillColor,
-              borderRadius: BorderRadius.circular(16.w),
-              border: Border.all(
-                color: _isExpanded
-                    ? AppColors.primary
-                    : Theme.of(context)
-                        .inputDecorationTheme
-                        .border!
-                        .borderSide
-                        .color,
+        children: <Widget>[
+          GestureDetector(
+            onTap: _toggleExpanded,
+            child: Container(
+              width: 1.sw,
+              height: 45.h,
+              decoration: BoxDecoration(
+                color: Theme.of(context).inputDecorationTheme.fillColor,
+                borderRadius: BorderRadius.circular(16.w),
+                border: Border.all(
+                  color: _isExpanded
+                      ? AppColors.primary
+                      : Theme.of(context)
+                          .inputDecorationTheme
+                          .border!
+                          .borderSide
+                          .color,
+                ),
+              ),
+              padding: const EdgeInsets.all(8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  ImageIcon(
+                    AssetImage(AppImages.socialMediaIcon),
+                    color: AppColors.gray,
+                    size: 32.sp,
+                  ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
+                  Expanded(
+                    child: Text(
+                      S.of(context).socialMedia,
+                      maxLines: 1,
+                      style: _isExpanded
+                          ? Theme.of(context).textTheme.bodyMedium!
+                          : Theme.of(context)
+                              .textTheme
+                              .bodyMedium!
+                              .copyWith(color: AppColors.gray),
+                    ),
+                  ),
+                  Icon(
+                    _isExpanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
+                    color: AppColors.gray,
+                  ),
+                ],
               ),
             ),
-            padding: const EdgeInsets.all(8),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                ImageIcon(
-                  AssetImage(AppImages.socialMediaIcon),
-                  color: AppColors.gray,
-                  size: 32.sp,
-                ),
-                SizedBox(
-                  width: 10.w,
-                ),
-                Expanded(
-                  child: Text(
-                    S.of(context).socialMedia,
-                    maxLines: 1,
-                    style: _isExpanded
-                        ? Theme.of(context).textTheme.bodyMedium!
-                        : Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(color: AppColors.gray),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          DecoratedBox(
+            decoration: BoxDecoration(
+              color: AppTheme.isLight(context)
+                  ? AppColors.white
+                  : AppColors.blackLight,
+              borderRadius: BorderRadius.circular(16.w),
+            ),
+            child: SizeTransition(
+              sizeFactor: _animationController
+                  .drive(CurveTween(curve: Curves.easeInOut)),
+              axisAlignment: 1,
+              child: Column(
+                children: <Widget>[
+                  CustomTextFormField(
+                    control: widget.socialFacebookController,
+                    hintText: S.of(context).facebook,
+                    focusNode: socialFacebookFocus,
+                    onEditingComplete: () => FocusScope.of(context)
+                        .requestFocus(socialInstagramFocus),
                   ),
-                ),
-                Icon(
-                  _isExpanded
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
-                  color: AppColors.gray,
-                ),
-              ],
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  CustomTextFormField(
+                    control: widget.socialInstagramController,
+                    hintText: S.of(context).instagram,
+                    focusNode: socialInstagramFocus,
+                    onEditingComplete: () => FocusScope.of(context)
+                        .requestFocus(socialLinkedinFocus),
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  CustomTextFormField(
+                    control: widget.socialLinkedinController,
+                    hintText: S.of(context).linkedin,
+                    focusNode: socialLinkedinFocus,
+                    onEditingComplete: () =>
+                        FocusScope.of(context).requestFocus(socialTwitterFocus),
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  CustomTextFormField(
+                    control: widget.socialTwitterController,
+                    hintText: S.of(context).twitter,
+                    focusNode: socialTwitterFocus,
+                    onEditingComplete: () => FocusScope.of(context).unfocus(),
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        SizedBox(
-          height: 15.h,
-        ),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            color: AppTheme.isLight(context)
-                ? AppColors.white
-                : AppColors.blackLight,
-            borderRadius: BorderRadius.circular(16.w),
-          ),
-          child: SizeTransition(
-            sizeFactor:
-                _animationController.drive(CurveTween(curve: Curves.easeInOut)),
-            axisAlignment: 1,
-            child: Column(
-              children: <Widget>[
-                CustomTextFormField(
-                  control: widget.socialFacebookController,
-                  hintText: S.of(context).facebook,
-                  focusNode: socialFacebookFocus,
-                  onEditingComplete: () =>
-                      FocusScope.of(context).requestFocus(socialInstagramFocus),
-                ),
-                CustomTextFormField(
-                  control: widget.socialInstagramController,
-                  hintText: S.of(context).instagram,
-                  focusNode: socialInstagramFocus,
-                  onEditingComplete: () =>
-                      FocusScope.of(context).requestFocus(socialLinkedinFocus),
-                ),
-                CustomTextFormField(
-                  control: widget.socialLinkedinController,
-                  hintText: S.of(context).linkedin,
-                  focusNode: socialLinkedinFocus,
-                  onEditingComplete: () =>
-                      FocusScope.of(context).requestFocus(socialTwitterFocus),
-                ),
-                CustomTextFormField(
-                  control: widget.socialTwitterController,
-                  hintText: S.of(context).twitter,
-                  focusNode: socialTwitterFocus,
-                  onEditingComplete: () => FocusScope.of(context).unfocus(),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+        ],
+      );
+}
