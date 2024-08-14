@@ -7,6 +7,7 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:halla/core/common/domain/entities/company.dart";
 import "package:halla/core/common/domain/entities/social_media.dart";
 import "package:halla/features/contacts/presentation/screens/contact_details_screen.dart";
+import "package:halla/features/profile/presentation/screens/update_profile_screen.dart";
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import "package:halla/core/common/data/models/company_model.dart";
 import "package:halla/core/common/data/models/social_media_model.dart";
@@ -89,34 +90,7 @@ class MyApp extends StatelessWidget {
                   : AppTheme.lightTheme,
               themeMode:
                   state == Brightness.light ? ThemeMode.light : ThemeMode.dark,
-              home: ContactDetailsScreen(
-                contact: Contact(
-                  id: "12365",
-                  fullName: "asdasdasd",
-                  email: "asdasdasd",
-                  primePhone: "01015089201",
-                  phones: [
-                    '01156065655',
-                    '01156065655',
-                    '01156065655',
-                  ],
-                  nationality: "Egyption",
-                  dateOfBirth: "19/2/2022",
-                  socialMedia: SocialMedia(
-                    facebook: "facebook",
-                    instagram: "instagram",
-                    linkedin: 'linkedin',
-                    twitter: 'twitter',
-                  ),
-                  company: Company(
-                    name: "name",
-                    phoneNumber: "phoneNumber",
-                    website: 'website',
-                    position: 'position',
-                  ),
-                  addTime: Timestamp.now(),
-                ),
-              ),
+              home: const UpdateProfileScreen(),
             );
           },
         ),

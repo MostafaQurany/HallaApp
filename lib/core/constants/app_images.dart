@@ -38,6 +38,11 @@ class AppImages {
   static String googleIcon = _imageName("google_icon.png");
   static String facebookIcon = _imageName("facebook_icon.png");
   static String messageIcon = _imageName("message_icon.png");
+  static String updateProfileBackgroundLight =
+      _imageName("update_profile_backfround_light.png");
+  static String updateProfileBackgroundDark =
+      _imageName("update_profile_backgroun_dark.png");
+  static String editImageIcon = _imageName("edit_image_icon.png");
 
   // svg
   static String loginVectorSvg = _svgName("login_vector.svg");

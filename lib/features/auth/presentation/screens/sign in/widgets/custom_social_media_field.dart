@@ -78,7 +78,9 @@ class _CustomSocialMediaFieldState extends State<CustomSocialMediaField>
               width: 1.sw,
               height: 45.h,
               decoration: BoxDecoration(
-                color: Theme.of(context).inputDecorationTheme.fillColor,
+                color: AppTheme.isLight(context)
+                    ? AppColors.white
+                    : AppColors.blackLight,
                 borderRadius: BorderRadius.circular(16.w),
                 border: Border.all(
                   color: _isExpanded
@@ -130,7 +132,7 @@ class _CustomSocialMediaFieldState extends State<CustomSocialMediaField>
           DecoratedBox(
             decoration: BoxDecoration(
               color: AppTheme.isLight(context)
-                  ? AppColors.white
+                  ? AppColors.transparent
                   : AppColors.blackLight,
               borderRadius: BorderRadius.circular(16.w),
             ),

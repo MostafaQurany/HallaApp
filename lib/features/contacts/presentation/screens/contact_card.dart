@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
+import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/features/contacts/presentation/screens/contact_details_screen.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_share_contact_icon.dart';
 
 class ContactCard extends StatefulWidget {
@@ -86,9 +88,17 @@ class _ContactCardState extends State<ContactCard>
                         ),
                   ),
                   const Spacer(),
-                  Icon(
-                    Icons.info_outline_rounded,
-                    size: 22.sp,
+                  IconButton(
+                    icon: Icon(
+                      Icons.info_outline_rounded,
+                      size: 22.sp,
+                    ),
+                    onPressed: () => AppNavigator.navigatePush(
+                      context,
+                      ContactDetailsScreen(
+                        contact: widget.contact,
+                      ),
+                    ),
                   ),
                   SizedBox(
                     width: 15.w,

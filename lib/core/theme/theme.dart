@@ -35,6 +35,8 @@ class AppTheme {
       iconColor: AppColors.primary,
       prefixIconColor: Colors.grey,
       suffixIconColor: Colors.grey,
+      fillColor: AppColors.white,
+      filled: true,
       hintStyle: const TextStyle(
         color: Colors.grey,
       ),

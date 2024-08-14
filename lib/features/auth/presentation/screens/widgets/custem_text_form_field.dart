@@ -85,6 +85,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       onEditingComplete: widget.onEditingComplete,
       decoration: InputDecoration(
         hintText: widget.hintText,
+        filled: true,
+        fillColor: theme.fillColor,
         prefixIcon: widget.prefixIconIsImage
             ? Container(
                 padding: EdgeInsets.all(10.0.w),
