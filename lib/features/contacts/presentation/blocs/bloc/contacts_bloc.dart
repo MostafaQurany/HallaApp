@@ -1,12 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halla/core/usecase/usecase.dart';
-import 'package:halla/core/utils/encryption.dart';
-import 'package:halla/features/contacts/data/models/contact_model.dart';
 import 'package:halla/features/contacts/domain/entities/contact.dart';
 import 'package:halla/features/contacts/domain/usecases/imports.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:meta/meta.dart';
 
 part 'contacts_event.dart';
 part 'contacts_state.dart';

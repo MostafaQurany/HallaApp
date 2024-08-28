@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/domain/entities/nfc_message.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
+import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custom_nfc_close_error.dart';
 import 'package:lottie/lottie.dart';
 
@@ -123,7 +124,7 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
             );
           }
           if (state is AuthFailure) {
-            print(state.message);
+            AppShowDialog.showErrorMessage(context, state.message);
           }
         },
         builder: (context, state) {

@@ -10,6 +10,7 @@ class PhonesWidget extends StatefulWidget {
 }
 
 class PhonesWidgetState extends State<PhonesWidget> {
+  bool changeInPrime = false;
   List<String> phoneId = [
     "prime phone",
     "phone 1",
@@ -24,7 +25,21 @@ class PhonesWidgetState extends State<PhonesWidget> {
   void initState() {
     super.initState();
     phonesController[phoneId[0]] =
-        TextEditingController(text: UserCubit.get(context).user?.primePhone);
+        TextEditingController(text: UserCubit.get(context).user!.primePhone);
+
+    if (UserCubit.get(context).user!.phones.isNotEmpty) {
+      for (int i = 1; i < UserCubit.get(context).user!.phones.length; i++) {
+        phonesController[phoneId[i]] =
+            TextEditingController(text: UserCubit.get(context).user!.phones[i]);
+      }
+    }
+    phonesController[phoneId[0]]!.addListener(_primePhoneChangeListener);
+
+    Future.delayed(Duration.zero, () {
+      for (int i = 0; i < phonesController.length - 1; i++) {
+        _listKey.currentState?.insertItem(i, duration: _duration);
+      }
+    });
   }
 
   @override
@@ -67,10 +82,10 @@ class PhonesWidgetState extends State<PhonesWidget> {
     );
   }
 
-  void _addPhoneField(int index) {
+  void _addPhoneField(int index, {String text = ''}) {
     setState(() {
       phonesController.addAll({
-        phoneId[index]: TextEditingController(),
+        phoneId[index]: TextEditingController(text: text),
       });
       _listKey.currentState
           ?.insertItem(phonesController.length - 1, duration: _duration);
@@ -96,13 +111,11 @@ class PhonesWidgetState extends State<PhonesWidget> {
               isFirst: index == 0,
               isAdd: _getAddOrRemove(
                   maxIndex: phonesController.length, currentindex: index),
-              suffixOnTap: () => index == 0
-                  ? _addPhoneField(index + 1)
-                  : _getAddOrRemove(
-                          maxIndex: phonesController.length,
-                          currentindex: index)
-                      ? _addPhoneField(index + 1)
-                      : _removePhoneField(index),
+              suffixOnTap: (index == 0 && phonesController.length == 4)
+                  ? null
+                  : (index == 0)
+                      ? () => _addPhoneField(phonesController.length)
+                      : () => _removePhoneField(index),
             ),
             SizedBox(
               height: 20.h,
@@ -136,5 +149,18 @@ class PhonesWidgetState extends State<PhonesWidget> {
     return phonesController.values
         .map((controller) => controller.text)
         .toList();
+  }
+
+  void _primePhoneChangeListener() {
+    if (phonesController[phoneId[0]]!.text !=
+        UserCubit.get(context).user!.primePhone) {
+      setState(() {
+        changeInPrime = true;
+      });
+    } else {
+      setState(() {
+        changeInPrime = false;
+      });
+    }
   }
 }

@@ -12,16 +12,20 @@ class SignInWithEmailPasswordUsecase
   Future<Either<Failure, User>> call(
       SignInWithEmailPasswordParams params) async {
     return await authRepository.signInWithEmailPassword(
-        email: params.email, password: params.password);
+        email: params.email,
+        password: params.password,
+        pinCode: params.pinCode);
   }
 }
 
 class SignInWithEmailPasswordParams {
   final String email;
   final String password;
+  final String pinCode;
 
   SignInWithEmailPasswordParams({
     required this.email,
     required this.password,
+    required this.pinCode,
   });
 }

@@ -3,7 +3,6 @@
 import 'package:halla/core/common/domain/entities/company.dart';
 import 'package:halla/core/common/domain/entities/social_media.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
-import 'package:halla/features/auth/presentation/screens/widgets/social_icon.dart';
 
 class Guest extends User {
   final String idGuest;
@@ -25,6 +24,7 @@ class Guest extends User {
           primePhone: '',
           dateOfBirth: '',
           nationality: '',
+          imageUrl: '',
           pinCode: pinCodeGuest,
           nfcList: [],
           phones: [],

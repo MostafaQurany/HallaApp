@@ -10,6 +10,7 @@ import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dar
 import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/personal_information_screen.dart";
 import "package:halla/features/auth/presentation/screens/widgets/pin_code_text_form_field.dart";
+import "package:halla/features/home/presentation/screens/home_layout.dart";
 import "package:halla/generated/l10n.dart";
 
 class SmsCodeBody extends StatefulWidget {
@@ -68,25 +69,37 @@ class _SmsCodeBodyState extends State<SmsCodeBody> {
       listener: (context, state) {
         if (state is AuthLoading) {
           AppShowDialog.loading(context);
-        }
-        if (state is AuthFailure) {
+        } else if (state is AuthFailure) {
           Navigator.pop(context);
-          // TODO:show snake pare
-        }
-        if (state is AuthSuccess) {
-          state.user.primePhone = widget.phoneNumber;
-          context.read<AuthBloc>().add(
-                AuthUploadUserEvent(
-                  user: state.user,
-                ),
-              );
-        }
-        if (state is AuthUploadSuccess) {
-          context.read<AuthBloc>().add(
-                GetIsNfcAvailableEvent(),
-              );
-        }
-        if (state is GetIsNfcAvailableState) {
+          AppShowDialog.showErrorMessage(context, state.message);
+        } else if (state is AuthSuccess) {
+          if (context.read<AuthBloc>().isLogWithPhone) {
+            context.read<AuthBloc>().isLogWithPhone = false;
+            AppNavigator.navigatePushReplaceRemoveAll(
+              context,
+              const HomeLayout(),
+            );
+          } else {
+            state.user.primePhone = widget.phoneNumber;
+            context.read<AuthBloc>().add(
+                  AuthUploadUserEvent(
+                    user: state.user,
+                  ),
+                );
+          }
+        } else if (state is AuthUploadSuccess) {
+          if (context.read<AuthBloc>().isSignWithSocial) {
+            context.read<AuthBloc>().isSignWithSocial = false;
+            AppNavigator.navigatePushReplaceRemoveAll(
+              context,
+              const HomeLayout(),
+            );
+          } else {
+            context.read<AuthBloc>().add(
+                  GetIsNfcAvailableEvent(),
+                );
+          }
+        } else if (state is GetIsNfcAvailableState) {
           if (state.isAvailable) {
             AppNavigator.navigatePushReplaceRemoveAll(
               context,
@@ -179,11 +192,19 @@ class _SmsCodeBodyState extends State<SmsCodeBody> {
             ElevatedButton(
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  context.read<AuthBloc>().add(
-                        AuthSentSmsCodeEvent(
-                          smsCode: pinController.text.trim(),
-                        ),
-                      );
+                  if (context.read<AuthBloc>().isLogWithPhone) {
+                    context.read<AuthBloc>().add(
+                          AuthLogWithPhoneEvent(
+                            smsCode: pinController.text.trim(),
+                          ),
+                        );
+                  } else {
+                    context.read<AuthBloc>().add(
+                          AuthSentSmsCodeEvent(
+                            smsCode: pinController.text.trim(),
+                          ),
+                        );
+                  }
                 }
               },
               child: Text(S.of(context).verified),

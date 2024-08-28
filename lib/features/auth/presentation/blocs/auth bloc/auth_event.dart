@@ -47,6 +47,12 @@ final class AuthSentSmsCodeEvent extends AuthEvent {
   AuthSentSmsCodeEvent({required this.smsCode});
 }
 
+final class AuthLogWithPhoneEvent extends AuthEvent {
+  final String smsCode;
+
+  AuthLogWithPhoneEvent({required this.smsCode});
+}
+
 final class AuthCheckPinCode extends AuthEvent {
   final String userId;
   final String userPinCode;
@@ -54,6 +60,12 @@ final class AuthCheckPinCode extends AuthEvent {
 
   AuthCheckPinCode(
       {required this.userId, required this.pinCode, required this.userPinCode});
+}
+
+final class AuthForgetPassword extends AuthEvent {
+  final String email;
+
+  AuthForgetPassword({required this.email});
 }
 
 // data base
@@ -83,9 +95,6 @@ final class WriteOnNfcEvent extends AuthEvent {
 
 final class ReadFromNfcEvent extends AuthEvent {}
 
+// guest
 
-
-// guest 
-
-
-final class AuthLogInGuestEvent extends AuthEvent{}
+final class AuthLogInGuestEvent extends AuthEvent {}

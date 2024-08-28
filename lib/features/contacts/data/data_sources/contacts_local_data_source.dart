@@ -31,6 +31,10 @@ abstract class ContactsLocalDataSource {
     required String userId,
     required ContactModel contactModel,
   });
+
+
+
+  
 }
 
 class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {

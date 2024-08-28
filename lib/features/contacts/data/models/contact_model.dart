@@ -29,6 +29,8 @@ class ContactModel extends Contact with HiveObjectMixin {
   final SocialMediaModel socialMediaModel;
   @HiveField(9)
   final CompanyModel companyModel;
+  @HiveField(10)
+  final String imageUrlModel;
 
   ContactModel({
     required this.idModel,
@@ -41,12 +43,14 @@ class ContactModel extends Contact with HiveObjectMixin {
     required this.socialMediaModel,
     required this.companyModel,
     required this.emailModel,
+    required this.imageUrlModel,
   }) : super(
           id: idModel,
           addTime: addTimeModel,
           dateOfBirth: dateOfBirthModel,
           fullName: fullNameModel,
           nationality: nationalityModel,
+          imageUrl: imageUrlModel ,
           phones: phonesModel,
           primePhone: primePhoneModel,
           socialMedia: socialMediaModel,
@@ -61,6 +65,7 @@ class ContactModel extends Contact with HiveObjectMixin {
     String? primePhone,
     String? dateOfBirth,
     String? nationality,
+    String? imageUrl,
     Timestamp? addTime,
     List<String>? phones,
     SocialMediaModel? socialMedia,
@@ -73,6 +78,7 @@ class ContactModel extends Contact with HiveObjectMixin {
       primePhoneModel: primePhone ?? primePhoneModel,
       dateOfBirthModel: dateOfBirth ?? dateOfBirthModel,
       nationalityModel: nationality ?? nationalityModel,
+      imageUrlModel: imageUrl ?? imageUrlModel,
       phonesModel: phones ?? phonesModel,
       socialMediaModel: socialMedia ?? socialMediaModel,
       companyModel: company ?? companyModel,
@@ -89,6 +95,7 @@ class ContactModel extends Contact with HiveObjectMixin {
       'primePhone': primePhoneModel,
       'dateOfBirth': dateOfBirthModel,
       'nationality': nationalityModel,
+      'imageUrl': imageUrlModel,
       'phones': phones,
       'socialMedia': socialMediaModel.toMap(),
       'company': companyModel.toMap(),
@@ -99,6 +106,7 @@ class ContactModel extends Contact with HiveObjectMixin {
     return ContactModel(
       primePhoneModel: json['primePhone'] ?? '',
       nationalityModel: json['nationality'] ?? '',
+      imageUrlModel: json['imageUrl'] ?? '',
       emailModel: json['email'] ?? '',
       phonesModel: List<String>.from(json['phones']),
       fullNameModel: json['fullName'] ?? '',
@@ -117,6 +125,7 @@ class ContactModel extends Contact with HiveObjectMixin {
       primePhoneModel: user.primePhone,
       dateOfBirthModel: user.dateOfBirth,
       nationalityModel: user.nationality,
+      imageUrlModel: user.imageUrl,
       emailModel: user.email,
       phonesModel: user.phones,
       socialMediaModel: SocialMediaModel.fromSocialMedia(user.socialMedia),
@@ -133,6 +142,7 @@ class ContactModel extends Contact with HiveObjectMixin {
       'primePhone': primePhoneModel,
       'dateOfBirth': dateOfBirthModel,
       'nationality': nationalityModel,
+      'imageUrl': imageUrlModel,
       'phones': phonesModel,
       'socialMedia': socialMediaModel.toMap(),
       'company': companyModel.toMap(),
@@ -144,6 +154,7 @@ class ContactModel extends Contact with HiveObjectMixin {
     return ContactModel(
       primePhoneModel: json['primePhone'] ?? '',
       nationalityModel: json['nationality'] ?? '',
+      imageUrlModel: json['imageUrl'] ?? '',
       phonesModel: List<String>.from(json['phones']),
       fullNameModel: json['fullName'] ?? '',
       companyModel: CompanyModel.fromMap(json['company']),

@@ -27,6 +27,7 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       socialMediaModel: fields[8] as SocialMediaModel,
       companyModel: fields[9] as CompanyModel,
       emailModel: fields[1] as String,
+      imageUrlModel: fields[10] as String,
     );
   }
 
@@ -53,7 +54,9 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       ..writeByte(8)
       ..write(obj.socialMediaModel)
       ..writeByte(9)
-      ..write(obj.companyModel);
+      ..write(obj.companyModel)
+      ..writeByte(10)
+      ..write(obj.imageUrlModel);
   }
 
   @override

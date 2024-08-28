@@ -6,6 +6,7 @@ abstract class AuthRepository {
   Future<Either<Failure, User>> signInWithEmailPassword({
     required String email,
     required String password,
+    required String pinCode,
   });
 
   Future<Either<Failure, String>> getSmsCode({
@@ -13,6 +14,10 @@ abstract class AuthRepository {
   });
 
   Future<Either<Failure, User>> sentSmsCode({
+    required String smsCode,
+    required String verificationId,
+  });
+  Future<Either<Failure, String>> logInWithPhone({
     required String smsCode,
     required String verificationId,
   });
@@ -28,4 +33,13 @@ abstract class AuthRepository {
   Future<Either<Failure, void>> linkWlinkWithEmailPassword(
     User user,
   );
+
+
+  
+  Future<Either<Failure, void>> forgetPassword(
+    String email,
+  );
+
+
+
 }

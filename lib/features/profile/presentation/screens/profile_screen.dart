@@ -6,7 +6,8 @@ import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/auth/presentation/screens/auth_screen.dart';
 import 'package:halla/features/home/presentation/screens/components/end_spacer_sized_box.dart';
 import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
-import 'package:halla/features/profile/presentation/screens/components/profile_app_bar.dart';
+import 'package:halla/features/profile/presentation/screens/update_profile_screen.dart';
+import 'package:halla/features/profile/presentation/screens/widgets/profile_app_bar.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_profile_buttom.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_profile_log_out_buttom.dart';
 
@@ -33,7 +34,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               CustomProfileButtom(
                 icon: AppImages.personalIcon,
                 name: "Change Profile",
-                onTap: () {},
+                onTap: () {
+                  AppNavigator.navigatePush(
+                      context, const UpdateProfileScreen());
+                },
               ),
               CustomProfileButtom(
                 icon: AppImages.emptyHeart,

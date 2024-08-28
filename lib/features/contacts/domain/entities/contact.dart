@@ -14,6 +14,7 @@ class Contact extends User {
     required super.socialMedia,
     required super.company,
     required super.email,
+    required super.imageUrl,
   }) : super(
           nfcList: [],
           pinCode: '',

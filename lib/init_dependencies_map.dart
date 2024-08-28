@@ -16,11 +16,13 @@ import 'package:halla/features/auth/data/data_sources/auth_data_source.dart';
 import 'package:halla/core/common/data/data%20source/data_base_source.dart';
 import 'package:halla/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:halla/features/auth/domain/repositories/auth_repository.dart';
+import 'package:halla/features/auth/domain/usecases/forget_password_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/get_sms_code_usecase.dart';
 import 'package:halla/core/common/domain/usecase/get_user_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/google_login.dart';
 import 'package:halla/features/auth/domain/usecases/link_with_email_pincode.dart';
 import 'package:halla/features/auth/domain/usecases/log_in_with_email_password.dart';
+import 'package:halla/features/auth/domain/usecases/log_in_with_phone_use_case.dart';
 import 'package:halla/features/auth/domain/usecases/sent_sms_code_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/sign_in_with_email_password_usecase.dart';
 import 'package:halla/core/common/domain/usecase/upload_user_usecase.dart';
@@ -36,9 +38,11 @@ import 'package:halla/features/contacts/domain/usecases/get_box_listenable_use_c
 import 'package:halla/features/contacts/domain/usecases/get_contact_list_local_use_case.dart';
 import 'package:halla/features/contacts/domain/usecases/get_contact_local_use_case.dart';
 import 'package:halla/features/contacts/presentation/blocs/bloc/contacts_bloc.dart';
-import 'package:halla/features/profile/data/data_sources/profile_data_source.dart';
+import 'package:halla/features/profile/data/datasources/profile_data_source.dart';
 import 'package:halla/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:halla/features/profile/domain/repositories/profile_repository.dart';
+import 'package:halla/features/profile/domain/usecases/get_image_url_usecase.dart';
+import 'package:halla/features/profile/domain/usecases/set_image_url_usecase.dart';
 import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
 
 

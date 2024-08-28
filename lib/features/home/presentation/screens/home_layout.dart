@@ -6,6 +6,7 @@ import 'package:halla/core/theme/theme.dart';
 import 'package:halla/features/contacts/presentation/screens/contacts_screen.dart';
 import 'package:halla/features/home/presentation/screens/home_screen.dart';
 import 'package:halla/features/profile/presentation/screens/profile_screen.dart';
+import 'package:halla/generated/l10n.dart';
 
 class HomeLayout extends StatefulWidget {
   const HomeLayout({super.key});
@@ -73,17 +74,17 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
                 children: [
                   _bottomNavigationItem(
                     icon: AppImages.homeBNBIcon,
-                    name: 'Home',
+                    name: S.of(context).home,
                     index: 0,
                   ),
                   _bottomNavigationItem(
                     icon: AppImages.contactBNBIcon,
-                    name: 'Contact',
+                    name: S.of(context).contact,
                     index: 1,
                   ),
                   _bottomNavigationItem(
                     icon: AppImages.profileBNBIcon,
-                    name: 'Profile',
+                    name: S.of(context).profile,
                     index: 2,
                   ),
                 ],

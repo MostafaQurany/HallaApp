@@ -1,9 +1,12 @@
-/// ProfileRepository is an abstract class defining the contract for operations
-/// related to data within the domain layer.
-/// Concrete implementations of this repository interface will be provided
-/// in the data layer to interact with specific data sources (e.g., API, database).
+import 'dart:io';
+
+import 'package:fpdart/fpdart.dart';
+import 'package:halla/core/error/failure.dart';
+
 abstract class ProfileRepository {
-
-
-
+  Future<Either<Failure, String>> getImageUrl(String userId);
+  Future<Either<Failure, String>> setImageUrl({
+    required String userId,
+    required File image,
+  });
 }

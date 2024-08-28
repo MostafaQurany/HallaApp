@@ -19,6 +19,10 @@ class AppNavigator {
     Navigator.of(context).push(_animation(page));
   }
 
+  static void navigatePop(BuildContext context) {
+    Navigator.of(context).pop();
+  }
+
   static _animation(Widget page) {
     const int time = 500;
     final Animatable<Offset> tween =

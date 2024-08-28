@@ -80,20 +80,20 @@ class S {
     );
   }
 
-  /// `I Don''t Have an Account ? `
+  /// `I Don''t Have an Account ?`
   String get iDontHaveAnAccount {
     return Intl.message(
-      'I Don\'\'t Have an Account ? ',
+      'I Don\'\'t Have an Account ?',
       name: 'iDontHaveAnAccount',
       desc: '',
       args: [],
     );
   }
 
-  /// `Register.`
+  /// `Register`
   String get register {
     return Intl.message(
-      'Register.',
+      'Register',
       name: 'register',
       desc: '',
       args: [],
@@ -160,10 +160,10 @@ class S {
     );
   }
 
-  /// `Already I have An Acount ? `
+  /// `Already I have An Acount ?`
   String get alreadyIHaveAnAcount {
     return Intl.message(
-      'Already I have An Acount ? ',
+      'Already I have An Acount ?',
       name: 'alreadyIHaveAnAcount',
       desc: '',
       args: [],
@@ -370,10 +370,10 @@ class S {
     );
   }
 
-  /// `Enter PIN - Code Password`
+  /// `Enter Pin-Code Password`
   String get enterPinCodePassword {
     return Intl.message(
-      'Enter PIN - Code Password',
+      'Enter Pin-Code Password',
       name: 'enterPinCodePassword',
       desc: '',
       args: [],
@@ -410,13 +410,13 @@ class S {
     );
   }
 
-  /// `Welcome to Halla, Your PIN code for login is ${state.guest!.pinCode}. Keep it secure and don't share it with anyone.`
-  String get welcomeToHallaYourPinCodeForLoginIsStateguestpincode {
+  /// `Welcome to Halla, Your PIN code for login is {pinCode}. Keep it secure and don''t share it with anyone.`
+  String welcomeToHallaYourPinCodeForLoginIsStateguestpincode(String pinCode) {
     return Intl.message(
-      'Welcome to Halla, Your PIN code for login is \${state.guest!.pinCode}. Keep it secure and don\'t share it with anyone.',
+      'Welcome to Halla, Your PIN code for login is $pinCode. Keep it secure and don\'\'t share it with anyone.',
       name: 'welcomeToHallaYourPinCodeForLoginIsStateguestpincode',
       desc: '',
-      args: [],
+      args: [pinCode],
     );
   }
 
@@ -445,6 +445,97 @@ class S {
     return Intl.message(
       'Scan Qr-Code to add contact',
       name: 'scanQrcodeToAddContact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email or phone number 01`
+  String get emailOrPhoneNumber01 {
+    return Intl.message(
+      'Email or phone number 01',
+      name: 'emailOrPhoneNumber01',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your email address below and we'll send you a link to reset your password. If the email is associated with an account, you'll receive an email with instructions to create a new password `
+  String get enterYourEmailAddressBelowAndWellSendYouA {
+    return Intl.message(
+      'Enter your email address below and we\'ll send you a link to reset your password. If the email is associated with an account, you\'ll receive an email with instructions to create a new password ',
+      name: 'enterYourEmailAddressBelowAndWellSendYouA',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Submit`
+  String get submit {
+    return Intl.message(
+      'Submit',
+      name: 'submit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ForgetPassword?`
+  String get forgetpassword {
+    return Intl.message(
+      'ForgetPassword?',
+      name: 'forgetpassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Check your email in {minutes} minutes ?`
+  String checkYourEmail(int minutes) {
+    return Intl.message(
+      'Check your email in $minutes minutes ?',
+      name: 'checkYourEmail',
+      desc: '',
+      args: [minutes],
+    );
+  }
+
+  /// `Welcome to Halla,\nYour pin-code for login is {pinCode}.\nKeep it secure and don''t share it with anyone.`
+  String welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure(
+      String pinCode) {
+    return Intl.message(
+      'Welcome to Halla,\nYour pin-code for login is $pinCode.\nKeep it secure and don\'\'t share it with anyone.',
+      name: 'welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure',
+      desc: '',
+      args: [pinCode],
+    );
+  }
+
+  /// `Home`
+  String get home {
+    return Intl.message(
+      'Home',
+      name: 'home',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Contact`
+  String get contact {
+    return Intl.message(
+      'Contact',
+      name: 'contact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
       desc: '',
       args: [],
     );

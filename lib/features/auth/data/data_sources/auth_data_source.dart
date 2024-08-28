@@ -12,6 +12,7 @@ abstract interface class AuthDataSource {
   Future<UserModel> signInWithEmailPassword({
     required String email,
     required String password,
+    required String pinCode,
   });
   Future<String> signInWithPhone({
     required String phoneNumber,
@@ -26,6 +27,14 @@ abstract interface class AuthDataSource {
     required String password,
   });
 
+  Future<String> logInWithPhone({
+    required String smsCode,
+    required String verificationId,
+  });
+
+  Future<void> forgetPassword({
+    required String email,
+  });
   // social
   Future<UserModel> googleLogIn();
 
@@ -41,6 +50,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   Future<UserModel> signInWithEmailPassword({
     required String email,
     required String password,
+    required String pinCode,
   }) async {
     try {
       final UserCredential credential =
@@ -51,6 +61,7 @@ class AuthDataSourceImpl implements AuthDataSource {
       return UserModel(
         id: credential.user!.uid,
         email: email,
+        pinCode: pinCode,
         nfcList: [],
         company: CompanyModel(),
         socialMedia: SocialMediaModel(),
@@ -193,6 +204,37 @@ class AuthDataSourceImpl implements AuthDataSource {
       final AuthCredential passwordCredential = EmailAuthProvider.credential(
           email: user.email, password: user.pinCode);
       await firebaseAuth.currentUser!.linkWithCredential(passwordCredential);
+    } on FirebaseException catch (e) {
+      throw ServerException(e.message.toString());
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<String> logInWithPhone(
+      {required String smsCode, required String verificationId}) async {
+    try {
+      final PhoneAuthCredential phoneAuthCredential =
+          PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: smsCode,
+      );
+      UserCredential userCredential =
+          await firebaseAuth.signInWithCredential(phoneAuthCredential);
+
+      return userCredential.user!.uid;
+    } on FirebaseException catch (e) {
+      throw ServerException(e.message.toString());
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> forgetPassword({required String email}) async {
+    try {
+      return await firebaseAuth.sendPasswordResetEmail(email: email);
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {

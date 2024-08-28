@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
-import 'package:halla/features/contacts/domain/entities/contact.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:halla/core/constants/app_images.dart';
-import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/features/contacts/data/models/contact_model.dart';
 import 'package:halla/features/contacts/presentation/blocs/bloc/contacts_bloc.dart';
@@ -15,8 +13,6 @@ import 'package:halla/features/contacts/presentation/screens/components/header_c
 import 'package:halla/features/contacts/presentation/screens/contact_card.dart';
 import 'package:halla/features/home/presentation/screens/components/end_spacer_sized_box.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter/material.dart';
-import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
 class ContactsScreen extends StatefulWidget {
   const ContactsScreen({super.key});
@@ -55,10 +51,16 @@ class _ContactsScreenState extends State<ContactsScreen> {
           }
           if (state is AddContactsErorrState) {
             Future.delayed(const Duration(milliseconds: 200)).then(
-              (value) => Navigator.pop(context),
+              (value) {
+                Navigator.pop(context);
+                AppShowDialog.showErrorMessage(context, state.message);
+              },
             );
           }
-          if (state is GetContactsErorrState) {}
+          if (state is GetContactsErorrState) {
+          AppShowDialog.showErrorMessage(context, state.message);
+
+          }
           if (state is GetContactsSuccessfully) {
             print(state.contacts);
           }

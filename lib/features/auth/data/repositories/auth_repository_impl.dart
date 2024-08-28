@@ -14,12 +14,16 @@ class AuthRepositoryImpl implements AuthRepository {
   final DataBaseSource dataBaseSource;
 
   @override
-  Future<Either<Failure, User>> signInWithEmailPassword(
-      {required String email, required String password}) {
+  Future<Either<Failure, User>> signInWithEmailPassword({
+    required String email,
+    required String password,
+    required String pinCode,
+  }) {
     return _getUser(
       () async => authDataSource.signInWithEmailPassword(
         email: email,
         password: password,
+        pinCode: pinCode,
       ),
     );
   }
@@ -113,6 +117,30 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       UserModel userModel = UserModel.fromUser(user);
       final res = await authDataSource.linkWithEmailPassword(user: userModel);
+      return right(res);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> logInWithPhone(
+      {required String smsCode, required String verificationId}) async {
+    try {
+      final res = await authDataSource.logInWithPhone(
+        smsCode: smsCode,
+        verificationId: verificationId,
+      );
+      return right(res);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> forgetPassword(String email) async {
+    try {
+      final res = await authDataSource.forgetPassword(email: email);
       return right(res);
     } on ServerException catch (e) {
       return left(Failure(e.message));

@@ -110,6 +110,11 @@ _initAuth() {
       ),
     )
     ..registerFactory(
+      () => LogInWithPhoneUseCase(
+        authRepository: serviceLocator(),
+      ),
+    )
+    ..registerFactory(
       () => GetUserUsecase(
         serviceLocator(),
       ),
@@ -134,10 +139,17 @@ _initAuth() {
         serviceLocator(),
       ),
     )
+    ..registerFactory(
+      () => ForgetPasswordUsecase(
+        serviceLocator(),
+      ),
+    )
 
     // bloc
     ..registerLazySingleton(
       () => AuthBloc(
+        serviceLocator(),
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
@@ -232,9 +244,23 @@ _initProfile() {
       ),
     )
     // UseCase
-
+    ..registerFactory(
+      () => SetImageUrlUsecase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetImageUrlUsecase(
+        serviceLocator(),
+      ),
+    )
     // bloc
     ..registerLazySingleton(
-      () => ProfileBloc(),
+      () => ProfileBloc(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+      ),
     );
 }

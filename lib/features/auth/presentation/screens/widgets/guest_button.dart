@@ -22,6 +22,7 @@ class GuestButton extends StatelessWidget {
         }
         if (state is AuthFailure) {
           Navigator.pop(context);
+          AppShowDialog.showErrorMessage(context, state.message);
         }
         if (state is LogInGuestSucces) {
           Navigator.pop(context);

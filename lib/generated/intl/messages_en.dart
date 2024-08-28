@@ -20,25 +20,43 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(minutes) => "Check your email in ${minutes} minutes ?";
+
+  static String m1(pinCode) =>
+      "Welcome to Halla, Your PIN code for login is ${pinCode}. Keep it secure and don\'\'t share it with anyone.";
+
+  static String m2(pinCode) =>
+      "Welcome to Halla,\nYour pin-code for login is ${pinCode}.\nKeep it secure and don\'\'t share it with anyone.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "alreadyIHaveAnAcount":
-            MessageLookupByLibrary.simpleMessage("Already I have An Acount ? "),
+            MessageLookupByLibrary.simpleMessage("Already I have An Acount ?"),
+        "checkYourEmail": m0,
         "company": MessageLookupByLibrary.simpleMessage("Company"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "contact": MessageLookupByLibrary.simpleMessage("Contact"),
         "contactList": MessageLookupByLibrary.simpleMessage("Contact List"),
         "dataOfBirth": MessageLookupByLibrary.simpleMessage("Data Of Birth"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emailOrPhoneNumber01":
+            MessageLookupByLibrary.simpleMessage("Email or phone number 01"),
         "enterPinCodePassword":
-            MessageLookupByLibrary.simpleMessage("Enter PIN - Code Password"),
+            MessageLookupByLibrary.simpleMessage("Enter Pin-Code Password"),
+        "enterYourEmailAddressBelowAndWellSendYouA":
+            MessageLookupByLibrary.simpleMessage(
+                "Enter your email address below and we\'ll send you a link to reset your password. If the email is associated with an account, you\'ll receive an email with instructions to create a new password "),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password ?"),
+        "forgetpassword":
+            MessageLookupByLibrary.simpleMessage("ForgetPassword?"),
         "fullName": MessageLookupByLibrary.simpleMessage("Full Name"),
         "guest": MessageLookupByLibrary.simpleMessage("Guest"),
+        "home": MessageLookupByLibrary.simpleMessage("Home"),
         "iDontHaveAnAccount": MessageLookupByLibrary.simpleMessage(
-            "I Don\'\'t Have an Account ? "),
+            "I Don\'\'t Have an Account ?"),
         "instagram": MessageLookupByLibrary.simpleMessage("Instagram"),
         "linkedin": MessageLookupByLibrary.simpleMessage("Linkedin"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
@@ -58,8 +76,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "Please enter verification code \n Sent to your phone number."),
         "positon": MessageLookupByLibrary.simpleMessage("Positon"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "putNfcTag": MessageLookupByLibrary.simpleMessage("Put NFC Tag"),
-        "register": MessageLookupByLibrary.simpleMessage("Register."),
+        "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registerNow": MessageLookupByLibrary.simpleMessage("Register Now"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
         "scanQrcodeToAddContact":
@@ -67,13 +86,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "search": MessageLookupByLibrary.simpleMessage("Search"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "socialMedia": MessageLookupByLibrary.simpleMessage("Social Media"),
+        "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "twitter": MessageLookupByLibrary.simpleMessage("Twitter"),
         "verificationCode":
             MessageLookupByLibrary.simpleMessage("Verification Code"),
         "verified": MessageLookupByLibrary.simpleMessage("Verified"),
         "website": MessageLookupByLibrary.simpleMessage("Website"),
-        "welcomeToHallaYourPinCodeForLoginIsStateguestpincode":
-            MessageLookupByLibrary.simpleMessage(
-                "Welcome to Halla, Your PIN code for login is \${state.guest!.pinCode}. Keep it secure and don\'t share it with anyone.")
+        "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": m1,
+        "welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure": m2
       };
 }

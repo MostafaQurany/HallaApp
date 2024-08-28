@@ -20,59 +20,79 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
+  static String m0(minutes) => "تأكد بريدك الإلكتروني في ${minutes} دقائق ؟";
+
+  static String m1(pinCode) =>
+      "مرحباً بك في هلا، رقم البين الخاص بك للدخول هو ${pinCode}. احتفظ به آمناً ولا تشاركه مع أي شخص.";
+
+  static String m2(pinCode) =>
+      "مرحبًا بك في Halla،\nرمزك السري لتسجيل الدخول هو ${pinCode}\nاحتفظ به في مكان آمن ولا تشاركه مع أي شخص.";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "alreadyIHaveAnAcount":
-            MessageLookupByLibrary.simpleMessage("بالفعل لدي حساب؟"),
-        "company": MessageLookupByLibrary.simpleMessage("شركة"),
+            MessageLookupByLibrary.simpleMessage("لدي حساب بالفعل ؟"),
+        "checkYourEmail": m0,
+        "company": MessageLookupByLibrary.simpleMessage("الشركة"),
         "confirmPassword":
-            MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور"),
-        "contactList": MessageLookupByLibrary.simpleMessage("Contact List"),
-        "dataOfBirth": MessageLookupByLibrary.simpleMessage("بيانات الولادة"),
+            MessageLookupByLibrary.simpleMessage("تأكيد كلمة السر"),
+        "contact": MessageLookupByLibrary.simpleMessage("جهة الاتصال"),
+        "contactList": MessageLookupByLibrary.simpleMessage("قائمة الاتصال"),
+        "dataOfBirth": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
         "email": MessageLookupByLibrary.simpleMessage("بريد إلكتروني"),
+        "emailOrPhoneNumber01": MessageLookupByLibrary.simpleMessage(
+            "بريد إلكتروني أو رقم هاتف 01"),
         "enterPinCodePassword":
-            MessageLookupByLibrary.simpleMessage("Enter PIN - Code Password"),
-        "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
+            MessageLookupByLibrary.simpleMessage("أدخل pin-code كلمة السر"),
+        "enterYourEmailAddressBelowAndWellSendYouA":
+            MessageLookupByLibrary.simpleMessage(
+                "أدخل عنوان بريدك الإلكتروني أدناه وسنرسل لك رابط لإعادة تعيين كلمة السر. إذا كان البريد الإلكتروني مرتبطاً بحساب، فستتلقى بريداً إلكترونياً مع التعليمات لإنشاء كلمة سر جديدة "),
+        "facebook": MessageLookupByLibrary.simpleMessage("فيسبوك"),
         "forgetPassword":
-            MessageLookupByLibrary.simpleMessage("Forget Password ?"),
+            MessageLookupByLibrary.simpleMessage("نسيان كلمة السر ؟"),
+        "forgetpassword":
+            MessageLookupByLibrary.simpleMessage("هل نسيان كلمة السر؟ "),
         "fullName": MessageLookupByLibrary.simpleMessage("الاسم الكامل"),
         "guest": MessageLookupByLibrary.simpleMessage("ضيف"),
+        "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
         "iDontHaveAnAccount":
-            MessageLookupByLibrary.simpleMessage("ليس لدي حساب؟"),
-        "instagram": MessageLookupByLibrary.simpleMessage("Instagram"),
-        "linkedin": MessageLookupByLibrary.simpleMessage("Linkedin"),
-        "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
-        "login": MessageLookupByLibrary.simpleMessage("تسجيل الدخول"),
+            MessageLookupByLibrary.simpleMessage("ليس لدي حساب ؟"),
+        "instagram": MessageLookupByLibrary.simpleMessage("إنستجرام"),
+        "linkedin": MessageLookupByLibrary.simpleMessage("لينكد إن"),
+        "logOut": MessageLookupByLibrary.simpleMessage("خروج"),
+        "login": MessageLookupByLibrary.simpleMessage("دخول"),
         "name": MessageLookupByLibrary.simpleMessage("اسم"),
         "nationality": MessageLookupByLibrary.simpleMessage("جنسية"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
-        "open": MessageLookupByLibrary.simpleMessage("Open"),
+        "open": MessageLookupByLibrary.simpleMessage("افتح"),
         "or": MessageLookupByLibrary.simpleMessage("أو"),
-        "password": MessageLookupByLibrary.simpleMessage("كلمة المرور"),
+        "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
         "personalNinformation":
-            MessageLookupByLibrary.simpleMessage("Personal \nInformation"),
+            MessageLookupByLibrary.simpleMessage("معلومات شخصية \n"),
         "phone": MessageLookupByLibrary.simpleMessage("هاتف"),
-        "pinIsIncorrect": MessageLookupByLibrary.simpleMessage("PIN غير صحيح"),
+        "pinIsIncorrect":
+            MessageLookupByLibrary.simpleMessage("رقم ال pin-code خاطئ"),
         "pleaseEnterVerificationCodeNsentToYourPhoneNumber":
             MessageLookupByLibrary.simpleMessage(
-                "الرجاء إدخال رمز التحقق \n المرسلة إلى رقم هاتفك."),
-        "positon": MessageLookupByLibrary.simpleMessage("بوسيتون"),
-        "putNfcTag": MessageLookupByLibrary.simpleMessage("Put NFC Tag"),
-        "register": MessageLookupByLibrary.simpleMessage("يسجل."),
-        "registerNow": MessageLookupByLibrary.simpleMessage("سجل الان"),
-        "resendCode": MessageLookupByLibrary.simpleMessage("أعد إرسال الرمز"),
+                "الرجاء إدخال OTP \n المرسل إلى رقم هاتفك."),
+        "positon": MessageLookupByLibrary.simpleMessage("موقع الشركة"),
+        "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+        "putNfcTag": MessageLookupByLibrary.simpleMessage("ضع علامة NFC"),
+        "register": MessageLookupByLibrary.simpleMessage("تسجيل"),
+        "registerNow": MessageLookupByLibrary.simpleMessage("تسجيل الآن"),
+        "resendCode": MessageLookupByLibrary.simpleMessage("إعادة إرسال OTP"),
         "scanQrcodeToAddContact":
-            MessageLookupByLibrary.simpleMessage("Scan Qr-Code to add contact"),
-        "search": MessageLookupByLibrary.simpleMessage("يبحث"),
-        "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+            MessageLookupByLibrary.simpleMessage("ماسح رمز QR لاضافة اتصال"),
+        "search": MessageLookupByLibrary.simpleMessage("بحث"),
+        "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
         "socialMedia":
             MessageLookupByLibrary.simpleMessage("وسائل التواصل الاجتماعي"),
-        "twitter": MessageLookupByLibrary.simpleMessage("Twitter"),
+        "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
+        "twitter": MessageLookupByLibrary.simpleMessage("تويتر"),
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
-        "verified": MessageLookupByLibrary.simpleMessage("تم التحقق"),
-        "website": MessageLookupByLibrary.simpleMessage("موقع إلكتروني"),
-        "welcomeToHallaYourPinCodeForLoginIsStateguestpincode":
-            MessageLookupByLibrary.simpleMessage(
-                "Welcome to Halla, Your PIN code for login is \${state.guest!.pinCode}. Keep it secure and don\'t share it with anyone.")
+        "verified": MessageLookupByLibrary.simpleMessage("مُتأكد"),
+        "website": MessageLookupByLibrary.simpleMessage("صفحة الويب"),
+        "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": m1,
+        "welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure": m2
       };
 }

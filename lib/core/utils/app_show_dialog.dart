@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
+import 'package:halla/features/auth/presentation/screens/log%20in/bodys/forget_password_body.dart';
 import 'package:lottie/lottie.dart';
 
 class AppShowDialog {
@@ -49,5 +50,53 @@ class AppShowDialog {
         );
       },
     );
+  }
+
+  static forgetPassword(
+    BuildContext context,
+  ) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return const Dialog(
+          child: ForgetPasswordBody(),
+        );
+      },
+    );
+  }
+
+  static showHelpSnckPar(
+    BuildContext context,
+    String message,
+  ) {
+    final snackBar = SnackBar(
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: AppColors.grayDark,
+      content: Text(message),
+    );
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
+  static showErrorMessage(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      elevation: 0,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.horizontal(
+          left: Radius.circular(16),
+          right: Radius.circular(16),
+        ),
+      ),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: AppColors.errorDark,
+      content: Text(message),
+    );
+
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
   }
 }

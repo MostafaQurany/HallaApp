@@ -1,16 +1,19 @@
 {
   "login": "Login",
+  "@login": {},
   "email": "Email",
+  "@email": {},
   "password": "Password",
-  "iDontHaveAnAccount": "I Don''t Have an Account ? ",
-  "register": "Register.",
+  "iDontHaveAnAccount": "I Don''t Have an Account ?",
+  "register": "Register",
   "or": "OR",
   "guest": "Guest",
   "registerNow": "Register Now",
   "pinIsIncorrect": "Pin is incorrect",
   "phone": "Phone",
   "confirmPassword": "Confirm Password",
-  "alreadyIHaveAnAcount": "Already I have An Acount ? ",
+  "@confirmPassword": {},
+  "alreadyIHaveAnAcount": "Already I have An Acount ?",
   "verified": "Verified",
   "resendCode": "Resend Code",
   "pleaseEnterVerificationCodeNsentToYourPhoneNumber": "Please enter verification code \n Sent to your phone number.",
@@ -31,12 +34,45 @@
   "verificationCode": "Verification Code",
   "personalNinformation": "Personal \nInformation",
   "skip": "Skip",
-  "enterPinCodePassword": "Enter PIN - Code Password",
+  "enterPinCodePassword": "Enter Pin-Code Password",
   "forgetPassword": "Forget Password ?",
   "putNfcTag": "Put NFC Tag",
   "open": "Open",
-  "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": "Welcome to Halla, Your PIN code for login is ${state.guest!.pinCode}. Keep it secure and don't share it with anyone.",
+  "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": "Welcome to Halla, Your PIN code for login is {pinCode}. Keep it secure and don''t share it with anyone.",
+  "@welcomeToHallaYourPinCodeForLoginIsStateguestpincode": {
+    "description": "",
+    "placeholders": {
+      "pinCode": {
+        "type": "String"
+      }
+    }
+  },
   "contactList": "Contact List",
   "logOut": "Log Out",
-  "scanQrcodeToAddContact": "Scan Qr-Code to add contact"
+  "scanQrcodeToAddContact": "Scan Qr-Code to add contact",
+  "emailOrPhoneNumber01": "Email or phone number 01",
+  "enterYourEmailAddressBelowAndWellSendYouA": "Enter your email address below and we'll send you a link to reset your password. If the email is associated with an account, you'll receive an email with instructions to create a new password ",
+  "submit": "Submit",
+  "forgetpassword": "ForgetPassword?",
+  "checkYourEmail": "Check your email in {minutes} minutes ?",
+  "@checkYourEmail": {
+    "description": "",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure": "Welcome to Halla,\nYour pin-code for login is {pinCode}.\nKeep it secure and don''t share it with anyone.",
+  "@welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure": {
+    "description": "",
+    "placeholders": {
+      "pinCode": {
+        "type": "String"
+      }
+    }
+  },
+  "home": "Home",
+  "contact": "Contact",
+  "profile": "Profile"
 }

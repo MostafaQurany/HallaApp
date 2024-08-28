@@ -1,42 +1,78 @@
 {
-  "login": "تسجيل الدخول",
+  "login": "دخول",
+  "@login": {},
   "email": "بريد إلكتروني",
-  "password": "كلمة المرور",
-  "iDontHaveAnAccount": "ليس لدي حساب؟",
-  "register": "يسجل.",
+  "@email": {},
+  "password": "كلمة السر",
+  "iDontHaveAnAccount": "ليس لدي حساب ؟",
+  "register": "تسجيل",
   "or": "أو",
   "guest": "ضيف",
-  "registerNow": "سجل الان",
-  "pinIsIncorrect": "PIN غير صحيح",
+  "registerNow": "تسجيل الآن",
+  "pinIsIncorrect": "رقم ال pin-code خاطئ",
   "phone": "هاتف",
-  "confirmPassword": "تأكيد كلمة المرور",
-  "alreadyIHaveAnAcount": "بالفعل لدي حساب؟",
-  "verified": "تم التحقق",
-  "resendCode": "أعد إرسال الرمز",
-  "pleaseEnterVerificationCodeNsentToYourPhoneNumber": "الرجاء إدخال رمز التحقق \n المرسلة إلى رقم هاتفك.",
+  "confirmPassword": "تأكيد كلمة السر",
+  "@confirmPassword": {},
+  "alreadyIHaveAnAcount": "لدي حساب بالفعل ؟",
+  "verified": "مُتأكد",
+  "resendCode": "إعادة إرسال OTP",
+  "pleaseEnterVerificationCodeNsentToYourPhoneNumber": "الرجاء إدخال OTP \n المرسل إلى رقم هاتفك.",
   "socialMedia": "وسائل التواصل الاجتماعي",
-  "facebook": "Facebook",
-  "instagram": "Instagram",
-  "linkedin": "Linkedin",
-  "twitter": "Twitter",
+  "facebook": "فيسبوك",
+  "instagram": "إنستجرام",
+  "linkedin": "لينكد إن",
+  "twitter": "تويتر",
   "nationality": "جنسية",
-  "search": "يبحث",
-  "company": "شركة",
-  "positon": "بوسيتون",
-  "website": "موقع إلكتروني",
+  "search": "بحث",
+  "company": "الشركة",
+  "positon": "موقع الشركة",
+  "website": "صفحة الويب",
   "name": "اسم",
-  "dataOfBirth": "بيانات الولادة",
+  "dataOfBirth": "تاريخ الميلاد",
   "fullName": "الاسم الكامل",
   "next": "التالي",
   "verificationCode": "رمز التحقق",
-  "personalNinformation": "Personal \nInformation",
-  "skip": "Skip",
-  "enterPinCodePassword": "Enter PIN - Code Password",
-  "forgetPassword": "Forget Password ?",
-  "putNfcTag": "Put NFC Tag",
-  "open": "Open",
-  "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": "Welcome to Halla, Your PIN code for login is ${state.guest!.pinCode}. Keep it secure and don't share it with anyone.",
-  "contactList": "Contact List",
-  "logOut": "Log Out",
-  "scanQrcodeToAddContact": "Scan Qr-Code to add contact"
+  "personalNinformation": "معلومات شخصية \n",
+  "skip": "تخطي",
+  "enterPinCodePassword": "أدخل pin-code كلمة السر",
+  "forgetPassword": "نسيان كلمة السر ؟",
+  "putNfcTag": "ضع علامة NFC",
+  "open": "افتح",
+  "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": "مرحباً بك في هلا، رقم البين الخاص بك للدخول هو {pinCode}. احتفظ به آمناً ولا تشاركه مع أي شخص.",
+  "@welcomeToHallaYourPinCodeForLoginIsStateguestpincode": {
+    "description": "",
+    "placeholders": {
+      "pinCode": {
+        "type": "String"
+      }
+    }
+  },
+  "contactList": "قائمة الاتصال",
+  "logOut": "خروج",
+  "scanQrcodeToAddContact": "ماسح رمز QR لاضافة اتصال",
+  "emailOrPhoneNumber01": "بريد إلكتروني أو رقم هاتف 01",
+  "enterYourEmailAddressBelowAndWellSendYouA": "أدخل عنوان بريدك الإلكتروني أدناه وسنرسل لك رابط لإعادة تعيين كلمة السر. إذا كان البريد الإلكتروني مرتبطاً بحساب، فستتلقى بريداً إلكترونياً مع التعليمات لإنشاء كلمة سر جديدة ",
+  "submit": "إرسال",
+  "forgetpassword": "هل نسيان كلمة السر؟ ",
+  "checkYourEmail": "تأكد بريدك الإلكتروني في {minutes} دقائق ؟",
+  "@checkYourEmail": {
+    "description": "",
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure": "مرحبًا بك في Halla،\nرمزك السري لتسجيل الدخول هو {pinCode}\nاحتفظ به في مكان آمن ولا تشاركه مع أي شخص.",
+  "@welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure": {
+    "description": "",
+    "placeholders": {
+      "pinCode": {
+        "type": "String"
+      }
+    }
+  },
+  "home": "الصفحة الرئيسية",
+  "contact": "جهة الاتصال",
+  "profile": "الملف الشخصي"
 }

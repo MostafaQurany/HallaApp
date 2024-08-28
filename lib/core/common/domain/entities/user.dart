@@ -9,6 +9,7 @@ class User {
   String primePhone;
   String dateOfBirth;
   String nationality;
+  String imageUrl;
   String pinCode;
   List<String> phones;
   List<String> nfcList;
@@ -22,6 +23,7 @@ class User {
     required this.primePhone,
     required this.dateOfBirth,
     required this.nationality,
+    required this.imageUrl,
     required this.pinCode,
     required this.nfcList,
     required this.phones,

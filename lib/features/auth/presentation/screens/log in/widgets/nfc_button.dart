@@ -3,7 +3,6 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:halla/core/constants/app_images.dart";
-import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
@@ -73,23 +72,6 @@ class NfcButton extends StatelessWidget {
           },
         );
       },
-    );
-    GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: 50.w,
-        height: 50.w,
-        padding: EdgeInsets.all(10.w),
-        decoration: BoxDecoration(
-          color: AppTheme.isLight(context)
-              ? AppColors.primaryObesty
-              : AppColors.blackLight,
-          borderRadius: BorderRadius.all(Radius.circular(8.w)),
-        ),
-        child: Image.asset(
-          AppTheme.isLight(context) ? AppImages.nfcIcon : AppImages.nfcIconDark,
-        ),
-      ),
     );
   }
 }

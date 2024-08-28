@@ -20,12 +20,11 @@ class ShowGuestPinCode extends StatelessWidget {
             children: [
               Lottie.asset(AppImages.welcomePinCodeLottie),
               Text(
-                """
-Welcome to Halla,
-Your PIN code for login is ${state.user!.pinCode}.
-Keep it secure and don't share it with anyone.""",
+                S
+                    .of(context)
+                    .welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure(
+                        state.user!.pinCode),
                 style: Theme.of(context).textTheme.bodyLarge,
-                textAlign: TextAlign.justify,
               ),
               ElevatedButton(
                   onPressed: () {

@@ -34,6 +34,8 @@ final class AuthPersonalInfoSuccess extends AuthState {
   AuthPersonalInfoSuccess({required this.user});
 }
 
+final class AuthSentMessageSuccess extends AuthState {}
+
 final class AuthFailure extends AuthState {
   final String message;
   AuthFailure({

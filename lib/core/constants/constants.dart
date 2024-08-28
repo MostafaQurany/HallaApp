@@ -202,6 +202,8 @@ class AppConstants {
   static String contactBox = "ContactsBox";
   static String userBox = "UserBox";
   static String userLoginId = "UserLoginId";
+
+  static const Duration durationSlide = Duration(milliseconds: 350);
   static String generatePinCode() {
     final random = Random();
     String pinCode = '';

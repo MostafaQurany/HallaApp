@@ -46,7 +46,7 @@ class PinCodeScreen extends StatelessWidget {
               ),
             ),
       
-                   Center(
+                   const Center(
                     child: PinCodeBody(
                       
                     ),

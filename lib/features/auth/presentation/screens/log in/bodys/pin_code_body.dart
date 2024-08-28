@@ -99,7 +99,7 @@ class _PinCodeBodyState extends State<PinCodeBody> {
                           context, const HomeLayout());
                     }
                     if (state is AuthFailure) {
-                      Navigator.pop(context);
+                      AppShowDialog.showErrorMessage(context, state.message);
                     }
                   },
                   builder: (context, state) {

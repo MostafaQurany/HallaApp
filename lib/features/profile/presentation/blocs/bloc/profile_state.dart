@@ -14,3 +14,20 @@ final class ProfileError extends ProfileState {
 }
 
 final class LogOutSuccesState extends ProfileState {}
+
+final class ProfileImageUpdateSuccessfully extends ProfileState {
+  final String imageUrl;
+
+  ProfileImageUpdateSuccessfully({required this.imageUrl});
+}
+
+final class ProfileUpdateUserSuccessfully extends ProfileState {
+  final MyUser.User user;
+
+  ProfileUpdateUserSuccessfully({required this.user});
+}
+final class ProfileUserUpdateSccessfully extends ProfileState {
+  final MyUser.User user;
+
+  ProfileUserUpdateSccessfully({required this.user});
+}
