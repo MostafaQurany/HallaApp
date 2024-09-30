@@ -76,7 +76,10 @@ class _PinCodeBodyState extends State<PinCodeBody> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // show the forget dialog
+                      AppShowDialog.showConfirmToDeleteGuest(context);
+                    },
                     child: Text(
                       S.of(context).forgetPassword,
                       style: Theme.of(context)

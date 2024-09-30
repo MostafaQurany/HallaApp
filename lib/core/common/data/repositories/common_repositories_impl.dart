@@ -1,5 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/common/data/data%20source/data_base_source.dart';
+import 'package:halla/core/common/data/data%20source/local_user_data_source.dart';
 import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
 import 'package:halla/core/common/data/models/nfc_message_model.dart';
 import 'package:halla/core/common/data/models/user_model.dart';
@@ -13,8 +14,14 @@ import 'package:halla/core/error/server_exception.dart';
 class CommonRepositoriesImpl implements CommonRepositories {
   final NfcDataSource nfcDataSource;
   final DataBaseSource dataBaseSource;
-  CommonRepositoriesImpl(this.nfcDataSource, this.dataBaseSource);
+  final LocalUserDataSource localUserDataSource;
+  CommonRepositoriesImpl(
+    this.nfcDataSource,
+    this.dataBaseSource,
+    this.localUserDataSource,
+  );
 
+// user database
   @override
   Future<Either<Failure, User>> uploadUser({required User user}) async {
     try {
@@ -36,14 +43,15 @@ class CommonRepositoriesImpl implements CommonRepositories {
     }
   }
 
+// NFC
   @override
   Future<Either<Failure, bool>> getIsNfcAvailable() async {
     try {
       final res = await nfcDataSource.getNFCIsAvailable();
       return Right(res);
-    } catch (e) {
+    } on ServerException catch (e) {
       return Left(
-        Failure(e.toString()),
+        Failure(e.message),
       );
     }
   }
@@ -53,9 +61,9 @@ class CommonRepositoriesImpl implements CommonRepositories {
     try {
       final res = await nfcDataSource.getNFCIsOpen();
       return Right(res);
-    } catch (e) {
+    } on ServerException catch (e) {
       return Left(
-        Failure(e.toString()),
+        Failure(e.message),
       );
     }
   }
@@ -67,9 +75,9 @@ class CommonRepositoriesImpl implements CommonRepositories {
         NfcMessageModel.fromNfcMessage(nfcMessage),
       );
       return Right(res);
-    } catch (e) {
+    } on ServerException catch (e) {
       return Left(
-        Failure(e.toString()),
+        Failure(e.message),
       );
     }
   }
@@ -79,21 +87,23 @@ class CommonRepositoriesImpl implements CommonRepositories {
     try {
       final res = await nfcDataSource.read();
       return Right(res);
-    } catch (e) {
+    } on ServerException catch (e) {
       return Left(
-        Failure(e.toString()),
+        Failure(e.message),
       );
     }
   }
+
+  // guest
 
   @override
   Future<Either<Failure, Guest>> logInGuest() async {
     try {
       final res = await dataBaseSource.logInGuest();
       return Right(res);
-    } catch (e) {
+    } on ServerException catch (e) {
       return Left(
-        Failure(e.toString()),
+        Failure(e.message),
       );
     }
   }
@@ -103,9 +113,9 @@ class CommonRepositoriesImpl implements CommonRepositories {
     try {
       final res = await dataBaseSource.getGuest();
       return Right(res);
-    } catch (e) {
+    } on ServerException catch (e) {
       return Left(
-        Failure(e.toString()),
+        Failure(e.message),
       );
     }
   }
@@ -115,9 +125,9 @@ class CommonRepositoriesImpl implements CommonRepositories {
     try {
       final res = await dataBaseSource.isGuestUpdate();
       return Right(res);
-    } catch (e) {
+    } on ServerException catch (e) {
       return Left(
-        Failure(e.toString()),
+        Failure(e.message),
       );
     }
   }
@@ -127,9 +137,71 @@ class CommonRepositoriesImpl implements CommonRepositories {
     try {
       final res = await dataBaseSource.isGuestExit();
       return Right(res);
-    } catch (e) {
+    } on ServerException catch (e) {
       return Left(
-        Failure(e.toString()),
+        Failure(e.message),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> fotgetGuestPinCode() async {
+    try {
+      final res = await dataBaseSource.forgetGuestPinCode();
+      return Right(res);
+    } on ServerException catch (e) {
+      return Left(
+        Failure(e.message),
+      );
+    }
+  }
+
+  // local user
+  @override
+  Future<Either<Failure, void>> addUserToLocal(User user) async {
+    try {
+      final res =
+          await localUserDataSource.addUserToLocal(UserModel.fromUser(user));
+      return Right(res);
+    } on ServerException catch (e) {
+      return Left(
+        Failure(e.message),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteUserFromLocal() async {
+    try {
+      final res = await localUserDataSource.deleteUserFromLocal();
+      return Right(res);
+    } on ServerException catch (e) {
+      return Left(
+        Failure(e.message),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, User>> getUserFromLocal() async {
+    try {
+      final res = await localUserDataSource.getUserFromLocal();
+      return Right(res);
+    } on ServerException catch (e) {
+      return Left(
+        Failure(e.message),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, bool>> isUserSavedLocal() async {
+    try {
+      final res = await localUserDataSource.isUserSavedLocal();
+      return Right(res);
+    } on ServerException catch (e) {
+      return Left(
+        Failure(e.message),
       );
     }
   }

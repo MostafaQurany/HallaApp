@@ -30,24 +30,40 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "addNewCategories":
+            MessageLookupByLibrary.simpleMessage("Add New Categories"),
         "alreadyIHaveAnAcount":
             MessageLookupByLibrary.simpleMessage("لدي حساب بالفعل ؟"),
+        "arabic": MessageLookupByLibrary.simpleMessage("عربي"),
+        "cancel": MessageLookupByLibrary.simpleMessage("يلغي"),
+        "categorie": MessageLookupByLibrary.simpleMessage("Categorie"),
+        "changeProfile":
+            MessageLookupByLibrary.simpleMessage("تغيير الملف الشخصي"),
+        "changeSecurityCode":
+            MessageLookupByLibrary.simpleMessage("تغيير رمز الأمان"),
         "checkYourEmail": m0,
         "company": MessageLookupByLibrary.simpleMessage("الشركة"),
+        "confirm": MessageLookupByLibrary.simpleMessage("يتأكد"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("تأكيد كلمة السر"),
         "contact": MessageLookupByLibrary.simpleMessage("جهة الاتصال"),
         "contactList": MessageLookupByLibrary.simpleMessage("قائمة الاتصال"),
+        "customerService": MessageLookupByLibrary.simpleMessage("خدمة العملاء"),
+        "darkTheme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
         "dataOfBirth": MessageLookupByLibrary.simpleMessage("تاريخ الميلاد"),
         "email": MessageLookupByLibrary.simpleMessage("بريد إلكتروني"),
         "emailOrPhoneNumber01": MessageLookupByLibrary.simpleMessage(
             "بريد إلكتروني أو رقم هاتف 01"),
+        "english": MessageLookupByLibrary.simpleMessage("إنجليزي"),
         "enterPinCodePassword":
             MessageLookupByLibrary.simpleMessage("أدخل pin-code كلمة السر"),
         "enterYourEmailAddressBelowAndWellSendYouA":
             MessageLookupByLibrary.simpleMessage(
                 "أدخل عنوان بريدك الإلكتروني أدناه وسنرسل لك رابط لإعادة تعيين كلمة السر. إذا كان البريد الإلكتروني مرتبطاً بحساب، فستتلقى بريداً إلكترونياً مع التعليمات لإنشاء كلمة سر جديدة "),
         "facebook": MessageLookupByLibrary.simpleMessage("فيسبوك"),
+        "favoriteContacts": MessageLookupByLibrary.simpleMessage(
+            "إعدادات جهات الاتصال المفضلة"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("نسيان كلمة السر ؟"),
         "forgetpassword":
@@ -57,13 +73,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("الصفحة الرئيسية"),
         "iDontHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("ليس لدي حساب ؟"),
+        "ifYouConfirmAllExistingDataWillBeLost":
+            MessageLookupByLibrary.simpleMessage(
+                "إذا تأكدت ، فستفقد جميع البيانات الموجودة.\nملاحظة: يمكنك إنشاء واحدة جديدة."),
         "instagram": MessageLookupByLibrary.simpleMessage("إنستجرام"),
+        "language": MessageLookupByLibrary.simpleMessage("الغة"),
         "linkedin": MessageLookupByLibrary.simpleMessage("لينكد إن"),
         "logOut": MessageLookupByLibrary.simpleMessage("خروج"),
         "login": MessageLookupByLibrary.simpleMessage("دخول"),
         "name": MessageLookupByLibrary.simpleMessage("اسم"),
         "nationality": MessageLookupByLibrary.simpleMessage("جنسية"),
         "next": MessageLookupByLibrary.simpleMessage("التالي"),
+        "nowYouCanCreateNewGuestAccount": MessageLookupByLibrary.simpleMessage(
+            "Now you can create new guest account"),
+        "ok": MessageLookupByLibrary.simpleMessage("نعم"),
         "open": MessageLookupByLibrary.simpleMessage("افتح"),
         "or": MessageLookupByLibrary.simpleMessage("أو"),
         "password": MessageLookupByLibrary.simpleMessage("كلمة السر"),
@@ -77,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "الرجاء إدخال OTP \n المرسل إلى رقم هاتفك."),
         "positon": MessageLookupByLibrary.simpleMessage("موقع الشركة"),
         "profile": MessageLookupByLibrary.simpleMessage("الملف الشخصي"),
+        "promotions": MessageLookupByLibrary.simpleMessage("الترقيات"),
         "putNfcTag": MessageLookupByLibrary.simpleMessage("ضع علامة NFC"),
         "register": MessageLookupByLibrary.simpleMessage("تسجيل"),
         "registerNow": MessageLookupByLibrary.simpleMessage("تسجيل الآن"),
@@ -84,13 +108,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanQrcodeToAddContact":
             MessageLookupByLibrary.simpleMessage("ماسح رمز QR لاضافة اتصال"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
+        "settings": MessageLookupByLibrary.simpleMessage("إعدادات"),
         "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
         "socialMedia":
             MessageLookupByLibrary.simpleMessage("وسائل التواصل الاجتماعي"),
         "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
+        "success": MessageLookupByLibrary.simpleMessage("نجاح"),
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "twitter": MessageLookupByLibrary.simpleMessage("تويتر"),
+        "typeYourNewFavoriteCategorieToAdd":
+            MessageLookupByLibrary.simpleMessage(
+                "Type your new favorite categorie to add."),
         "verificationCode": MessageLookupByLibrary.simpleMessage("رمز التحقق"),
         "verified": MessageLookupByLibrary.simpleMessage("مُتأكد"),
+        "warning": MessageLookupByLibrary.simpleMessage("تحذير"),
         "website": MessageLookupByLibrary.simpleMessage("صفحة الويب"),
         "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": m1,
         "welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure": m2

@@ -81,6 +81,12 @@ final class AuthPersonalInfoEvent extends AuthEvent {
   AuthPersonalInfoEvent({required this.user});
 }
 
+final class AuthGetUserDataEvent extends AuthEvent {
+  final User user;
+
+  AuthGetUserDataEvent({required this.user});
+}
+
 //nfc
 
 final class GetIsNfcAvailableEvent extends AuthEvent {}
@@ -98,3 +104,5 @@ final class ReadFromNfcEvent extends AuthEvent {}
 // guest
 
 final class AuthLogInGuestEvent extends AuthEvent {}
+
+final class AuthForgetPinCodeGuestEvent extends AuthEvent {}

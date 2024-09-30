@@ -96,3 +96,5 @@ class LogInGuestSucces extends AuthState {
 }
 
 class GuestIsUpdateState extends AuthState {}
+
+class GuestDeletedSucces extends AuthState {}

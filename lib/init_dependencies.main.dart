@@ -20,9 +20,13 @@ _initCommon() {
     ..registerLazySingleton<NfcDataSource>(
       () => NfcDataSourceImpl(),
     )
+    ..registerLazySingleton<LocalUserDataSource>(
+      () => LocalUserDataSourceImpl(),
+    )
     // Repository
     ..registerFactory<CommonRepositories>(
       () => CommonRepositoriesImpl(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
       ),
@@ -68,12 +72,48 @@ _initCommon() {
         serviceLocator(),
       ),
     )
+    ..registerFactory(
+      () => ForgetPinCodeGuestUseCase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => AddUserToLocalUsecase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetUserFromLocalUsecase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => IsUserSavedLocalUsecase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => DeleteUserFromLocalUsecase(
+        serviceLocator(),
+      ),
+    )
     // bloc
     ..registerLazySingleton(
-      () => UserCubit(),
+      () => UserCubit(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+      ),
     )
     ..registerLazySingleton(
       () => BrightnessCubit(),
+    )
+    ..registerLazySingleton(
+      () => LanguageCubit(),
+    )
+    ..registerLazySingleton(
+      () => ConnectivityCubit(),
     );
 }
 
@@ -148,6 +188,7 @@ _initAuth() {
     // bloc
     ..registerLazySingleton(
       () => AuthBloc(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

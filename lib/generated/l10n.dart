@@ -540,6 +540,226 @@ class S {
       args: [],
     );
   }
+
+  /// `If you confirm, all existing data will be lost.\nNote: You can create a new one.`
+  String get ifYouConfirmAllExistingDataWillBeLost {
+    return Intl.message(
+      'If you confirm, all existing data will be lost.\nNote: You can create a new one.',
+      name: 'ifYouConfirmAllExistingDataWillBeLost',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Warning`
+  String get warning {
+    return Intl.message(
+      'Warning',
+      name: 'warning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm`
+  String get confirm {
+    return Intl.message(
+      'Confirm',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Success`
+  String get success {
+    return Intl.message(
+      'Success',
+      name: 'success',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Ok`
+  String get ok {
+    return Intl.message(
+      'Ok',
+      name: 'ok',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Now you can create new guest account`
+  String get nowYouCanCreateNewGuestAccount {
+    return Intl.message(
+      'Now you can create new guest account',
+      name: 'nowYouCanCreateNewGuestAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Customer Service`
+  String get customerService {
+    return Intl.message(
+      'Customer Service',
+      name: 'customerService',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Promotions`
+  String get promotions {
+    return Intl.message(
+      'Promotions',
+      name: 'promotions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Security Code`
+  String get changeSecurityCode {
+    return Intl.message(
+      'Change Security Code',
+      name: 'changeSecurityCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Favorite Contacts Setting`
+  String get favoriteContacts {
+    return Intl.message(
+      'Favorite Contacts Setting',
+      name: 'favoriteContacts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change Profile`
+  String get changeProfile {
+    return Intl.message(
+      'Change Profile',
+      name: 'changeProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Arabic`
+  String get arabic {
+    return Intl.message(
+      'Arabic',
+      name: 'arabic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Theme`
+  String get darkTheme {
+    return Intl.message(
+      'Dark Theme',
+      name: 'darkTheme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Categorie`
+  String get categorie {
+    return Intl.message(
+      'Categorie',
+      name: 'categorie',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your new favorite categorie to add.`
+  String get typeYourNewFavoriteCategorieToAdd {
+    return Intl.message(
+      'Type your new favorite categorie to add.',
+      name: 'typeYourNewFavoriteCategorieToAdd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add New Categories`
+  String get addNewCategories {
+    return Intl.message(
+      'Add New Categories',
+      name: 'addNewCategories',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

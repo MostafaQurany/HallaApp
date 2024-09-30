@@ -1,4 +1,13 @@
-enum FieldType { email, name, password, text, phone, confPasword, none }
+enum FieldType {
+  email,
+  name,
+  password,
+  text,
+  phone,
+  confPasword,
+  category,
+  none
+}
 
 class MyValidation {
   static String? emailValidator(String? value) {
@@ -35,7 +44,14 @@ class MyValidation {
 
   static String? textValidator(String? value) {
     if (value == null || value.isEmpty) {
-      return "This field cannot be empty";
+      return "This field cannot be empty.";
+    }
+    return null;
+  }
+
+  static String? categoryValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return "Enter the category.";
     }
     return null;
   }

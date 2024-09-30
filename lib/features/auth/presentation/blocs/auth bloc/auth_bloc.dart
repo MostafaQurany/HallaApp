@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:halla/core/common/domain/usecase/forget_pin_code_guest.dart';
 import 'package:halla/features/auth/domain/usecases/forget_password_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/log_in_with_phone_use_case.dart';
 import 'package:meta/meta.dart';
@@ -57,37 +58,37 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LogInGuest _logInGuest;
   final IsGuestUpdate _isGuestUpdate;
   final IsGuestExit _isGuestExit;
+  final ForgetPinCodeGuestUseCase _forgetPinCodeGuestUseCase;
 
   bool isLoading = false;
   AuthBloc(
-      // cubit
-      UserCubit userCubit,
-
-      // auth email_password
-      SignInWithEmailPasswordUsecase signInWithEmailPassword,
-      LogInWithEmailPassword logInWithEmailPassword,
-      ForgetPasswordUsecase forgetPassword,
-      // social
-      GoogleLogin googleLogin,
-      LinkWithEmailPincode linkWithEmailPincode,
-
-      // auth phone
-      GetSmsCodeUsecase getSmsCodeUsecase,
-      SentSmsCodeUsecase sentSmsCodeUsecase,
-      LogInWithPhoneUseCase logInWithPhoneUseCase,
-      //data base
-      GetUserUsecase getUserUsecase,
-      UploadUserUsecase uploadUserUsecase,
-      // nfc
-      GetIsNfcAvailableUsecase getIsNfcAvailableUsecase,
-      GetIsNfcOpenUsecase getIsNfcOpenUsecase,
-      WriteOnNfcUsecase writeOnNfcUsecase,
-      ReadFromNfc readFromNfc,
-      // guest
-      LogInGuest logInGuest,
-      IsGuestUpdate isGuestUpdate,
-      IsGuestExit isGuestExit)
-      : _userCubit = userCubit,
+    // cubit
+    UserCubit userCubit,
+    // auth email_password
+    SignInWithEmailPasswordUsecase signInWithEmailPassword,
+    LogInWithEmailPassword logInWithEmailPassword,
+    ForgetPasswordUsecase forgetPassword,
+    // social
+    GoogleLogin googleLogin,
+    LinkWithEmailPincode linkWithEmailPincode,
+    // auth phone
+    GetSmsCodeUsecase getSmsCodeUsecase,
+    SentSmsCodeUsecase sentSmsCodeUsecase,
+    LogInWithPhoneUseCase logInWithPhoneUseCase,
+    //data base
+    GetUserUsecase getUserUsecase,
+    UploadUserUsecase uploadUserUsecase,
+    // nfc
+    GetIsNfcAvailableUsecase getIsNfcAvailableUsecase,
+    GetIsNfcOpenUsecase getIsNfcOpenUsecase,
+    WriteOnNfcUsecase writeOnNfcUsecase,
+    ReadFromNfc readFromNfc,
+    // guest
+    LogInGuest logInGuest,
+    IsGuestUpdate isGuestUpdate,
+    IsGuestExit isGuestExit,
+    ForgetPinCodeGuestUseCase forgetPinCodeGuestUseCase,
+  )   : _userCubit = userCubit,
         _signInWithEmailPasswordUsecase = signInWithEmailPassword,
         _logInWithEmailPassword = logInWithEmailPassword,
         _googleLogin = googleLogin,
@@ -105,6 +106,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _isGuestExit = isGuestExit,
         _logInWithPhoneUseCase = logInWithPhoneUseCase,
         _forgetPasswordUsecase = forgetPassword,
+        _forgetPinCodeGuestUseCase = forgetPinCodeGuestUseCase,
         super(AuthInitial()) {
     // auth
     on<AuthSignUp>(_onAuthSignUp);
@@ -118,8 +120,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // database
     on<AuthUploadUserEvent>(_onAuthUploadUser);
     on<AuthPersonalInfoEvent>(_onAuthPersonalInfoEvent);
+    on<AuthGetUserDataEvent>(_onAuthGetUserDataEvent);
     // guest
     on<AuthLogInGuestEvent>(_onAuthLogInGuestEvent);
+    on<AuthForgetPinCodeGuestEvent>(_onAuthForgetPinCodeGuestEvent);
     // nfc
     on<GetIsNfcAvailableEvent>(_onGetIsNfcAvailableEvent);
     on<GetIsNfcOpenEvent>(_onGetIsNfcOpenEvent);
@@ -371,6 +375,29 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
+  _onAuthGetUserDataEvent(
+    AuthGetUserDataEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    loadingEmitter(emit);
+
+    final res = await _getUserUsecase(
+      GetUserParams(
+        userId: event.user.id,
+      ),
+    );
+
+    res.fold(
+      (l) {
+        isLoading = !isLoading;
+        emit(AuthFailure(message: l.message));
+      },
+      (r) {
+        _emitAuthSuccess(r, emit);
+      },
+    );
+  }
+
   void _emitAuthSuccess(
     User user,
     Emitter<AuthState> emit,
@@ -575,6 +602,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           );
         }
       },
+    );
+  }
+
+  _onAuthForgetPinCodeGuestEvent(
+    AuthForgetPinCodeGuestEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(AuthLoading());
+    final deleteGuest = await _forgetPinCodeGuestUseCase(NoParams());
+    deleteGuest.fold(
+      (l) => emit(
+        AuthFailure(message: l.message),
+      ),
+      (r) => emit(
+        GuestDeletedSucces(),
+      ),
     );
   }
 }

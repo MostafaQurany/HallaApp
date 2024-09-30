@@ -16,6 +16,7 @@ class User {
   SocialMedia socialMedia;
   Company company;
   bool isGuest;
+  Map<int, String> favoriteCategories;
   User({
     required this.id,
     required this.email,
@@ -29,6 +30,7 @@ class User {
     required this.phones,
     required this.socialMedia,
     required this.company,
+    this.favoriteCategories = const {},
     this.isGuest = false,
   });
 

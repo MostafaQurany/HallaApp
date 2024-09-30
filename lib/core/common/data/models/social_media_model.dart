@@ -50,10 +50,10 @@ class SocialMediaModel extends SocialMedia with HiveObjectMixin {
 
   factory SocialMediaModel.fromMap(Map<String, dynamic> map) {
     return SocialMediaModel(
-      facebookModel: map['facebook'] as String,
-      instagramModel: map['instagram'] as String,
-      linkedinModel: map['linkedin'] as String,
-      twitterModel: map['twitter'] as String,
+      facebookModel: map['facebook'] as String ?? '',
+      instagramModel: map['instagram'] as String ?? '',
+      linkedinModel: map['linkedin'] as String ?? '',
+      twitterModel: map['twitter'] as String ?? '',
     );
   }
   factory SocialMediaModel.fromSocialMedia(SocialMedia socialMedia) {

@@ -43,6 +43,8 @@ class AppImages {
   static String updateProfileBackgroundDark =
       _imageName("update_profile_backgroun_dark.png");
   static String editImageIcon = _imageName("edit_image_icon.png");
+  static String arabicLanguageIcon = _imageName("arabic_language_icon.png");
+  static String englishLanguageIcon = _imageName("english_language_icon.png");
 
   // svg
   static String loginVectorSvg = _svgName("login_vector.svg");
@@ -56,6 +58,13 @@ class AppImages {
   static String downloadContactIconsLottie =
       _lottieName("download_contact_icons.json");
   static String loadingLottie = _lottieName("loading_lottie.json");
+  static String warningLottie = _lottieName("dialog_warning_lottie.json");
+  static String successsLottie = _lottieName("dialog_success_lottie.json");
+  static String disconnectConnectionLottie =
+      _lottieName("disconnect_connection.json");
+  static String addCategorieLottie = _lottieName("add_categorie_lottie.json");
+
+  // settings
   static String _imageName(String name) => "assets/images/$name";
   static String _svgName(String name) => "assets/svg/$name";
   static String _lottieName(String name) => "assets/lottie/$name";

@@ -49,10 +49,10 @@ class CompanyModel extends Company with HiveObjectMixin {
 
   factory CompanyModel.fromMap(Map<String, dynamic> map) {
     return CompanyModel(
-      nameModel: map['name'] as String,
-      phoneNumberModel: map['phoneNumber'] as String,
-      websiteModel: map['website'] as String,
-      positionModel: map['position'] as String,
+      nameModel: map['name'] as String ?? '',
+      phoneNumberModel: map['phoneNumber'] as String ?? '',
+      websiteModel: map['website'] as String ?? '',
+      positionModel: map['position'] as String ?? '',
     );
   }
 

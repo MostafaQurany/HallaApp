@@ -1,10 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
+import 'package:halla/features/splash/presentation/bloc/language%20cubit/language_cubit.dart';
 import 'package:halla/generated/l10n.dart';
 
 class CustomProfileLogOutButtom extends StatefulWidget {
@@ -55,11 +59,20 @@ class _CustomProfileLogOutButtomState extends State<CustomProfileLogOutButtom> {
         margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 5.w),
         child: Row(
           children: [
-            ImageIcon(
-              AssetImage(AppImages.logOutIcon),
-              color: AppTheme.isLight(context)
-                  ? AppColors.errorIconLight
-                  : AppColors.errorDarkBackground,
+            Transform.rotate(
+              angle: context
+                      .read<LanguageCubit>()
+                      .state
+                      .languageCode
+                      .contains('ar')
+                  ? -pi
+                  : 0,
+              child: ImageIcon(
+                AssetImage(AppImages.logOutIcon),
+                color: AppTheme.isLight(context)
+                    ? AppColors.errorIconLight
+                    : AppColors.errorDarkBackground,
+              ),
             ),
             SizedBox(
               width: 10.w,

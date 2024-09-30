@@ -1,13 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/common/data/models/company_model.dart';
 import 'package:halla/core/common/data/models/social_media_model.dart';
 
 class UserModel extends User {
-  @override
-  final SocialMediaModel socialMedia;
+  final SocialMediaModel socialMediaModel;
 
-  @override
-  final CompanyModel company;
+  final CompanyModel companyModel;
   UserModel({
     super.id = '',
     super.email = '',
@@ -19,9 +19,13 @@ class UserModel extends User {
     super.pinCode = '',
     super.phones = const [],
     super.nfcList = const [],
-    required this.socialMedia,
-    required this.company,
-  }) : super(socialMedia: socialMedia, company: company);
+    super.favoriteCategories = const {},
+    required this.socialMediaModel,
+    required this.companyModel,
+  }) : super(
+          socialMedia: socialMediaModel,
+          company: companyModel,
+        );
 
   UserModel copyWith({
     String? id,
@@ -34,6 +38,7 @@ class UserModel extends User {
     String? pinCode,
     List<String>? phones,
     List<String>? nfcList,
+    Map<int, String>? favoriteCategories,
     SocialMediaModel? socialMedia,
     CompanyModel? company,
   }) {
@@ -48,8 +53,9 @@ class UserModel extends User {
       pinCode: pinCode ?? this.pinCode,
       phones: phones ?? this.phones,
       nfcList: nfcList ?? this.nfcList,
-      socialMedia: socialMedia ?? this.socialMedia,
-      company: company ?? this.company,
+      favoriteCategories: favoriteCategories ?? this.favoriteCategories,
+      socialMediaModel: socialMedia ?? socialMediaModel,
+      companyModel: company ?? companyModel,
     );
   }
 
@@ -65,12 +71,20 @@ class UserModel extends User {
       'pinCode': pinCode,
       'phones': phones,
       'nfcList': nfcList,
-      'socialMedia': socialMedia.toMap(),
-      'company': company.toMap(),
+      'favoriteCategories': favoriteCategories,
+      'socialMedia': socialMediaModel.toMap(),
+      'company': companyModel.toMap(),
     };
   }
 
   factory UserModel.fromJson(Map<String, dynamic> map) {
+    Map<int, String> newMap = {};
+    map["favoriteCategories"].forEach(
+      (key, value) {
+        newMap[int.parse(key)] = value.toString();
+      },
+    );
+
     return UserModel(
       id: map['id'] as String,
       email: map['email'] as String,
@@ -83,11 +97,14 @@ class UserModel extends User {
       phones: (map['phones'] as List<dynamic>).map((e) => e as String).toList(),
       nfcList:
           (map['nfcList'] as List<dynamic>).map((e) => e as String).toList(),
-      socialMedia:
+      favoriteCategories: newMap,
+      socialMediaModel:
           SocialMediaModel.fromMap(map['socialMedia'] as Map<String, dynamic>),
-      company: CompanyModel.fromMap(map['company'] as Map<String, dynamic>),
+      companyModel:
+          CompanyModel.fromMap(map['company'] as Map<String, dynamic>),
     );
   }
+
   factory UserModel.fromUser(User user) {
     return UserModel(
       id: user.id,
@@ -100,8 +117,9 @@ class UserModel extends User {
       pinCode: user.pinCode,
       phones: user.phones,
       nfcList: user.nfcList,
-      socialMedia: SocialMediaModel.fromSocialMedia(user.socialMedia),
-      company: CompanyModel.fromCompany(user.company),
+      favoriteCategories: user.favoriteCategories,
+      socialMediaModel: SocialMediaModel.fromSocialMedia(user.socialMedia),
+      companyModel: CompanyModel.fromCompany(user.company),
     );
   }
 }

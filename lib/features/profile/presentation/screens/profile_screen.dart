@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/constants/app_images.dart';
+import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/auth/presentation/screens/auth_screen.dart';
 import 'package:halla/features/home/presentation/screens/components/end_spacer_sized_box.dart';
 import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
-import 'package:halla/features/profile/presentation/screens/update_profile_screen.dart';
+import 'package:halla/features/profile/presentation/screens/favorite%20contacts%20setting/favorite_contacts_settings.dart';
+import 'package:halla/features/profile/presentation/screens/settings/settings_screen.dart';
+import 'package:halla/features/profile/presentation/screens/update%20profile/update_profile_screen.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/profile_app_bar.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_profile_buttom.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_profile_log_out_buttom.dart';
+import 'package:halla/generated/l10n.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -24,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 15.h),
+          padding: AppConstants.paddingScreen,
           child: ListView(
             children: [
               const ProfileAppBar(),
@@ -33,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               CustomProfileButtom(
                 icon: AppImages.personalIcon,
-                name: "Change Profile",
+                name: S.of(context).changeProfile,
                 onTap: () {
                   AppNavigator.navigatePush(
                       context, const UpdateProfileScreen());
@@ -41,28 +45,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               CustomProfileButtom(
                 icon: AppImages.emptyHeart,
-                name: "Favorite Contacts",
-                onTap: () {},
+                name: S.of(context).favoriteContacts,
+                onTap: () {
+                  AppNavigator.navigatePush(
+                    context,
+                    const FavoriteContactsSettings(),
+                  );
+                },
               ),
               CustomProfileButtom(
                 icon: AppImages.pincodeChangeIcon,
-                name: "Change Security Code",
+                name: S.of(context).changeSecurityCode,
                 onTap: () {},
               ),
               CustomProfileButtom(
                 icon: AppImages.promotionsIcon,
-                name: "Promotions",
+                name: S.of(context).promotions,
                 onTap: () {},
               ),
               CustomProfileButtom(
                 icon: AppImages.customerServiceIcon,
-                name: "Customer Service",
+                name: S.of(context).customerService,
                 onTap: () {},
               ),
               CustomProfileButtom(
                 icon: AppImages.settingsIcon,
-                name: "Settings",
-                onTap: () {},
+                name: S.of(context).settings,
+                onTap: () {
+                  AppNavigator.navigatePush(context, const SettingsScreen());
+                },
               ),
               SizedBox(
                 height: 5.h,

@@ -25,6 +25,7 @@ class ContactModel extends Contact with HiveObjectMixin {
   final String nationalityModel;
   @HiveField(7)
   final List<String> phonesModel;
+  @override
   @HiveField(8)
   final SocialMediaModel socialMediaModel;
   @HiveField(9)
@@ -50,7 +51,7 @@ class ContactModel extends Contact with HiveObjectMixin {
           dateOfBirth: dateOfBirthModel,
           fullName: fullNameModel,
           nationality: nationalityModel,
-          imageUrl: imageUrlModel ,
+          imageUrl: imageUrlModel,
           phones: phonesModel,
           primePhone: primePhoneModel,
           socialMedia: socialMediaModel,

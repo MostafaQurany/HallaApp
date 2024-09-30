@@ -52,6 +52,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         return MyValidation.passwordValidator(value);
       case FieldType.text:
         return MyValidation.textValidator(value);
+      case FieldType.category:
+        return MyValidation.categoryValidator(value);
       case FieldType.phone:
         return MyValidation.phoneNumberValidator(value);
       case FieldType.confPasword:

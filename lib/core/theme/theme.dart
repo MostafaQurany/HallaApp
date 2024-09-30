@@ -168,4 +168,7 @@ class AppTheme {
       );
   static bool isLight(BuildContext context) =>
       Theme.of(context).brightness == Brightness.light;
+
+  static TextTheme getThemeText(BuildContext context) =>
+      Theme.of(context).textTheme;
 }

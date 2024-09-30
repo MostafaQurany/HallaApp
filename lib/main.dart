@@ -3,11 +3,14 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:halla/core/common/presentation/cubit/connectivity/connectivity_cubit.dart";
+import "package:halla/features/splash/presentation/bloc/brightness%20cubit/brightness_cubit.dart";
+import "package:halla/features/splash/presentation/bloc/language%20cubit/language_cubit.dart";
+import "package:halla/features/splash/presentation/screen/splash_screen.dart";
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import "package:halla/core/common/data/models/company_model.dart";
 import "package:halla/core/common/data/models/social_media_model.dart";
 import "package:halla/core/common/data/models/time_stamp.g.dart";
-import "package:halla/core/common/presentation/cubit/theme/cubit/brightness_cubit.dart";
 import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/bloc_observer.dart";
@@ -47,6 +50,8 @@ void main() async {
       providers: [
         BlocProvider(create: (context) => serviceLocator<UserCubit>()),
         BlocProvider(create: (context) => serviceLocator<BrightnessCubit>()),
+        BlocProvider(create: (context) => serviceLocator<ConnectivityCubit>()),
+        BlocProvider(create: (context) => serviceLocator<LanguageCubit>()),
         BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
         BlocProvider(create: (context) => serviceLocator<ContactsBloc>()),
         BlocProvider(create: (context) => serviceLocator<ProfileBloc>()),
@@ -63,24 +68,38 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,
-        builder: (_, Widget? child) => BlocBuilder<BrightnessCubit, Brightness>(
-          builder: (context, state) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: "Halla",
-              locale: const Locale("ar"),
-              localizationsDelegates: const <LocalizationsDelegate>[
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-                RefreshLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-              theme: state == Brightness.light
-                  ? AppTheme.darkTheme
-                  : AppTheme.lightTheme,
-              home: const AuthScreen(),
+        builder: (_, Widget? child) => BlocBuilder<BrightnessCubit, ThemeMode>(
+          builder: (context, themeMode) {
+            print(themeMode.name);
+            return BlocBuilder<LanguageCubit, Locale>(
+              builder: (context, locale) {
+                return BlocListener<ConnectivityCubit, ConnectivityState>(
+                  listener: (context, state) {
+                    if (state is CurrentSateChanged) {
+                      if (state.connectivityTransmetions ==
+                          ConnectivityTransmetions.fromConnectToDisconnect) {
+                      } else {}
+                    }
+                  },
+                  child: MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    title: "Halla",
+                    locale: locale,
+                    localizationsDelegates: const <LocalizationsDelegate>[
+                      S.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    supportedLocales: S.delegate.supportedLocales,
+                    themeMode: themeMode,
+                    theme: themeMode == ThemeMode.light
+                        ? AppTheme.lightTheme
+                        : AppTheme.darkTheme,
+                    home: const SplashScreen(),
+                  ),
+                );
+              },
             );
           },
         ),

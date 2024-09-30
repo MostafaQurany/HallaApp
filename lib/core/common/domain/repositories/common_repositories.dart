@@ -18,4 +18,10 @@ abstract interface class CommonRepositories {
   Future<Either<Failure, bool>> isGuestExit();
   Future<Either<Failure, Guest>> getGuest();
   Future<Either<Failure, bool>> isGuestUpdate();
+  Future<Either<Failure, void>> fotgetGuestPinCode();
+
+  Future<Either<Failure, bool>> isUserSavedLocal();
+  Future<Either<Failure, void>> addUserToLocal(User user);
+  Future<Either<Failure, User>> getUserFromLocal();
+  Future<Either<Failure, void>> deleteUserFromLocal();
 }

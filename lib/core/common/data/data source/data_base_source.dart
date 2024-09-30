@@ -13,6 +13,7 @@ abstract interface class DataBaseSource {
   Future<bool> isGuestExit();
   Future<GuestModel> getGuest();
   Future<bool> isGuestUpdate();
+  Future<void> forgetGuestPinCode();
 }
 
 class DataBaseSourceImpl implements DataBaseSource {
@@ -28,6 +29,7 @@ class DataBaseSourceImpl implements DataBaseSource {
             .doc(user.id)
             .set(user.toJson());
       } else {
+        print(user.favoriteCategories);
         await _firestore
             .collection(_userCollection)
             .doc(user.id)
@@ -155,6 +157,20 @@ class DataBaseSourceImpl implements DataBaseSource {
     try {
       GuestModel guestModel = await getGuest();
       return guestModel.isUpGraded;
+    } on FirebaseException catch (e) {
+      throw ServerException(e.message.toString());
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<void> forgetGuestPinCode() async {
+    try {
+      await _firestore
+          .collection(_userCollection)
+          .doc(await AppConstants.getGuestId())
+          .delete();
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {

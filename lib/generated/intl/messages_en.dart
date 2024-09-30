@@ -30,24 +30,40 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "addNewCategories":
+            MessageLookupByLibrary.simpleMessage("Add New Categories"),
         "alreadyIHaveAnAcount":
             MessageLookupByLibrary.simpleMessage("Already I have An Acount ?"),
+        "arabic": MessageLookupByLibrary.simpleMessage("Arabic"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "categorie": MessageLookupByLibrary.simpleMessage("Categorie"),
+        "changeProfile": MessageLookupByLibrary.simpleMessage("Change Profile"),
+        "changeSecurityCode":
+            MessageLookupByLibrary.simpleMessage("Change Security Code"),
         "checkYourEmail": m0,
         "company": MessageLookupByLibrary.simpleMessage("Company"),
+        "confirm": MessageLookupByLibrary.simpleMessage("Confirm"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "contact": MessageLookupByLibrary.simpleMessage("Contact"),
         "contactList": MessageLookupByLibrary.simpleMessage("Contact List"),
+        "customerService":
+            MessageLookupByLibrary.simpleMessage("Customer Service"),
+        "darkTheme": MessageLookupByLibrary.simpleMessage("Dark Theme"),
         "dataOfBirth": MessageLookupByLibrary.simpleMessage("Data Of Birth"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emailOrPhoneNumber01":
             MessageLookupByLibrary.simpleMessage("Email or phone number 01"),
+        "english": MessageLookupByLibrary.simpleMessage("English"),
         "enterPinCodePassword":
             MessageLookupByLibrary.simpleMessage("Enter Pin-Code Password"),
         "enterYourEmailAddressBelowAndWellSendYouA":
             MessageLookupByLibrary.simpleMessage(
                 "Enter your email address below and we\'ll send you a link to reset your password. If the email is associated with an account, you\'ll receive an email with instructions to create a new password "),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
+        "favoriteContacts":
+            MessageLookupByLibrary.simpleMessage("Favorite Contacts Setting"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password ?"),
         "forgetpassword":
@@ -57,13 +73,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "home": MessageLookupByLibrary.simpleMessage("Home"),
         "iDontHaveAnAccount": MessageLookupByLibrary.simpleMessage(
             "I Don\'\'t Have an Account ?"),
+        "ifYouConfirmAllExistingDataWillBeLost":
+            MessageLookupByLibrary.simpleMessage(
+                "If you confirm, all existing data will be lost.\nNote: You can create a new one."),
         "instagram": MessageLookupByLibrary.simpleMessage("Instagram"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
         "linkedin": MessageLookupByLibrary.simpleMessage("Linkedin"),
         "logOut": MessageLookupByLibrary.simpleMessage("Log Out"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
         "next": MessageLookupByLibrary.simpleMessage("Next"),
+        "nowYouCanCreateNewGuestAccount": MessageLookupByLibrary.simpleMessage(
+            "Now you can create new guest account"),
+        "ok": MessageLookupByLibrary.simpleMessage("Ok"),
         "open": MessageLookupByLibrary.simpleMessage("Open"),
         "or": MessageLookupByLibrary.simpleMessage("OR"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -77,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Please enter verification code \n Sent to your phone number."),
         "positon": MessageLookupByLibrary.simpleMessage("Positon"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "promotions": MessageLookupByLibrary.simpleMessage("Promotions"),
         "putNfcTag": MessageLookupByLibrary.simpleMessage("Put NFC Tag"),
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registerNow": MessageLookupByLibrary.simpleMessage("Register Now"),
@@ -84,13 +108,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "scanQrcodeToAddContact":
             MessageLookupByLibrary.simpleMessage("Scan Qr-Code to add contact"),
         "search": MessageLookupByLibrary.simpleMessage("Search"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "skip": MessageLookupByLibrary.simpleMessage("Skip"),
         "socialMedia": MessageLookupByLibrary.simpleMessage("Social Media"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+        "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "twitter": MessageLookupByLibrary.simpleMessage("Twitter"),
+        "typeYourNewFavoriteCategorieToAdd":
+            MessageLookupByLibrary.simpleMessage(
+                "Type your new favorite categorie to add."),
         "verificationCode":
             MessageLookupByLibrary.simpleMessage("Verification Code"),
         "verified": MessageLookupByLibrary.simpleMessage("Verified"),
+        "warning": MessageLookupByLibrary.simpleMessage("Warning"),
         "website": MessageLookupByLibrary.simpleMessage("Website"),
         "welcomeToHallaYourPinCodeForLoginIsStateguestpincode": m1,
         "welcomeToHallayourPincodeForLoginIsStateuserpincodekeepItSecure": m2

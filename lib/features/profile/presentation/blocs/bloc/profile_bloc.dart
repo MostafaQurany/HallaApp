@@ -39,11 +39,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     on<UpdateUserEvent>(_onUpdateUserEvent);
   }
 
-  _onSetImageEvent(SetImageEvent event, Emitter<ProfileState> emit) async {
+  _loading(Emitter<ProfileState> emit) {
     if (!isLoading) {
       isLoading = !isLoading;
       emit(ProfileLoading());
     }
+  }
+
+  _onSetImageEvent(SetImageEvent event, Emitter<ProfileState> emit) async {
+    _loading(emit);
 
     final res = await setImageUrlUsecase(
         SetImageUrlParams(userId: event.userId, image: event.image));
@@ -65,10 +69,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     UpdateUserEvent event,
     Emitter<ProfileState> emit,
   ) async {
-    if (!isLoading) {
-      isLoading = !isLoading;
-      emit(ProfileLoading());
-    }
+    _loading(emit);
+
     final res = await uploadUserUsecase(
       UploadUserParams(user: event.user),
     );
@@ -79,6 +81,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       },
       (r) {
         isLoading = !isLoading;
+        print(r.toString());
         userCubit.updateUser(user: r);
         emit(ProfileUpdateUserSuccessfully(
           user: r,

@@ -52,7 +52,7 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       ..writeByte(7)
       ..write(obj.phonesModel)
       ..writeByte(8)
-      ..write(obj.socialMediaModel)
+      ..write(obj.socialMedia)
       ..writeByte(9)
       ..write(obj.companyModel)
       ..writeByte(10)

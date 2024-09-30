@@ -223,6 +223,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       imageUrl: user.imageUrl,
       pinCode: user.pinCode,
       nfcList: user.nfcList,
+      favoriteCategories: user.favoriteCategories,
       phones: phonesWidgetKey.currentState!.getPhones(),
       socialMedia: SocialMedia(
         facebook: socialFacebookController.text,

@@ -245,9 +245,9 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
       socialMedia: socialMedia,
       company: company,
       phones: phoneNumbers,
+      favoriteCategories: user.favoriteCategories,
     );
 
-    print(user.toString());
     return user;
   }
 }

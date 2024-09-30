@@ -63,8 +63,8 @@ class AuthDataSourceImpl implements AuthDataSource {
         email: email,
         pinCode: pinCode,
         nfcList: [],
-        company: CompanyModel(),
-        socialMedia: SocialMediaModel(),
+        companyModel: CompanyModel(),
+        socialMediaModel: SocialMediaModel(),
       );
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
@@ -125,8 +125,8 @@ class AuthDataSourceImpl implements AuthDataSource {
         email: credential.user!.email.toString(),
         primePhone: credential.user!.phoneNumber.toString(),
         nfcList: [],
-        company: CompanyModel(),
-        socialMedia: SocialMediaModel(),
+        companyModel: CompanyModel(),
+        socialMediaModel: SocialMediaModel(),
       );
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
@@ -159,8 +159,8 @@ class AuthDataSourceImpl implements AuthDataSource {
         id: credential.user!.uid,
         email: email,
         nfcList: [],
-        company: CompanyModel(),
-        socialMedia: SocialMediaModel(),
+        companyModel: CompanyModel(),
+        socialMediaModel: SocialMediaModel(),
       );
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
@@ -188,8 +188,8 @@ class AuthDataSourceImpl implements AuthDataSource {
         fullName: userCredential.user!.displayName ?? '',
         primePhone: userCredential.user!.phoneNumber ?? '',
         nfcList: [],
-        company: CompanyModel(),
-        socialMedia: SocialMediaModel(),
+        companyModel: CompanyModel(),
+        socialMediaModel: SocialMediaModel(),
       );
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());

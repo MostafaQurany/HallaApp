@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/app_show_dialog.dart";
@@ -9,6 +10,7 @@ import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dar
 import "package:halla/features/auth/presentation/screens/log%20in/pin_code_screen.dart";
 import "package:halla/features/auth/presentation/screens/widgets/show_guest_pin_code.dart";
 import "package:halla/generated/l10n.dart";
+import "package:lottie/lottie.dart";
 
 class GuestButton extends StatelessWidget {
   const GuestButton({super.key});
@@ -30,7 +32,38 @@ class GuestButton extends StatelessWidget {
         }
         if (state is CreatNewGuestSucces) {
           Navigator.pop(context);
-          AppShowDialog.scaleAlertDialog(context, const ShowGuestPinCode());
+          AppShowDialog.scaleAlertDialog(
+            context,
+            const AlertDialog(
+              content: ShowGuestPinCode(),
+            ),
+          );
+        }
+        if (state is GuestDeletedSucces) {
+          Navigator.pop(context);
+          Navigator.pop(context);
+          AppShowDialog.scaleAlertDialog(
+            context,
+            AlertDialog(
+              title: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Lottie.asset(AppImages.successsLottie,
+                      repeat: false, height: 150.h, width: 150.w),
+                  Text(S.of(context).success),
+                ],
+              ),
+              content: Text(S.of(context).nowYouCanCreateNewGuestAccount),
+              actions: [
+                TextButton(
+                  child: Text(S.of(context).ok),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
         }
       },
       builder: (context, state) {

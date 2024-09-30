@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppConstants {
   static String guest = "Guest";
@@ -200,8 +202,13 @@ class AppConstants {
   ];
   static String userCollection = 'users';
   static String contactBox = "ContactsBox";
+  static String userLocalBox = "UserLocalBox";
+  static String userLocalKey = "UserLocalKey";
   static String userBox = "UserBox";
   static String userLoginId = "UserLoginId";
+
+  static final paddingScreen =
+      EdgeInsets.symmetric(horizontal: 18.w, vertical: 15.h);
 
   static const Duration durationSlide = Duration(milliseconds: 350);
   static String generatePinCode() {

@@ -3,27 +3,31 @@ import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:halla/features/auth/presentation/screens/log%20in/bodys/forget_password_body.dart';
+import 'package:halla/features/auth/presentation/screens/widgets/delete_guest_dialog_body.dart';
 import 'package:lottie/lottie.dart';
 
 class AppShowDialog {
+  bool isLoading = false;
+
+  static const Duration _transitionDuration = Duration(milliseconds: 200);
+  static final Color _barrierColor = Colors.black.withOpacity(0.5);
   static scaleAlertDialog(BuildContext context, Widget page) {
     return showGeneralDialog(
       context: context,
-      transitionDuration: const Duration(milliseconds: 200),
+      transitionDuration: _transitionDuration,
+      barrierColor: _barrierColor,
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         return Transform.scale(
           scale: animation.value,
           child: Opacity(
             opacity: animation.value,
-            child: child,
+            child: page,
           ),
         );
       },
       pageBuilder: (BuildContext context, Animation animation,
           Animation secondaryAnimation) {
-        return AlertDialog(
-          content: page,
-        );
+        return Container();
       },
     );
   }
@@ -98,5 +102,68 @@ class AppShowDialog {
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);
+  }
+
+  static showConfirmToDeleteGuest(BuildContext context) {
+    showGeneralDialog(
+        barrierColor: Colors.black.withOpacity(0.5),
+        transitionDuration: const Duration(milliseconds: 200),
+        barrierDismissible: true,
+        barrierLabel: '',
+        context: context,
+        transitionBuilder: (context, a1, a2, widget) {
+          return Transform.scale(
+            scale: a1.value,
+            child: Opacity(
+              opacity: a1.value,
+              child: const DeleteGuestDialogBody(),
+            ),
+          );
+        },
+        pageBuilder: (context, animation1, animation2) {
+          return Container();
+        });
+  }
+
+  static showConnectivityFDTC(BuildContext context) {
+    showGeneralDialog(
+        barrierColor: Colors.black.withOpacity(0.5),
+        transitionDuration: const Duration(milliseconds: 200),
+        barrierDismissible: true,
+        barrierLabel: '',
+        context: context,
+        transitionBuilder: (context, a1, a2, widget) {
+          return Transform.scale(
+            scale: a1.value,
+            child: Opacity(
+              opacity: a1.value,
+              child: const DeleteGuestDialogBody(),
+            ),
+          );
+        },
+        pageBuilder: (context, animation1, animation2) {
+          return Container();
+        });
+  }
+
+  static showConnectivityFCTD(BuildContext context) {
+    showGeneralDialog(
+        barrierColor: Colors.black.withOpacity(0.5),
+        transitionDuration: const Duration(milliseconds: 200),
+        barrierDismissible: true,
+        barrierLabel: '',
+        context: context,
+        transitionBuilder: (context, a1, a2, widget) {
+          return Transform.scale(
+            scale: a1.value,
+            child: Opacity(
+              opacity: a1.value,
+              child: const DeleteGuestDialogBody(),
+            ),
+          );
+        },
+        pageBuilder: (context, animation1, animation2) {
+          return Container();
+        });
   }
 }
