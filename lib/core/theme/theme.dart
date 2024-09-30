@@ -163,7 +163,7 @@ class AppTheme {
           ),
           padding: EdgeInsets.symmetric(
             vertical: 12.0.h,
-          ), // Increase vertical padding
+          ),
         ),
       );
   static bool isLight(BuildContext context) =>
