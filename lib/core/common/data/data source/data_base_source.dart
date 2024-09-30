@@ -29,11 +29,12 @@ class DataBaseSourceImpl implements DataBaseSource {
             .doc(user.id)
             .set(user.toJson());
       } else {
-        print(user.favoriteCategories);
         await _firestore
             .collection(_userCollection)
             .doc(user.id)
             .update(user.toJson());
+        print(
+            " uploadUser  user.favoriteCategories  ${user.favoriteCategories}");
       }
       return await getUser(user.id);
     } on FirebaseException catch (e) {

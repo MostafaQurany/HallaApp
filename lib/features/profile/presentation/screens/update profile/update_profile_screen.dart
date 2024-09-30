@@ -161,30 +161,34 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         SizedBox(
                           height: 20.h,
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            if (imageWidgetKey.currentState!.image != null) {
-                              context.read<ProfileBloc>().add(
-                                    SetImageEvent(
-                                      userId: UserCubit.get(context).user!.id,
-                                      image:
-                                          imageWidgetKey.currentState!.image!,
-                                    ),
-                                  );
-                            }
-                            if (formKey.currentState!.validate()) {
-                              if (phonesWidgetKey.currentState!.changeInPrime) {
-                                print("object");
+                        SizedBox(
+                          width: double.maxFinite,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (imageWidgetKey.currentState!.image != null) {
+                                context.read<ProfileBloc>().add(
+                                      SetImageEvent(
+                                        userId: UserCubit.get(context).user!.id,
+                                        image:
+                                            imageWidgetKey.currentState!.image!,
+                                      ),
+                                    );
                               }
-                              context.read<ProfileBloc>().add(
-                                    UpdateUserEvent(
-                                      user: _fetchDataToUser(
-                                          UserCubit.get(context).user!),
-                                    ),
-                                  );
-                            }
-                          },
-                          child: const Text("Update"),
+                              if (formKey.currentState!.validate()) {
+                                if (phonesWidgetKey
+                                    .currentState!.changeInPrime) {
+                                  print("object");
+                                }
+                                context.read<ProfileBloc>().add(
+                                      UpdateUserEvent(
+                                        user: _fetchDataToUser(
+                                            UserCubit.get(context).user!),
+                                      ),
+                                    );
+                              }
+                            },
+                            child: const Text("Update"),
+                          ),
                         )
                       ],
                     ),

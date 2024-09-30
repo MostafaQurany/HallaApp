@@ -60,6 +60,10 @@ class UserModel extends User {
   }
 
   Map<String, dynamic> toJson() {
+    Map<String, dynamic> favoriteCategories = {};
+    for (var key in this.favoriteCategories.keys) {
+      favoriteCategories[key.toString()] = this.favoriteCategories[key];
+    }
     return <String, dynamic>{
       'id': id,
       'email': email,

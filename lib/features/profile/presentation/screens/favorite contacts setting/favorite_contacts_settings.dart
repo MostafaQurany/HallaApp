@@ -1,15 +1,14 @@
-import 'package:drag_and_drop_lists/drag_and_drop_list.dart';
-import 'package:drag_and_drop_lists/drag_and_drop_lists.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/core/common/presentation/widgets/arrow_back.dart';
 import 'package:halla/core/constants/constants.dart';
+import 'package:halla/core/utils/app_show_dialog.dart';
+import 'package:halla/core/utils/routting.dart';
+import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
 import 'package:halla/features/profile/presentation/screens/favorite%20contacts%20setting/widgets/add_favorite_contact_categories.dart';
-import 'package:halla/features/profile/presentation/screens/favorite%20contacts%20setting/widgets/drager_categories.dart';
-import 'package:halla/features/profile/presentation/screens/favorite%20contacts%20setting/widgets/favorite_container_decoration.dart';
+import 'package:halla/features/profile/presentation/screens/favorite%20contacts%20setting/widgets/favorit_categories_item.dart';
 import 'package:halla/generated/l10n.dart';
 
 class FavoriteContactsSettings extends StatefulWidget {
@@ -28,22 +27,20 @@ class _FavoriteContactsSettingsState extends State<FavoriteContactsSettings> {
     if (newIndex == UserCubit.get(context).user!.favoriteCategories.length) {
       return; // Ignore reordering to the last position
     }
-
-    setState(() {
-      final itemKey = UserCubit.get(context)
-          .user!
-          .favoriteCategories
-          .keys
-          .elementAt(oldIndex);
-      final itemValue =
-          UserCubit.get(context).user!.favoriteCategories[itemKey];
-      UserCubit.get(context).user!.favoriteCategories.remove(itemKey);
-      UserCubit.get(context).user!.favoriteCategories[UserCubit.get(context)
-          .user!
-          .favoriteCategories
-          .keys
-          .elementAt(newIndex)] = itemValue!;
-    });
+    final itemKey = UserCubit.get(context)
+        .user!
+        .favoriteCategories
+        .keys
+        .elementAt(oldIndex);
+    final itemValue = UserCubit.get(context).user!.favoriteCategories[itemKey];
+    UserCubit.get(context).user!.favoriteCategories.remove(itemKey);
+    UserCubit.get(context).user!.favoriteCategories[UserCubit.get(context)
+        .user!
+        .favoriteCategories
+        .keys
+        .elementAt(newIndex)] = itemValue!;
+    UserCubit.get(context).addUserToLocal();
+    setState(() {});
   }
 
   @override
@@ -58,28 +55,33 @@ class _FavoriteContactsSettingsState extends State<FavoriteContactsSettings> {
       ),
       body: Padding(
         padding: AppConstants.paddingScreen,
-        child: BlocBuilder<UserCubit, UserState>(
-          builder: (context, state) {
-            User user = UserCubit.get(context).user!;
-            print(user.favoriteCategories);
-            return ReorderableListView(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              onReorder: _onReorder,
-              children: [
-                ...user.favoriteCategories.entries.map((entry) {
-                  return Text(
-                    entry.value,
-                    key: Key(entry.key.toString()),
-                  );
-                }),
-                Container(
-                  key: const Key('add-category'), // Provide a unique key
-                  child: const AddFavoriteContactCategories(),
-                ),
-              ],
-            );
+        child: BlocListener<ProfileBloc, ProfileState>(
+          listener: (context, state) {
+            if (state is ProfileLoading) {
+              AppShowDialog.loading(context);
+            }
+            if (state is ProfileError) {
+              AppNavigator.navigatePop(context);
+              AppShowDialog.showErrorMessage(context, state.message);
+            }
+            if (state is ProfileUpdateUserSuccessfully) {
+              AppNavigator.navigatePop(context);
+            }
           },
+          child: BlocBuilder<UserCubit, UserState>(
+            builder: (context, state) {
+              User user = UserCubit.get(context).user!;
+              return ListView(
+                shrinkWrap: true,
+                children: [
+                  ...user.favoriteCategories.entries.map((entry) {
+                    return FavoriteCategoriesItem(entry: entry);
+                  }),
+                  const AddFavoriteContactCategories(),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
