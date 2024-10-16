@@ -16,13 +16,16 @@ class CustomTextFormField extends StatefulWidget {
   final FocusNode? focusNode;
   final FieldType fieldType;
   final String confirmPassword;
+  final bool? ignorePointers;
   final void Function(String)? onChanged;
+  final String? Function(String?)? validate;
 
   const CustomTextFormField({
     required this.control,
     required this.hintText,
     super.key,
     this.prefixIcon,
+    this.ignorePointers,
     this.onEditingComplete,
     this.suffixIcon,
     this.focusNode,
@@ -33,6 +36,7 @@ class CustomTextFormField extends StatefulWidget {
     this.fieldType = FieldType.none,
     this.confirmPassword = '',
     this.onChanged,
+    this.validate,
   });
 
   @override
@@ -81,6 +85,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return TextFormField(
       controller: widget.control,
       focusNode: widget.focusNode,
+      ignorePointers: widget.ignorePointers,
       style: Theme.of(context).textTheme.bodyMedium,
       obscureText: obscureText,
       keyboardType: widget.keyboardType,
@@ -119,7 +124,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           color: !widget.obscureText ? theme.iconColor : theme.suffixIconColor,
         ),
       ),
-      validator: validate,
+      validator: widget.validate ?? validate,
       onChanged: widget.onChanged,
     );
   }

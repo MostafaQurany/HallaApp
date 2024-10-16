@@ -5,6 +5,7 @@ import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/features/contacts/presentation/screens/components/contact_favorit_edite_icon.dart';
 import 'package:halla/features/contacts/presentation/screens/contact_details_screen.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_share_contact_icon.dart';
 
@@ -80,12 +81,14 @@ class _ContactCardState extends State<ContactCard>
                       height: 50,
                     ),
                   ),
-                  Text(
-                    widget.contact.fullName,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.sp,
-                        ),
+                  SizedBox(
+                    width: 145.w,
+                    child: Text(
+                      widget.contact.fullName,
+                      style: Theme.of(context).textTheme.bodyMedium!,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                   const Spacer(),
                   IconButton(
@@ -100,16 +103,11 @@ class _ContactCardState extends State<ContactCard>
                       ),
                     ),
                   ),
-                  SizedBox(
-                    width: 15.w,
-                  ),
-                  ImageIcon(
-                    AssetImage(
-                      AppImages.emptyHeart,
-                    ),
+                  ContactFavoritEditeIcon(
+                    selectedKey: widget.contact.favoriteCategory,
                   ),
                   SizedBox(
-                    width: 15.w,
+                    width: 5.w,
                   ),
                   CustomShareContactIcon(userId: widget.contact.id),
                 ],

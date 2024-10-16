@@ -7,6 +7,7 @@ import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
+import "package:halla/features/auth/presentation/screens/first%20time%20contacts/first_time_contacts_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/personal_information_screen.dart";
 import "package:halla/features/auth/presentation/screens/widgets/pin_code_text_form_field.dart";
@@ -69,48 +70,68 @@ class _SmsCodeBodyState extends State<SmsCodeBody> {
       listener: (context, state) {
         if (state is AuthLoading) {
           AppShowDialog.loading(context);
-        } else if (state is AuthFailure) {
+        }
+        if (state is AuthFailure) {
           Navigator.pop(context);
           AppShowDialog.showErrorMessage(context, state.message);
-        } else if (state is AuthSuccess) {
-          if (context.read<AuthBloc>().isLogWithPhone) {
-            context.read<AuthBloc>().isLogWithPhone = false;
-            AppNavigator.navigatePushReplaceRemoveAll(
-              context,
-              const HomeLayout(),
-            );
-          } else {
-            state.user.primePhone = widget.phoneNumber;
-            context.read<AuthBloc>().add(
-                  AuthUploadUserEvent(
-                    user: state.user,
-                  ),
-                );
-          }
-        } else if (state is AuthUploadSuccess) {
-          if (context.read<AuthBloc>().isSignWithSocial) {
-            context.read<AuthBloc>().isSignWithSocial = false;
-            AppNavigator.navigatePushReplaceRemoveAll(
-              context,
-              const HomeLayout(),
-            );
-          } else {
-            context.read<AuthBloc>().add(
-                  GetIsNfcAvailableEvent(),
-                );
-          }
-        } else if (state is GetIsNfcAvailableState) {
+        }
+        // from sign in
+        if (state is AuthSuccess && !context.read<AuthBloc>().isLogWithPhone) {
+          AppNavigator.navigatePop(context);
+
+          state.user.primePhone = widget.phoneNumber;
+          context.read<AuthBloc>().add(
+                AuthUploadUserEvent(
+                  user: state.user,
+                ),
+              );
+        }
+        if (state is AuthUploadSuccess &&
+            !context.read<AuthBloc>().isSignWithSocial) {
+          AppNavigator.navigatePop(context);
+
+          // get from the sign screen to the Nfc
+          context.read<AuthBloc>().add(
+                GetIsNfcAvailableEvent(),
+              );
+        }
+        if (state is GetIsNfcAvailableState) {
           if (state.isAvailable) {
+            // get from the sign screen to the nfc
+            AppNavigator.navigatePop(context);
             AppNavigator.navigatePushReplaceRemoveAll(
               context,
               const NfcWriteScreen(),
             );
           } else {
+            // get from the sign screen to the  personal infromation
+            AppNavigator.navigatePop(context);
             AppNavigator.navigatePushReplaceRemoveAll(
               context,
               const PersonalInformationScreen(),
             );
           }
+        }
+        // from log in
+        if (state is AuthSuccess && context.read<AuthBloc>().isLogWithPhone) {
+          AppNavigator.navigatePop(context);
+          context.read<AuthBloc>().isLogWithPhone = false;
+          AppNavigator.navigatePushReplaceRemoveAll(
+            context,
+            const HomeLayout(),
+          );
+        }
+
+        // from personal
+        if (state is AuthUploadSuccess &&
+            context.read<AuthBloc>().isSignWithSocial) {
+          context.read<AuthBloc>().isSignWithSocial = false;
+          AppNavigator.navigatePop(context);
+          // get from the personal infromation to the FirestTime
+          AppNavigator.navigatePushReplaceRemoveAll(
+            context,
+            const FirstTimeContactsScreen(),
+          );
         }
       },
       builder: (context, state) {

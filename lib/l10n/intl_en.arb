@@ -86,7 +86,7 @@
   "customerService": "Customer Service",
   "promotions": "Promotions",
   "changeSecurityCode": "Change Security Code",
-  "favoriteContacts": "Favorite Contacts Setting",
+  "favoriteContacts": "Favorite Contacts",
   "changeProfile": "Change Profile",
   "language": "Language",
   "arabic": "Arabic",
@@ -96,5 +96,6 @@
   "add": "Add",
   "categorie": "Categorie",
   "typeYourNewFavoriteCategorieToAdd": "Type your new favorite categorie to add.",
-  "addNewCategories": "Add New Categories"
+  "addNewCategories": "Add New Categories",
+  "thisTitleIsAlreadyAdded": "This title is already added"
 }

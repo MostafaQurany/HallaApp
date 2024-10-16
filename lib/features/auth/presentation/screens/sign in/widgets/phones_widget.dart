@@ -24,6 +24,7 @@ class PhonesWidgetState extends State<PhonesWidget> {
   @override
   void initState() {
     super.initState();
+
     phonesController[phoneId[0]] =
         TextEditingController(text: UserCubit.get(context).user!.primePhone);
 
@@ -41,6 +42,8 @@ class PhonesWidgetState extends State<PhonesWidget> {
       }
     });
   }
+
+  FocusNode focusNode = FocusNode(canRequestFocus: false);
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +67,7 @@ class PhonesWidgetState extends State<PhonesWidget> {
                 controller:
                     phonesController[phoneId[index]] ?? TextEditingController(),
                 isFirst: index == 0,
+                focusNode: focusNode,
                 isAdd: _getAddOrRemove(
                     maxIndex: phonesController.length, currentindex: index),
                 suffixOnTap: (index == 0 && phonesController.length == 4)

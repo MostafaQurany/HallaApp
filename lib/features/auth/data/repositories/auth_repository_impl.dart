@@ -1,6 +1,5 @@
 import "package:fpdart/fpdart.dart";
 import "package:halla/core/common/domain/entities/user.dart";
-import "package:halla/core/constants/constants.dart";
 import "package:halla/core/error/failure.dart";
 import "package:halla/core/error/server_exception.dart";
 import "package:halla/features/auth/data/data_sources/auth_data_source.dart";
@@ -92,7 +91,7 @@ class AuthRepositoryImpl implements AuthRepository {
       UserModel userModel = await authDataSource.googleLogIn();
       // see if there is in data base
       final isUserExit = await dataBaseSource.isUserExit(userModel);
-
+      print(isUserExit);
       UserModel res;
       // == get user
       if (isUserExit) {
@@ -100,7 +99,6 @@ class AuthRepositoryImpl implements AuthRepository {
       }
       // == create new user
       else {
-        userModel.pinCode = AppConstants.generatePinCode();
         res = await dataBaseSource.uploadUser(userModel);
       }
       return right({

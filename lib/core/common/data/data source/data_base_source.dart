@@ -5,10 +5,12 @@ import 'package:halla/core/common/data/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract interface class DataBaseSource {
+  // user
   Future<bool> isUserExit(UserModel user);
   Future<UserModel> uploadUser(UserModel user);
   Future<UserModel> getUser(String userId);
 
+  // guest
   Future<GuestModel> logInGuest();
   Future<bool> isGuestExit();
   Future<GuestModel> getGuest();
@@ -19,7 +21,7 @@ abstract interface class DataBaseSource {
 class DataBaseSourceImpl implements DataBaseSource {
   final String _userCollection = AppConstants.userCollection;
   final _firestore = FirebaseFirestore.instance;
-
+  // user
   @override
   Future<UserModel> uploadUser(UserModel user) async {
     try {
@@ -33,10 +35,9 @@ class DataBaseSourceImpl implements DataBaseSource {
             .collection(_userCollection)
             .doc(user.id)
             .update(user.toJson());
-        print(
-            " uploadUser  user.favoriteCategories  ${user.favoriteCategories}");
       }
-      return await getUser(user.id);
+      final usern = await getUser(user.id);
+      return usern;
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {
@@ -46,9 +47,7 @@ class DataBaseSourceImpl implements DataBaseSource {
 
   Future<bool> _userExists(String userId) async {
     try {
-      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot;
-
-      documentSnapshot =
+      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await _firestore.collection(_userCollection).doc(userId).get();
       if (documentSnapshot.exists) {
         return true;
@@ -72,9 +71,7 @@ class DataBaseSourceImpl implements DataBaseSource {
   @override
   Future<bool> isUserExit(UserModel user) async {
     try {
-      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot;
-
-      documentSnapshot =
+      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await _firestore.collection(_userCollection).doc(user.id).get();
 
       if (documentSnapshot.exists) {
@@ -89,14 +86,15 @@ class DataBaseSourceImpl implements DataBaseSource {
     }
   }
 
+  // guest
   @override
   Future<bool> isGuestExit() async {
     try {
-      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot;
-      documentSnapshot = await _firestore
-          .collection(_userCollection)
-          .doc(await AppConstants.getGuestId())
-          .get();
+      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await _firestore
+              .collection(_userCollection)
+              .doc(await AppConstants.getGuestId())
+              .get();
 
       if (documentSnapshot.exists) {
         return true;

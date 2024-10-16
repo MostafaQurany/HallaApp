@@ -20,29 +20,6 @@ class FavoriteContactsSettings extends StatefulWidget {
 }
 
 class _FavoriteContactsSettingsState extends State<FavoriteContactsSettings> {
-  _onReorder(oldIndex, newIndex) {
-    if (oldIndex == UserCubit.get(context).user!.favoriteCategories.length) {
-      return; // Ignore reordering of the last item
-    }
-    if (newIndex == UserCubit.get(context).user!.favoriteCategories.length) {
-      return; // Ignore reordering to the last position
-    }
-    final itemKey = UserCubit.get(context)
-        .user!
-        .favoriteCategories
-        .keys
-        .elementAt(oldIndex);
-    final itemValue = UserCubit.get(context).user!.favoriteCategories[itemKey];
-    UserCubit.get(context).user!.favoriteCategories.remove(itemKey);
-    UserCubit.get(context).user!.favoriteCategories[UserCubit.get(context)
-        .user!
-        .favoriteCategories
-        .keys
-        .elementAt(newIndex)] = itemValue!;
-    UserCubit.get(context).addUserToLocal();
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext ontext) {
     return Scaffold(
@@ -50,6 +27,7 @@ class _FavoriteContactsSettingsState extends State<FavoriteContactsSettings> {
         leading: const ArrowBack(),
         title: Text(
           S.of(context).favoriteContacts,
+          maxLines: 2,
         ),
         centerTitle: true,
       ),
@@ -74,7 +52,7 @@ class _FavoriteContactsSettingsState extends State<FavoriteContactsSettings> {
               return ListView(
                 shrinkWrap: true,
                 children: [
-                  ...user.favoriteCategories.entries.map((entry) {
+                  ...user.favoriteCategories.map((entry) {
                     return FavoriteCategoriesItem(entry: entry);
                   }),
                   const AddFavoriteContactCategories(),

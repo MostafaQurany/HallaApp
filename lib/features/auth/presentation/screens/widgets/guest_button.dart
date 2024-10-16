@@ -40,8 +40,6 @@ class GuestButton extends StatelessWidget {
           );
         }
         if (state is GuestDeletedSucces) {
-          Navigator.pop(context);
-          Navigator.pop(context);
           AppShowDialog.scaleAlertDialog(
             context,
             AlertDialog(

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
 import 'package:halla/core/common/data/models/company_model.dart';
 import 'package:halla/core/common/data/models/social_media_model.dart';
@@ -59,10 +60,10 @@ class AuthDataSourceImpl implements AuthDataSource {
         password: password,
       );
       return UserModel(
-        id: credential.user!.uid,
-        email: email,
-        pinCode: pinCode,
-        nfcList: [],
+        idModel: credential.user!.uid,
+        emailModel: email,
+        pinCodeModel: pinCode,
+        nfcListModel: [],
         companyModel: CompanyModel(),
         socialMediaModel: SocialMediaModel(),
       );
@@ -121,10 +122,10 @@ class AuthDataSourceImpl implements AuthDataSource {
       final UserCredential credential = await firebaseAuth.currentUser!
           .linkWithCredential(phoneAuthCredential);
       return UserModel(
-        id: credential.user!.uid,
-        email: credential.user!.email.toString(),
-        primePhone: credential.user!.phoneNumber.toString(),
-        nfcList: [],
+        idModel: credential.user!.uid,
+        emailModel: credential.user!.email.toString(),
+        primePhoneModel: credential.user!.phoneNumber.toString(),
+        nfcListModel: [],
         companyModel: CompanyModel(),
         socialMediaModel: SocialMediaModel(),
       );
@@ -156,9 +157,9 @@ class AuthDataSourceImpl implements AuthDataSource {
         password: password,
       );
       return UserModel(
-        id: credential.user!.uid,
-        email: email,
-        nfcList: [],
+        idModel: credential.user!.uid,
+        emailModel: email,
+        nfcListModel: [],
         companyModel: CompanyModel(),
         socialMediaModel: SocialMediaModel(),
       );
@@ -183,11 +184,12 @@ class AuthDataSourceImpl implements AuthDataSource {
       final UserCredential userCredential =
           await firebaseAuth.signInWithCredential(credential);
       return UserModel(
-        id: userCredential.user!.uid,
-        email: userCredential.user!.email!,
-        fullName: userCredential.user!.displayName ?? '',
-        primePhone: userCredential.user!.phoneNumber ?? '',
-        nfcList: [],
+        idModel: userCredential.user!.uid,
+        emailModel: userCredential.user!.email!,
+        fullNameModel: userCredential.user!.displayName ?? '',
+        primePhoneModel: userCredential.user!.phoneNumber ?? '',
+        pinCodeModel: AppConstants.generatePinCode(),
+        nfcListModel: [],
         companyModel: CompanyModel(),
         socialMediaModel: SocialMediaModel(),
       );

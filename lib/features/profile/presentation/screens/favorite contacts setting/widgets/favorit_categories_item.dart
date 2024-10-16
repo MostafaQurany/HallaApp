@@ -7,7 +7,7 @@ import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart
 import 'package:halla/features/profile/presentation/screens/favorite%20contacts%20setting/widgets/favorite_container_decoration.dart';
 
 class FavoriteCategoriesItem extends StatelessWidget {
-  final MapEntry entry;
+  final String entry;
   const FavoriteCategoriesItem({super.key, required this.entry});
 
   @override
@@ -17,7 +17,7 @@ class FavoriteCategoriesItem extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            entry.value,
+            entry,
             style: AppTheme.getThemeText(context).bodyMedium,
             maxLines: 1,
             softWrap: true,
@@ -26,7 +26,7 @@ class FavoriteCategoriesItem extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {
-            UserCubit.get(context).user!.favoriteCategories.remove(entry.key);
+            UserCubit.get(context).user!.favoriteCategories.remove(entry);
             context.read<ProfileBloc>().add(
                   UpdateUserEvent(user: UserCubit.get(context).user!),
                 );

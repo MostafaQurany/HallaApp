@@ -58,8 +58,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
             );
           }
           if (state is GetContactsErorrState) {
-          AppShowDialog.showErrorMessage(context, state.message);
-
+            AppShowDialog.showErrorMessage(context, state.message);
           }
           if (state is GetContactsSuccessfully) {
             print(state.contacts);

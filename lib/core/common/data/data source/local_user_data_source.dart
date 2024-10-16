@@ -1,5 +1,3 @@
-import 'package:halla/core/common/data/models/company_model.dart';
-import 'package:halla/core/common/data/models/social_media_model.dart';
 import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
 import 'package:halla/core/common/data/models/user_model.dart';
@@ -20,7 +18,7 @@ class LocalUserDataSourceImpl implements LocalUserDataSource {
   Future<void> addUserToLocal(UserModel user) async {
     try {
       final box = await _getBoxContact();
-      await box.put(_keyName, user.toJson());
+      await box.put(_keyName, user);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -40,27 +38,8 @@ class LocalUserDataSourceImpl implements LocalUserDataSource {
   Future<UserModel> getUserFromLocal() async {
     try {
       final box = await _getBoxContact();
-      final Map<dynamic, dynamic> rawMap = box.get(_keyName)!;
-      final Map<String, dynamic> userMap = rawMap.map(
-        (key, value) => MapEntry(key, value),
-      );
-      Map<dynamic, dynamic> soucialMapDynamic = userMap['socialMedia'];
-
-      final Map<String, dynamic> soucialMap = soucialMapDynamic.map(
-        (key, value) => MapEntry(key, value),
-      );
-      userMap["socialMedia"] = soucialMap;
-
-      Map<dynamic, dynamic> companyMapDynamic = userMap['company'];
-
-      final Map<String, dynamic> companyMap = companyMapDynamic.map(
-        (key, value) => MapEntry(key, value),
-      );
-      userMap["company"] = companyMap;
-      print(companyMap);
-      print(soucialMap);
-
-      return UserModel.fromJson(userMap);
+      final UserModel user = box.get(_keyName)!;
+      return user;
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -70,9 +49,7 @@ class LocalUserDataSourceImpl implements LocalUserDataSource {
   Future<bool> isUserSavedLocal() async {
     try {
       final box = await _getBoxContact();
-      if (box.get(_keyName) == null) {
-        return false;
-      } else if (box.get(_keyName)!.isNotEmpty) {
+      if (box.get(_keyName) != null) {
         return true;
       } else {
         return false;
@@ -82,11 +59,11 @@ class LocalUserDataSourceImpl implements LocalUserDataSource {
     }
   }
 
-  Future<Box<Map>> _getBoxContact() async {
+  Future<Box<UserModel>> _getBoxContact() async {
     if (Hive.isBoxOpen(_boxName)) {
-      return Hive.box<Map>(_boxName);
+      return Hive.box<UserModel>(_boxName);
     } else {
-      return await Hive.openBox<Map>(_boxName);
+      return await Hive.openBox<UserModel>(_boxName);
     }
   }
 }

@@ -87,6 +87,18 @@ final class AuthGetUserDataEvent extends AuthEvent {
   AuthGetUserDataEvent({required this.user});
 }
 
+final class AuthGetNativeLocalContact extends AuthEvent {}
+
+final class AuthAddFirstTimeContactList extends AuthEvent {
+  final List<String> contact;
+  final String userId;
+
+  AuthAddFirstTimeContactList({
+    required this.userId,
+    required this.contact,
+  });
+}
+
 //nfc
 
 final class GetIsNfcAvailableEvent extends AuthEvent {}

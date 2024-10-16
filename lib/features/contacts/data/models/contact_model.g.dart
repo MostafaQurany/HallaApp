@@ -28,13 +28,14 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       companyModel: fields[9] as CompanyModel,
       emailModel: fields[1] as String,
       imageUrlModel: fields[10] as String,
+      favoriteCategoryModel: fields[11] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ContactModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.idModel)
       ..writeByte(1)
@@ -52,11 +53,13 @@ class ContactModelAdapter extends TypeAdapter<ContactModel> {
       ..writeByte(7)
       ..write(obj.phonesModel)
       ..writeByte(8)
-      ..write(obj.socialMedia)
+      ..write(obj.socialMediaModel)
       ..writeByte(9)
       ..write(obj.companyModel)
       ..writeByte(10)
-      ..write(obj.imageUrlModel);
+      ..write(obj.imageUrlModel)
+      ..writeByte(11)
+      ..write(obj.favoriteCategoryModel);
   }
 
   @override

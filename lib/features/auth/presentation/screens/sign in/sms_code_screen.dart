@@ -7,7 +7,9 @@ import "package:halla/features/auth/presentation/screens/sign%20in/bodys/sms_cod
 import "package:halla/generated/l10n.dart";
 
 class SmsCodeScreen extends StatelessWidget {
+  
   final String phoneNumber;
+
   const SmsCodeScreen({required this.phoneNumber, super.key});
 
   @override

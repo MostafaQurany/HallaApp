@@ -58,7 +58,6 @@ class _CustomShareContactIconState extends State<CustomShareContactIcon> {
           AppImages.shareContact,
         ),
         color: widget.iconColor,
-        size: 18.sp,
       ),
     );
   }

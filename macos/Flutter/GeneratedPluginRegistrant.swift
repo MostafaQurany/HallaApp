@@ -16,7 +16,7 @@ import isar_flutter_libs
 import path_provider_foundation
 import shared_preferences_foundation
 import smart_auth
-import sqflite
+import sqflite_darwin
 
 func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   FLTFirebaseFirestorePlugin.register(with: registry.registrar(forPlugin: "FLTFirebaseFirestorePlugin"))

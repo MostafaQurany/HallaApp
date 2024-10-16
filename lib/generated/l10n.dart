@@ -651,10 +651,10 @@ class S {
     );
   }
 
-  /// `Favorite Contacts Setting`
+  /// `Favorite Contacts`
   String get favoriteContacts {
     return Intl.message(
-      'Favorite Contacts Setting',
+      'Favorite Contacts',
       name: 'favoriteContacts',
       desc: '',
       args: [],
@@ -756,6 +756,16 @@ class S {
     return Intl.message(
       'Add New Categories',
       name: 'addNewCategories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This title is already added`
+  String get thisTitleIsAlreadyAdded {
+    return Intl.message(
+      'This title is already added',
+      name: 'thisTitleIsAlreadyAdded',
       desc: '',
       args: [],
     );

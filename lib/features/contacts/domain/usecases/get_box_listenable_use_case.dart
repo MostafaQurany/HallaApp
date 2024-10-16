@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/error/failure.dart';
-import 'package:halla/core/usecase/usecase.dart';
+import 'package:halla/core/common/domain/usecase/usecase.dart';
 import 'package:halla/features/contacts/domain/repositories/contacts_repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

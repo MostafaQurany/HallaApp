@@ -1,28 +1,82 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fpdart/fpdart.dart';
-import 'package:halla/core/common/domain/entities/user.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:halla/core/common/data/models/company_model.dart';
 import 'package:halla/core/common/data/models/social_media_model.dart';
+import 'package:halla/core/common/domain/entities/user.dart';
+part 'user_model.g.dart';
+@HiveType(typeId: 5)
+class UserModel extends User with HiveObjectMixin {
+  @HiveField(0)
+  String idModel;
 
-class UserModel extends User {
+  @HiveField(1)
+  String emailModel;
+
+  @HiveField(2)
+  String fullNameModel;
+
+  @HiveField(3)
+  String primePhoneModel;
+
+  @HiveField(4)
+  String dateOfBirthModel;
+
+  @HiveField(5)
+  String nationalityModel;
+
+  @HiveField(6)
+  String imageUrlModel;
+
+  @HiveField(7)
+  String pinCodeModel;
+
+  @HiveField(8)
+  List<String> phonesModel;
+
+  @HiveField(9)
+  List<String> nfcListModel;
+
+  @HiveField(10)
+  bool isGuestModel;
+
+  @HiveField(11)
+  List<String> favoriteCategoriesModel;
+
+  @HiveField(12)
   final SocialMediaModel socialMediaModel;
 
+  @HiveField(13)
   final CompanyModel companyModel;
+
   UserModel({
-    super.id = '',
-    super.email = '',
-    super.fullName = '',
-    super.primePhone = '',
-    super.dateOfBirth = '',
-    super.nationality = '',
-    super.imageUrl = '',
-    super.pinCode = '',
-    super.phones = const [],
-    super.nfcList = const [],
-    super.favoriteCategories = const {},
+    this.idModel = '',
+    this.emailModel = '',
+    this.fullNameModel = '',
+    this.primePhoneModel = '',
+    this.dateOfBirthModel = '',
+    this.nationalityModel = '',
+    this.imageUrlModel = '',
+    this.pinCodeModel = '',
+    this.phonesModel = const [],
+    this.nfcListModel = const [],
+    this.isGuestModel = false,
+    this.favoriteCategoriesModel = const [],
     required this.socialMediaModel,
     required this.companyModel,
   }) : super(
+          id: idModel,
+          email: emailModel,
+          fullName: fullNameModel,
+          primePhone: primePhoneModel,
+          dateOfBirth: dateOfBirthModel,
+          nationality: nationalityModel,
+          imageUrl: imageUrlModel,
+          pinCode: pinCodeModel,
+          nfcList: nfcListModel,
+          phones: phonesModel,
+          favoriteCategories: favoriteCategoriesModel,
+          
           socialMedia: socialMediaModel,
           company: companyModel,
         );
@@ -38,70 +92,63 @@ class UserModel extends User {
     String? pinCode,
     List<String>? phones,
     List<String>? nfcList,
-    Map<int, String>? favoriteCategories,
+    List<String>? favoriteCategories,
     SocialMediaModel? socialMedia,
     CompanyModel? company,
   }) {
     return UserModel(
-      id: id ?? this.id,
-      email: email ?? this.email,
-      fullName: fullName ?? this.fullName,
-      primePhone: primePhone ?? this.primePhone,
-      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
-      nationality: nationality ?? this.nationality,
-      imageUrl: imageUrl ?? this.imageUrl,
-      pinCode: pinCode ?? this.pinCode,
-      phones: phones ?? this.phones,
-      nfcList: nfcList ?? this.nfcList,
-      favoriteCategories: favoriteCategories ?? this.favoriteCategories,
+      idModel: id ?? idModel,
+      emailModel: email ?? emailModel,
+      fullNameModel: fullName ?? fullNameModel,
+      primePhoneModel: primePhone ?? primePhoneModel,
+      dateOfBirthModel: dateOfBirth ?? dateOfBirthModel,
+      nationalityModel: nationality ?? nationalityModel,
+      imageUrlModel: imageUrl ?? imageUrlModel,
+      pinCodeModel: pinCode ?? pinCodeModel,
+      phonesModel: phones ?? phonesModel,
+      nfcListModel: nfcList ?? nfcListModel,
+      isGuestModel: isGuestModel,
+      favoriteCategoriesModel: favoriteCategories ?? favoriteCategoriesModel,
       socialMediaModel: socialMedia ?? socialMediaModel,
       companyModel: company ?? companyModel,
     );
   }
 
   Map<String, dynamic> toJson() {
-    Map<String, dynamic> favoriteCategories = {};
-    for (var key in this.favoriteCategories.keys) {
-      favoriteCategories[key.toString()] = this.favoriteCategories[key];
-    }
     return <String, dynamic>{
-      'id': id,
-      'email': email,
-      'fullName': fullName,
-      'primePhone': primePhone,
-      'dateOfBirth': dateOfBirth,
-      'nationality': nationality,
-      'imageUrl': imageUrl,
-      'pinCode': pinCode,
-      'phones': phones,
-      'nfcList': nfcList,
-      'favoriteCategories': favoriteCategories,
+      'id': idModel,
+      'email': emailModel,
+      'fullName': fullNameModel,
+      'primePhone': primePhoneModel,
+      'dateOfBirth': dateOfBirthModel,
+      'nationality': nationalityModel,
+      'imageUrl': imageUrlModel,
+      'pinCode': pinCodeModel,
+      'phones': phonesModel,
+      'nfcList': nfcListModel,
+      'favoriteCategories': favoriteCategoriesModel,
       'socialMedia': socialMediaModel.toMap(),
       'company': companyModel.toMap(),
     };
   }
 
   factory UserModel.fromJson(Map<String, dynamic> map) {
-    Map<int, String> newMap = {};
-    map["favoriteCategories"].forEach(
-      (key, value) {
-        newMap[int.parse(key)] = value.toString();
-      },
-    );
-
     return UserModel(
-      id: map['id'] as String,
-      email: map['email'] as String,
-      fullName: map['fullName'] as String,
-      primePhone: map['primePhone'] as String,
-      dateOfBirth: map['dateOfBirth'] as String,
-      nationality: map['nationality'] as String,
-      imageUrl: map['imageUrl'] as String,
-      pinCode: map['pinCode'] as String,
-      phones: (map['phones'] as List<dynamic>).map((e) => e as String).toList(),
-      nfcList:
+      idModel: map['id'] as String,
+      emailModel: map['email'] as String,
+      fullNameModel: map['fullName'] as String,
+      primePhoneModel: map['primePhone'] as String,
+      dateOfBirthModel: map['dateOfBirth'] as String,
+      nationalityModel: map['nationality'] as String,
+      imageUrlModel: map['imageUrl'] as String,
+      pinCodeModel: map['pinCode'] as String,
+      phonesModel:
+          (map['phones'] as List<dynamic>).map((e) => e as String).toList(),
+      nfcListModel:
           (map['nfcList'] as List<dynamic>).map((e) => e as String).toList(),
-      favoriteCategories: newMap,
+      favoriteCategoriesModel: (map['favoriteCategories'] as List<dynamic>)
+          .map((e) => e as String)
+          .toList(),
       socialMediaModel:
           SocialMediaModel.fromMap(map['socialMedia'] as Map<String, dynamic>),
       companyModel:
@@ -111,17 +158,17 @@ class UserModel extends User {
 
   factory UserModel.fromUser(User user) {
     return UserModel(
-      id: user.id,
-      email: user.email,
-      fullName: user.fullName,
-      primePhone: user.primePhone,
-      dateOfBirth: user.dateOfBirth,
-      nationality: user.nationality,
-      imageUrl: user.imageUrl,
-      pinCode: user.pinCode,
-      phones: user.phones,
-      nfcList: user.nfcList,
-      favoriteCategories: user.favoriteCategories,
+      idModel: user.id,
+      emailModel: user.email,
+      fullNameModel: user.fullName,
+      primePhoneModel: user.primePhone,
+      dateOfBirthModel: user.dateOfBirth,
+      nationalityModel: user.nationality,
+      imageUrlModel: user.imageUrl,
+      pinCodeModel: user.pinCode,
+      phonesModel: user.phones,
+      nfcListModel: user.nfcList,
+      favoriteCategoriesModel: user.favoriteCategories,
       socialMediaModel: SocialMediaModel.fromSocialMedia(user.socialMedia),
       companyModel: CompanyModel.fromCompany(user.company),
     );

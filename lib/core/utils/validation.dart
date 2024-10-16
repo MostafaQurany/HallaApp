@@ -74,6 +74,9 @@ class MyValidation {
     if (value[0] == '+') {
       return 'Please enter a phone number start with 01';
     }
+    if (value.length != 11) {
+      return 'Please enter a valid phone number';
+    }
     final phoneRegex = RegExp(r'^\+?[0-9]{10,15}$');
     if (!phoneRegex.hasMatch(value)) {
       return 'Enter a valid phone number';

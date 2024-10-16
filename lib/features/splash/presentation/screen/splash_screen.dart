@@ -1,9 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:halla/core/common/domain/entities/user.dart';
-import 'package:halla/core/common/presentation/cubit/connectivity/connectivity_cubit.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/core/utils/routting.dart';
@@ -84,7 +80,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<bool> getConnectionState() async {
-    return await ConnectivityCubit.get(context).getCurrentSateConnetion();
+    return true;
+    //await ConnectivityCubit.get(context).getCurrentSateConnetion();
   }
 
   @override

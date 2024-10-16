@@ -98,3 +98,12 @@ class LogInGuestSucces extends AuthState {
 class GuestIsUpdateState extends AuthState {}
 
 class GuestDeletedSucces extends AuthState {}
+
+// native local contact
+class GetNativeContactSucces extends AuthState {
+  final List<Contact> contacts;
+
+  GetNativeContactSucces({required this.contacts});
+}
+class AddFirstTimeContactSucces extends AuthState {
+}

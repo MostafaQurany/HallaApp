@@ -2,7 +2,7 @@ import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/common/domain/repositories/common_repositories.dart';
 import 'package:halla/core/error/failure.dart';
-import 'package:halla/core/usecase/usecase.dart';
+import 'package:halla/core/common/domain/usecase/usecase.dart';
 
 class UploadUserUsecase implements UseCase<User, UploadUserParams> {
   final CommonRepositories commonRepositories;

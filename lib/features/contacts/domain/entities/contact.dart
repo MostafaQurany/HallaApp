@@ -3,6 +3,7 @@ import 'package:halla/core/common/domain/entities/user.dart';
 
 class Contact extends User {
   Timestamp addTime;
+  String favoriteCategory;
   Contact({
     required super.id,
     required this.addTime,
@@ -15,6 +16,7 @@ class Contact extends User {
     required super.company,
     required super.email,
     required super.imageUrl,
+    required this.favoriteCategory,
   }) : super(
           nfcList: [],
           pinCode: '',

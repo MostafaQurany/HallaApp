@@ -86,7 +86,7 @@
   "customerService": "خدمة العملاء",
   "promotions": "الترقيات",
   "changeSecurityCode": "تغيير رمز الأمان",
-  "favoriteContacts": "إعدادات جهات الاتصال المفضلة",
+  "favoriteContacts": "جهات الاتصال المفضلة",
   "changeProfile": "تغيير الملف الشخصي",
   "language": "الغة",
   "arabic": "عربي",
@@ -96,5 +96,6 @@
   "add": "Add",
   "categorie": "Categorie",
   "typeYourNewFavoriteCategorieToAdd": "Type your new favorite categorie to add.",
-  "addNewCategories": "Add New Categories"
+  "addNewCategories": "Add New Categories",
+  "thisTitleIsAlreadyAdded": "This title is already added"
 }

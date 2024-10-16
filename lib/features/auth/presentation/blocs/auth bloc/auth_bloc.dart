@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halla/core/common/domain/usecase/forget_pin_code_guest.dart';
+import 'package:halla/core/common/domain/usecase/get_first_time_local_contacts_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/forget_password_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/log_in_with_phone_use_case.dart';
+import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/features/contacts/domain/usecases/add_contact_list_server_use_case.dart';
 import 'package:meta/meta.dart';
 
 import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
@@ -20,7 +23,7 @@ import 'package:halla/core/common/domain/usecase/read_from_nfc.dart';
 import 'package:halla/core/common/domain/usecase/upload_user_usecase.dart';
 import 'package:halla/core/common/domain/usecase/write_on_nfc.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
-import 'package:halla/core/usecase/usecase.dart';
+import 'package:halla/core/common/domain/usecase/usecase.dart';
 import 'package:halla/features/auth/domain/usecases/get_sms_code_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/google_login.dart';
 import 'package:halla/features/auth/domain/usecases/link_with_email_pincode.dart';
@@ -53,6 +56,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   // core => database usecase
   final GetUserUsecase _getUserUsecase;
   final UploadUserUsecase _uploadUserUsecase;
+  final GetFirstTimeLocalContactsUsecase _getFirstTimeLocalContactsUsecase;
+  final AddContactListServerUseCase _addContactListServerUseCase;
 
   // core => guest
   final LogInGuest _logInGuest;
@@ -78,6 +83,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     //data base
     GetUserUsecase getUserUsecase,
     UploadUserUsecase uploadUserUsecase,
+    GetFirstTimeLocalContactsUsecase getFirstTimeLocalContactsUsecase,
+    AddContactListServerUseCase addContactListServerUseCase,
     // nfc
     GetIsNfcAvailableUsecase getIsNfcAvailableUsecase,
     GetIsNfcOpenUsecase getIsNfcOpenUsecase,
@@ -96,6 +103,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _sentSmsCodeUsecase = sentSmsCodeUsecase,
         _getUserUsecase = getUserUsecase,
         _uploadUserUsecase = uploadUserUsecase,
+        _getFirstTimeLocalContactsUsecase = getFirstTimeLocalContactsUsecase,
+        _addContactListServerUseCase = addContactListServerUseCase,
         _getIsNfcAvailable = getIsNfcAvailableUsecase,
         _getIsNfcOpen = getIsNfcOpenUsecase,
         _writeOnNfcUsecase = writeOnNfcUsecase,
@@ -121,6 +130,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthUploadUserEvent>(_onAuthUploadUser);
     on<AuthPersonalInfoEvent>(_onAuthPersonalInfoEvent);
     on<AuthGetUserDataEvent>(_onAuthGetUserDataEvent);
+    on<AuthGetNativeLocalContact>(_onAuthGetNativeLocalContact);
+    on<AuthAddFirstTimeContactList>(_onAuthAddFirstTimeContactList);
     // guest
     on<AuthLogInGuestEvent>(_onAuthLogInGuestEvent);
     on<AuthForgetPinCodeGuestEvent>(_onAuthForgetPinCodeGuestEvent);
@@ -133,9 +144,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   loadingEmitter(Emitter<AuthState> emit) {
     if (!isLoading) {
-      isLoading = !isLoading;
+      isLoading = true;
       emit(AuthLoading());
     }
+  }
+
+  antherEmutter(Emitter<AuthState> emit, AuthState state) {
+    isLoading = false;
+    emit(state);
   }
 
   _onAuthSignUp(
@@ -153,7 +169,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     res.fold(
       (failure) {
-        isLoading = !isLoading;
         emit(AuthFailure(message: failure.message));
       },
       (user) {
@@ -167,7 +182,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     loadingEmitter(emit);
-
     final res = await _logInWithEmailPassword(
       LogInWithEmailPasswordPrams(
         email: event.email,
@@ -192,13 +206,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     loadingEmitter(emit);
-
     final res = await _googleLogin(NoParams());
     isSignWithSocial = true;
     await res.fold(
       (l) {
         isSignWithSocial = false;
-        isLoading = !isLoading;
+        isLoading = false;
         emit(AuthFailure(message: l.message));
         return Future.value();
       },
@@ -207,7 +220,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         User user = r['user'];
         if (isExit) {
           isSignWithSocial = false;
-          isLoading = !isLoading;
+          isLoading = false;
           _userCubit.updateUser(user: user);
           emit(
             AuthGoogleState(user: user, isExit: isExit),
@@ -216,15 +229,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           isSignWithSocial = true;
           final linkRes = await _linkWithEmailPincode(
               LinkWithEmailPincodePeram(user: user));
+          isLoading = false;
           await linkRes.fold(
             (l) {
-              isLoading = !isLoading;
               isSignWithSocial = false;
               emit(AuthFailure(message: l.message));
               return Future.value();
             },
             (r) async {
-              isLoading = !isLoading;
               isSignWithSocial = true;
               _userCubit.updateUser(user: user);
               emit(
@@ -244,19 +256,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     loadingEmitter(emit);
-
     final res = await _getSmsCodeUsecase.call(
       GetSmsCodeParams(phoneNumber: event.phoneNumber),
     );
-
     res.fold(
       (l) {
-        isLoading = !isLoading;
+        isLoading = false;
         emit(AuthFailure(message: "_onAuthGetSmsCode${l.message}"));
-        isLoading = !isLoading;
       },
       (r) {
-        isLoading = !isLoading;
+        isLoading = false;
         _verificationId = r;
         emit(AuthGetCodeSmsSiccessState());
       },
@@ -276,11 +285,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     res.fold(
       (l) {
-        isLoading = !isLoading;
+        isLoading = false;
         emit(AuthFailure(message: l.message));
       },
       (r) async {
-        isLoading = !isLoading;
+        isLoading = false;
         emit(
           AuthSuccess(user: _userCubit.user!),
         );
@@ -302,19 +311,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
     await res.fold(
       (l) {
-        isLoading = !isLoading;
+        isLoading = false;
         emit(AuthFailure(message: l.message));
       },
       (r) async {
         final res = await _getUserUsecase(GetUserParams(userId: r));
         await res.fold(
           (l) {
-            isLoading = !isLoading;
+            isLoading = false;
             emit(AuthFailure(message: l.message));
             return Future.value();
           },
           (r) {
-            isLoading = !isLoading;
+            isLoading = false;
             _userCubit.updateUser(user: r);
             emit(
               AuthSuccess(user: r),
@@ -331,20 +340,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     loadingEmitter(emit);
-
     final res = await _uploadUserUsecase(
       UploadUserParams(
         user: event.user,
       ),
     );
-
     res.fold(
       (l) {
-        isLoading = !isLoading;
+        isLoading = false;
         emit(AuthFailure(message: l.message));
       },
       (r) {
-        isLoading = !isLoading;
+        isLoading = false;
         _emitAuthUploadSuccess(r, emit);
       },
     );
@@ -355,20 +362,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     loadingEmitter(emit);
-
     final res = await _uploadUserUsecase(
       UploadUserParams(
         user: event.user,
       ),
     );
-
     res.fold(
       (l) {
-        isLoading = !isLoading;
+        isLoading = false;
         emit(AuthFailure(message: l.message));
       },
       (r) {
-        isLoading = !isLoading;
+        isLoading = false;
         _userCubit.updateUser(user: r);
         emit(AuthPersonalInfoSuccess(user: r));
       },
@@ -380,7 +385,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     loadingEmitter(emit);
-
     final res = await _getUserUsecase(
       GetUserParams(
         userId: event.user.id,
@@ -389,7 +393,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     res.fold(
       (l) {
-        isLoading = !isLoading;
+        isLoading = false;
         emit(AuthFailure(message: l.message));
       },
       (r) {
@@ -402,7 +406,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     User user,
     Emitter<AuthState> emit,
   ) {
-    isLoading = !isLoading;
+    isLoading = false;
     _userCubit.updateUser(user: user);
     emit(
       AuthSuccess(
@@ -415,7 +419,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     User user,
     Emitter<AuthState> emit,
   ) {
-    isLoading = !isLoading;
+    isLoading = false;
     _userCubit.updateUser(user: user);
     emit(
       AuthUploadSuccess(
@@ -428,7 +432,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthForgetPassword event,
     Emitter<AuthState> emit,
   ) async {
-    emit(AuthLoading());
+    loadingEmitter(emit);
     final res = await _forgetPasswordUsecase(
       ForgetPasswordPrams(
         email: event.email,
@@ -532,7 +536,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthCheckPinCode event,
     Emitter<AuthState> emit,
   ) async {
-    emit(AuthLoading());
+    loadingEmitter(emit);
     if (event.pinCode == event.userPinCode) {
       final res = await _getUserUsecase(GetUserParams(userId: event.userId));
       res.fold(
@@ -555,14 +559,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthLogInGuestEvent event,
     Emitter<AuthState> emit,
   ) async {
-    emit(AuthLoading());
+    loadingEmitter(emit);
     final isGuestExitRes = await _isGuestExit(NoParams());
     await isGuestExitRes.fold(
       (l) {
+        isLoading = false;
         emit(AuthFailure(message: l.message));
       },
       (r) async {
         if (r) {
+          isLoading = false;
+
           final isUpdateRes = await _isGuestUpdate(NoParams());
           await isUpdateRes.fold(
             (l) {
@@ -609,7 +616,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthForgetPinCodeGuestEvent event,
     Emitter<AuthState> emit,
   ) async {
-    emit(AuthLoading());
+    loadingEmitter(emit);
     final deleteGuest = await _forgetPinCodeGuestUseCase(NoParams());
     deleteGuest.fold(
       (l) => emit(
@@ -618,6 +625,47 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (r) => emit(
         GuestDeletedSucces(),
       ),
+    );
+  }
+
+  // natice contacts
+  _onAuthGetNativeLocalContact(
+    AuthGetNativeLocalContact event,
+    Emitter<AuthState> emit,
+  ) async {
+    loadingEmitter(emit);
+    final res = await _getFirstTimeLocalContactsUsecase(NoParams());
+    isLoading = false;
+    res.fold(
+      (l) {
+        emit(
+          AuthFailure(message: l.message),
+        );
+      },
+      (r) => emit(
+        GetNativeContactSucces(contacts: r),
+      ),
+    );
+  }
+
+  _onAuthAddFirstTimeContactList(
+    AuthAddFirstTimeContactList event,
+    Emitter<AuthState> emit,
+  ) async {
+    loadingEmitter(emit);
+    final res = await _addContactListServerUseCase(AddContactListServerPram(
+      userId: event.userId,
+      contactIdList: event.contact,
+    ));
+    isLoading = false;
+
+    res.fold(
+      (l) {
+        emit(
+          AuthFailure(message: l.message),
+        );
+      },
+      (r) => emit(AddFirstTimeContactSucces()),
     );
   }
 }

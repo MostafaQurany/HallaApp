@@ -7,7 +7,7 @@ import 'package:halla/core/common/domain/usecase/add_user_to_local_usecase.dart'
 import 'package:halla/core/common/domain/usecase/delete_user_from_local_usecase.dart';
 import 'package:halla/core/common/domain/usecase/get_user_from_local_usecase.dart';
 import 'package:halla/core/common/domain/usecase/is_user_saved_local_usecase.dart';
-import 'package:halla/core/usecase/usecase.dart';
+import 'package:halla/core/common/domain/usecase/usecase.dart';
 
 part 'user_state.dart';
 
@@ -34,7 +34,7 @@ class UserCubit extends Cubit<UserState> {
       emit(UserInitial());
     } else {
       this.user = user;
-      addUserToLocal();
+      if (!user.isGuest) addUserToLocal();
       emit(UserLoggedIn(
         user: user,
       ));
