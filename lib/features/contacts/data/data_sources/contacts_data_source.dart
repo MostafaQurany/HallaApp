@@ -3,6 +3,7 @@ import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
 import 'package:halla/features/contacts/data/data_sources/contacts_local_data_source.dart';
 import 'package:halla/features/contacts/data/models/contact_model.dart';
+import 'package:halla/features/contacts/data/models/contact_model_server.dart';
 
 abstract class ContactsDataSource {
   Future<void> addContact({
@@ -32,7 +33,7 @@ abstract class ContactsDataSource {
 
 class ContactsDataSourceImpl implements ContactsDataSource {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final ContactsLocalDataSourceImpl _localDataSource =
+  final ContactsLocalDataSource _localDataSource =
       ContactsLocalDataSourceImpl();
 
   @override
@@ -84,25 +85,30 @@ class ContactsDataSourceImpl implements ContactsDataSource {
     required String userId,
     required List<String> contactIdList,
   }) async {
-    final contactMapList = contactIdList
-        .map((id) => {
-              'id': id,
-              'time': FieldValue.serverTimestamp(),
-            })
-        .toList();
     try {
       await _firestore
           .collection(AppConstants.userCollection)
           .doc(userId)
           .update({
-        'contacts': FieldValue.arrayUnion(contactMapList),
+        'contacts': FieldValue.arrayUnion(
+          contactIdList
+              .map( 
+                (id) => ContactModelServer(
+                  id: id,
+                  timestamp: Timestamp.now(),
+                  favoriteCategories: '',
+                ).toMap(),
+              )
+              .toList(),
+        ),
       });
-
       List<ContactModel> contactModelList =
           await getContactList(userId: userId);
-
+      print(contactModelList.length);
       await _localDataSource.addContactList(
-          userId: userId, contactList: contactModelList);
+        userId: userId,
+        contactList: contactModelList,
+      );
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {
@@ -125,8 +131,8 @@ class ContactsDataSourceImpl implements ContactsDataSource {
           );
 
       if (userContact.containsKey(contactId)) {
-        final contactModel =
-            await _getContactModel(contactId, userContact[contactId]);
+        final contactModel = await _getContactModel(
+            ContactModelServer.fromMap(userContact[contactId]));
         return contactModel;
       } else {
         throw ServerException("No Contact");
@@ -143,16 +149,22 @@ class ContactsDataSourceImpl implements ContactsDataSource {
     required String userId,
   }) async {
     try {
-      final contactList = await _firestore
+      final List<Map<String, dynamic>> contactList = await _firestore
           .collection(AppConstants.userCollection)
           .doc(userId)
           .get()
-          .then((doc) => doc.get('contacts'));
+          .then((doc) => doc.data()?["contacts"]);
 
-      final contactModelList = await contactList
-          .map((Map<String, dynamic> contactMap) async =>
-              await _getContactModel(contactMap['id'], Timestamp.now()))
+      final List<ContactModelServer> contactListServer = contactList
+          .map(
+            (e) => ContactModelServer.fromMap(e),
+          )
           .toList();
+
+      final List<ContactModel> contactModelList = [];
+      for (var contactServer in contactListServer) {
+        contactModelList.add(await _getContactModel(contactServer));
+      }
 
       return contactModelList;
     } on FirebaseException catch (e) {
@@ -163,19 +175,19 @@ class ContactsDataSourceImpl implements ContactsDataSource {
   }
 
   Future<ContactModel> _getContactModel(
-    String contactId,
-    Timestamp timestamp,
-  ) async {
+      ContactModelServer contactModelServer) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> contactDocumentSnapshot =
           await _firestore
               .collection(AppConstants.userCollection)
-              .doc(contactId)
+              .doc(contactModelServer.id)
               .get();
       if (contactDocumentSnapshot.data() != null) {
         Map<String, dynamic> map = contactDocumentSnapshot.data()!;
-        map["addTime"] = timestamp;
         ContactModel contactModel = ContactModel.fromMap(map);
+        contactModel.addTimeModel = contactModelServer.timestamp;
+        contactModel.favoriteCategoryModel =
+            contactModelServer.favoriteCategories;
         return contactModel;
       } else {
         throw ServerException("No Contact");
@@ -199,7 +211,10 @@ class ContactsDataSourceImpl implements ContactsDataSource {
           .doc(userId)
           .update({
         'contacts': FieldValue.arrayRemove([
-          {'id': contactModel.id, 'time': FieldValue.serverTimestamp()},
+          {
+            'id': contactModel.id,
+            'time': FieldValue.serverTimestamp(),
+          },
         ]),
       });
 

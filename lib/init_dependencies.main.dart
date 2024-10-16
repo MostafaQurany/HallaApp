@@ -23,9 +23,13 @@ _initCommon() {
     ..registerLazySingleton<LocalUserDataSource>(
       () => LocalUserDataSourceImpl(),
     )
+    ..registerLazySingleton<NativeLocalContactDataBaseSource>(
+      () => NativeLocalContactDataBaseSourceImpl(),
+    )
     // Repository
     ..registerFactory<CommonRepositories>(
       () => CommonRepositoriesImpl(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
@@ -97,6 +101,11 @@ _initCommon() {
         serviceLocator(),
       ),
     )
+    ..registerFactory(
+      () => GetFirstTimeLocalContactsUsecase(
+        serviceLocator(),
+      ),
+    )
     // bloc
     ..registerLazySingleton(
       () => UserCubit(
@@ -111,9 +120,6 @@ _initCommon() {
     )
     ..registerLazySingleton(
       () => LanguageCubit(),
-    )
-    ..registerLazySingleton(
-      () => ConnectivityCubit(),
     );
 }
 
@@ -188,6 +194,8 @@ _initAuth() {
     // bloc
     ..registerLazySingleton(
       () => AuthBloc(
+        serviceLocator(),
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

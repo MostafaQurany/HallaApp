@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/utils/routting.dart';
@@ -23,6 +24,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late bool isGuest;
+
+  @override
+  void initState() {
+    super.initState();
+    isGuest = UserCubit.get(context).user!.isGuest;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,49 +44,51 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(
                 height: 30.h,
               ),
-              CustomProfileButtom(
-                icon: AppImages.personalIcon,
-                name: S.of(context).changeProfile,
-                onTap: () {
-                  AppNavigator.navigatePush(
-                      context, const UpdateProfileScreen());
-                },
-              ),
-              CustomProfileButtom(
-                icon: AppImages.emptyHeart,
-                name: S.of(context).favoriteContacts,
-                onTap: () {
-                  AppNavigator.navigatePush(
-                    context,
-                    const FavoriteContactsSettings(),
-                  );
-                },
-              ),
-              CustomProfileButtom(
-                icon: AppImages.pincodeChangeIcon,
-                name: S.of(context).changeSecurityCode,
-                onTap: () {},
-              ),
-              CustomProfileButtom(
-                icon: AppImages.promotionsIcon,
-                name: S.of(context).promotions,
-                onTap: () {},
-              ),
-              CustomProfileButtom(
-                icon: AppImages.customerServiceIcon,
-                name: S.of(context).customerService,
-                onTap: () {},
-              ),
-              CustomProfileButtom(
-                icon: AppImages.settingsIcon,
-                name: S.of(context).settings,
-                onTap: () {
-                  AppNavigator.navigatePush(context, const SettingsScreen());
-                },
-              ),
-              SizedBox(
-                height: 5.h,
-              ),
+              if (!isGuest) ...[
+                CustomProfileButtom(
+                  icon: AppImages.personalIcon,
+                  name: S.of(context).changeProfile,
+                  onTap: () {
+                    AppNavigator.navigatePush(
+                        context, const UpdateProfileScreen());
+                  },
+                ),
+                CustomProfileButtom(
+                  icon: AppImages.emptyHeart,
+                  name: S.of(context).favoriteContacts,
+                  onTap: () {
+                    AppNavigator.navigatePush(
+                      context,
+                      const FavoriteContactsSettings(),
+                    );
+                  },
+                ),
+                CustomProfileButtom(
+                  icon: AppImages.pincodeChangeIcon,
+                  name: S.of(context).changeSecurityCode,
+                  onTap: () {},
+                ),
+                CustomProfileButtom(
+                  icon: AppImages.promotionsIcon,
+                  name: S.of(context).promotions,
+                  onTap: () {},
+                ),
+                CustomProfileButtom(
+                  icon: AppImages.customerServiceIcon,
+                  name: S.of(context).customerService,
+                  onTap: () {},
+                ),
+                CustomProfileButtom(
+                  icon: AppImages.settingsIcon,
+                  name: S.of(context).settings,
+                  onTap: () {
+                    AppNavigator.navigatePush(context, const SettingsScreen());
+                  },
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+              ],
               BlocListener<ProfileBloc, ProfileState>(
                 listener: (context, state) {
                   if (state is LogOutSuccesState) {

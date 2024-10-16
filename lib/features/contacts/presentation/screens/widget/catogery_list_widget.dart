@@ -50,7 +50,7 @@ class _CatogeryListWidgetState extends State<CatogeryListWidget> {
                         : Text(
                             UserCubit.get(context)
                                 .user!
-                                .favoriteCategories[index - 1]!,
+                                .favoriteCategories[index - 1],
                           ),
                   ),
                 ),

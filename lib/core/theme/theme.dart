@@ -15,9 +15,11 @@ class AppTheme {
       shadowColor: AppColors.transparent,
     ),
     elevatedButtonTheme: _elevatedButtonThemeData(),
+    iconButtonTheme: _iconButtonThemeData(),
     textTheme: TextTheme(
       headlineLarge: _ibmTextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-      headlineMedium: _ibmTextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+      headlineMedium:
+          _ibmTextStyle(fontSize: 28.sp, fontWeight: FontWeight.w500),
       headlineSmall: _ibmTextStyle(fontSize: 24),
       bodyLarge: _ibmTextStyle(fontSize: 18, fontWeight: FontWeight.w600),
       bodyMedium: _ibmTextStyle(fontSize: 16),
@@ -25,7 +27,8 @@ class AppTheme {
     ),
     primaryTextTheme: TextTheme(
       headlineLarge: _ibmTextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-      headlineMedium: _ibmTextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+      headlineMedium:
+          _ibmTextStyle(fontSize: 28.sp, fontWeight: FontWeight.w500),
       headlineSmall: _ibmTextStyle(fontSize: 24),
       bodyLarge: _ibmTextStyle(fontSize: 18, fontWeight: FontWeight.w600),
       bodyMedium: _ibmTextStyle(fontSize: 16),
@@ -71,6 +74,7 @@ class AppTheme {
       shadowColor: AppColors.transparent,
     ),
     elevatedButtonTheme: _elevatedButtonThemeData(),
+    iconButtonTheme: _iconButtonThemeData(),
     textTheme: TextTheme(
       headlineLarge: _ibmTextStyle(
         fontSize: 32,
@@ -78,8 +82,8 @@ class AppTheme {
         color: AppColors.white,
       ),
       headlineMedium: _ibmTextStyle(
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
+        fontSize: 28.sp,
+        fontWeight: FontWeight.w500,
         color: AppColors.white,
       ),
       headlineSmall: _ibmTextStyle(
@@ -98,8 +102,8 @@ class AppTheme {
         color: AppColors.white,
       ),
       headlineMedium: _ibmTextStyle(
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
+        fontSize: 28.sp,
+        fontWeight: FontWeight.w500,
         color: AppColors.white,
       ),
       headlineSmall: _ibmTextStyle(
@@ -164,6 +168,14 @@ class AppTheme {
           padding: EdgeInsets.symmetric(
             vertical: 12.0.h,
           ),
+        ),
+      );
+
+  static IconButtonThemeData _iconButtonThemeData() => IconButtonThemeData(
+        style: IconButton.styleFrom(
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          fixedSize: Size.zero,
+          iconSize: 16.sp,
         ),
       );
   static bool isLight(BuildContext context) =>

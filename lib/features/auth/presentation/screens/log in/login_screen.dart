@@ -11,42 +11,42 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios_outlined),
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back_ios_outlined),
+          ),
+          title: Text(
+            S.of(context).login,
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          centerTitle: true,
         ),
-        title: Text(
-          S.of(context).login,
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-        centerTitle: true,
-      ),
-      body: Stack(
-        children: <Widget>[
-          Align(
-            alignment: AlignmentDirectional.bottomCenter,
-            child: Container(
-              width: double.maxFinite,
-              height: 1.sh,
-              decoration: BoxDecoration(
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: AppColors.primary.withOpacity(0.1),
-                    blurRadius: 1.sh,
-                  ),
-                ],
-              ),
-              child: Image.asset(
-                AppTheme.isLight(context)
-                    ? AppImages.loginSignBackgroundLight
-                    : AppImages.loginSignBackgroundDark,
-                fit: BoxFit.fill,
+        body: Stack(
+          children: <Widget>[
+            Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: Container(
+                width: double.maxFinite,
+                height: 1.sh,
+                decoration: BoxDecoration(
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: AppColors.primary.withOpacity(0.1),
+                      blurRadius: 1.sh,
+                    ),
+                  ],
+                ),
+                child: Image.asset(
+                  AppTheme.isLight(context)
+                      ? AppImages.loginSignBackgroundLight
+                      : AppImages.loginSignBackgroundDark,
+                  fit: BoxFit.fill,
+                ),
               ),
             ),
-          ),
-          const LoginBody(),
-        ],
-      ),
-    );
+            const LoginBody(),
+          ],
+        ),
+      );
 }

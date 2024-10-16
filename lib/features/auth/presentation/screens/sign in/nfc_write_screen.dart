@@ -62,7 +62,6 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
             child: TextButton(
               onPressed: () {
                 context.read<AuthBloc>().closeNfcStatusStream();
-
                 AppNavigator.navigatePushReplaceRemoveAll(
                   context,
                   const PersonalInformationScreen(),
@@ -81,6 +80,12 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
       ),
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
+          if (state is AuthLoading) {
+            AppShowDialog.loading(context);
+          }
+          if (state is AuthFailure) {
+            AppShowDialog.showErrorMessage(context, state.message);
+          }
           if (state is NfcState) {
             if (state.isOpen) {
               _slideTransitionController.reverse();
@@ -117,14 +122,12 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
           }
 
           if (state is AuthUploadSuccess) {
+            AppNavigator.navigatePop(context);
             context.read<AuthBloc>().closeNfcStatusStream();
             AppNavigator.navigatePushReplaceRemoveAll(
               context,
               const PersonalInformationScreen(),
             );
-          }
-          if (state is AuthFailure) {
-            AppShowDialog.showErrorMessage(context, state.message);
           }
         },
         builder: (context, state) {

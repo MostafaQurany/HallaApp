@@ -31,7 +31,6 @@ class DeleteGuestDialogBody extends StatelessWidget {
           onPressed: () {
             context.read<AuthBloc>().add(AuthForgetPinCodeGuestEvent());
             Navigator.of(context).pop();
-            Navigator.of(context).pop();
           },
         ),
       ],

@@ -18,7 +18,7 @@ class ConnectivityFDTCBody extends StatelessWidget {
           Text(S.of(context).warning),
         ],
       ),
-      content: Text(""),
+      content: const Text(""),
       actions: [
         TextButton(
           child: Text(S.of(context).cancel),

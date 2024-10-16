@@ -24,38 +24,46 @@ class _WriteCategoriesFieldState extends State<WriteCategoriesField> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AlertDialog(
       title: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Lottie.asset(
-            AppImages.addCategorieLottie,
-            repeat: false,
-            width: 120.w,
-          ),
-          Expanded(
-            child: Text(S.of(context).addNewCategories),
-          ),
+          Lottie.asset(AppImages.addCategorieLottie,
+              repeat: false, width: 120.w),
+          Expanded(child: Text(S.of(context).addNewCategories)),
         ],
       ),
-      titleTextStyle: AppTheme.getThemeText(context).headlineSmall!.copyWith(
-            fontSize: 20.sp,
-          ),
+      titleTextStyle: AppTheme.getThemeText(context)
+          .headlineSmall!
+          .copyWith(fontSize: 20.sp),
       content: Form(
         key: formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(S.of(context).typeYourNewFavoriteCategorieToAdd),
-            SizedBox(
-              height: 15.h,
-            ),
+            SizedBox(height: 15.h),
             CustomTextFormField(
               control: controller,
               fieldType: FieldType.category,
               hintText: S.of(context).categorie,
               prefixIcon: Icons.contacts_outlined,
+              validate: (value) {
+                if (UserCubit.get(context)
+                    .user!
+                    .favoriteCategories
+                    .contains(value)) {
+                  return S.of(context).thisTitleIsAlreadyAdded;
+                }
+                return null;
+              },
             ),
           ],
         ),
@@ -68,33 +76,29 @@ class _WriteCategoriesFieldState extends State<WriteCategoriesField> {
             child: Text(S.of(context).add),
             onPressed: () {
               if (formKey.currentState!.validate()) {
-                Map<int, String> map =
-                    UserCubit.get(context).user!.favoriteCategories;
-                int maxKey = 0;
-                if (map.isEmpty) {
-                  maxKey = -1;
-                } else {
-                  maxKey = map.keys.reduce((a, b) => a > b ? a : b);
-                }
-                map[maxKey + 1] = controller.text;
-                UserCubit.get(context).user!.favoriteCategories = map;
-                context.read<ProfileBloc>().add(
-                      UpdateUserEvent(user: UserCubit.get(context).user!),
-                    );
+                // Update user categories in UserCubit
+                List<String> updatedCategories =
+                    List.from(UserCubit.get(context).user!.favoriteCategories)
+                      ..add(controller.text.trim());
+                UserCubit.get(context).user!.favoriteCategories =
+                    updatedCategories;
+                // Dispatch event to update user profile
+                context
+                    .read<ProfileBloc>()
+                    .add(UpdateUserEvent(user: UserCubit.get(context).user!));
                 Navigator.of(context).pop();
               }
             },
           ),
         ),
         TextButton(
-          child: Text(S.of(context).cancel,
-              style: AppTheme.getThemeText(context).bodyMedium!.copyWith(
-                    color: AppColors.gray,
-                  )),
-          onPressed: () {
-            controller.dispose();
-            Navigator.of(context).pop();
-          },
+          child: Text(
+            S.of(context).cancel,
+            style: AppTheme.getThemeText(context)
+                .bodyMedium!
+                .copyWith(color: AppColors.gray),
+          ),
+          onPressed: () => Navigator.of(context).pop(), // Just close the dialog
         ),
       ],
     );

@@ -1,11 +1,13 @@
 import 'package:get_it/get_it.dart';
 import 'package:halla/core/common/data/data%20source/local_user_data_source.dart';
+import 'package:halla/core/common/data/data%20source/native_local_contact_data_base_source.dart';
 import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
 import 'package:halla/core/common/data/repositories/common_repositories_impl.dart';
 import 'package:halla/core/common/domain/repositories/common_repositories.dart';
 import 'package:halla/core/common/domain/usecase/add_user_to_local_usecase.dart';
 import 'package:halla/core/common/domain/usecase/delete_user_from_local_usecase.dart';
 import 'package:halla/core/common/domain/usecase/forget_pin_code_guest.dart';
+import 'package:halla/core/common/domain/usecase/get_first_time_local_contacts_usecase.dart';
 import 'package:halla/core/common/domain/usecase/get_guest.dart';
 import 'package:halla/core/common/domain/usecase/get_is_nfc_available.dart';
 import 'package:halla/core/common/domain/usecase/get_is_nfc_open.dart';
@@ -16,7 +18,6 @@ import 'package:halla/core/common/domain/usecase/is_user_saved_local_usecase.dar
 import 'package:halla/core/common/domain/usecase/log_in_guest.dart';
 import 'package:halla/core/common/domain/usecase/read_from_nfc.dart';
 import 'package:halla/core/common/domain/usecase/write_on_nfc.dart';
-import 'package:halla/core/common/presentation/cubit/connectivity/connectivity_cubit.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/features/auth/data/data_sources/auth_data_source.dart';
 import 'package:halla/core/common/data/data%20source/data_base_source.dart';
@@ -52,6 +53,5 @@ import 'package:halla/features/profile/domain/usecases/set_image_url_usecase.dar
 import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
 import 'package:halla/features/splash/presentation/bloc/brightness%20cubit/brightness_cubit.dart';
 import 'package:halla/features/splash/presentation/bloc/language%20cubit/language_cubit.dart';
-
 
 part 'init_dependencies.main.dart';

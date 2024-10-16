@@ -1,6 +1,6 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/error/failure.dart';
-import 'package:halla/core/usecase/usecase.dart';
+import 'package:halla/core/common/domain/usecase/usecase.dart';
 import 'package:halla/features/profile/domain/repositories/profile_repository.dart';
 
 class GetImageUrlUsecase implements UseCase<String, GetImageUrlParams> {

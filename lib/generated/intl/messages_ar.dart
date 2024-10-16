@@ -62,8 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage(
                 "أدخل عنوان بريدك الإلكتروني أدناه وسنرسل لك رابط لإعادة تعيين كلمة السر. إذا كان البريد الإلكتروني مرتبطاً بحساب، فستتلقى بريداً إلكترونياً مع التعليمات لإنشاء كلمة سر جديدة "),
         "facebook": MessageLookupByLibrary.simpleMessage("فيسبوك"),
-        "favoriteContacts": MessageLookupByLibrary.simpleMessage(
-            "إعدادات جهات الاتصال المفضلة"),
+        "favoriteContacts":
+            MessageLookupByLibrary.simpleMessage("جهات الاتصال المفضلة"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("نسيان كلمة السر ؟"),
         "forgetpassword":
@@ -115,6 +115,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
         "success": MessageLookupByLibrary.simpleMessage("نجاح"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "thisTitleIsAlreadyAdded":
+            MessageLookupByLibrary.simpleMessage("This title is already added"),
         "twitter": MessageLookupByLibrary.simpleMessage("تويتر"),
         "typeYourNewFavoriteCategorieToAdd":
             MessageLookupByLibrary.simpleMessage(

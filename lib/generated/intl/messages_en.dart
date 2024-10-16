@@ -63,7 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Enter your email address below and we\'ll send you a link to reset your password. If the email is associated with an account, you\'ll receive an email with instructions to create a new password "),
         "facebook": MessageLookupByLibrary.simpleMessage("Facebook"),
         "favoriteContacts":
-            MessageLookupByLibrary.simpleMessage("Favorite Contacts Setting"),
+            MessageLookupByLibrary.simpleMessage("Favorite Contacts"),
         "forgetPassword":
             MessageLookupByLibrary.simpleMessage("Forget Password ?"),
         "forgetpassword":
@@ -114,6 +114,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "thisTitleIsAlreadyAdded":
+            MessageLookupByLibrary.simpleMessage("This title is already added"),
         "twitter": MessageLookupByLibrary.simpleMessage("Twitter"),
         "typeYourNewFavoriteCategorieToAdd":
             MessageLookupByLibrary.simpleMessage(

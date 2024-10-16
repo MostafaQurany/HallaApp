@@ -1,12 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
 import 'package:halla/features/contacts/data/models/contact_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class ContactsLocalDataSource {
-  Future<ValueListenable<Box<Map>>>
-      getContactModelBoxListenable();
+  Future<ValueListenable<Box<Map>>> getContactModelBoxListenable();
 
   Future<void> addContact({
     required String userId,
@@ -31,14 +29,9 @@ abstract class ContactsLocalDataSource {
     required String userId,
     required ContactModel contactModel,
   });
-
-
-
-  
 }
 
 class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
-  final String _boxName = AppConstants.contactBox;
 
   @override
   Future<void> addContact({
@@ -47,16 +40,17 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
   }) async {
     try {
       final box = await _getBoxContact();
-      final contactMap = box.get(userId);
-      print(contactMap);
+      Map<String, String>? contactMap = box.get(userId)?.cast<String, String>();
+
       if (contactMap != null) {
-        contactMap[contactModel.id] = contactModel.toJsonHive();
+        contactMap[contactModel.idModel] = contactModel.toJson();
         await box.put(userId, contactMap);
       } else {
-        final newContactMap = {contactModel.id: contactModel.toJsonHive()};
+        final newContactMap = {contactModel.idModel: contactModel.toJson()};
         await box.put(userId, newContactMap);
       }
-      print(contactMap);
+
+      print('Added/Updated contact: $contactMap');
     } catch (e) {
       print(e);
       throw ServerException(e.toString());
@@ -73,13 +67,13 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
       final contactMap = box.get(userId);
       if (contactMap != null) {
         for (final contact in contactList) {
-          contactMap[contact.id] = contact.toJsonHive();
+          contactMap[contact.id] = contact.toJson();
         }
         await box.put(userId, contactMap);
       } else {
         Map<String, String> newContactMap = {};
         for (var element in contactList) {
-          newContactMap[element.id] = element.toJsonHive();
+          newContactMap[element.id] = element.toJson();
         }
         await box.put(userId, newContactMap);
       }
@@ -114,7 +108,7 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
       final box = await _getBoxContact();
       final contactMap = box.get(userId);
       if (contactMap != null && contactMap[contactId] != null) {
-        return ContactModel.fromJsonHive(contactMap[contactId]!);
+        return ContactModel.fromJson(contactMap[contactId]!);
       } else {
         throw ServerException("Can't find the contact");
       }
@@ -132,8 +126,9 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
       final contactMap = box.get(userId);
       if (contactMap != null) {
         List<ContactModel> contactModelList = [];
+        box.get(userId);
         for (var k in contactMap.keys) {
-          contactModelList.add(ContactModel.fromJsonHive(contactMap[k]!));
+          contactModelList.add(ContactModel.fromJson(contactMap[k]!));
         }
         return contactModelList;
       } else {
@@ -147,17 +142,17 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
   }
 
   @override
-  Future<ValueListenable<Box<Map>>>
-      getContactModelBoxListenable() async {
+  Future<ValueListenable<Box<Map>>> getContactModelBoxListenable() async {
     final box = await _getBoxContact();
     return box.listenable();
   }
 
   Future<Box<Map>> _getBoxContact() async {
-    if (Hive.isBoxOpen(_boxName)) {
-      return Hive.box<Map>(_boxName);
+    const String boxName = "contacts"; // Define box name
+    if (Hive.isBoxOpen(boxName)) {
+      return Hive.box<Map>(boxName);
     } else {
-      return await Hive.openBox<Map>(_boxName);
+      return await Hive.openBox<Map>(boxName);
     }
   }
 }

@@ -79,11 +79,9 @@ class _SignBodyState extends State<SignBody> {
                 }
                 if (state is AuthFailure) {
                   Navigator.pop(context);
-
                   AppShowDialog.showErrorMessage(context, state.message);
                 }
                 if (state is AuthSuccess) {
-                  Navigator.pop(context);
                   context.read<AuthBloc>().add(
                         AuthUploadUserEvent(
                           user: state.user,
@@ -91,7 +89,8 @@ class _SignBodyState extends State<SignBody> {
                       );
                 }
                 if (state is AuthUploadSuccess) {
-                  Navigator.pop(context);
+                  AppNavigator.navigatePop(context);
+
                   context.read<AuthBloc>().add(
                         AuthGetSmsCodeEvent(
                           phoneNumber: phoneController.text.trim(),
@@ -99,7 +98,8 @@ class _SignBodyState extends State<SignBody> {
                       );
                 }
                 if (state is AuthGetCodeSmsSiccessState) {
-                  Navigator.pop(context);
+                  AppNavigator.navigatePop(context);
+
                   AppNavigator.navigatePush(
                       context,
                       SmsCodeScreen(

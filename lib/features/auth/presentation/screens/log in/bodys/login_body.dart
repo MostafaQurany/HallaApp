@@ -72,6 +72,7 @@ class _LoginBodyState extends State<LoginBody> {
             AppShowDialog.loading(context);
           }
           if (state is AuthSuccess) {
+            AppNavigator.navigatePop(context);
             AppNavigator.navigatePushReplaceRemoveAll(
                 context, const HomeLayout());
           }
@@ -80,6 +81,7 @@ class _LoginBodyState extends State<LoginBody> {
             AppShowDialog.showErrorMessage(context, state.message);
           }
           if (state is AuthGoogleState) {
+            AppNavigator.navigatePop(context);
             if (state.isExit) {
               AppNavigator.navigatePushReplaceRemoveAll(
                   context, const HomeLayout());
@@ -89,6 +91,7 @@ class _LoginBodyState extends State<LoginBody> {
             }
           }
           if (state is AuthGetCodeSmsSiccessState) {
+            AppNavigator.navigatePop(context);
             context.read<AuthBloc>().isLogWithPhone = true;
             AppNavigator.navigatePushReplace(
               context,
@@ -97,7 +100,6 @@ class _LoginBodyState extends State<LoginBody> {
               ),
             );
           }
-
           if (state is AuthSentMessageSuccess) {
             AppNavigator.navigatePop(context);
             AppNavigator.navigatePop(context);

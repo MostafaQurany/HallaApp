@@ -3,7 +3,7 @@ import 'package:fpdart/fpdart.dart';
 
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/error/failure.dart';
-import 'package:halla/core/usecase/usecase.dart';
+import 'package:halla/core/common/domain/usecase/usecase.dart';
 import 'package:halla/features/auth/domain/repositories/auth_repository.dart';
 
 class SentSmsCodeUsecase implements UseCase<User, SentSmsCodeParams> {

@@ -4,6 +4,7 @@ import 'package:halla/core/common/domain/entities/guest.dart';
 import 'package:halla/core/common/domain/entities/nfc_message.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/error/failure.dart';
+import 'package:halla/features/contacts/domain/entities/contact.dart';
 
 abstract interface class CommonRepositories {
   Future<Either<Failure, User>> uploadUser({required User user});
@@ -24,4 +25,6 @@ abstract interface class CommonRepositories {
   Future<Either<Failure, void>> addUserToLocal(User user);
   Future<Either<Failure, User>> getUserFromLocal();
   Future<Either<Failure, void>> deleteUserFromLocal();
+
+  Future<Either<Failure, List<Contact>>> getFirstTimeLocalContacts();
 }

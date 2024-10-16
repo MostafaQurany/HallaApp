@@ -11,6 +11,7 @@ import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
+import "package:halla/features/auth/presentation/screens/first%20time%20contacts/first_time_contacts_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/sms_code_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_birthday_field.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_company_field.dart";
@@ -18,7 +19,6 @@ import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custo
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_social_media_field.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/phones_widget.dart";
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
-import "package:halla/features/home/presentation/screens/home_layout.dart";
 import "package:halla/generated/l10n.dart";
 
 class PersonalInformationScreen extends StatefulWidget {
@@ -85,16 +85,17 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   }
                   if (state is AuthFailure) {
                     Navigator.pop(context);
-
                     AppShowDialog.showErrorMessage(context, state.message);
                   }
                   if (state is AuthPersonalInfoSuccess) {
+                    AppNavigator.navigatePop(context);
                     AppNavigator.navigatePushReplaceRemoveAll(
                       context,
-                      const HomeLayout(),
+                      const FirstTimeContactsScreen(),
                     );
                   }
                   if (state is AuthGetCodeSmsSiccessState) {
+                    AppNavigator.navigatePop(context);
                     AppNavigator.navigatePush(
                       context,
                       SmsCodeScreen(
@@ -174,9 +175,8 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
                                   User user = _featchData();
-                                  if (context
-                                      .read<AuthBloc>()
-                                      .isSignWithSocial) {
+                                  if (phonesWidgetKey
+                                      .currentState!.changeInPrime) {
                                     context.read<AuthBloc>().add(
                                           AuthGetSmsCodeEvent(
                                             phoneNumber: phonesWidgetKey

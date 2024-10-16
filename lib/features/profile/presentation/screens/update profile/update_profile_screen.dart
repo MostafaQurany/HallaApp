@@ -77,7 +77,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           UserCubit.get(context).updateUser(user: UserCubit.get(context).user!);
           Navigator.pop(context);
         }
-        if (state is ProfileUserUpdateSccessfully) {
+        if (state is ProfileUpdateUserSuccessfully) {
           UserCubit.get(context).updateUser(user: state.user);
           Navigator.pop(context);
         }

@@ -1,7 +1,6 @@
 import "package:dropdown_search/dropdown_search.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/constants/constants.dart";
 import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/theme/theme.dart";
@@ -29,7 +28,7 @@ class _CustomNationalityFieldState extends State<CustomNationalityField> {
         selectedItem: selectedNationality.isEmpty
             ? S.of(context).nationality
             : selectedNationality,
-        items: AppConstants.nationalities,
+        items: (filter, loadProps) => AppConstants.nationalities,
         onChanged: (String? value) {
           setState(() {
             widget.controller.text = value ?? "";
@@ -61,46 +60,6 @@ class _CustomNationalityFieldState extends State<CustomNationalityField> {
             backgroundColor: AppTheme.isLight(context)
                 ? AppColors.white
                 : AppColors.blackLight,
-          ),
-        ),
-        dropdownButtonProps: DropdownButtonProps(
-          color: AppColors.gray,
-          icon: const Icon(Icons.keyboard_arrow_down),
-        ),
-        dropdownDecoratorProps: DropDownDecoratorProps(
-          textAlignVertical: TextAlignVertical.center,
-          baseStyle: widget.controller.text.isEmpty
-              ? Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: AppColors.gray)
-              : Theme.of(context).textTheme.bodyMedium!,
-          dropdownSearchDecoration: InputDecoration(
-            hintText: "Nationality",
-            hintStyle: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: AppColors.gray),
-            prefixIcon: Container(
-              padding: EdgeInsets.all(10.0.w),
-              child: ImageIcon(
-                AssetImage(AppImages.nationalityIcon),
-                color: Theme.of(context).inputDecorationTheme.prefixIconColor,
-              ),
-            ),
-            prefixIconColor: AppColors.gray,
-            suffixIcon: const Icon(Icons.keyboard_arrow_down),
-            suffixIconColor: AppColors.gray,
-            filled: true,
-            fillColor: AppTheme.isLight(context)
-                ? AppColors.white
-                : AppColors.blackLight,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(0.5.sw),
-            ),
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 40.w,
-            ),
           ),
         ),
       );

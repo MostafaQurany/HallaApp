@@ -1,7 +1,7 @@
 import 'package:fpdart/src/either.dart';
 import 'package:halla/core/common/domain/repositories/common_repositories.dart';
 import 'package:halla/core/error/failure.dart';
-import 'package:halla/core/usecase/usecase.dart';
+import 'package:halla/core/common/domain/usecase/usecase.dart';
 
 class IsGuestExit implements UseCase<bool, NoParams> {
   final CommonRepositories commonRepositories;

@@ -17,8 +17,10 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
 //server
   @override
-  Future<Either<Failure, void>> addContactListServer(
-      {required String userId, required List<String> contactIdList}) async {
+  Future<Either<Failure, void>> addContactListServer({
+    required String userId,
+    required List<String> contactIdList,
+  }) async {
     try {
       final res = await server.addContactList(
           userId: userId, contactIdList: contactIdList);
@@ -54,8 +56,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
   // local
 
   @override
-  Future<Either<Failure, ValueListenable<Box<Map>>>>
-      getBoxListenable() async {
+  Future<Either<Failure, ValueListenable<Box<Map>>>> getBoxListenable() async {
     try {
       final res = await local.getContactModelBoxListenable();
       return Right(res);

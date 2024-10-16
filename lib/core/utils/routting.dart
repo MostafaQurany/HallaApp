@@ -24,10 +24,10 @@ class AppNavigator {
   }
 
   static _animation(Widget page) {
-    const int time = 500;
+    const int time = 150;
     final Animatable<Offset> tween =
         Tween(begin: const Offset(1, 0), end: Offset.zero).chain(
-      CurveTween(curve: Curves.easeInOutCirc),
+      CurveTween(curve: Curves.easeInOut),
     );
     return PageRouteBuilder(
       pageBuilder: (BuildContext context, Animation<double> animation,

@@ -1,6 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/common/data/data%20source/data_base_source.dart';
 import 'package:halla/core/common/data/data%20source/local_user_data_source.dart';
+import 'package:halla/core/common/data/data%20source/native_local_contact_data_base_source.dart';
 import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
 import 'package:halla/core/common/data/models/nfc_message_model.dart';
 import 'package:halla/core/common/data/models/user_model.dart';
@@ -10,15 +11,18 @@ import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/common/domain/repositories/common_repositories.dart';
 import 'package:halla/core/error/failure.dart';
 import 'package:halla/core/error/server_exception.dart';
+import 'package:halla/features/contacts/domain/entities/contact.dart';
 
 class CommonRepositoriesImpl implements CommonRepositories {
   final NfcDataSource nfcDataSource;
   final DataBaseSource dataBaseSource;
   final LocalUserDataSource localUserDataSource;
+  final NativeLocalContactDataBaseSource nativeLocalContactDataBaseSource;
   CommonRepositoriesImpl(
     this.nfcDataSource,
     this.dataBaseSource,
     this.localUserDataSource,
+    this.nativeLocalContactDataBaseSource,
   );
 
 // user database
@@ -26,6 +30,7 @@ class CommonRepositoriesImpl implements CommonRepositories {
   Future<Either<Failure, User>> uploadUser({required User user}) async {
     try {
       UserModel userModel = UserModel.fromUser(user);
+
       final res = await dataBaseSource.uploadUser(userModel);
       return right(res);
     } on ServerException catch (e) {
@@ -198,6 +203,19 @@ class CommonRepositoriesImpl implements CommonRepositories {
   Future<Either<Failure, bool>> isUserSavedLocal() async {
     try {
       final res = await localUserDataSource.isUserSavedLocal();
+      return Right(res);
+    } on ServerException catch (e) {
+      return Left(
+        Failure(e.message),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Contact>>> getFirstTimeLocalContacts() async {
+    try {
+      final res =
+          await nativeLocalContactDataBaseSource.getFirstTimeLocalContacts();
       return Right(res);
     } on ServerException catch (e) {
       return Left(

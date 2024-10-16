@@ -1,37 +1,41 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'package:halla/core/common/data/models/company_model.dart';
 import 'package:halla/core/common/data/models/social_media_model.dart';
 import 'package:halla/features/contacts/domain/entities/contact.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+
 part 'contact_model.g.dart';
 
 @HiveType(typeId: 1)
 class ContactModel extends Contact with HiveObjectMixin {
   @HiveField(0)
-  final String idModel;
+  String idModel;
   @HiveField(1)
-  final String emailModel;
+  String emailModel;
   @HiveField(2)
-  final Timestamp addTimeModel;
+  Timestamp addTimeModel;
   @HiveField(3)
-  final String fullNameModel;
+  String fullNameModel;
   @HiveField(4)
-  final String primePhoneModel;
+  String primePhoneModel;
   @HiveField(5)
-  final String dateOfBirthModel;
+  String dateOfBirthModel;
   @HiveField(6)
-  final String nationalityModel;
+  String nationalityModel;
   @HiveField(7)
-  final List<String> phonesModel;
-  @override
+  List<String> phonesModel;
   @HiveField(8)
-  final SocialMediaModel socialMediaModel;
+  SocialMediaModel socialMediaModel;
   @HiveField(9)
-  final CompanyModel companyModel;
+  CompanyModel companyModel;
   @HiveField(10)
-  final String imageUrlModel;
+  String imageUrlModel;
+  @HiveField(11)
+  String favoriteCategoryModel;
 
   ContactModel({
     required this.idModel,
@@ -45,6 +49,7 @@ class ContactModel extends Contact with HiveObjectMixin {
     required this.companyModel,
     required this.emailModel,
     required this.imageUrlModel,
+    required this.favoriteCategoryModel,
   }) : super(
           id: idModel,
           addTime: addTimeModel,
@@ -57,6 +62,7 @@ class ContactModel extends Contact with HiveObjectMixin {
           socialMedia: socialMediaModel,
           company: companyModel,
           email: emailModel,
+          favoriteCategory: favoriteCategoryModel,
         );
 
   ContactModel copyWith({
@@ -71,35 +77,37 @@ class ContactModel extends Contact with HiveObjectMixin {
     List<String>? phones,
     SocialMediaModel? socialMedia,
     CompanyModel? company,
+    String? favoriteCategory,
   }) {
     return ContactModel(
-      idModel: id ?? idModel,
-      addTimeModel: addTime ?? addTimeModel,
-      fullNameModel: fullName ?? fullNameModel,
-      primePhoneModel: primePhone ?? primePhoneModel,
-      dateOfBirthModel: dateOfBirth ?? dateOfBirthModel,
-      nationalityModel: nationality ?? nationalityModel,
-      imageUrlModel: imageUrl ?? imageUrlModel,
-      phonesModel: phones ?? phonesModel,
-      socialMediaModel: socialMedia ?? socialMediaModel,
-      companyModel: company ?? companyModel,
-      emailModel: email ?? emailModel,
-    );
+        idModel: id ?? idModel,
+        addTimeModel: addTime ?? addTimeModel,
+        fullNameModel: fullName ?? fullNameModel,
+        primePhoneModel: primePhone ?? primePhoneModel,
+        dateOfBirthModel: dateOfBirth ?? dateOfBirthModel,
+        nationalityModel: nationality ?? nationalityModel,
+        imageUrlModel: imageUrl ?? imageUrlModel,
+        phonesModel: phones ?? phonesModel,
+        socialMediaModel: socialMedia ?? socialMediaModel,
+        companyModel: company ?? companyModel,
+        emailModel: email ?? emailModel,
+        favoriteCategoryModel: favoriteCategory ?? favoriteCategoryModel);
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'id': idModel,
-      'addTime': addTimeModel,
-      'fullName': fullNameModel,
-      'email': emailModel,
-      'primePhone': primePhoneModel,
-      'dateOfBirth': dateOfBirthModel,
-      'nationality': nationalityModel,
-      'imageUrl': imageUrlModel,
-      'phones': phones,
-      'socialMedia': socialMediaModel.toMap(),
-      'company': companyModel.toMap(),
+      'idModel': idModel,
+      'emailModel': emailModel,
+      'addTimeModel': addTimeModel.millisecondsSinceEpoch,
+      'fullNameModel': fullNameModel,
+      'primePhoneModel': primePhoneModel,
+      'dateOfBirthModel': dateOfBirthModel,
+      'nationalityModel': nationalityModel,
+      'phonesModel': phonesModel,
+      'socialMediaModel': socialMediaModel.toMap(),
+      'companyModel': companyModel.toMap(),
+      'imageUrlModel': imageUrlModel,
+      'favoriteCategoryModel': favoriteCategoryModel,
     };
   }
 
@@ -115,9 +123,11 @@ class ContactModel extends Contact with HiveObjectMixin {
       dateOfBirthModel: json['dateOfBirth'] ?? '',
       idModel: json['id'] ?? '',
       socialMediaModel: SocialMediaModel.fromMap(json['socialMedia']),
-      addTimeModel: json['addTime'],
+      addTimeModel: Timestamp.fromMillisecondsSinceEpoch(json['addTime']),
+      favoriteCategoryModel: json['favoriteCategory'],
     );
   }
+
   factory ContactModel.fromContact(Contact user) {
     return ContactModel(
       idModel: user.id,
@@ -129,12 +139,21 @@ class ContactModel extends Contact with HiveObjectMixin {
       imageUrlModel: user.imageUrl,
       emailModel: user.email,
       phonesModel: user.phones,
+      favoriteCategoryModel: '',
       socialMediaModel: SocialMediaModel.fromSocialMedia(user.socialMedia),
       companyModel: CompanyModel.fromCompany(user.company),
     );
   }
 
-  String toJsonHive() {
+  
+
+  String toJson() => json.encode(toMap());
+
+  factory ContactModel.fromJson(String source) => ContactModel.fromMap(json.decode(source) as Map<String, dynamic>);
+}
+
+/*
+String toJsonHive() {
     return jsonEncode({
       'id': idModel,
       'addTime': addTimeModel.millisecondsSinceEpoch,
@@ -145,6 +164,7 @@ class ContactModel extends Contact with HiveObjectMixin {
       'nationality': nationalityModel,
       'imageUrl': imageUrlModel,
       'phones': phonesModel,
+      'favoriteCategory': favoriteCategoryModel,
       'socialMedia': socialMediaModel.toMap(),
       'company': companyModel.toMap(),
     });
@@ -162,10 +182,10 @@ class ContactModel extends Contact with HiveObjectMixin {
       dateOfBirthModel: json['dateOfBirth'] ?? '',
       idModel: json['id'] ?? '',
       emailModel: json['email'] ?? '',
+      favoriteCategoryModel: json['favoriteCategory'] ?? '',
       socialMediaModel: SocialMediaModel.fromMap(json['socialMedia']),
       addTimeModel: Timestamp.fromMillisecondsSinceEpoch(
         json['addTime'],
       ),
     );
-  }
-}
+  }*/

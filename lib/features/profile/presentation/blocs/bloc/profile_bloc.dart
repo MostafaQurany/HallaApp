@@ -31,6 +31,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       (event, emit) {
         FirebaseAuth.instance.signOut();
         GoogleSignIn().signOut();
+        userCubit.deletUserFromLocal();
         emit(LogOutSuccesState());
       },
     );
@@ -70,7 +71,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     _loading(emit);
-
     final res = await uploadUserUsecase(
       UploadUserParams(user: event.user),
     );
@@ -81,7 +81,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       },
       (r) {
         isLoading = !isLoading;
-        print(r.toString());
         userCubit.updateUser(user: r);
         emit(ProfileUpdateUserSuccessfully(
           user: r,

@@ -21,13 +21,13 @@ class AppShowDialog {
           scale: animation.value,
           child: Opacity(
             opacity: animation.value,
-            child: page,
+            child: child,
           ),
         );
       },
       pageBuilder: (BuildContext context, Animation animation,
           Animation secondaryAnimation) {
-        return Container();
+        return page;
       },
     );
   }
@@ -116,12 +116,12 @@ class AppShowDialog {
             scale: a1.value,
             child: Opacity(
               opacity: a1.value,
-              child: const DeleteGuestDialogBody(),
+              child: widget,
             ),
           );
         },
         pageBuilder: (context, animation1, animation2) {
-          return Container();
+          return const DeleteGuestDialogBody();
         });
   }
 

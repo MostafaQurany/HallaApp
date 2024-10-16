@@ -1,4 +1,3 @@
-import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MySharedPreferences {
