@@ -1,14 +1,16 @@
+import "package:firebase_auth_platform_interface/src/providers/phone_auth.dart";
 import "package:fpdart/fpdart.dart";
+import "package:halla/core/common/data/data%20source/data_base_source.dart";
+import "package:halla/core/common/data/models/user_model.dart";
 import "package:halla/core/common/domain/entities/user.dart";
 import "package:halla/core/error/failure.dart";
 import "package:halla/core/error/server_exception.dart";
 import "package:halla/features/auth/data/data_sources/auth_data_source.dart";
-import "package:halla/core/common/data/data%20source/data_base_source.dart";
-import "package:halla/core/common/data/models/user_model.dart";
 import "package:halla/features/auth/domain/repositories/auth_repository.dart";
 
 class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.authDataSource, this.dataBaseSource);
+
   final AuthDataSource authDataSource;
   final DataBaseSource dataBaseSource;
 
@@ -52,12 +54,25 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, User>> sentSmsCode({
+  Future<Either<Failure, void>> linkPhoneWithPhoneAuthCredential({
+    required PhoneAuthCredential phoneAuthCredential,
+  }) async {
+    try {
+      final res = await authDataSource.linkPhoneWithEmail(
+          phoneAuthCredential: phoneAuthCredential);
+      return right(res);
+    } on ServerException catch (e) {
+      return left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, PhoneAuthCredential>> getPhoneAuthCredentials({
     required String smsCode,
     required String verificationId,
   }) async {
     try {
-      final res = await authDataSource.linkPhoneWithEmail(
+      final res = await authDataSource.getPhoneAuthCredential(
         smsCode: smsCode,
         verificationId: verificationId,
       );

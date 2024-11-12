@@ -1,17 +1,34 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ContactModelServer {
   final String id;
-  final Timestamp timestamp;
-  final String favoriteCategories;
+  Timestamp? timestamp = Timestamp.now();
+  String? favoriteCategories = "";
+
   ContactModelServer({
     required this.id,
-    required this.timestamp,
-    required this.favoriteCategories,
+    this.timestamp,
+    this.favoriteCategories,
   });
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ContactModelServer &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          timestamp == other.timestamp &&
+          favoriteCategories == other.favoriteCategories);
+
+  @override
+  int get hashCode =>
+      id.hashCode ^ timestamp.hashCode ^ favoriteCategories.hashCode;
+
+  @override
+  String toString() {
+    return 'ContactModelServer{ id: $id, timestamp: $timestamp, favoriteCategories: $favoriteCategories,}';
+  }
 
   ContactModelServer copyWith({
     String? id,
@@ -26,26 +43,18 @@ class ContactModelServer {
   }
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'id': id,
-      'timestamp': timestamp.millisecondsSinceEpoch,
-      'favoriteCategories': favoriteCategories,
+      'timestamp': timestamp ?? Timestamp.now().millisecondsSinceEpoch,
+      'favoriteCategories': favoriteCategories ?? '',
     };
   }
 
   factory ContactModelServer.fromMap(Map<String, dynamic> map) {
     return ContactModelServer(
-        id: map['id'] as String,
-        timestamp: Timestamp.fromMillisecondsSinceEpoch(map['timestamp']),
-        favoriteCategories: map['favoriteCategories'] as String);
+      id: map['id'] ?? '',
+      timestamp: map['timestamp'] ?? Timestamp.now(),
+      favoriteCategories: map['favoriteCategories'] ?? '',
+    );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory ContactModelServer.fromJson(String source) =>
-      ContactModelServer.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() =>
-      'ContactModelServer(id: $id, timestamp: $timestamp, favoriteCategories: $favoriteCategories)';
 }

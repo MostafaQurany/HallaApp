@@ -1,15 +1,35 @@
 import 'dart:convert';
 
 import 'package:halla/core/common/domain/entities/guest.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+@HiveType(typeId: 3)
 class GuestModel extends Guest {
+  @HiveField(0)
+  final String idGuestModel;
+  @HiveField(1)
+  final String fullNameGuestModel;
+  @HiveField(2)
+  final String pinCodeGuestModel;
+  @HiveField(3)
+  bool isUpGradedModel;
+  @HiveField(4)
+  String upgradedIdModel;
+
   GuestModel({
-    required super.idGuest,
-    required super.fullNameGuest,
-    required super.pinCodeGuest,
-    super.isUpGraded,
-    super.upgradedId,
-  });
+    required this.idGuestModel,
+    required this.fullNameGuestModel,
+    required this.pinCodeGuestModel,
+    this.isUpGradedModel = false,
+    this.upgradedIdModel = '',
+  }) : super(
+          idGuest: idGuestModel,
+          fullNameGuest: fullNameGuestModel,
+          pinCodeGuest: pinCodeGuestModel,
+          isUpGraded: isUpGradedModel,
+          upgradedId: upgradedIdModel,
+        );
+
   GuestModel copyWith({
     String? id,
     String? fullNameGuest,
@@ -18,11 +38,11 @@ class GuestModel extends Guest {
     String? upgradedId,
   }) {
     return GuestModel(
-      idGuest: id ?? this.id,
-      fullNameGuest: fullNameGuest ?? this.fullNameGuest,
-      pinCodeGuest: pinCode ?? this.pinCode,
-      isUpGraded: isUpGraded ?? this.isUpGraded,
-      upgradedId: upgradedId ?? this.upgradedId,
+      idGuestModel: id ?? this.id,
+      fullNameGuestModel: fullNameGuest ?? this.fullNameGuest,
+      pinCodeGuestModel: pinCode ?? this.pinCode,
+      isUpGradedModel: isUpGraded ?? this.isUpGraded,
+      upgradedIdModel: upgradedId ?? this.upgradedId,
     );
   }
 
@@ -38,11 +58,11 @@ class GuestModel extends Guest {
 
   factory GuestModel.fromMap(Map<String, dynamic> map) {
     return GuestModel(
-      idGuest: map['id'] as String,
-      fullNameGuest: map['name'] as String,
-      pinCodeGuest: map['pinCode'] as String,
-      isUpGraded: map['isUpGraded'] as bool,
-      upgradedId: map['upgradedId'] as String,
+      idGuestModel: map['id'] as String,
+      fullNameGuestModel: map['name'] as String,
+      pinCodeGuestModel: map['pinCode'] as String,
+      isUpGradedModel: map['isUpGraded'] as bool,
+      upgradedIdModel: map['upgradedId'] as String,
     );
   }
 

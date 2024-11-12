@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:halla/features/contacts/presentation/screens/widget/search_field.dart';
 
 class SearchFirstTimeContactScreen extends StatefulWidget {
-  const SearchFirstTimeContactScreen({super.key});
+  final TextEditingController searchController;
+
+  const SearchFirstTimeContactScreen(
+      {super.key, required this.searchController});
 
   @override
   State<SearchFirstTimeContactScreen> createState() =>
@@ -11,10 +14,8 @@ class SearchFirstTimeContactScreen extends StatefulWidget {
 
 class _SearchFirstTimeContactScreenState
     extends State<SearchFirstTimeContactScreen> {
-  final TextEditingController searchController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    return SearchField(searchController: searchController);
+    return SearchField(searchController: widget.searchController);
   }
 }

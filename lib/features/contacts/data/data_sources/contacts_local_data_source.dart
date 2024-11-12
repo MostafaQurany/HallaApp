@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
+import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
 import 'package:halla/features/contacts/data/models/contact_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class ContactsLocalDataSource {
-  Future<ValueListenable<Box<Map>>> getContactModelBoxListenable();
+  Stream<BoxEvent> getContactModelBoxListenable(String userId);
 
   Future<void> addContact({
     required String userId,
@@ -27,11 +27,13 @@ abstract class ContactsLocalDataSource {
 
   Future<void> deleteContact({
     required String userId,
-    required ContactModel contactModel,
+    required String contactId,
   });
 }
 
-class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
+class ContactsLocalDataSourceNewImpl implements ContactsLocalDataSource {
+  final Box<List<ContactModel>> _contactBox =
+      Hive.box<List<ContactModel>>(AppConstants.contactBox);
 
   @override
   Future<void> addContact({
@@ -39,22 +41,29 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
     required ContactModel contactModel,
   }) async {
     try {
-      final box = await _getBoxContact();
-      Map<String, String>? contactMap = box.get(userId)?.cast<String, String>();
-
-      if (contactMap != null) {
-        contactMap[contactModel.idModel] = contactModel.toJson();
-        await box.put(userId, contactMap);
-      } else {
-        final newContactMap = {contactModel.idModel: contactModel.toJson()};
-        await box.put(userId, newContactMap);
-      }
-
-      print('Added/Updated contact: $contactMap');
+      List<ContactModel> contactList =
+          _convertFromDynamicToContactModelList(userId);
+      // ToDo: remove this comment that code to check if the contact is in the list
+      // if (contactList.indexWhere(
+      //         (element) => element.idModel == contactModel.idModel) !=
+      //     -1) {
+      //   throw ServerException("This contact is already added");
+      // }
+      contactList.add(contactModel);
+      _contactBox.put(userId, contactList);
     } catch (e) {
-      print(e);
       throw ServerException(e.toString());
     }
+  }
+
+  List<ContactModel> _convertFromDynamicToContactModelList(String userId) {
+    return _contactBox
+            .get(userId)
+            ?.map(
+              (e) => e,
+            )
+            .toList() ??
+        [];
   }
 
   @override
@@ -63,37 +72,35 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
     required List<ContactModel> contactList,
   }) async {
     try {
-      final box = await _getBoxContact();
-      final contactMap = box.get(userId);
-      if (contactMap != null) {
-        for (final contact in contactList) {
-          contactMap[contact.id] = contact.toJson();
-        }
-        await box.put(userId, contactMap);
-      } else {
-        Map<String, String> newContactMap = {};
-        for (var element in contactList) {
-          newContactMap[element.id] = element.toJson();
-        }
-        await box.put(userId, newContactMap);
-      }
+      List<ContactModel> contactsBoxList =
+          _convertFromDynamicToContactModelList(userId);
+      contactsBoxList = _mergeContacts(contactsBoxList, contactList);
+      _contactBox.put(userId, contactsBoxList);
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
+  List<ContactModel> _mergeContacts(
+      List<ContactModel> list1, List<ContactModel> list2) {
+    final Set<ContactModel> set1 = list1.toSet();
+    final Set<ContactModel> set2 = list2.toSet();
+    return set1.union(set2).toList();
+  }
+
   @override
   Future<void> deleteContact({
     required String userId,
-    required ContactModel contactModel,
+    required String contactId,
   }) async {
     try {
-      final box = await _getBoxContact();
-      final contactMap = box.get(userId);
-      if (contactMap != null) {
-        contactMap.remove(contactModel.id);
-        await box.put(userId, contactMap);
-      }
+      List<ContactModel> contactList =
+          _convertFromDynamicToContactModelList(userId);
+      final int index = contactList.indexWhere(
+        (element) => element.idModel == contactId,
+      );
+      contactList.removeAt(index);
+      _contactBox.put(userId, contactList);
     } catch (e) {
       throw ServerException(e.toString());
     }
@@ -105,54 +112,31 @@ class ContactsLocalDataSourceImpl implements ContactsLocalDataSource {
     required String contactId,
   }) async {
     try {
-      final box = await _getBoxContact();
-      final contactMap = box.get(userId);
-      if (contactMap != null && contactMap[contactId] != null) {
-        return ContactModel.fromJson(contactMap[contactId]!);
-      } else {
-        throw ServerException("Can't find the contact");
-      }
+      List<ContactModel> contactList =
+          _convertFromDynamicToContactModelList(userId);
+      return contactList.where((element) => element.idModel == contactId).first;
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<List<ContactModel>> getContactList({
-    required String userId,
-  }) async {
+  Future<List<ContactModel>> getContactList({required String userId}) async {
     try {
-      final box = await _getBoxContact();
-      final contactMap = box.get(userId);
-      if (contactMap != null) {
-        List<ContactModel> contactModelList = [];
-        box.get(userId);
-        for (var k in contactMap.keys) {
-          contactModelList.add(ContactModel.fromJson(contactMap[k]!));
-        }
-        return contactModelList;
-      } else {
-        Map<String, String> newContactMap = {};
-        await box.put(userId, newContactMap);
-        return [];
-      }
+      List<ContactModel> contactList =
+          _contactBox.get(userId) as List<ContactModel> ?? <ContactModel>[];
+      return contactList;
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<ValueListenable<Box<Map>>> getContactModelBoxListenable() async {
-    final box = await _getBoxContact();
-    return box.listenable();
-  }
-
-  Future<Box<Map>> _getBoxContact() async {
-    const String boxName = "contacts"; // Define box name
-    if (Hive.isBoxOpen(boxName)) {
-      return Hive.box<Map>(boxName);
-    } else {
-      return await Hive.openBox<Map>(boxName);
+  Stream<BoxEvent> getContactModelBoxListenable(String userId) {
+    try {
+      return _contactBox.watch(key: userId);
+    } catch (e) {
+      throw ServerException(e.toString());
     }
   }
 }

@@ -4,16 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/domain/entities/nfc_message.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
-import 'package:halla/core/utils/app_show_dialog.dart';
-import 'package:halla/features/auth/presentation/screens/widgets/custom_nfc_close_error.dart';
-import 'package:lottie/lottie.dart';
-
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
+import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/core/utils/routting.dart';
-import 'package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart';
+import 'package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart';
 import 'package:halla/features/auth/presentation/screens/sign%20in/personal_information_screen.dart';
+import 'package:halla/features/auth/presentation/screens/widgets/custom_nfc_close_error.dart';
 import 'package:halla/generated/l10n.dart';
+import 'package:lottie/lottie.dart';
 import 'package:uuid/uuid.dart';
 
 class NfcWriteScreen extends StatefulWidget {
@@ -29,10 +28,11 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
   late Animation<Offset> _animationOffset;
   bool _nfcIsOpen = false;
   NfcMessage? nfcMessage;
+
   @override
   void initState() {
     super.initState();
-    context.read<AuthBloc>().add(GetIsNfcOpenEvent());
+    context.read<SignInCubit>().getIsNfcOpenEvent();
     _slideTransitionController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -61,7 +61,7 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
             padding: const EdgeInsets.all(8.0),
             child: TextButton(
               onPressed: () {
-                context.read<AuthBloc>().closeNfcStatusStream();
+                context.read<SignInCubit>().closeNfcStatusStream();
                 AppNavigator.navigatePushReplaceRemoveAll(
                   context,
                   const PersonalInformationScreen(),
@@ -78,67 +78,68 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
           ),
         ],
       ),
-      body: BlocConsumer<AuthBloc, AuthState>(
+      body: BlocConsumer<SignInCubit, SignInState>(
         listener: (context, state) {
-          if (state is AuthLoading) {
-            AppShowDialog.loading(context);
-          }
-          if (state is AuthFailure) {
-            AppShowDialog.showErrorMessage(context, state.message);
-          }
-          if (state is NfcState) {
-            if (state.isOpen) {
-              _slideTransitionController.reverse();
-              if (_nfcIsOpen != state.isOpen) {
-                UserState userState = context.read<UserCubit>().state;
-                if (userState is UserLoggedIn) {
-                  nfcMessage = NfcMessage(
-                    id: const Uuid().v1(),
-                    uId: userState.user!.id,
-                    email: userState.user!.email,
-                    phone: userState.user!.primePhone,
-                    pinCode: userState.user!.pinCode,
-                  );
-                  context.read<AuthBloc>().add(
-                        WriteOnNfcEvent(
-                          nfcMessage: nfcMessage!,
-                        ),
-                      );
-                }
+          state.whenOrNull(
+            nfcLoading: () {
+              AppShowDialog.loading(context);
+            },
+            nfcError: (error) {
+              AppShowDialog.error(context, error);
+            },
+            nfcUseState: (nfcUseState, nfcId) {
+              UserState userState = context.read<UserCubit>().state;
+              if (userState is UserLoggedIn) {
+                userState.user!.nfcList.add(nfcId);
+                context.read<SignInCubit>().authUploadUser(userState.user!);
               }
-            } else {
-              _slideTransitionController.forward();
-            }
-            _nfcIsOpen = state.isOpen;
-          }
-          if (state is NfcUseState) {
-            UserState userState = context.read<UserCubit>().state;
-            if (userState is UserLoggedIn) {
-              userState.user!.nfcList.add(state.nfcId);
-              context.read<AuthBloc>().add(
-                    AuthUploadUserEvent(user: userState.user!),
-                  );
-            }
-          }
-
-          if (state is AuthUploadSuccess) {
-            AppNavigator.navigatePop(context);
-            context.read<AuthBloc>().closeNfcStatusStream();
-            AppNavigator.navigatePushReplaceRemoveAll(
-              context,
-              const PersonalInformationScreen(),
-            );
-          }
+            },
+            nfcState: (isOpen) {
+              if (isOpen) {
+                _slideTransitionController.reverse();
+                if (_nfcIsOpen != isOpen) {
+                  UserState userState = context.read<UserCubit>().state;
+                  if (userState is UserLoggedIn) {
+                    nfcMessage = NfcMessage(
+                      id: const Uuid().v1(),
+                      uId: userState.user!.id,
+                      email: userState.user!.email,
+                      phone: userState.user!.primePhone,
+                      pinCode: userState.user!.pinCode,
+                    );
+                    context.read<SignInCubit>().writeOnNfcEvent(
+                          nfcMessage: nfcMessage!,
+                        );
+                  }
+                }
+              } else {
+                _slideTransitionController.forward();
+              }
+              _nfcIsOpen = isOpen;
+            },
+            uploadUserSuccess: () {
+              AppNavigator.navigatePopDialog(context);
+              context.read<SignInCubit>().closeNfcStatusStream();
+              AppNavigator.navigatePushReplace(
+                context,
+                const PersonalInformationScreen(),
+              );
+            },
+          );
         },
         builder: (context, state) {
-          if (state is GetIsNfcAvailableState && !state.isAvailable) {
-            return const Center(
-              child: Text(
-                "Your device dont support NFC.",
-                style: TextStyle(color: Colors.white),
-              ),
-            );
-          }
+          state.whenOrNull(
+            nfcAvailable: (isAvailable) {
+              if (!isAvailable) {
+                return const Center(
+                  child: Text(
+                    "Your device dont support NFC.",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                );
+              }
+            },
+          );
           return Center(
             child: Padding(
               padding: const EdgeInsets.all(8.0),

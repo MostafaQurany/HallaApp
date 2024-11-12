@@ -4,6 +4,7 @@ enum FieldType {
   password,
   text,
   phone,
+  phonePersonal,
   confPasword,
   category,
   none
@@ -79,6 +80,20 @@ class MyValidation {
     }
     final phoneRegex = RegExp(r'^\+?[0-9]{10,15}$');
     if (!phoneRegex.hasMatch(value)) {
+      return 'Enter a valid phone number';
+    }
+    return null;
+  }
+
+  static String? phoneNumberPersonalValidator(String? value) {
+    if (value != null && value[0] == '+') {
+      return 'Please enter a phone number start with 01';
+    }
+    if (value != null && value.length != 11) {
+      return 'Please enter a valid phone number';
+    }
+    final phoneRegex = RegExp(r'^\+?[0-9]{10,15}$');
+    if (!phoneRegex.hasMatch(value!)) {
       return 'Enter a valid phone number';
     }
     return null;

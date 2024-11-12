@@ -17,6 +17,7 @@ class User {
   Company company;
   bool isGuest;
   List<String> favoriteCategories;
+
   User({
     required this.id,
     required this.email,

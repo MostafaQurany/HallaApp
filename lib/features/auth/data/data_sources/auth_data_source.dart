@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:halla/core/constants/constants.dart';
-import 'package:halla/core/error/server_exception.dart';
 import 'package:halla/core/common/data/models/company_model.dart';
 import 'package:halla/core/common/data/models/social_media_model.dart';
 import 'package:halla/core/common/data/models/user_model.dart';
+import 'package:halla/core/constants/constants.dart';
+import 'package:halla/core/error/server_exception.dart';
 
 abstract interface class AuthDataSource {
   // sign in
@@ -15,13 +15,20 @@ abstract interface class AuthDataSource {
     required String password,
     required String pinCode,
   });
+
   Future<String> signInWithPhone({
     required String phoneNumber,
   });
-  Future<UserModel> linkPhoneWithEmail({
+
+  Future<PhoneAuthCredential> getPhoneAuthCredential({
     required String smsCode,
     required String verificationId,
   });
+
+  Future<void> linkPhoneWithEmail({
+    required PhoneAuthCredential phoneAuthCredential,
+  });
+
   // login
   Future<UserModel> logInWithEmailPassword({
     required String email,
@@ -36,6 +43,7 @@ abstract interface class AuthDataSource {
   Future<void> forgetPassword({
     required String email,
   });
+
   // social
   Future<UserModel> googleLogIn();
 
@@ -109,26 +117,28 @@ class AuthDataSourceImpl implements AuthDataSource {
   }
 
   @override
-  Future<UserModel> linkPhoneWithEmail({
+  Future<void> linkPhoneWithEmail({
+    required PhoneAuthCredential phoneAuthCredential,
+  }) async {
+    try {
+      final UserCredential credential = await firebaseAuth.currentUser!
+          .linkWithCredential(phoneAuthCredential);
+    } on FirebaseException catch (e) {
+      throw ServerException(e.message.toString());
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<PhoneAuthCredential> getPhoneAuthCredential({
     required String smsCode,
     required String verificationId,
   }) async {
     try {
-      final PhoneAuthCredential phoneAuthCredential =
-          PhoneAuthProvider.credential(
-        verificationId: verificationId,
-        smsCode: smsCode,
-      );
-      final UserCredential credential = await firebaseAuth.currentUser!
-          .linkWithCredential(phoneAuthCredential);
-      return UserModel(
-        idModel: credential.user!.uid,
-        emailModel: credential.user!.email.toString(),
-        primePhoneModel: credential.user!.phoneNumber.toString(),
-        nfcListModel: [],
-        companyModel: CompanyModel(),
-        socialMediaModel: SocialMediaModel(),
-      );
+      final PhoneAuthCredential credential = PhoneAuthProvider.credential(
+          verificationId: verificationId, smsCode: smsCode);
+      return credential;
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {

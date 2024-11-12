@@ -1,6 +1,7 @@
 import "package:dropdown_search/dropdown_search.dart";
 import "package:flutter/material.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/constants/constants.dart";
 import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/theme/theme.dart";
@@ -60,6 +61,17 @@ class _CustomNationalityFieldState extends State<CustomNationalityField> {
             backgroundColor: AppTheme.isLight(context)
                 ? AppColors.white
                 : AppColors.blackLight,
+          ),
+        ),
+        decoratorProps: DropDownDecoratorProps(
+          decoration: InputDecoration(
+            hintStyle: Theme.of(context).inputDecorationTheme.hintStyle,
+            prefixIcon: Container(
+              padding: EdgeInsets.all(10.0.w),
+              child: ImageIcon(
+                AssetImage(AppImages.nationalityIcon),
+              ),
+            ),
           ),
         ),
       );

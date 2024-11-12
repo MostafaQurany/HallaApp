@@ -1,5 +1,6 @@
 import 'package:halla/core/common/domain/entities/company.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 part 'company_model.g.dart';
 
 @HiveType(typeId: 2)
@@ -12,6 +13,7 @@ class CompanyModel extends Company with HiveObjectMixin {
   final String websiteModel;
   @HiveField(3)
   final String positionModel;
+
   CompanyModel({
     this.nameModel = '',
     this.phoneNumberModel = '',
@@ -49,10 +51,10 @@ class CompanyModel extends Company with HiveObjectMixin {
 
   factory CompanyModel.fromMap(Map<String, dynamic> map) {
     return CompanyModel(
-      nameModel: map['name'] as String,
-      phoneNumberModel: map['phoneNumber'] as String,
-      websiteModel: map['website'] as String,
-      positionModel: map['position'] as String,
+      nameModel: map['name'] ?? '',
+      phoneNumberModel: map['phoneNumber'] ?? '',
+      websiteModel: map['website'] ?? '',
+      positionModel: map['position'] ?? '',
     );
   }
 

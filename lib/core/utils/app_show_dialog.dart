@@ -7,10 +7,11 @@ import 'package:halla/features/auth/presentation/screens/widgets/delete_guest_di
 import 'package:lottie/lottie.dart';
 
 class AppShowDialog {
-  bool isLoading = false;
+  static bool isLoading = false;
 
   static const Duration _transitionDuration = Duration(milliseconds: 200);
   static final Color _barrierColor = Colors.black.withOpacity(0.5);
+
   static scaleAlertDialog(BuildContext context, Widget page) {
     return showGeneralDialog(
       context: context,
@@ -32,28 +33,31 @@ class AppShowDialog {
     );
   }
 
-  static loading(
-    BuildContext context,
-  ) {
-    return showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) {
-        return PopScope(
-          canPop: false,
-          child: Center(
-              child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: AppTheme.isLight(context)
-                        ? AppColors.white
-                        : AppColors.blackLight,
-                  ),
-                  padding: const EdgeInsets.all(16),
-                  child: Lottie.asset(AppImages.loadingLottie))),
-        );
-      },
-    );
+  static loading(BuildContext context, {String? message}) {
+    if (!isLoading) {
+      isLoading = true;
+      return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return PopScope(
+            canPop: false,
+            child: Center(
+                child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: AppTheme.isLight(context)
+                          ? AppColors.white
+                          : AppColors.blackLight,
+                    ),
+                    padding: const EdgeInsets.all(16),
+                    child: Lottie.asset(AppImages.loadingLottie))),
+          );
+        },
+      ).then(
+        (value) => isLoading = false,
+      );
+    }
   }
 
   static forgetPassword(
@@ -73,6 +77,10 @@ class AppShowDialog {
     BuildContext context,
     String message,
   ) {
+    if (isLoading == true) {
+      isLoading = false;
+      Navigator.of(context).pop();
+    }
     final snackBar = SnackBar(
       elevation: 0,
       behavior: SnackBarBehavior.floating,
@@ -85,7 +93,11 @@ class AppShowDialog {
       ..showSnackBar(snackBar);
   }
 
-  static showErrorMessage(BuildContext context, String message) {
+  static error(BuildContext context, String message) {
+    if (isLoading == true) {
+      isLoading = false;
+      Navigator.of(context).pop();
+    }
     final snackBar = SnackBar(
       elevation: 0,
       shape: const RoundedRectangleBorder(
@@ -98,7 +110,7 @@ class AppShowDialog {
       backgroundColor: AppColors.errorDark,
       content: Text(message),
     );
-
+    print(isLoading);
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(snackBar);

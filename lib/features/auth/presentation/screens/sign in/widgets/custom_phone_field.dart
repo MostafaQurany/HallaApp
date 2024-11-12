@@ -10,6 +10,7 @@ class CustomPhoneField extends StatefulWidget {
   final bool? ignorePointers;
   final void Function()? suffixOnTap;
   final FocusNode? focusNode;
+
   const CustomPhoneField({
     super.key,
     required this.controller,
@@ -17,7 +18,7 @@ class CustomPhoneField extends StatefulWidget {
     required this.isAdd,
     this.suffixOnTap,
     this.ignorePointers,
-     this.focusNode,
+    this.focusNode,
   });
 
   @override
@@ -38,7 +39,9 @@ class _CustomPhoneFieldState extends State<CustomPhoneField> {
               focusNode: widget.focusNode,
               hintText: "phone",
               keyboardType: TextInputType.phone,
-              fieldType: FieldType.phone,
+              fieldType: widget.controller.text.isEmpty
+                  ? FieldType.none
+                  : FieldType.phonePersonal,
               prefixIcon: Icons.phone_outlined,
               ignorePointers: widget.ignorePointers,
             ),

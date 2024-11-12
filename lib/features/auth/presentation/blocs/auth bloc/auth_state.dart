@@ -5,10 +5,18 @@ sealed class AuthState {}
 
 final class AuthInitial extends AuthState {}
 
-final class AuthLoading extends AuthState {}
+// sign in
+final class AuthLoading extends AuthState {
+  AuthLoading();
+}
+
+final class AuthSignInLoading extends AuthState {
+  AuthSignInLoading();
+}
 
 final class AuthSuccess extends AuthState {
   final User user;
+
   AuthSuccess({
     required this.user,
   });
@@ -28,6 +36,10 @@ final class AuthGetUserSuccess extends AuthState {
   AuthGetUserSuccess({required this.user});
 }
 
+final class AuthPersonalInfoLoading extends AuthState {
+  AuthPersonalInfoLoading();
+}
+
 final class AuthPersonalInfoSuccess extends AuthState {
   final User user;
 
@@ -36,8 +48,19 @@ final class AuthPersonalInfoSuccess extends AuthState {
 
 final class AuthSentMessageSuccess extends AuthState {}
 
+final class AuthSignFailure extends AuthState {
+  final String message;
+
+  AuthSignFailure({
+    required this.message,
+  }) {
+    print("=================>>> ErrorMessage is $message");
+  }
+}
+
 final class AuthFailure extends AuthState {
   final String message;
+
   AuthFailure({
     required this.message,
   }) {
@@ -56,17 +79,20 @@ final class AuthGoogleState extends AuthState {
 // nfc
 class GetIsNfcAvailableState extends AuthState {
   final bool isAvailable;
+
   GetIsNfcAvailableState(this.isAvailable);
 }
 
 class NfcState extends AuthState {
   final bool isOpen;
+
   NfcState(this.isOpen);
 }
 
 class NfcUseState extends AuthState {
   final NfcUse nfcUseState;
   final String nfcId;
+
   NfcUseState({required this.nfcId, required this.nfcUseState});
 }
 
@@ -83,6 +109,12 @@ class PinCodeCheckState extends AuthState {
 }
 
 // Guest
+class AuthGuestLoading extends AuthState {
+  final String message;
+
+  AuthGuestLoading(this.message);
+}
+
 class CreatNewGuestSucces extends AuthState {
   final Guest guest;
 
@@ -105,5 +137,5 @@ class GetNativeContactSucces extends AuthState {
 
   GetNativeContactSucces({required this.contacts});
 }
-class AddFirstTimeContactSucces extends AuthState {
-}
+
+class AddFirstTimeContactSucces extends AuthState {}

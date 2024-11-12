@@ -8,7 +8,7 @@ part of 'social_media_model.dart';
 
 class SocialMediaModelAdapter extends TypeAdapter<SocialMediaModel> {
   @override
-  final int typeId = 3;
+  final int typeId = 5;
 
   @override
   SocialMediaModel read(BinaryReader reader) {

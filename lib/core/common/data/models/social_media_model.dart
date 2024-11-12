@@ -1,9 +1,9 @@
 import 'package:halla/core/common/domain/entities/social_media.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
 part 'social_media_model.g.dart';
 
-
-@HiveType(typeId: 3)
+@HiveType(typeId: 5)
 class SocialMediaModel extends SocialMedia with HiveObjectMixin {
   @HiveField(0)
   final String facebookModel;
@@ -51,12 +51,13 @@ class SocialMediaModel extends SocialMedia with HiveObjectMixin {
 
   factory SocialMediaModel.fromMap(Map<String, dynamic> map) {
     return SocialMediaModel(
-      facebookModel: map['facebook'] as String,
-      instagramModel: map['instagram'] as String,
-      linkedinModel: map['linkedin'] as String,
-      twitterModel: map['twitter'] as String,
+      facebookModel: map['facebook'] ?? '',
+      instagramModel: map['instagram'] ?? '',
+      linkedinModel: map['linkedin'] ?? '',
+      twitterModel: map['twitter'] ?? '',
     );
   }
+
   factory SocialMediaModel.fromSocialMedia(SocialMedia socialMedia) {
     return SocialMediaModel(
       facebookModel: socialMedia.facebook,

@@ -10,9 +10,8 @@ import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
-import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
+import "package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart";
 import "package:halla/features/auth/presentation/screens/first%20time%20contacts/first_time_contacts_screen.dart";
-import "package:halla/features/auth/presentation/screens/sign%20in/sms_code_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_birthday_field.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_company_field.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_nationality_field.dart";
@@ -39,7 +38,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   final TextEditingController companyPhoneController = TextEditingController();
   final TextEditingController companyWebsiteController =
       TextEditingController();
-  final TextEditingController companyPositonController =
+  final TextEditingController companyPostionController =
       TextEditingController();
 
   final TextEditingController socialFacebookController =
@@ -51,6 +50,12 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   final TextEditingController socialTwitterController = TextEditingController();
 
   final GlobalKey<PhonesWidgetState> phonesWidgetKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    _prepareData(UserCubit.get(context).user!);
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -78,32 +83,20 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                   ),
                 ),
               ),
-              BlocConsumer<AuthBloc, AuthState>(
+              BlocConsumer<SignInCubit, SignInState>(
                 listener: (context, state) {
-                  if (state is AuthLoading) {
-                    AppShowDialog.loading(context);
-                  }
-                  if (state is AuthFailure) {
-                    Navigator.pop(context);
-                    AppShowDialog.showErrorMessage(context, state.message);
-                  }
-                  if (state is AuthPersonalInfoSuccess) {
-                    AppNavigator.navigatePop(context);
-                    AppNavigator.navigatePushReplaceRemoveAll(
-                      context,
-                      const FirstTimeContactsScreen(),
-                    );
-                  }
-                  if (state is AuthGetCodeSmsSiccessState) {
-                    AppNavigator.navigatePop(context);
-                    AppNavigator.navigatePush(
-                      context,
-                      SmsCodeScreen(
-                        phoneNumber: phonesWidgetKey.currentState!
-                            .phonesController["prime phone"]!.text,
-                      ),
-                    );
-                  }
+                  state.whenOrNull(
+                      personalInfoLoading: () => AppShowDialog.loading(context),
+                      personalInfoError: (message) {
+                        AppShowDialog.error(context, message);
+                      },
+                      personalInfoSuccess: () {
+                        AppNavigator.navigatePopDialog(context);
+                        AppNavigator.navigatePushReplace(
+                          context,
+                          const FirstTimeContactsScreen(),
+                        );
+                      });
                 },
                 builder: (context, state) {
                   return Form(
@@ -166,7 +159,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                               companyWebsiteController:
                                   companyWebsiteController,
                               companyPositonController:
-                                  companyPositonController,
+                                  companyPostionController,
                             ),
                             SizedBox(
                               height: 20.h,
@@ -175,22 +168,9 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
                                   User user = _featchData();
-                                  if (phonesWidgetKey
-                                      .currentState!.changeInPrime) {
-                                    context.read<AuthBloc>().add(
-                                          AuthGetSmsCodeEvent(
-                                            phoneNumber: phonesWidgetKey
-                                                .currentState!
-                                                .phonesController[
-                                                    "prime phone"]!
-                                                .text,
-                                          ),
-                                        );
-                                  } else {
-                                    context.read<AuthBloc>().add(
-                                          AuthPersonalInfoEvent(user: user),
-                                        );
-                                  }
+                                  context
+                                      .read<SignInCubit>()
+                                      .personalInfoEvent(user);
                                 }
                               },
                               child: Text(S.of(context).next),
@@ -212,7 +192,7 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
       name: companyNameController.text,
       phoneNumber: companyPhoneController.text,
       website: companyWebsiteController.text,
-      position: companyPositonController.text,
+      position: companyPostionController.text,
     );
     SocialMedia socialMedia = SocialMedia(
       facebook: socialFacebookController.text,
@@ -222,32 +202,37 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
     );
     List<String> phoneNumbers = phonesWidgetKey.currentState?.getPhones() ?? [];
     User user = UserCubit.get(context).user!;
-
-    if (user.primePhone.isEmpty) {
-      user.primePhone = phoneNumbers.first;
-    }
     user = User(
       id: user.id,
       email: user.email,
-      fullName:
-          nameController.text.isNotEmpty ? nameController.text : user.fullName,
-      primePhone:
-          phonesWidgetKey.currentState!.phonesController["prime phone"]!.text,
-      dateOfBirth: dateOfBirthController.text.isNotEmpty
-          ? dateOfBirthController.text
-          : user.dateOfBirth,
-      nationality: nationalityController.text.isNotEmpty
-          ? nationalityController.text
-          : user.nationality,
+      fullName: nameController.text,
+      primePhone: user.primePhone,
+      dateOfBirth: dateOfBirthController.text,
+      nationality: nationalityController.text,
       imageUrl: "",
       pinCode: user.pinCode,
       nfcList: user.nfcList,
       socialMedia: socialMedia,
       company: company,
       phones: phoneNumbers,
-      favoriteCategories: user.favoriteCategories,
     );
 
     return user;
+  }
+
+  _prepareData(User user) {
+    nameController.text = user.fullName;
+    dateOfBirthController.text = user.dateOfBirth;
+    nationalityController.text = user.nationality;
+
+    companyNameController.text = user.company.name;
+    companyPhoneController.text = user.company.phoneNumber;
+    companyWebsiteController.text = user.company.website;
+    companyPostionController.text = user.company.position;
+
+    socialFacebookController.text = user.socialMedia.facebook;
+    socialInstagramController.text = user.socialMedia.instagram;
+    socialLinkedinController.text = user.socialMedia.linkedin;
+    socialTwitterController.text = user.socialMedia.twitter;
   }
 }

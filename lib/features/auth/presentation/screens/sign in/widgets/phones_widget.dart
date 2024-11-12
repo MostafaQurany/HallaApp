@@ -5,14 +5,13 @@ import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custo
 
 class PhonesWidget extends StatefulWidget {
   const PhonesWidget({super.key});
+
   @override
   State<PhonesWidget> createState() => PhonesWidgetState();
 }
 
 class PhonesWidgetState extends State<PhonesWidget> {
-  bool changeInPrime = false;
   List<String> phoneId = [
-    "prime phone",
     "phone 1",
     "phone 2",
     "phone 3",
@@ -21,20 +20,18 @@ class PhonesWidgetState extends State<PhonesWidget> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey();
 
   final Duration _duration = const Duration(milliseconds: 350);
+
   @override
   void initState() {
     super.initState();
 
-    phonesController[phoneId[0]] =
-        TextEditingController(text: UserCubit.get(context).user!.primePhone);
-
+    phonesController[phoneId[0]] = TextEditingController();
     if (UserCubit.get(context).user!.phones.isNotEmpty) {
       for (int i = 1; i < UserCubit.get(context).user!.phones.length; i++) {
         phonesController[phoneId[i]] =
             TextEditingController(text: UserCubit.get(context).user!.phones[i]);
       }
     }
-    phonesController[phoneId[0]]!.addListener(_primePhoneChangeListener);
 
     Future.delayed(Duration.zero, () {
       for (int i = 0; i < phonesController.length - 1; i++) {
@@ -43,12 +40,10 @@ class PhonesWidgetState extends State<PhonesWidget> {
     });
   }
 
-  FocusNode focusNode = FocusNode(canRequestFocus: false);
-
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      height: (68 * phonesController.length).h,
+      height: (61 * phonesController.length).h,
       duration: const Duration(milliseconds: 200),
       child: AnimatedList(
         key: _listKey,
@@ -61,26 +56,7 @@ class PhonesWidgetState extends State<PhonesWidget> {
                 : const Offset(1, 0),
             end: const Offset(0, 0),
           ).animate(animation),
-          child: Column(
-            children: [
-              CustomPhoneField(
-                controller:
-                    phonesController[phoneId[index]] ?? TextEditingController(),
-                isFirst: index == 0,
-                focusNode: focusNode,
-                isAdd: _getAddOrRemove(
-                    maxIndex: phonesController.length, currentindex: index),
-                suffixOnTap: (index == 0 && phonesController.length == 4)
-                    ? null
-                    : (index == 0)
-                        ? () => _addPhoneField(phonesController.length)
-                        : () => _removePhoneField(index),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-            ],
-          ),
+          child: _phoneFieldWidget(index),
         ),
       ),
     );
@@ -107,25 +83,7 @@ class PhonesWidgetState extends State<PhonesWidget> {
               : const Offset(1, 0),
           end: const Offset(0, 0),
         ).animate(animation),
-        child: Column(
-          children: [
-            CustomPhoneField(
-              controller:
-                  phonesController[phoneId[index]] ?? TextEditingController(),
-              isFirst: index == 0,
-              isAdd: _getAddOrRemove(
-                  maxIndex: phonesController.length, currentindex: index),
-              suffixOnTap: (index == 0 && phonesController.length == 4)
-                  ? null
-                  : (index == 0)
-                      ? () => _addPhoneField(phonesController.length)
-                      : () => _removePhoneField(index),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-          ],
-        ),
+        child: _phoneFieldWidget(index),
       ),
     );
 
@@ -141,8 +99,8 @@ class PhonesWidgetState extends State<PhonesWidget> {
     );
   }
 
-  bool _getAddOrRemove({required int maxIndex, required int currentindex}) {
-    if (currentindex == 0) {
+  bool _getAddOrRemove({required int maxIndex, required int currentIndex}) {
+    if (currentIndex == 0) {
       return true;
     } else {
       return false;
@@ -155,16 +113,20 @@ class PhonesWidgetState extends State<PhonesWidget> {
         .toList();
   }
 
-  void _primePhoneChangeListener() {
-    if (phonesController[phoneId[0]]!.text !=
-        UserCubit.get(context).user!.primePhone) {
-      setState(() {
-        changeInPrime = true;
-      });
-    } else {
-      setState(() {
-        changeInPrime = false;
-      });
-    }
+  _phoneFieldWidget(int index) {
+    return Container(
+      margin: EdgeInsets.only(bottom: 16.0.h),
+      child: CustomPhoneField(
+        controller: phonesController[phoneId[index]] ?? TextEditingController(),
+        isFirst: index == 0,
+        isAdd: _getAddOrRemove(
+            maxIndex: phonesController.length, currentIndex: index),
+        suffixOnTap: (index == 0 && phonesController.length == 4)
+            ? null
+            : (index == 0)
+                ? () => _addPhoneField(phonesController.length)
+                : () => _removePhoneField(index),
+      ),
+    );
   }
 }

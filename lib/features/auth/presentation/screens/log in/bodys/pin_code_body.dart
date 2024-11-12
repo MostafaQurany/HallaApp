@@ -102,7 +102,7 @@ class _PinCodeBodyState extends State<PinCodeBody> {
                           context, const HomeLayout());
                     }
                     if (state is AuthFailure) {
-                      AppShowDialog.showErrorMessage(context, state.message);
+                      AppShowDialog.error(context, state.message);
                     }
                   },
                   builder: (context, state) {
