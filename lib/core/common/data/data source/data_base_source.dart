@@ -1,26 +1,33 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:halla/core/common/data/models/guest_model.dart';
+import 'package:halla/core/common/data/models/user_model.dart';
 import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
-import 'package:halla/core/common/data/models/user_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract interface class DataBaseSource {
   // user
   Future<bool> isUserExit(UserModel user);
+
   Future<UserModel> uploadUser(UserModel user);
+
   Future<UserModel> getUser(String userId);
 
   // guest
   Future<GuestModel> logInGuest();
+
   Future<bool> isGuestExit();
+
   Future<GuestModel> getGuest();
+
   Future<bool> isGuestUpdate();
+
   Future<void> forgetGuestPinCode();
 }
 
 class DataBaseSourceImpl implements DataBaseSource {
   final String _userCollection = AppConstants.userCollection;
   final _firestore = FirebaseFirestore.instance;
+
   // user
   @override
   Future<UserModel> uploadUser(UserModel user) async {
@@ -115,9 +122,9 @@ class DataBaseSourceImpl implements DataBaseSource {
         return getGuest();
       } else {
         GuestModel guestModel = GuestModel(
-          idGuest: await AppConstants.getGuestId(),
-          fullNameGuest: "Guest",
-          pinCodeGuest: AppConstants.generatePinCode(),
+          idGuestModel: await AppConstants.getGuestId(),
+          fullNameGuestModel: "Guest",
+          pinCodeGuestModel: AppConstants.generatePinCode(),
         );
         await _firestore
             .collection(_userCollection)

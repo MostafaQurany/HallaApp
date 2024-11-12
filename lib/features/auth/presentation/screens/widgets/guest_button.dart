@@ -19,19 +19,19 @@ class GuestButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state is AuthLoading) {
-          AppShowDialog.loading(context);
+        if (state is AuthGuestLoading) {
+          AppShowDialog.loading(context, message: state.message);
         }
         if (state is AuthFailure) {
-          Navigator.pop(context);
-          AppShowDialog.showErrorMessage(context, state.message);
+          AppNavigator.navigatePopDialog(context);
+          AppShowDialog.error(context, state.message);
         }
         if (state is LogInGuestSucces) {
-          Navigator.pop(context);
+          AppNavigator.navigatePopDialog(context);
           AppNavigator.navigatePush(context, const PinCodeScreen());
         }
         if (state is CreatNewGuestSucces) {
-          Navigator.pop(context);
+          AppNavigator.navigatePopDialog(context);
           AppShowDialog.scaleAlertDialog(
             context,
             const AlertDialog(

@@ -83,7 +83,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         }
         if (state is ProfileError) {
           Navigator.pop(context);
-          AppShowDialog.showErrorMessage(context, state.message);
+          AppShowDialog.error(context, state.message);
         }
       },
       child: Scaffold(
@@ -175,10 +175,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                     );
                               }
                               if (formKey.currentState!.validate()) {
-                                if (phonesWidgetKey
-                                    .currentState!.changeInPrime) {
-                                  print("object");
-                                }
                                 context.read<ProfileBloc>().add(
                                       UpdateUserEvent(
                                         user: _fetchDataToUser(

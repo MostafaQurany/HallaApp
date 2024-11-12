@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/error/failure.dart';
@@ -13,15 +14,20 @@ abstract class AuthRepository {
     required String phoneNumber,
   });
 
-  Future<Either<Failure, User>> sentSmsCode({
-    required String smsCode,
-    required String verificationId,
-  });
-  Future<Either<Failure, String>> logInWithPhone({
+  Future<Either<Failure, firebase_auth.PhoneAuthCredential>>
+      getPhoneAuthCredentials({
     required String smsCode,
     required String verificationId,
   });
 
+  Future<Either<Failure, void>> linkPhoneWithPhoneAuthCredential({
+    required firebase_auth.PhoneAuthCredential phoneAuthCredential,
+  });
+
+  Future<Either<Failure, String>> logInWithPhone({
+    required String smsCode,
+    required String verificationId,
+  });
 
   Future<Either<Failure, User>> logInWithEmailPassword({
     required String email,
@@ -34,12 +40,7 @@ abstract class AuthRepository {
     User user,
   );
 
-
-  
   Future<Either<Failure, void>> forgetPassword(
     String email,
   );
-
-
-
 }

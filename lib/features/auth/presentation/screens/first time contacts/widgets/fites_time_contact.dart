@@ -6,13 +6,13 @@ import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:lottie/lottie.dart';
 
-class FitesTimeContact extends StatefulWidget {
+class FitesTimeContactCard extends StatefulWidget {
   final String name;
   final String image;
   final bool isSelected;
   final VoidCallback onTap;
 
-  const FitesTimeContact({
+  const FitesTimeContactCard({
     super.key,
     required this.name,
     required this.image,
@@ -21,10 +21,10 @@ class FitesTimeContact extends StatefulWidget {
   });
 
   @override
-  State<FitesTimeContact> createState() => _FitesTimeContactState();
+  State<FitesTimeContactCard> createState() => _FitesTimeContactCardState();
 }
 
-class _FitesTimeContactState extends State<FitesTimeContact> {
+class _FitesTimeContactCardState extends State<FitesTimeContactCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(

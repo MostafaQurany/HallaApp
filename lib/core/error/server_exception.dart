@@ -1,9 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class ServerException {
   final String message;
-  ServerException(
-    this.message,
-  ) {
+
+  ServerException([this.message = 'An unexpected error occurred,']) {
     print(message);
   }
 }

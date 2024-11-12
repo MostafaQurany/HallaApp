@@ -2,11 +2,10 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
 import 'package:halla/core/common/data/models/company_model.dart';
 import 'package:halla/core/common/data/models/social_media_model.dart';
 import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 part 'contact_model.g.dart';
 
@@ -117,14 +116,16 @@ class ContactModel extends Contact with HiveObjectMixin {
       nationalityModel: json['nationality'] ?? '',
       imageUrlModel: json['imageUrl'] ?? '',
       emailModel: json['email'] ?? '',
-      phonesModel: List<String>.from(json['phones']),
+      phonesModel: List<String>.from(json['phones'] ?? []),
       fullNameModel: json['fullName'] ?? '',
       companyModel: CompanyModel.fromMap(json['company']),
       dateOfBirthModel: json['dateOfBirth'] ?? '',
       idModel: json['id'] ?? '',
       socialMediaModel: SocialMediaModel.fromMap(json['socialMedia']),
-      addTimeModel: Timestamp.fromMillisecondsSinceEpoch(json['addTime']),
-      favoriteCategoryModel: json['favoriteCategory'],
+      addTimeModel: json['addTime'] == null
+          ? Timestamp.now()
+          : Timestamp.fromMillisecondsSinceEpoch(json['addTime']),
+      favoriteCategoryModel: json['favoriteCategory'] ?? '',
     );
   }
 
@@ -145,11 +146,18 @@ class ContactModel extends Contact with HiveObjectMixin {
     );
   }
 
-  
-
   String toJson() => json.encode(toMap());
 
-  factory ContactModel.fromJson(String source) => ContactModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory ContactModel.fromJson(String source) =>
+      ContactModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Contact && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 /*

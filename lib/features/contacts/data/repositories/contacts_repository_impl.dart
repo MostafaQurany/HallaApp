@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/error/failure.dart';
 import 'package:halla/core/error/server_exception.dart';
@@ -15,73 +14,87 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
   ContactsRepositoryImpl(this.local, this.server);
 
-//server
+  // add local and server
   @override
-  Future<Either<Failure, void>> addContactListServer({
+  Future<Either<Failure, void>> addContact({
+    required String userId,
+    required String contactId,
+  }) async {
+    try {
+      ContactModel contactModel =
+          await server.addContact(userId: userId, contactId: contactId);
+      final r =
+          await local.addContact(userId: userId, contactModel: contactModel);
+      return Right(r);
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
+
+  // add list local and server
+  @override
+  Future<Either<Failure, void>> addContactList({
     required String userId,
     required List<String> contactIdList,
   }) async {
     try {
-      final res = await server.addContactList(
+      List<ContactModel> contactModel = await server.addContactList(
           userId: userId, contactIdList: contactIdList);
-      return Right(res);
+      final r =
+          await local.addContactList(userId: userId, contactList: contactModel);
+      return Right(r);
     } on ServerException catch (e) {
       return Left(Failure(e.message));
     }
   }
 
-  @override
-  Future<Either<Failure, void>> addContactServer(
-      {required String userId, required String contactId}) async {
-    try {
-      final res = await server.addContact(userId: userId, contactId: contactId);
-      return Right(res);
-    } on ServerException catch (e) {
-      return Left(Failure(e.message));
-    }
-  }
+  // get list local and server
 
   @override
-  Future<Either<Failure, void>> deleteContactServer(
-      {required String userId, required Contact contact}) async {
-    try {
-      ContactModel contactModel = ContactModel.fromContact(contact);
-      final res = await server.deleteContact(
-          userId: userId, contactModel: contactModel);
-      return Right(res);
-    } on ServerException catch (e) {
-      return Left(Failure(e.message));
-    }
-  }
-  // local
-
-  @override
-  Future<Either<Failure, ValueListenable<Box<Map>>>> getBoxListenable() async {
-    try {
-      final res = await local.getContactModelBoxListenable();
-      return Right(res);
-    } on ServerException catch (e) {
-      return Left(Failure(e.message));
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<Contact>>> getContactListLocal(
+  Future<Either<Failure, List<Contact>>> getContactList(
       {required String userId}) async {
     try {
-      final res = await local.getContactList(userId: userId);
-      return Right(res);
+      final r = await local.getContactList(userId: userId);
+      return Right(r);
     } on ServerException catch (e) {
       return Left(Failure(e.message));
     }
   }
 
   @override
-  Future<Either<Failure, Contact>> getContactLocal(
+  Future<Either<Failure, List<Contact>>> getContactListSync(
+      {required String userId}) async {
+    try {
+      List<ContactModel> contactModel =
+          await server.getContactList(userId: userId);
+      final r =
+          await local.addContactList(userId: userId, contactList: contactModel);
+      return Right(contactModel);
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
+
+  // stream
+  @override
+  Future<Either<Failure, Stream<BoxEvent>>> getContactListStream(
+      {required String userId}) async {
+    try {
+      final r = local.getContactModelBoxListenable(userId);
+      return Right(r);
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
+
+  // delete contact local and server
+  @override
+  Future<Either<Failure, void>> deleteContact(
       {required String userId, required String contactId}) async {
     try {
-      final res = await local.getContact(userId: userId, contactId: contactId);
-      return Right(res);
+      await server.deleteContact(userId: userId, contactId: contactId);
+      final r = await local.deleteContact(userId: userId, contactId: contactId);
+      return Right(r);
     } on ServerException catch (e) {
       return Left(Failure(e.message));
     }

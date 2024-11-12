@@ -93,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen> {
         }
         if (state is AuthFailure) {
           AppNavigator.navigatePop(context);
-          AppShowDialog.showErrorMessage(context, state.message);
+          AppShowDialog.error(context, state.message);
         }
         if (state is AuthSuccess) {
           AppNavigator.navigatePop(context);

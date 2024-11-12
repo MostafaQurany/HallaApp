@@ -5,7 +5,7 @@ import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:halla/core/utils/routting.dart';
-import 'package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart';
+import 'package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart';
 import 'package:halla/features/auth/presentation/screens/first%20time%20contacts/widgets/first_time_contacts_body.dart';
 import 'package:halla/features/auth/presentation/screens/first%20time%20contacts/widgets/search_first_time_contact_screen.dart';
 import 'package:halla/features/home/presentation/screens/home_layout.dart';
@@ -20,10 +20,27 @@ class FirstTimeContactsScreen extends StatefulWidget {
 }
 
 class _FirstTimeContactsScreenState extends State<FirstTimeContactsScreen> {
+  final TextEditingController searchController = TextEditingController();
+  String searchText = '';
+
   @override
   void initState() {
     super.initState();
-    context.read<AuthBloc>().add(AuthGetNativeLocalContact());
+    context.read<SignInCubit>().getNativeLocalContact();
+    searchController.addListener(_onSearchChanged);
+  }
+
+  @override
+  void dispose() {
+    searchController.removeListener(_onSearchChanged);
+    searchController.dispose();
+    super.dispose();
+  }
+
+  void _onSearchChanged() {
+    setState(() {
+      searchText = searchController.text;
+    });
   }
 
   @override
@@ -36,13 +53,11 @@ class _FirstTimeContactsScreenState extends State<FirstTimeContactsScreen> {
               padding: AppConstants.paddingScreen,
               child: Column(
                 children: [
-                  // title
+                  // Title
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(
-                        width: 0.3.sw,
-                      ),
+                      SizedBox(width: 0.3.sw),
                       Text(
                         "Contact",
                         style: AppTheme.getThemeText(context).headlineMedium,
@@ -63,31 +78,25 @@ class _FirstTimeContactsScreenState extends State<FirstTimeContactsScreen> {
                               ),
                             ),
                           ),
-                          padding: EdgeInsets.only(
-                            bottom: 3.h,
-                          ),
+                          padding: EdgeInsets.only(bottom: 3.h),
                           child: Text(
                             S.of(context).skip,
                             style: AppTheme.getThemeText(context)
                                 .bodySmall!
-                                .copyWith(
-                                  color: AppColors.primary,
-                                ),
+                                .copyWith(color: AppColors.primary),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  // search par
-                  SizedBox(
-                    height: 30.h,
+                  SizedBox(height: 30.h),
+                  SearchFirstTimeContactScreen(
+                    searchController: searchController,
                   ),
-                  const SearchFirstTimeContactScreen(),
                 ],
               ),
             ),
-            // body
-            const FirstTimeContactsBody()
+            FirstTimeContactsBody(searchText: searchText),
           ],
         ),
       ),

@@ -1,11 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:hive_flutter/hive_flutter.dart';
-
 import 'package:halla/core/common/data/models/company_model.dart';
 import 'package:halla/core/common/data/models/social_media_model.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 part 'user_model.g.dart';
-@HiveType(typeId: 5)
+
+@HiveType(typeId: 0)
 class UserModel extends User with HiveObjectMixin {
   @HiveField(0)
   String idModel;
@@ -76,7 +77,6 @@ class UserModel extends User with HiveObjectMixin {
           nfcList: nfcListModel,
           phones: phonesModel,
           favoriteCategories: favoriteCategoriesModel,
-          
           socialMedia: socialMediaModel,
           company: companyModel,
         );

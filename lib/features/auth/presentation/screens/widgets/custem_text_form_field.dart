@@ -63,6 +63,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       case FieldType.confPasword:
         return MyValidation.confirmPasswordValidate(
             value, widget.confirmPassword);
+      case FieldType.phonePersonal:
+        return MyValidation.phoneNumberPersonalValidator(value);
       case FieldType.none:
         return null;
     }

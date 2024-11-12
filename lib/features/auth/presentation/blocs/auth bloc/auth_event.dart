@@ -8,11 +8,13 @@ final class AuthSignUp extends AuthEvent {
   final String email;
   final String password;
   final String pinCode;
+  final String phoneNumber;
 
   AuthSignUp({
     required this.email,
     required this.password,
     required this.pinCode,
+    required this.phoneNumber,
   });
 }
 

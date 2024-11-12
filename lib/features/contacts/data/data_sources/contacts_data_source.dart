@@ -1,24 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
-import 'package:halla/features/contacts/data/data_sources/contacts_local_data_source.dart';
 import 'package:halla/features/contacts/data/models/contact_model.dart';
 import 'package:halla/features/contacts/data/models/contact_model_server.dart';
 
 abstract class ContactsDataSource {
-  Future<void> addContact({
+  Future<ContactModel> addContact({
     required String userId,
     required String contactId,
   });
 
-  Future<void> addContactList({
+  Future<List<ContactModel>> addContactList({
     required String userId,
     required List<String> contactIdList,
-  });
-
-  Future<ContactModel> getContact({
-    required String userId,
-    required String contactId,
   });
 
   Future<List<ContactModel>> getContactList({
@@ -27,175 +21,74 @@ abstract class ContactsDataSource {
 
   Future<void> deleteContact({
     required String userId,
-    required ContactModel contactModel,
+    required String contactId,
   });
 }
 
-class ContactsDataSourceImpl implements ContactsDataSource {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final ContactsLocalDataSource _localDataSource =
-      ContactsLocalDataSourceImpl();
+class ContactsDataSourceNewImpl implements ContactsDataSource {
+  final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   @override
-  Future<void> addContact({
+  Future<ContactModel> addContact({
     required String userId,
     required String contactId,
   }) async {
     try {
-      Map<String, dynamic> contactMap = await _firestore
+      DocumentSnapshot<Map<String, dynamic>> snapshotUser = await _fireStore
           .collection(AppConstants.userCollection)
           .doc(userId)
-          .get(const GetOptions(
-            source: Source.serverAndCache,
-          ))
-          .then(
-        (DocumentSnapshot<Map<String, dynamic>> value) {
-          print(value.data());
-          return value.data()!['contacts'] ?? {};
-        },
-      );
-      if (contactMap.containsKey(contactId)) {
-        throw ServerException("User is Exsit.");
-      }
-      contactMap[contactId] = Timestamp.now();
-      await _firestore
+          .get();
+      DocumentSnapshot<Map<String, dynamic>> snapshotContact = await _fireStore
           .collection(AppConstants.userCollection)
-          .doc(userId)
-          .update({
-        'contacts': contactMap,
-      });
-      ContactModel contactModel = await getContact(
-        userId: userId,
-        contactId: contactId,
-      );
-
-      await _localDataSource.addContact(
-        userId: userId,
-        contactModel: contactModel,
-      );
-    } on FirebaseException catch (e) {
-      throw ServerException(e.message.toString());
-    } catch (e) {
-      throw ServerException(e.toString());
-    }
-  }
-
-  @override
-  Future<void> addContactList({
-    required String userId,
-    required List<String> contactIdList,
-  }) async {
-    try {
-      await _firestore
-          .collection(AppConstants.userCollection)
-          .doc(userId)
-          .update({
-        'contacts': FieldValue.arrayUnion(
-          contactIdList
-              .map( 
-                (id) => ContactModelServer(
-                  id: id,
-                  timestamp: Timestamp.now(),
-                  favoriteCategories: '',
-                ).toMap(),
-              )
-              .toList(),
-        ),
-      });
-      List<ContactModel> contactModelList =
-          await getContactList(userId: userId);
-      print(contactModelList.length);
-      await _localDataSource.addContactList(
-        userId: userId,
-        contactList: contactModelList,
-      );
-    } on FirebaseException catch (e) {
-      throw ServerException(e.message.toString());
-    } catch (e) {
-      throw ServerException(e.toString());
-    }
-  }
-
-  @override
-  Future<ContactModel> getContact({
-    required String userId,
-    required String contactId,
-  }) async {
-    try {
-      Map<String, dynamic> userContact = await _firestore
-          .collection(AppConstants.userCollection)
-          .doc(userId)
-          .get()
-          .then(
-            (value) => value.data()!['contacts'] ?? {},
-          );
-
-      if (userContact.containsKey(contactId)) {
-        final contactModel = await _getContactModel(
-            ContactModelServer.fromMap(userContact[contactId]));
-        return contactModel;
+          .doc(contactId)
+          .get();
+      if (snapshotUser.data() == null || snapshotContact.data() == null) {
+        throw ServerException("Something is wrong");
       } else {
-        throw ServerException("No Contact");
+        List<Map<String, dynamic>> contactList =
+            List.from(snapshotUser.data()?["contacts"] ?? []);
+        // ToDo: remove this comment to add the check if the user is existing
+        // if (contactList.any((contact) => contact['id'] == contactId)) {
+        //   throw ServerException("User already exists.");
+        // }
+
+        ContactModelServer contactModelServer = ContactModelServer(
+          id: snapshotContact.data()!['id'],
+          timestamp: Timestamp.now(),
+          favoriteCategories: '',
+        );
+        await _fireStore
+            .collection(AppConstants.userCollection)
+            .doc(userId)
+            .update({
+          'contacts': FieldValue.arrayUnion(
+            [
+              contactModelServer.toMap(),
+            ],
+          ),
+        });
+        return ContactModel.fromMap(snapshotContact.data()!);
       }
     } on FirebaseException catch (e) {
-      throw ServerException(e.message.toString());
+      throw ServerException(e.message?.toString() ?? "Something is wrong");
     } catch (e) {
       throw ServerException(e.toString());
     }
   }
 
   @override
-  Future<List<ContactModel>> getContactList({
-    required String userId,
-  }) async {
+  Future<List<ContactModel>> addContactList(
+      {required String userId, required List<String> contactIdList}) async {
     try {
-      final List<Map<String, dynamic>> contactList = await _firestore
-          .collection(AppConstants.userCollection)
-          .doc(userId)
-          .get()
-          .then((doc) => doc.data()?["contacts"]);
-
-      final List<ContactModelServer> contactListServer = contactList
-          .map(
-            (e) => ContactModelServer.fromMap(e),
-          )
-          .toList();
-
-      final List<ContactModel> contactModelList = [];
-      for (var contactServer in contactListServer) {
-        contactModelList.add(await _getContactModel(contactServer));
+      List<ContactModel> contactListMy = [];
+      for (String contactId in contactIdList) {
+        contactListMy
+            .add(await addContact(userId: userId, contactId: contactId));
       }
-
-      return contactModelList;
+      return contactListMy;
     } on FirebaseException catch (e) {
-      throw ServerException(e.message.toString());
+      throw ServerException(e.message?.toString() ?? "Something is wrong");
     } catch (e) {
-      throw ServerException(e.toString());
-    }
-  }
-
-  Future<ContactModel> _getContactModel(
-      ContactModelServer contactModelServer) async {
-    try {
-      DocumentSnapshot<Map<String, dynamic>> contactDocumentSnapshot =
-          await _firestore
-              .collection(AppConstants.userCollection)
-              .doc(contactModelServer.id)
-              .get();
-      if (contactDocumentSnapshot.data() != null) {
-        Map<String, dynamic> map = contactDocumentSnapshot.data()!;
-        ContactModel contactModel = ContactModel.fromMap(map);
-        contactModel.addTimeModel = contactModelServer.timestamp;
-        contactModel.favoriteCategoryModel =
-            contactModelServer.favoriteCategories;
-        return contactModel;
-      } else {
-        throw ServerException("No Contact");
-      }
-    } on FirebaseException catch (e) {
-      throw ServerException(e.message.toString());
-    } catch (e) {
-      print(e);
       throw ServerException(e.toString());
     }
   }
@@ -203,25 +96,91 @@ class ContactsDataSourceImpl implements ContactsDataSource {
   @override
   Future<void> deleteContact({
     required String userId,
-    required ContactModel contactModel,
+    required String contactId,
   }) async {
     try {
-      await _firestore
+      DocumentSnapshot<Map<String, dynamic>> snapshotUser = await _fireStore
           .collection(AppConstants.userCollection)
           .doc(userId)
-          .update({
-        'contacts': FieldValue.arrayRemove([
-          {
-            'id': contactModel.id,
-            'time': FieldValue.serverTimestamp(),
-          },
-        ]),
-      });
-
-      await _localDataSource.deleteContact(
-          userId: userId, contactModel: contactModel);
+          .get();
+      if (snapshotUser.data() == null) {
+        throw ServerException("Something is wrong");
+      } else {
+        List<Map<String, dynamic>> contactList =
+            snapshotUser.data()?["contacts"] ?? [];
+        int index =
+            contactList.indexWhere((contact) => contact['id'] == contactId);
+        if (index == -1) {
+          throw ServerException("User isn't exists.");
+        }
+        contactList.removeAt(index);
+        await _fireStore
+            .collection(AppConstants.userCollection)
+            .doc(userId)
+            .update({
+          'contacts': contactList,
+        });
+      }
     } on FirebaseException catch (e) {
-      throw ServerException(e.message.toString());
+      throw ServerException(e.message?.toString() ?? "Something is wrong");
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  @override
+  Future<List<ContactModel>> getContactList({required String userId}) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snapshotUser = await _fireStore
+          .collection(AppConstants.userCollection)
+          .doc(userId)
+          .get();
+      if (snapshotUser.data() == null) {
+        throw ServerException("Something is wrong");
+      } else {
+        List<Map<String, dynamic>> contactList =
+            snapshotUser.data()?["contacts"] ?? [];
+        List<ContactModelServer> contactModelServerList =
+            contactList.map((e) => ContactModelServer.fromMap(e)).toList();
+        List<ContactModel> contactModel = [];
+        for (ContactModelServer contactModelServer in contactModelServerList) {
+          if (await _getContactModel(contactModelServer: contactModelServer) ==
+              null) {
+            continue;
+          }
+          contactModel.add(
+              await _getContactModel(contactModelServer: contactModelServer));
+        }
+        return contactModel;
+      }
+    } on FirebaseException catch (e) {
+      throw ServerException(e.message?.toString() ?? "Something is wrong");
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  Future<ContactModel> _getContactModel({
+    required ContactModelServer contactModelServer,
+  }) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snapshotUser = await _fireStore
+          .collection(AppConstants.userCollection)
+          .doc(contactModelServer.id)
+          .get();
+      if (snapshotUser.data() == null) {
+        throw ServerException("Something is wrong");
+      } else {
+        Map<String, dynamic> map = snapshotUser.data()!;
+        ContactModel contactModel = ContactModel.fromMap(map);
+        contactModel.addTimeModel =
+            contactModelServer.timestamp ?? Timestamp.now();
+        contactModel.favoriteCategoryModel =
+            contactModelServer.favoriteCategories ?? '';
+        return contactModel;
+      }
+    } on FirebaseException catch (e) {
+      throw ServerException(e.message?.toString() ?? "Something is wrong");
     } catch (e) {
       throw ServerException(e.toString());
     }

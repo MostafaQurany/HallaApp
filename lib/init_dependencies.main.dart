@@ -9,7 +9,9 @@ Future<void> initDependencies() async {
   // featuers
   _initAuth();
 
-  _initContact();
+  // contacts
+
+  await _initContact();
 
   _initProfile();
 }
@@ -151,11 +153,6 @@ _initAuth() {
       ),
     )
     ..registerFactory(
-      () => SentSmsCodeUsecase(
-        authRepository: serviceLocator(),
-      ),
-    )
-    ..registerFactory(
       () => LogInWithPhoneUseCase(
         authRepository: serviceLocator(),
       ),
@@ -176,7 +173,7 @@ _initAuth() {
       ),
     )
     ..registerFactory(
-      () => GoogleLogin(
+      () => GoogleLoginUseCase(
         serviceLocator(),
       ),
     )
@@ -188,6 +185,16 @@ _initAuth() {
     ..registerFactory(
       () => ForgetPasswordUsecase(
         serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => GetPhoneAuthCredentials(
+        authRepository: serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => LinkPhoneWithPhoneAuthCredentialUseCase(
+        authRepository: serviceLocator(),
       ),
     )
 
@@ -213,20 +220,41 @@ _initAuth() {
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => SignInCubit(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => SocialCubit(
         serviceLocator(),
         serviceLocator(),
       ),
     );
 }
 
-_initContact() {
+_initContact() async {
+  await Hive.openBox<List<ContactModel>>(AppConstants.contactBox);
   serviceLocator
     // Data Source
     ..registerFactory<ContactsDataSource>(
-      () => ContactsDataSourceImpl(),
+      () => ContactsDataSourceNewImpl(),
     )
     ..registerFactory<ContactsLocalDataSource>(
-      () => ContactsLocalDataSourceImpl(),
+      () => ContactsLocalDataSourceNewImpl(),
     )
     // Repository
     ..registerFactory<ContactsRepository>(
@@ -237,38 +265,38 @@ _initContact() {
     )
     // UseCase
     ..registerFactory(
-      () => AddContactListServerUseCase(
+      () => AddContactListUseCase(
         serviceLocator(),
       ),
     )
     ..registerFactory(
-      () => AddContactServerUseCase(
+      () => AddContactUseCase(
         serviceLocator(),
       ),
     )
     ..registerFactory(
-      () => DeleteContactServerUseCase(
+      () => DeleteContactUseCase(
         serviceLocator(),
       ),
     )
     ..registerFactory(
-      () => GetBoxListenableUseCase(
+      () => GetContactListStreamUseCase(
         serviceLocator(),
       ),
     )
     ..registerFactory(
-      () => GetContactListLocalUseCase(
+      () => GetContactListSyncUseCase(
         serviceLocator(),
       ),
     )
     ..registerFactory(
-      () => GetContactLocalUseCase(
+      () => GetContactListUseCase(
         serviceLocator(),
       ),
     )
     // bloc
     ..registerLazySingleton(
-      () => ContactsBloc(
+      () => ContactCubit(
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

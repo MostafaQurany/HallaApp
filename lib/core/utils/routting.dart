@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:halla/core/utils/app_show_dialog.dart";
 
 class AppNavigator {
   static navigatePushReplace(BuildContext context, Widget page) {
@@ -23,7 +24,13 @@ class AppNavigator {
     Navigator.of(context).pop();
   }
 
+  static void navigatePopDialog(BuildContext context) {
+    AppShowDialog.isLoading = false;
+    Navigator.of(context).pop();
+  }
+
   static _animation(Widget page) {
+    AppShowDialog.isLoading = false;
     const int time = 150;
     final Animatable<Offset> tween =
         Tween(begin: const Offset(1, 0), end: Offset.zero).chain(
