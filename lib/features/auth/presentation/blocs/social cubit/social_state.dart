@@ -19,4 +19,9 @@ class SocialState with _$SocialState {
       FacebookSuccess;
 
   const factory SocialState.facebookError(String errorMessage) = FacebookError;
+
+  // nfc
+  const factory SocialState.nfcAvailable(bool isAvailable) = NFCAvailable;
+
+  const factory SocialState.nfcError(String message) = NFCError;
 }

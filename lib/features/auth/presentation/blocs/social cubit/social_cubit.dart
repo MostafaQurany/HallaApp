@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
-import 'package:halla/core/common/domain/entities/nfc_message.dart';
+import 'package:halla/core/common/domain/usecase/get_is_nfc_available.dart';
 import 'package:halla/core/common/domain/usecase/usecase.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/features/auth/domain/usecases/google_login.dart';
@@ -13,9 +12,13 @@ class SocialCubit extends Cubit<SocialState> {
   // Cubits
   final UserCubit _userCubit;
   final GoogleLoginUseCase _googleLoginUseCase;
+  final GetIsNfcAvailableUsecase _getIsNfcAvailable;
 
-  SocialCubit(this._userCubit, this._googleLoginUseCase)
-      : super(const SocialState.initial());
+  SocialCubit(
+    this._userCubit,
+    this._googleLoginUseCase,
+    this._getIsNfcAvailable,
+  ) : super(const SocialState.initial());
 
   // google
   google() async {
@@ -31,6 +34,15 @@ class SocialCubit extends Cubit<SocialState> {
         _userCubit.updateUser(user: r['user']);
         emit(SocialState.googleSuccess(r));
       },
+    );
+  }
+
+  // nfc
+  getIsNfcAvailableEvent() async {
+    final res = await _getIsNfcAvailable(NoParams());
+    res.fold(
+      (l) => emit(SocialState.nfcError(l.message)),
+      (r) => emit(SocialState.nfcAvailable(r)),
     );
   }
 }

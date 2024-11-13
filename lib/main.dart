@@ -12,6 +12,8 @@ import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/bloc_observer.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
+import "package:halla/features/auth/presentation/blocs/login%20cubit/login_cubit.dart";
+import "package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/social%20cubit/social_cubit.dart";
 import "package:halla/features/contacts/data/models/contact_model.dart";
@@ -59,6 +61,10 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<SignInCubit>()),
         // social
         BlocProvider(create: (context) => serviceLocator<SocialCubit>()),
+        // login
+        BlocProvider(create: (context) => serviceLocator<LoginCubit>()),
+        // nfc
+        BlocProvider(create: (context) => serviceLocator<NfcCubit>()),
       ],
       child: const MyApp(),
     ),

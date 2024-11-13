@@ -8,6 +8,7 @@ import "package:halla/generated/l10n.dart";
 
 class PinCodeScreen extends StatelessWidget {
   const PinCodeScreen({super.key});
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
@@ -45,14 +46,8 @@ class PinCodeScreen extends StatelessWidget {
                 ),
               ),
             ),
-      
-                   const Center(
-                    child: PinCodeBody(
-                      
-                    ),
-                
-                
-
+            Center(
+              child: PinCodeBody(),
             ),
           ],
         ),

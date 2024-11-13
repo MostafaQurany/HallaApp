@@ -137,14 +137,15 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, String>> logInWithPhone(
+  Future<Either<Failure, User>> logInWithPhone(
       {required String smsCode, required String verificationId}) async {
     try {
       final res = await authDataSource.logInWithPhone(
         smsCode: smsCode,
         verificationId: verificationId,
       );
-      return right(res);
+      final resUser = await dataBaseSource.getUser(res);
+      return right(resUser);
     } on ServerException catch (e) {
       return left(Failure(e.message));
     }

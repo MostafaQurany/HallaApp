@@ -26,9 +26,12 @@ class _PinCodeBodyState extends State<PinCodeBody> {
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   String? pinCode;
+
   @override
   void initState() {
     super.initState();
+
+    ///ToDo : see what u can do in this screen to make it work
     pinCode = UserCubit.get(context).user!.pinCode;
   }
 
@@ -111,13 +114,13 @@ class _PinCodeBodyState extends State<PinCodeBody> {
                         if (formKey.currentState!.validate()) {
                           AuthState state = context.read<AuthBloc>().state;
                           if (state is NfcReadNfc) {
-                            context.read<AuthBloc>().add(
-                                  AuthCheckPinCode(
-                                    userId: state.nfcMessage.uId,
-                                    pinCode: pinController.text.trim(),
-                                    userPinCode: state.nfcMessage.pinCode,
-                                  ),
-                                );
+                            // context.read<AuthBloc>().add(
+                            //       AuthCheckPinCode(
+                            //         userId: state.nfcMessage.uId,
+                            //         pinCode: pinController.text.trim(),
+                            //         userPinCode: state.nfcMessage.pinCode,
+                            //       ),
+                            //     );
                           } else {
                             AppNavigator.navigatePush(
                                 context, const HomeLayout());

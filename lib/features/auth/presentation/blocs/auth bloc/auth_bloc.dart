@@ -45,7 +45,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   // auth usecase
   final SignInWithEmailPasswordUsecase _signInWithEmailPasswordUsecase;
   final GetSmsCodeUsecase _getSmsCodeUsecase;
-  final LogInWithEmailPassword _logInWithEmailPassword;
+  final LogInWithEmailPasswordUseCase _logInWithEmailPassword;
   final GoogleLoginUseCase _googleLogin;
   final LinkWithEmailPincode _linkWithEmailPincode;
   final LogInWithPhoneUseCase _logInWithPhoneUseCase;
@@ -69,7 +69,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     UserCubit userCubit,
     // auth email_password
     SignInWithEmailPasswordUsecase signInWithEmailPassword,
-    LogInWithEmailPassword logInWithEmailPassword,
+    LogInWithEmailPasswordUseCase logInWithEmailPassword,
     ForgetPasswordUsecase forgetPassword,
     // social
     GoogleLoginUseCase googleLogin,
@@ -115,8 +115,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // auth
     on<AuthLogIn>(_onAuthLogIn);
     on<AuthGoogle>(_onAuthGoogle);
-    on<AuthLogWithPhoneEvent>(_onAuthLogWithPhoneEvent);
-    on<AuthCheckPinCode>(_onAuthCheckPinCode);
     on<AuthForgetPassword>(_onAuthForgetPassword);
     // database
     on<AuthPersonalInfoEvent>(_onAuthPersonalInfoEvent);
@@ -124,11 +122,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // guest
     on<AuthLogInGuestEvent>(_onAuthLogInGuestEvent);
     on<AuthForgetPinCodeGuestEvent>(_onAuthForgetPinCodeGuestEvent);
-    // nfc
-    on<GetIsNfcAvailableEvent>(_onGetIsNfcAvailableEvent);
-    on<GetIsNfcOpenEvent>(_onGetIsNfcOpenEvent);
-    on<WriteOnNfcEvent>(_onWriteOnNfcEvent);
-    on<ReadFromNfcEvent>(_onAuthReadFromNfc);
   }
 
   antherEmutter(Emitter<AuthState> emit, AuthState state) {
@@ -210,41 +203,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   String _verificationId = '';
   bool isLogWithPhone = false;
 
-  _onAuthLogWithPhoneEvent(
-    AuthLogWithPhoneEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    //loadingEmitter(emit, "Log With Phone");
-
-    final res = await _logInWithPhoneUseCase(
-      LogInWithPhoneParams(
-        smsCode: event.smsCode,
-        verificationId: _verificationId,
-      ),
-    );
-    await res.fold(
-      (l) {
-        emit(AuthFailure(message: l.message));
-      },
-      (r) async {
-        final res = await _getUserUsecase(GetUserParams(userId: r));
-        await res.fold(
-          (l) {
-            emit(AuthFailure(message: l.message));
-            return Future.value();
-          },
-          (r) {
-            _userCubit.updateUser(user: r);
-            emit(
-              AuthSuccess(user: r),
-            );
-            return Future.value();
-          },
-        );
-      },
-    );
-  }
-
   _onAuthPersonalInfoEvent(
     AuthPersonalInfoEvent event,
     Emitter<AuthState> emit,
@@ -325,117 +283,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       (l) => emit(AuthFailure(message: l.message)),
       (r) => emit(AuthSentMessageSuccess()),
     );
-  }
-
-// =========================== nfc =============================
-
-  _onGetIsNfcAvailableEvent(
-    GetIsNfcAvailableEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    final res = await _getIsNfcAvailable(NoParams());
-    res.fold(
-      (l) => emit(AuthFailure(message: l.message)),
-      (r) => emit(GetIsNfcAvailableState(r)),
-    );
-  }
-
-  _onGetIsNfcOpenEvent(
-    GetIsNfcOpenEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    _shouldCloseNfcStatusStream = false;
-    await emit.forEach(
-      _getNFCStatusStream(),
-      onData: (bool isAvailable) {
-        return NfcState(isAvailable);
-      },
-      onError: (error, stackTrace) => AuthFailure(message: error.toString()),
-    );
-  }
-
-  bool _shouldCloseNfcStatusStream = false;
-
-  Stream<bool> _getNFCStatusStream() async* {
-    while (!_nfcStatusController.isClosed && !_shouldCloseNfcStatusStream) {
-      final res = await _getIsNfcOpen(NoParams());
-      yield res.fold(
-        (l) {
-          throw l;
-        },
-        (r) {
-          _nfcStatusController.add(r);
-          return r;
-        },
-      );
-      await Future.delayed(const Duration(seconds: 2));
-    }
-  }
-
-  void closeNfcStatusStream() {
-    _shouldCloseNfcStatusStream = true;
-    _nfcStatusController.close();
-  }
-
-  @override
-  Future<void> close() {
-    closeNfcStatusStream();
-    return super.close();
-  }
-
-  _onWriteOnNfcEvent(
-    WriteOnNfcEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    final res = await _writeOnNfcUsecase(
-      WriteOnNfcParam(nfcMessage: event.nfcMessage),
-    );
-    res.fold(
-      (l) => emit(AuthFailure(message: l.message)),
-      (r) {
-        _nfcStatusController.close();
-        emit(
-          NfcUseState(
-            nfcUseState: r,
-            nfcId: event.nfcMessage.id,
-          ),
-        );
-      },
-    );
-  }
-
-  _onAuthReadFromNfc(
-    ReadFromNfcEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    final res = await _readFromNfc(NoParams());
-    res.fold(
-      (l) => emit(AuthFailure(message: l.message)),
-      (r) => emit(
-        NfcReadNfc(nfcMessage: r),
-      ),
-    );
-  }
-
-  _onAuthCheckPinCode(
-    AuthCheckPinCode event,
-    Emitter<AuthState> emit,
-  ) async {
-    // loadingEmitter(emit, "CheckPinCode");
-    if (event.pinCode == event.userPinCode) {
-      final res = await _getUserUsecase(GetUserParams(userId: event.userId));
-      res.fold(
-        (l) => emit(AuthFailure(message: l.message)),
-        (r) {
-          _userCubit.updateUser(user: r);
-          emit(
-            AuthGetUserSuccess(user: r),
-          );
-        },
-      );
-    } else {
-      emit(AuthFailure(message: "The pin-code inccorect"));
-    }
   }
 
   // guest

@@ -19,29 +19,6 @@ class SignInState with _$SignInState {
 
   const factory SignInState.errorOtp(String error) = ErrorOtp;
 
-// nfc states
-  const factory SignInState.nfcAvailable(bool isAvailable) = NFCAvailable;
-
-  const factory SignInState.nfcLoading() = NfcLoading;
-
-  const factory SignInState.nfcError(String error) = NFCError;
-
-  const factory SignInState.nfcState(bool isOpen) = NFCState;
-
-  const factory SignInState.nfcUseState(
-    NfcUse nfcUseState,
-    String nfcId,
-  ) = NFCUseState;
-
-  const factory SignInState.nfcReadNfc(NfcMessage nfcMessage) = NFCReadNfc;
-
-  // upload user state
-  const factory SignInState.uploadUserLoading() = UploadUserLoading;
-
-  const factory SignInState.uploadUserError(String message) = UploadUserError;
-
-  const factory SignInState.uploadUserSuccess() = UploadUserSuccess;
-
 // personal information state
   const factory SignInState.personalInfoLoading() = personalInfoLoading;
 
@@ -49,6 +26,8 @@ class SignInState with _$SignInState {
       personalInfoError;
 
   const factory SignInState.personalInfoSuccess() = personalInfoSuccess;
+
+  const factory SignInState.uploadUserSuccess() = UploadUserSuccess;
 
   // first time contact state
   const factory SignInState.firstTimeContactLoading() = FirstTimeContactLoading;

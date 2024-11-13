@@ -8,7 +8,7 @@ import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/core/utils/routting.dart';
-import 'package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart';
+import 'package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dart';
 import 'package:halla/features/auth/presentation/screens/sign%20in/personal_information_screen.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custom_nfc_close_error.dart';
 import 'package:halla/generated/l10n.dart';
@@ -31,8 +31,9 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
 
   @override
   void initState() {
+    print("object");
     super.initState();
-    context.read<SignInCubit>().getIsNfcOpenEvent();
+    context.read<NfcCubit>().getIsNfcOpenEvent();
     _slideTransitionController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 1),
@@ -61,7 +62,7 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
             padding: const EdgeInsets.all(8.0),
             child: TextButton(
               onPressed: () {
-                context.read<SignInCubit>().closeNfcStatusStream();
+                context.read<NfcCubit>().closeNfcStatusStream();
                 AppNavigator.navigatePushReplaceRemoveAll(
                   context,
                   const PersonalInformationScreen(),
@@ -78,7 +79,7 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
           ),
         ],
       ),
-      body: BlocConsumer<SignInCubit, SignInState>(
+      body: BlocConsumer<NfcCubit, NfcState>(
         listener: (context, state) {
           state.whenOrNull(
             nfcLoading: () {
@@ -87,44 +88,27 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
             nfcError: (error) {
               AppShowDialog.error(context, error);
             },
-            nfcUseState: (nfcUseState, nfcId) {
-              UserState userState = context.read<UserCubit>().state;
-              if (userState is UserLoggedIn) {
-                userState.user!.nfcList.add(nfcId);
-                context.read<SignInCubit>().authUploadUser(userState.user!);
-              }
-            },
             nfcState: (isOpen) {
               if (isOpen) {
                 _slideTransitionController.reverse();
-                if (_nfcIsOpen != isOpen) {
-                  UserState userState = context.read<UserCubit>().state;
-                  if (userState is UserLoggedIn) {
-                    nfcMessage = NfcMessage(
-                      id: const Uuid().v1(),
-                      uId: userState.user!.id,
-                      email: userState.user!.email,
-                      phone: userState.user!.primePhone,
-                      pinCode: userState.user!.pinCode,
-                    );
-                    context.read<SignInCubit>().writeOnNfcEvent(
-                          nfcMessage: nfcMessage!,
-                        );
-                  }
-                }
               } else {
                 _slideTransitionController.forward();
               }
               _nfcIsOpen = isOpen;
             },
-            uploadUserSuccess: () {
-              AppNavigator.navigatePopDialog(context);
-              context.read<SignInCubit>().closeNfcStatusStream();
-              AppNavigator.navigatePushReplace(
-                context,
-                const PersonalInformationScreen(),
-              );
+            nfcUseState: (nfcUseState, nfcId) {
+              UserState userState = context.read<UserCubit>().state;
+              UserCubit.get(context).user!.nfcList.add(nfcId);
+              context
+                  .read<NfcCubit>()
+                  .authUploadUser(UserCubit.get(context).user!);
             },
+            uploadUserSuccess: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => PersonalInformationScreen(),
+              ),
+            ),
           );
         },
         builder: (context, state) {
@@ -133,7 +117,7 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
               if (!isAvailable) {
                 return const Center(
                   child: Text(
-                    "Your device dont support NFC.",
+                    "Your device don't support NFC.",
                     style: TextStyle(color: Colors.white),
                   ),
                 );
@@ -158,6 +142,20 @@ class _NfcWriteScreenState extends State<NfcWriteScreen>
                       AppImages.nfcWriteLottie,
                     ),
                   ),
+                  ElevatedButton(
+                      onPressed: () {
+                        nfcMessage = NfcMessage(
+                          id: const Uuid().v1(),
+                          uId: UserCubit.get(context).user?.id ?? '',
+                          email: UserCubit.get(context).user?.email ?? '',
+                          phone: UserCubit.get(context).user?.primePhone ?? '',
+                          pinCode: UserCubit.get(context).user?.pinCode ?? '',
+                        );
+                        context
+                            .read<NfcCubit>()
+                            .writeOnNfcEvent(nfcMessage: nfcMessage!);
+                      },
+                      child: Text("Write on NFC "))
                 ],
               ),
             ),

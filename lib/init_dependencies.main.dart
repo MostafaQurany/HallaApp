@@ -168,7 +168,7 @@ _initAuth() {
       ),
     )
     ..registerFactory(
-      () => LogInWithEmailPassword(
+      () => LogInWithEmailPasswordUseCase(
         serviceLocator(),
       ),
     )
@@ -232,6 +232,18 @@ _initAuth() {
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => SocialCubit(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => LoginCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
@@ -239,7 +251,11 @@ _initAuth() {
       ),
     )
     ..registerLazySingleton(
-      () => SocialCubit(
+      () => NfcCubit(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
       ),
