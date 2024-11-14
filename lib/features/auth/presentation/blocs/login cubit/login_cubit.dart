@@ -88,7 +88,7 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   // get user
-  getUser(String userId) async {
+  getUser(String userId, {bool isGuest = false}) async {
     emit(LoginState.getUserLoading());
     await _getUserUsecase(GetUserParams(userId: userId)).then(
       (res) {
@@ -97,6 +97,8 @@ class LoginCubit extends Cubit<LoginState> {
             emit(LoginState.getUserError(l.message));
           },
           (r) {
+            r.isGuest = isGuest;
+            print(r);
             _userCubit.updateUser(user: r);
             emit(LoginState.getUserSuccess());
           },

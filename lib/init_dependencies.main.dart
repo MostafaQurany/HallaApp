@@ -69,16 +69,6 @@ _initCommon() {
       ),
     )
     ..registerFactory(
-      () => IsGuestUpdate(
-        serviceLocator(),
-      ),
-    )
-    ..registerFactory(
-      () => IsGuestExit(
-        serviceLocator(),
-      ),
-    )
-    ..registerFactory(
       () => ForgetPinCodeGuestUseCase(
         serviceLocator(),
       ),
@@ -218,8 +208,6 @@ _initAuth() {
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
       ),
     )
     ..registerLazySingleton(
@@ -255,6 +243,14 @@ _initAuth() {
       () => NfcCubit(
         serviceLocator(),
         serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GuestCubit(
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

@@ -17,7 +17,14 @@ class PinCodeScreen extends StatefulWidget {
 
   final String pinCode;
 
-  const PinCodeScreen({super.key, required this.userId, required this.pinCode});
+  final bool isGuest;
+
+  const PinCodeScreen({
+    super.key,
+    required this.userId,
+    required this.pinCode,
+    this.isGuest = false,
+  });
 
   @override
   State<PinCodeScreen> createState() => _PinCodeScreenState();
@@ -73,21 +80,23 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                        onPressed: () {
-                          AppShowDialog.showConfirmToDeleteGuest(context);
-                        },
-                        child: Text(
-                          S.of(context).forgetPassword,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium!
-                              .copyWith(color: AppColors.errorborder),
+                    if (widget.isGuest)
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: TextButton(
+                          onPressed: () {
+                            AppNavigator.navigatePop(context);
+                            AppShowDialog.showConfirmToDeleteGuest(context);
+                          },
+                          child: Text(
+                            S.of(context).forgetPassword,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium!
+                                .copyWith(color: AppColors.errorborder),
+                          ),
                         ),
                       ),
-                    ),
                     SizedBox(
                       height: 60.h,
                     ),
@@ -108,7 +117,10 @@ class _PinCodeScreenState extends State<PinCodeScreen> {
                         onPressed: () {
                           if (formKey.currentState!.validate()) {
                             if (pinController.text == widget.pinCode) {
-                              context.read<LoginCubit>().getUser(widget.userId);
+                              context.read<LoginCubit>().getUser(
+                                    widget.userId,
+                                    isGuest: widget.isGuest,
+                                  );
                             }
                           }
                         },

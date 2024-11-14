@@ -134,25 +134,20 @@ class UserModel extends User with HiveObjectMixin {
 
   factory UserModel.fromJson(Map<String, dynamic> map) {
     return UserModel(
-      idModel: map['id'] as String,
-      emailModel: map['email'] as String,
-      fullNameModel: map['fullName'] as String,
-      primePhoneModel: map['primePhone'] as String,
-      dateOfBirthModel: map['dateOfBirth'] as String,
-      nationalityModel: map['nationality'] as String,
-      imageUrlModel: map['imageUrl'] as String,
-      pinCodeModel: map['pinCode'] as String,
-      phonesModel:
-          (map['phones'] as List<dynamic>).map((e) => e as String).toList(),
-      nfcListModel:
-          (map['nfcList'] as List<dynamic>).map((e) => e as String).toList(),
-      favoriteCategoriesModel: (map['favoriteCategories'] as List<dynamic>)
-          .map((e) => e as String)
-          .toList(),
-      socialMediaModel:
-          SocialMediaModel.fromMap(map['socialMedia'] as Map<String, dynamic>),
-      companyModel:
-          CompanyModel.fromMap(map['company'] as Map<String, dynamic>),
+      idModel: map['id'] ?? "",
+      emailModel: map['email'] ?? "",
+      fullNameModel: map['fullName'] ?? "",
+      primePhoneModel: map['primePhone'] ?? "",
+      dateOfBirthModel: map['dateOfBirth'] ?? "",
+      nationalityModel: map['nationality'] ?? "",
+      imageUrlModel: map['imageUrl'] ?? "",
+      pinCodeModel: map['pinCode'] ?? "",
+      phonesModel: (map['phones'] ?? []).whereType<String>().toList(),
+      nfcListModel: (map['nfcList'] ?? []).whereType<String>().toList(),
+      favoriteCategoriesModel:
+          (map['favoriteCategories'] ?? []).whereType<String>().toList(),
+      socialMediaModel: SocialMediaModel.fromMap(map['socialMedia'] ?? {}),
+      companyModel: CompanyModel.fromMap(map['company'] ?? {}),
     );
   }
 

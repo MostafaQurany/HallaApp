@@ -10,8 +10,6 @@ import 'package:halla/core/common/domain/usecase/get_first_time_local_contacts_u
 import 'package:halla/core/common/domain/usecase/get_is_nfc_available.dart';
 import 'package:halla/core/common/domain/usecase/get_is_nfc_open.dart';
 import 'package:halla/core/common/domain/usecase/get_user_usecase.dart';
-import 'package:halla/core/common/domain/usecase/is_guest_exit.dart';
-import 'package:halla/core/common/domain/usecase/is_guest_update.dart';
 import 'package:halla/core/common/domain/usecase/log_in_guest.dart';
 import 'package:halla/core/common/domain/usecase/read_from_nfc.dart';
 import 'package:halla/core/common/domain/usecase/upload_user_usecase.dart';
@@ -58,8 +56,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   // core => guest
   final LogInGuest _logInGuest;
-  final IsGuestUpdate _isGuestUpdate;
-  final IsGuestExit _isGuestExit;
   final ForgetPinCodeGuestUseCase _forgetPinCodeGuestUseCase;
 
   static AuthBloc get(context) => BlocProvider.of(context);
@@ -89,8 +85,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     ReadFromNfc readFromNfc,
     // guest
     LogInGuest logInGuest,
-    IsGuestUpdate isGuestUpdate,
-    IsGuestExit isGuestExit,
     ForgetPinCodeGuestUseCase forgetPinCodeGuestUseCase,
   )   : _userCubit = userCubit,
         _signInWithEmailPasswordUsecase = signInWithEmailPassword,
@@ -106,8 +100,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _linkWithEmailPincode = linkWithEmailPincode,
         _readFromNfc = readFromNfc,
         _logInGuest = logInGuest,
-        _isGuestUpdate = isGuestUpdate,
-        _isGuestExit = isGuestExit,
         _logInWithPhoneUseCase = logInWithPhoneUseCase,
         _forgetPasswordUsecase = forgetPassword,
         _forgetPinCodeGuestUseCase = forgetPinCodeGuestUseCase,
@@ -119,9 +111,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     // database
     on<AuthPersonalInfoEvent>(_onAuthPersonalInfoEvent);
     on<AuthGetUserDataEvent>(_onAuthGetUserDataEvent);
-    // guest
-    on<AuthLogInGuestEvent>(_onAuthLogInGuestEvent);
-    on<AuthForgetPinCodeGuestEvent>(_onAuthForgetPinCodeGuestEvent);
   }
 
   antherEmutter(Emitter<AuthState> emit, AuthState state) {
@@ -282,78 +271,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     res.fold(
       (l) => emit(AuthFailure(message: l.message)),
       (r) => emit(AuthSentMessageSuccess()),
-    );
-  }
-
-  // guest
-
-  _onAuthLogInGuestEvent(
-    AuthLogInGuestEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    //loadingEmitter(emit, "LogInGuest");
-    final isGuestExitRes = await _isGuestExit(NoParams());
-    await isGuestExitRes.fold(
-      (l) {
-        emit(AuthFailure(message: l.message));
-      },
-      (r) async {
-        if (r) {
-          final isUpdateRes = await _isGuestUpdate(NoParams());
-          await isUpdateRes.fold(
-            (l) {
-              emit(AuthFailure(message: l.message));
-            },
-            (r) async {
-              if (r) {
-                emit(GuestIsUpdateState());
-              } else {
-                final logInGuest = await _logInGuest(NoParams());
-                logInGuest.fold(
-                  (l) {
-                    emit(AuthFailure(message: l.message));
-                  },
-                  (r) {
-                    _userCubit.updateUser(
-                      user: r,
-                    );
-                    emit(LogInGuestSucces(r));
-                  },
-                );
-              }
-            },
-          );
-        } else {
-          final logInGuest = await _logInGuest(NoParams());
-          logInGuest.fold(
-            (l) {
-              emit(AuthFailure(message: l.message));
-            },
-            (r) {
-              _userCubit.updateUser(
-                user: r,
-              );
-              emit(CreatNewGuestSucces(r));
-            },
-          );
-        }
-      },
-    );
-  }
-
-  _onAuthForgetPinCodeGuestEvent(
-    AuthForgetPinCodeGuestEvent event,
-    Emitter<AuthState> emit,
-  ) async {
-    //loadingEmitter(emit, "ForgetPinCodeGuest");
-    final deleteGuest = await _forgetPinCodeGuestUseCase(NoParams());
-    deleteGuest.fold(
-      (l) => emit(
-        AuthFailure(message: l.message),
-      ),
-      (r) => emit(
-        GuestDeletedSucces(),
-      ),
     );
   }
 }

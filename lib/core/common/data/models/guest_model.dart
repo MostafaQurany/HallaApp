@@ -58,11 +58,11 @@ class GuestModel extends Guest {
 
   factory GuestModel.fromMap(Map<String, dynamic> map) {
     return GuestModel(
-      idGuestModel: map['id'] as String,
-      fullNameGuestModel: map['name'] as String,
-      pinCodeGuestModel: map['pinCode'] as String,
-      isUpGradedModel: map['isUpGraded'] as bool,
-      upgradedIdModel: map['upgradedId'] as String,
+      idGuestModel: map['id'] ?? '',
+      fullNameGuestModel: map['name'] ?? '',
+      pinCodeGuestModel: map['pinCode'] ?? '',
+      isUpGradedModel: map['isUpGraded'] ?? false,
+      upgradedIdModel: map['upgradedId'] ?? '',
     );
   }
 

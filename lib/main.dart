@@ -12,15 +12,16 @@ import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/bloc_observer.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
+import "package:halla/features/auth/presentation/blocs/guest%20cubit/guest_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/login%20cubit/login_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/social%20cubit/social_cubit.dart";
-import "package:halla/features/auth/presentation/screens/log%20in/pin_code_screen.dart";
 import "package:halla/features/contacts/data/models/contact_model.dart";
 import "package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart";
 import "package:halla/features/splash/presentation/bloc/brightness%20cubit/brightness_cubit.dart";
 import "package:halla/features/splash/presentation/bloc/language%20cubit/language_cubit.dart";
+import "package:halla/features/splash/presentation/screen/splash_screen.dart";
 import "package:halla/generated/l10n.dart";
 import "package:halla/init_dependencies_map.dart";
 import "package:hive_flutter/hive_flutter.dart";
@@ -65,6 +66,8 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<LoginCubit>()),
         // nfc
         BlocProvider(create: (context) => serviceLocator<NfcCubit>()),
+        // guest
+        BlocProvider(create: (context) => serviceLocator<GuestCubit>()),
       ],
       child: const MyApp(),
     ),
@@ -86,25 +89,21 @@ class MyApp extends StatelessWidget {
             return BlocBuilder<LanguageCubit, Locale>(
               builder: (context, locale) {
                 return MaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  title: "Halla",
-                  locale: locale,
-                  localizationsDelegates: const <LocalizationsDelegate>[
-                    S.delegate,
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                  supportedLocales: S.delegate.supportedLocales,
-                  themeMode: themeMode,
-                  theme: themeMode == ThemeMode.light
-                      ? AppTheme.lightTheme
-                      : AppTheme.darkTheme,
-                  home: PinCodeScreen(
-                    userId: 'QLio37VJZ7UhGXfUw3JxGhkEUfw1',
-                    pinCode: '811955',
-                  ),
-                );
+                    debugShowCheckedModeBanner: false,
+                    title: "Halla",
+                    locale: locale,
+                    localizationsDelegates: const <LocalizationsDelegate>[
+                      S.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    supportedLocales: S.delegate.supportedLocales,
+                    themeMode: themeMode,
+                    theme: themeMode == ThemeMode.light
+                        ? AppTheme.lightTheme
+                        : AppTheme.darkTheme,
+                    home: SplashScreen());
               },
             );
           },
