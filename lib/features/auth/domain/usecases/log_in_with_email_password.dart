@@ -1,14 +1,14 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
-import 'package:halla/core/error/failure.dart';
 import 'package:halla/core/common/domain/usecase/usecase.dart';
+import 'package:halla/core/error/failure.dart';
 import 'package:halla/features/auth/domain/repositories/auth_repository.dart';
 
-class LogInWithEmailPassword
+class LogInWithEmailPasswordUseCase
     implements UseCase<User, LogInWithEmailPasswordPrams> {
   final AuthRepository authRepository;
 
-  LogInWithEmailPassword(this.authRepository);
+  LogInWithEmailPasswordUseCase(this.authRepository);
   @override
   Future<Either<Failure, User>> call(LogInWithEmailPasswordPrams params) async {
     return await authRepository.logInWithEmailPassword(

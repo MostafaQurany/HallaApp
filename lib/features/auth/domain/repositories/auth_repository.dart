@@ -24,7 +24,7 @@ abstract class AuthRepository {
     required firebase_auth.PhoneAuthCredential phoneAuthCredential,
   });
 
-  Future<Either<Failure, String>> logInWithPhone({
+  Future<Either<Failure, User>> logInWithPhone({
     required String smsCode,
     required String verificationId,
   });

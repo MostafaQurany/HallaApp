@@ -224,8 +224,10 @@ class AuthDataSourceImpl implements AuthDataSource {
   }
 
   @override
-  Future<String> logInWithPhone(
-      {required String smsCode, required String verificationId}) async {
+  Future<String> logInWithPhone({
+    required String smsCode,
+    required String verificationId,
+  }) async {
     try {
       final PhoneAuthCredential phoneAuthCredential =
           PhoneAuthProvider.credential(

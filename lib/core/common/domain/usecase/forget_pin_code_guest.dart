@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/common/domain/repositories/common_repositories.dart';
-import 'package:halla/core/error/failure.dart';
 import 'package:halla/core/common/domain/usecase/usecase.dart';
+import 'package:halla/core/error/failure.dart';
 
 class ForgetPinCodeGuestUseCase implements UseCase<void, NoParams> {
   final CommonRepositories commonRepositories;
@@ -9,6 +9,6 @@ class ForgetPinCodeGuestUseCase implements UseCase<void, NoParams> {
   ForgetPinCodeGuestUseCase(this.commonRepositories);
   @override
   Future<Either<Failure, void>> call(NoParams params) async {
-    return await commonRepositories.fotgetGuestPinCode();
+    return await commonRepositories.forgetGuestPinCode();
   }
 }

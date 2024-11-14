@@ -15,11 +15,7 @@ abstract interface class DataBaseSource {
   // guest
   Future<GuestModel> logInGuest();
 
-  Future<bool> isGuestExit();
-
-  Future<GuestModel> getGuest();
-
-  Future<bool> isGuestUpdate();
+  Future<GuestModel?> getGuest();
 
   Future<void> forgetGuestPinCode();
 }
@@ -94,75 +90,48 @@ class DataBaseSourceImpl implements DataBaseSource {
   }
 
   // guest
-  @override
-  Future<bool> isGuestExit() async {
-    try {
-      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-          await _firestore
-              .collection(_userCollection)
-              .doc(await AppConstants.getGuestId())
-              .get();
-
-      if (documentSnapshot.exists) {
-        return true;
-      } else {
-        return false;
-      }
-    } on FirebaseException catch (e) {
-      throw ServerException(e.message.toString());
-    } catch (e) {
-      throw ServerException(e.toString());
-    }
-  }
 
   @override
   Future<GuestModel> logInGuest() async {
-    try {
-      if (await isGuestExit()) {
-        return getGuest();
-      } else {
-        GuestModel guestModel = GuestModel(
-          idGuestModel: await AppConstants.getGuestId(),
-          fullNameGuestModel: "Guest",
-          pinCodeGuestModel: AppConstants.generatePinCode(),
-        );
-        await _firestore
-            .collection(_userCollection)
-            .doc(await AppConstants.getGuestId())
-            .set(
-              guestModel.toMap(),
-            );
-        return getGuest();
-      }
-    } on FirebaseException catch (e) {
-      throw ServerException(e.message.toString());
-    } catch (e) {
-      throw ServerException(e.toString());
-    }
+    return await getGuest().then(
+      (guest) async {
+        if (guest == null) {
+          GuestModel guestModel = GuestModel(
+            idGuestModel: await AppConstants.getGuestId(),
+            fullNameGuestModel: "Guest",
+            pinCodeGuestModel: AppConstants.generatePinCode(),
+          );
+          await _firestore
+              .collection(_userCollection)
+              .doc(await AppConstants.getGuestId())
+              .set(
+                guestModel.toMap(),
+              );
+          return guestModel;
+        } else {
+          return guest;
+        }
+      },
+    ).onError(
+      (error, stackTrace) {
+        throw ServerException(error.toString());
+      },
+    );
   }
 
   @override
-  Future<GuestModel> getGuest() async {
+  Future<GuestModel?> getGuest() async {
     try {
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await _firestore
               .collection(_userCollection)
               .doc(await AppConstants.getGuestId())
               .get();
-      print(documentSnapshot.data()!);
-      return GuestModel.fromMap(documentSnapshot.data()!);
-    } on FirebaseException catch (e) {
-      throw ServerException(e.message.toString());
-    } catch (e) {
-      throw ServerException(e.toString());
-    }
-  }
-
-  @override
-  Future<bool> isGuestUpdate() async {
-    try {
-      GuestModel guestModel = await getGuest();
-      return guestModel.isUpGraded;
+      if (documentSnapshot.exists) {
+        return GuestModel.fromMap(documentSnapshot.data()!);
+      } else {
+        return null;
+      }
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {

@@ -83,12 +83,6 @@ class GetIsNfcAvailableState extends AuthState {
   GetIsNfcAvailableState(this.isAvailable);
 }
 
-class NfcState extends AuthState {
-  final bool isOpen;
-
-  NfcState(this.isOpen);
-}
-
 class NfcUseState extends AuthState {
   final NfcUse nfcUseState;
   final String nfcId;

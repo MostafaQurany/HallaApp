@@ -4,15 +4,26 @@ import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:halla/core/constants/app_images.dart";
 import "package:halla/core/theme/theme.dart";
+import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
-import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
+import "package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dart";
 import "package:halla/features/auth/presentation/screens/log%20in/pin_code_screen.dart";
 import "package:halla/features/auth/presentation/screens/widgets/social_icon.dart";
 import "package:halla/generated/l10n.dart";
 import "package:lottie/lottie.dart";
 
-class NfcButton extends StatelessWidget {
+class NfcButton extends StatefulWidget {
   const NfcButton({super.key});
+
+  @override
+  State<NfcButton> createState() => _NfcButtonState();
+}
+
+class _NfcButtonState extends State<NfcButton> {
+  bool isOpen = false;
+  bool isReading = false;
+
+  bool lastState = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,51 +35,60 @@ class NfcButton extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) {
-            context.read<AuthBloc>().add(GetIsNfcOpenEvent());
-            context.read<AuthBloc>().add(ReadFromNfcEvent());
-            return AlertDialog(
-              content: BlocListener<AuthBloc, AuthState>(
-                listener: (context, state) {
-                  if (state is NfcReadNfc) {
-                    context.read<AuthBloc>().closeNfcStatusStream();
-                    AppNavigator.navigatePush(context, const PinCodeScreen());
-                  }
-                },
-                child: SizedBox(
-                  height: 0.5.sh,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        S.of(context).putNfcTag,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      Lottie.asset(AppImages.nfcLoginLottie),
-                      BlocBuilder<AuthBloc, AuthState>(
-                        builder: (context, state) {
-                          if (state is NfcState) {
-                            if (state.isOpen) {
-                              return const SizedBox.shrink();
-                            }
-                          }
-                          return ElevatedButton(
-                            onPressed: () {
-                              AppSettings.openAppSettingsPanel(
-                                  AppSettingsPanelType.nfc);
-                            },
-                            child: Text(S.of(context).open),
-                          );
-                        },
-                      )
-                    ],
+            context.read<NfcCubit>().getIsNfcOpenEvent();
+            context.read<NfcCubit>().readFromNfc();
+            return BlocConsumer<NfcCubit, NfcState>(
+              listener: (context, state) {
+                state.whenOrNull(
+                  nfcLoading: () => AppShowDialog.loading(context),
+                  nfcState: (isOpen) => this.isOpen = isOpen,
+                  nfcError: (error) => AppShowDialog.error(context, error),
+                  nfcReadNfc: (nfcMessage) => AppNavigator.navigatePush(
+                    context,
+                    PinCodeScreen(
+                      userId: nfcMessage.id,
+                      pinCode: nfcMessage.pinCode,
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
+              builder: (context, state) {
+                if (lastState != isOpen) {
+                  lastState = isOpen;
+                  if (isOpen) {
+                    context.read<NfcCubit>().readFromNfc();
+                  }
+                }
+                return AlertDialog(
+                  content: SizedBox(
+                    height: 0.5.sh,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          S.of(context).putNfcTag,
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                        Lottie.asset(AppImages.nfcLoginLottie),
+                        (isOpen)
+                            ? const SizedBox.shrink()
+                            : ElevatedButton(
+                                onPressed: () {
+                                  AppSettings.openAppSettingsPanel(
+                                      AppSettingsPanelType.nfc);
+                                },
+                                child: Text(S.of(context).open),
+                              )
+                      ],
+                    ),
+                  ),
+                );
+              },
             );
           },
         ).then(
           (value) {
-            context.read<AuthBloc>().closeNfcStatusStream();
+            context.read<NfcCubit>().closeNfcStatusStream();
           },
         );
       },

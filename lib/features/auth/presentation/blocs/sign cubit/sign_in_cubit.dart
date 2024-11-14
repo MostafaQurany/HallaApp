@@ -3,16 +3,10 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
-import 'package:halla/core/common/domain/entities/nfc_message.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/common/domain/usecase/get_first_time_local_contacts_usecase.dart';
-import 'package:halla/core/common/domain/usecase/get_is_nfc_available.dart';
-import 'package:halla/core/common/domain/usecase/get_is_nfc_open.dart';
-import 'package:halla/core/common/domain/usecase/read_from_nfc.dart';
 import 'package:halla/core/common/domain/usecase/upload_user_usecase.dart';
 import 'package:halla/core/common/domain/usecase/usecase.dart';
-import 'package:halla/core/common/domain/usecase/write_on_nfc.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/features/auth/domain/usecases/get_phone_auth_credentials.dart';
 import 'package:halla/features/auth/domain/usecases/get_sms_code_usecase.dart';
@@ -30,13 +24,6 @@ class SignInCubit extends Cubit<SignInState> {
   // core
   final UserCubit _userCubit;
 
-  // core => nfc usecase
-  final StreamController<bool> _nfcStatusController = StreamController<bool>();
-  final GetIsNfcAvailableUsecase _getIsNfcAvailable;
-  final GetIsNfcOpenUsecase _getIsNfcOpen;
-  final WriteOnNfcUsecase _writeOnNfcUsecase;
-  final ReadFromNfc _readFromNfc;
-
   // auth usecase
   final SignInWithEmailPasswordUsecase _signInWithEmailPasswordUsecase;
   final GetSmsCodeUsecase _getSmsCodeUsecase;
@@ -51,10 +38,6 @@ class SignInCubit extends Cubit<SignInState> {
 
   SignInCubit(
     this._userCubit,
-    this._getIsNfcAvailable,
-    this._getIsNfcOpen,
-    this._writeOnNfcUsecase,
-    this._readFromNfc,
     this._signInWithEmailPasswordUsecase,
     this._getSmsCodeUsecase,
     this._uploadUserUsecase,
@@ -99,24 +82,8 @@ class SignInCubit extends Cubit<SignInState> {
     );
   }
 
-  _getSmsCode(String phoneNumber) async {
-    final res = await _getSmsCodeUsecase.call(
-      GetSmsCodeParams(phoneNumber: phoneNumber),
-    );
-    res.fold(
-      (l) {
-        emit(SignInState.error(l.message));
-      },
-      (r) {
-        _verificationId = r;
-        emit(SignInState.successGetCodeSms());
-      },
-    );
-  }
-
   // phone sign method
   String _verificationId = '';
-  bool isLogWithPhone = false;
 
   authGetSmsCode({
     required String phoneNumber,
@@ -214,102 +181,6 @@ class SignInCubit extends Cubit<SignInState> {
         _userCubit.updateUser(user: r);
         emit(SignInState.uploadUserSuccess());
         return Future.value();
-      },
-    );
-  }
-
-  // nfc method
-  getIsNfcAvailableEvent() async {
-    final res = await _getIsNfcAvailable(NoParams());
-    res.fold(
-      (l) => emit(SignInState.nfcError(l.message)),
-      (r) => emit(SignInState.nfcAvailable(r)),
-    );
-  }
-
-  getIsNfcOpenEvent() async {
-    _shouldCloseNfcStatusStream = false;
-    _getNFCStatusStream().listen(
-      (isAvailable) {
-        emit(SignInState.nfcState(isAvailable));
-      },
-      onError: (error) {
-        emit(SignInState.nfcError(error.message));
-      },
-    );
-  }
-
-  bool _shouldCloseNfcStatusStream = false;
-
-  Stream<bool> _getNFCStatusStream() async* {
-    while (!_nfcStatusController.isClosed && !_shouldCloseNfcStatusStream) {
-      final res = await _getIsNfcOpen(NoParams());
-      yield res.fold(
-        (l) {
-          throw l;
-        },
-        (r) {
-          _nfcStatusController.add(r);
-          return r;
-        },
-      );
-      await Future.delayed(const Duration(seconds: 2));
-    }
-  }
-
-  void closeNfcStatusStream() {
-    _shouldCloseNfcStatusStream = true;
-    _nfcStatusController.close();
-  }
-
-  @override
-  Future<void> close() {
-    closeNfcStatusStream();
-    return super.close();
-  }
-
-  writeOnNfcEvent({required NfcMessage nfcMessage}) async {
-    final res = await _writeOnNfcUsecase(
-      WriteOnNfcParam(nfcMessage: nfcMessage),
-    );
-    res.fold(
-      (l) => emit(SignInState.nfcError(l.message)),
-      (r) {
-        _nfcStatusController.close();
-        emit(
-          SignInState.nfcUseState(
-            r,
-            nfcMessage.id,
-          ),
-        );
-      },
-    );
-  }
-
-  authReadFromNfc() async {
-    final res = await _readFromNfc(NoParams());
-    res.fold(
-      (l) => emit(SignInState.nfcError(l.message)),
-      (r) => emit(
-        SignInState.nfcReadNfc(r),
-      ),
-    );
-  }
-
-// upload user to database
-  authUploadUser(User user) async {
-    final res = await _uploadUserUsecase(
-      UploadUserParams(
-        user: user,
-      ),
-    );
-    res.fold(
-      (l) {
-        emit(SignInState.nfcError(l.message));
-      },
-      (r) {
-        _userCubit.updateUser(user: r);
-        emit(SignInState.uploadUserSuccess());
       },
     );
   }

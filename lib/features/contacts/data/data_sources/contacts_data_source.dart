@@ -144,10 +144,6 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
             contactList.map((e) => ContactModelServer.fromMap(e)).toList();
         List<ContactModel> contactModel = [];
         for (ContactModelServer contactModelServer in contactModelServerList) {
-          if (await _getContactModel(contactModelServer: contactModelServer) ==
-              null) {
-            continue;
-          }
           contactModel.add(
               await _getContactModel(contactModelServer: contactModelServer));
         }

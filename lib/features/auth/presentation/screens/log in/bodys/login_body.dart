@@ -9,13 +9,14 @@ import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/core/utils/validation.dart";
 import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
+import "package:halla/features/auth/presentation/blocs/login%20cubit/login_cubit.dart";
 import "package:halla/features/auth/presentation/screens/log%20in/widgets/nfc_button.dart";
-import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/sign_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/sms_code_screen.dart";
 import "package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart";
 import "package:halla/features/auth/presentation/screens/widgets/facebook_button.dart";
 import "package:halla/features/auth/presentation/screens/widgets/google_button.dart";
+import "package:halla/features/auth/presentation/screens/widgets/or_widget.dart";
 import "package:halla/features/home/presentation/screens/home_layout.dart";
 import "package:halla/generated/l10n.dart";
 
@@ -39,10 +40,10 @@ class _LoginBodyState extends State<LoginBody> {
     super.initState();
     emailFocus = FocusNode();
     passwordFocus = FocusNode();
-    emailController.addListener(emailLestner);
+    emailController.addListener(emailListener);
   }
 
-  emailLestner() {
+  emailListener() {
     if (emailController.text.isEmpty) {
       setState(() {
         _isPhone = false;
@@ -66,40 +67,35 @@ class _LoginBodyState extends State<LoginBody> {
   }
 
   @override
-  Widget build(BuildContext context) => BlocConsumer<AuthBloc, AuthState>(
+  Widget build(BuildContext context) {
+    return BlocListener<LoginCubit, LoginState>(
+      listener: (context, state) {
+        state.whenOrNull(
+          // email
+          loginEmailLoading: () => AppShowDialog.loading(context),
+          loginEmailError: (message) => AppShowDialog.error(context, message),
+          loginEmailSuccess: () =>
+              AppNavigator.navigatePushReplaceRemoveAll(context, HomeLayout()),
+          // otp
+          loginGetOTPLoading: () => AppShowDialog.loading(context),
+          loginGetOTPError: (message) => AppShowDialog.error(context, message),
+          loginGetOTPSuccess: (verificationId) =>
+              AppNavigator.navigatePushReplace(
+            context,
+            SmsCodeScreen(
+              phoneNumber: emailController.text.trim(),
+              verificationId: verificationId,
+            ),
+          ),
+          // phone number
+          loginPhoneLoading: () => AppShowDialog.loading(context),
+          loginPhoneError: (message) => AppShowDialog.error(context, message),
+          loginPhoneSuccess: () =>
+              AppNavigator.navigatePushReplaceRemoveAll(context, HomeLayout()),
+        );
+      },
+      child: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthLoading) {
-            AppShowDialog.loading(context);
-          }
-          if (state is AuthSuccess) {
-            AppNavigator.navigatePopDialog(context);
-            AppNavigator.navigatePushReplaceRemoveAll(
-                context, const HomeLayout());
-          }
-          if (state is AuthFailure) {
-            // Navigator.pop(context);
-            AppShowDialog.error(context, state.message);
-          }
-          if (state is AuthGoogleState) {
-            AppNavigator.navigatePopDialog(context);
-            if (state.isExit) {
-              AppNavigator.navigatePushReplaceRemoveAll(
-                  context, const HomeLayout());
-            } else {
-              AppNavigator.navigatePushReplaceRemoveAll(
-                  context, const NfcWriteScreen());
-            }
-          }
-          if (state is AuthGetCodeSmsSiccessState) {
-            AppNavigator.navigatePopDialog(context);
-            context.read<AuthBloc>().isLogWithPhone = true;
-            AppNavigator.navigatePushReplace(
-              context,
-              SmsCodeScreen(
-                phoneNumber: emailController.text.trim(),
-              ),
-            );
-          }
           if (state is AuthSentMessageSuccess) {
             AppNavigator.navigatePopDialog(context);
             AppNavigator.navigatePopDialog(context);
@@ -221,17 +217,13 @@ class _LoginBodyState extends State<LoginBody> {
                       onPressed: () {
                         if (formKey.currentState!.validate()) {
                           if (_isPhone) {
-                            context.read<AuthBloc>().add(
-                                  AuthGetSmsCodeEvent(
-                                    phoneNumber: emailController.text.trim(),
-                                  ),
+                            context.read<LoginCubit>().loginGetSmsCode(
+                                  phoneNumber: emailController.text.trim(),
                                 );
                           } else {
-                            context.read<AuthBloc>().add(
-                                  AuthLogIn(
-                                    email: emailController.text.trim(),
-                                    password: passwordController.text.trim(),
-                                  ),
+                            context.read<LoginCubit>().loginEmailPassword(
+                                  emailController.text.trim(),
+                                  passwordController.text.trim(),
                                 );
                           }
                         }
@@ -241,7 +233,7 @@ class _LoginBodyState extends State<LoginBody> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    _or(),
+                    OrWidget(),
                     SizedBox(
                       height: 15.h,
                     ),
@@ -293,40 +285,7 @@ class _LoginBodyState extends State<LoginBody> {
             ),
           );
         },
-      );
-
-  Widget _or() => Row(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              height: 2,
-              decoration: BoxDecoration(
-                color: AppColors.gray,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 15.w,
-          ),
-          Text(
-            S.of(context).or,
-            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: AppColors.gray,
-                ),
-          ),
-          SizedBox(
-            width: 15.w,
-          ),
-          Expanded(
-            child: Container(
-              height: 2,
-              decoration: BoxDecoration(
-                color: AppColors.gray,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
-        ],
-      );
+      ),
+    );
+  }
 }

@@ -8,22 +8,29 @@ import 'package:halla/features/contacts/domain/entities/contact.dart';
 
 abstract interface class CommonRepositories {
   Future<Either<Failure, User>> uploadUser({required User user});
+
   Future<Either<Failure, User>> getUser({required String userId});
 
   Future<Either<Failure, bool>> getIsNfcAvailable();
+
   Future<Either<Failure, bool>> getIsNfcOpen();
+
   Future<Either<Failure, NfcUse>> writeOnNfc(NfcMessage nfcMessage);
+
   Future<Either<Failure, NfcMessage>> readFromNfc();
 
   Future<Either<Failure, Guest>> logInGuest();
-  Future<Either<Failure, bool>> isGuestExit();
-  Future<Either<Failure, Guest>> getGuest();
-  Future<Either<Failure, bool>> isGuestUpdate();
-  Future<Either<Failure, void>> fotgetGuestPinCode();
+
+  Future<Either<Failure, Guest?>> getGuest();
+
+  Future<Either<Failure, void>> forgetGuestPinCode();
 
   Future<Either<Failure, bool>> isUserSavedLocal();
+
   Future<Either<Failure, void>> addUserToLocal(User user);
+
   Future<Either<Failure, User>> getUserFromLocal();
+
   Future<Either<Failure, void>> deleteUserFromLocal();
 
   Future<Either<Failure, List<Contact>>> getFirstTimeLocalContacts();

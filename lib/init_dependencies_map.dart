@@ -14,8 +14,6 @@ import 'package:halla/core/common/domain/usecase/get_is_nfc_available.dart';
 import 'package:halla/core/common/domain/usecase/get_is_nfc_open.dart';
 import 'package:halla/core/common/domain/usecase/get_user_from_local_usecase.dart';
 import 'package:halla/core/common/domain/usecase/get_user_usecase.dart';
-import 'package:halla/core/common/domain/usecase/is_guest_exit.dart';
-import 'package:halla/core/common/domain/usecase/is_guest_update.dart';
 import 'package:halla/core/common/domain/usecase/is_user_saved_local_usecase.dart';
 import 'package:halla/core/common/domain/usecase/log_in_guest.dart';
 import 'package:halla/core/common/domain/usecase/read_from_nfc.dart';
@@ -36,6 +34,9 @@ import 'package:halla/features/auth/domain/usecases/log_in_with_email_password.d
 import 'package:halla/features/auth/domain/usecases/log_in_with_phone_use_case.dart';
 import 'package:halla/features/auth/domain/usecases/sign_in_with_email_password_usecase.dart';
 import 'package:halla/features/auth/presentation/blocs/auth bloc/auth_bloc.dart';
+import 'package:halla/features/auth/presentation/blocs/guest%20cubit/guest_cubit.dart';
+import 'package:halla/features/auth/presentation/blocs/login%20cubit/login_cubit.dart';
+import 'package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dart';
 import 'package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart';
 import 'package:halla/features/auth/presentation/blocs/social%20cubit/social_cubit.dart';
 import 'package:halla/features/contacts/data/data_sources/contacts_data_source.dart';

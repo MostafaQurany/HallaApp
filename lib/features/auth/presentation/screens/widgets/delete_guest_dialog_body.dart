@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halla/core/constants/app_images.dart';
-import 'package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart';
+import 'package:halla/features/auth/presentation/blocs/guest%20cubit/guest_cubit.dart';
 import 'package:halla/generated/l10n.dart';
 import 'package:lottie/lottie.dart';
 
@@ -29,7 +29,7 @@ class DeleteGuestDialogBody extends StatelessWidget {
         TextButton(
           child: Text(S.of(context).confirm),
           onPressed: () {
-            context.read<AuthBloc>().add(AuthForgetPinCodeGuestEvent());
+            context.read<GuestCubit>().forgetGuestPinCode();
             Navigator.of(context).pop();
           },
         ),

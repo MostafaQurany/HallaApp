@@ -33,10 +33,12 @@ class User {
     required this.company,
     this.favoriteCategories = const [],
     this.isGuest = false,
-  });
+  }) {
+    print("isGuest =================$isGuest");
+  }
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, fullName: $fullName, primePhone: $primePhone, dateOfBirth: $dateOfBirth, nationality: $nationality, pinCode: $pinCode, nfcList: $nfcList, socialMedia: ${socialMedia.toString()}, company: ${company.toString()})';
+    return 'User{id: $id, email: $email, fullName: $fullName, primePhone: $primePhone, dateOfBirth: $dateOfBirth, nationality: $nationality, imageUrl: $imageUrl, pinCode: $pinCode, phones: $phones, nfcList: $nfcList, socialMedia: $socialMedia, company: $company, isGuest: $isGuest, favoriteCategories: $favoriteCategories}';
   }
 }

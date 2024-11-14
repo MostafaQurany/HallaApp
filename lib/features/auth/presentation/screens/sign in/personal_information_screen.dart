@@ -30,26 +30,29 @@ class PersonalInformationScreen extends StatefulWidget {
 
 class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController dateOfBirthController = TextEditingController();
-  final TextEditingController nationalityController = TextEditingController();
+  late TextEditingController nameController;
 
-  final TextEditingController companyNameController = TextEditingController();
-  final TextEditingController companyPhoneController = TextEditingController();
-  final TextEditingController companyWebsiteController =
-      TextEditingController();
-  final TextEditingController companyPostionController =
-      TextEditingController();
+  late TextEditingController dateOfBirthController;
 
-  final TextEditingController socialFacebookController =
-      TextEditingController();
-  final TextEditingController socialInstagramController =
-      TextEditingController();
-  final TextEditingController socialLinkedinController =
-      TextEditingController();
-  final TextEditingController socialTwitterController = TextEditingController();
+  late TextEditingController nationalityController;
 
-  final GlobalKey<PhonesWidgetState> phonesWidgetKey = GlobalKey();
+  late TextEditingController companyNameController;
+
+  late TextEditingController companyPhoneController;
+
+  late TextEditingController companyWebsiteController;
+
+  late TextEditingController companyPostionController;
+
+  late TextEditingController socialFacebookController;
+
+  late TextEditingController socialInstagramController;
+
+  late TextEditingController socialLinkedinController;
+
+  late TextEditingController socialTwitterController;
+
+  GlobalKey<PhonesWidgetState> phonesWidgetKey = GlobalKey();
 
   @override
   void initState() {
@@ -58,134 +61,132 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: <Widget>[
-              Align(
-                alignment: AlignmentDirectional.bottomCenter,
-                child: Container(
-                  width: double.maxFinite,
-                  height: 1.sh,
-                  decoration: BoxDecoration(
-                    boxShadow: <BoxShadow>[
-                      BoxShadow(
-                        color: AppColors.primary.withOpacity(0.1),
-                        blurRadius: 1.sh,
-                      ),
-                    ],
-                  ),
-                  child: Image.asset(
-                    AppTheme.isLight(context)
-                        ? AppImages.personalInformationBackground
-                        : AppImages.personalInformationBackgroundDark,
-                    fit: BoxFit.fill,
-                  ),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
+          children: <Widget>[
+            Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: Container(
+                width: double.maxFinite,
+                height: 1.sh,
+                decoration: BoxDecoration(
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      color: AppColors.primary.withOpacity(0.1),
+                      blurRadius: 1.sh,
+                    ),
+                  ],
+                ),
+                child: Image.asset(
+                  AppTheme.isLight(context)
+                      ? AppImages.personalInformationBackground
+                      : AppImages.personalInformationBackgroundDark,
+                  fit: BoxFit.fill,
                 ),
               ),
-              BlocConsumer<SignInCubit, SignInState>(
-                listener: (context, state) {
-                  state.whenOrNull(
-                      personalInfoLoading: () => AppShowDialog.loading(context),
-                      personalInfoError: (message) {
-                        AppShowDialog.error(context, message);
-                      },
-                      personalInfoSuccess: () {
-                        AppNavigator.navigatePopDialog(context);
-                        AppNavigator.navigatePushReplace(
-                          context,
-                          const FirstTimeContactsScreen(),
-                        );
-                      });
-                },
-                builder: (context, state) {
-                  return Form(
-                    key: formKey,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
-                            SizedBox(
-                              height: 25.h,
-                            ),
-                            Text(
-                              S.of(context).personalNinformation,
-                              style: Theme.of(context).textTheme.headlineSmall,
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            CustomTextFormField(
-                              control: nameController,
-                              hintText: S.of(context).fullName,
-                              prefixIcon: Icons.person_2_outlined,
-                              keyboardType: TextInputType.name,
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            PhonesWidget(
-                              key: phonesWidgetKey,
-                            ),
-                            BirthdayPickerTextField(
-                              controller: dateOfBirthController,
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            CustomNationalityField(
-                              controller: nationalityController,
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            CustomSocialMediaField(
-                              socialFacebookController:
-                                  socialFacebookController,
-                              socialInstagramController:
-                                  socialInstagramController,
-                              socialLinkedinController:
-                                  socialLinkedinController,
-                              socialTwitterController: socialTwitterController,
-                            ),
-                            SizedBox(
-                              height: 5.h,
-                            ),
-                            CustomCompanyField(
-                              companyNameController: companyNameController,
-                              companyPhoneController: companyPhoneController,
-                              companyWebsiteController:
-                                  companyWebsiteController,
-                              companyPositonController:
-                                  companyPostionController,
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                if (formKey.currentState!.validate()) {
-                                  User user = _featchData();
-                                  context
-                                      .read<SignInCubit>()
-                                      .personalInfoEvent(user);
-                                }
-                              },
-                              child: Text(S.of(context).next),
-                            ),
-                          ],
-                        ),
+            ),
+            BlocConsumer<SignInCubit, SignInState>(
+              listener: (context, state) {
+                state.whenOrNull(
+                    personalInfoLoading: () => AppShowDialog.loading(context),
+                    personalInfoError: (message) {
+                      AppShowDialog.error(context, message);
+                    },
+                    personalInfoSuccess: () {
+                      AppNavigator.navigatePopDialog(context);
+                      AppNavigator.navigatePushReplace(
+                        context,
+                        const FirstTimeContactsScreen(),
+                      );
+                    });
+              },
+              builder: (context, state) {
+                return Form(
+                  key: formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 25.h,
+                          ),
+                          Text(
+                            S.of(context).personalNinformation,
+                            style: Theme.of(context).textTheme.headlineSmall,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          CustomTextFormField(
+                            control: nameController,
+                            hintText: S.of(context).fullName,
+                            prefixIcon: Icons.person_2_outlined,
+                            keyboardType: TextInputType.name,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          PhonesWidget(
+                            key: phonesWidgetKey,
+                          ),
+                          BirthdayPickerTextField(
+                            controller: dateOfBirthController,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          CustomNationalityField(
+                            controller: nationalityController,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          CustomSocialMediaField(
+                            socialFacebookController: socialFacebookController,
+                            socialInstagramController:
+                                socialInstagramController,
+                            socialLinkedinController: socialLinkedinController,
+                            socialTwitterController: socialTwitterController,
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          CustomCompanyField(
+                            companyNameController: companyNameController,
+                            companyPhoneController: companyPhoneController,
+                            companyWebsiteController: companyWebsiteController,
+                            companyPositonController: companyPostionController,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (formKey.currentState!.validate()) {
+                                User user = _featchData();
+                                context
+                                    .read<SignInCubit>()
+                                    .personalInfoEvent(user);
+                              }
+                            },
+                            child: Text(S.of(context).next),
+                          ),
+                        ],
                       ),
                     ),
-                  );
-                },
-              ),
-            ],
-          ),
+                  ),
+                );
+              },
+            ),
+          ],
         ),
-      );
+      ),
+    );
+  }
 
   User _featchData() {
     Company company = Company(
@@ -221,18 +222,25 @@ class _PersonalInformationScreenState extends State<PersonalInformationScreen> {
   }
 
   _prepareData(User user) {
-    nameController.text = user.fullName;
-    dateOfBirthController.text = user.dateOfBirth;
-    nationalityController.text = user.nationality;
+    nameController = TextEditingController(text: user.fullName);
+    dateOfBirthController = TextEditingController(text: user.dateOfBirth);
+    nationalityController = TextEditingController(text: user.nationality);
 
-    companyNameController.text = user.company.name;
-    companyPhoneController.text = user.company.phoneNumber;
-    companyWebsiteController.text = user.company.website;
-    companyPostionController.text = user.company.position;
+    companyNameController = TextEditingController(text: user.company.name);
+    companyPhoneController =
+        TextEditingController(text: user.company.phoneNumber);
+    companyWebsiteController =
+        TextEditingController(text: user.company.website);
+    companyPostionController =
+        TextEditingController(text: user.company.position);
 
-    socialFacebookController.text = user.socialMedia.facebook;
-    socialInstagramController.text = user.socialMedia.instagram;
-    socialLinkedinController.text = user.socialMedia.linkedin;
-    socialTwitterController.text = user.socialMedia.twitter;
+    socialFacebookController =
+        TextEditingController(text: user.socialMedia.facebook);
+    socialInstagramController =
+        TextEditingController(text: user.socialMedia.instagram);
+    socialLinkedinController =
+        TextEditingController(text: user.socialMedia.linkedin);
+    socialTwitterController =
+        TextEditingController(text: user.socialMedia.twitter);
   }
 }

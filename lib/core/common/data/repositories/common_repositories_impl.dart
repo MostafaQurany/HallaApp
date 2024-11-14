@@ -18,6 +18,7 @@ class CommonRepositoriesImpl implements CommonRepositories {
   final DataBaseSource dataBaseSource;
   final LocalUserDataSource localUserDataSource;
   final NativeLocalContactDataBaseSource nativeLocalContactDataBaseSource;
+
   CommonRepositoriesImpl(
     this.nfcDataSource,
     this.dataBaseSource,
@@ -114,7 +115,7 @@ class CommonRepositoriesImpl implements CommonRepositories {
   }
 
   @override
-  Future<Either<Failure, Guest>> getGuest() async {
+  Future<Either<Failure, Guest?>> getGuest() async {
     try {
       final res = await dataBaseSource.getGuest();
       return Right(res);
@@ -126,31 +127,7 @@ class CommonRepositoriesImpl implements CommonRepositories {
   }
 
   @override
-  Future<Either<Failure, bool>> isGuestUpdate() async {
-    try {
-      final res = await dataBaseSource.isGuestUpdate();
-      return Right(res);
-    } on ServerException catch (e) {
-      return Left(
-        Failure(e.message),
-      );
-    }
-  }
-
-  @override
-  Future<Either<Failure, bool>> isGuestExit() async {
-    try {
-      final res = await dataBaseSource.isGuestExit();
-      return Right(res);
-    } on ServerException catch (e) {
-      return Left(
-        Failure(e.message),
-      );
-    }
-  }
-
-  @override
-  Future<Either<Failure, void>> fotgetGuestPinCode() async {
+  Future<Either<Failure, void>> forgetGuestPinCode() async {
     try {
       final res = await dataBaseSource.forgetGuestPinCode();
       return Right(res);

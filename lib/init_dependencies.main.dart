@@ -69,16 +69,6 @@ _initCommon() {
       ),
     )
     ..registerFactory(
-      () => IsGuestUpdate(
-        serviceLocator(),
-      ),
-    )
-    ..registerFactory(
-      () => IsGuestExit(
-        serviceLocator(),
-      ),
-    )
-    ..registerFactory(
       () => ForgetPinCodeGuestUseCase(
         serviceLocator(),
       ),
@@ -168,7 +158,7 @@ _initAuth() {
       ),
     )
     ..registerFactory(
-      () => LogInWithEmailPassword(
+      () => LogInWithEmailPasswordUseCase(
         serviceLocator(),
       ),
     )
@@ -218,8 +208,6 @@ _initAuth() {
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
       ),
     )
     ..registerLazySingleton(
@@ -232,6 +220,19 @@ _initAuth() {
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => SocialCubit(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => LoginCubit(
+        serviceLocator(),
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
@@ -239,7 +240,19 @@ _initAuth() {
       ),
     )
     ..registerLazySingleton(
-      () => SocialCubit(
+      () => NfcCubit(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => GuestCubit(
+        serviceLocator(),
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
       ),

@@ -6,7 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/core/common/presentation/widgets/circle_image.dart';
-
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_share_contact_icon.dart';
@@ -47,7 +46,7 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    user.fullName,
+                    user.isGuest.toString(),
                     style: Theme.of(context).textTheme.bodyMedium,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

@@ -29,6 +29,7 @@ class Guest extends User {
           nfcList: [],
           phones: [],
           isGuest: true,
+          favoriteCategories: [],
           socialMedia: SocialMedia(
             facebook: '',
             instagram: '',

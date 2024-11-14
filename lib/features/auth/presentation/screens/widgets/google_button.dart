@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/core/utils/routting.dart';
-import 'package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart';
 import 'package:halla/features/auth/presentation/blocs/social%20cubit/social_cubit.dart';
+import 'package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart';
+import 'package:halla/features/auth/presentation/screens/sign%20in/personal_information_screen.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/social_icon.dart';
 import 'package:halla/features/home/presentation/screens/home_layout.dart';
 
@@ -23,7 +24,20 @@ class GoogleButton extends StatelessWidget {
             if (userState['isExit'] == true) {
               AppNavigator.navigatePushReplaceRemoveAll(context, HomeLayout());
             } else {
-              context.read<SignInCubit>().getIsNfcAvailableEvent();
+              context.read<SocialCubit>().getIsNfcAvailableEvent();
+            }
+          },
+          nfcAvailable: (isAvailable) {
+            if (isAvailable == true) {
+              AppNavigator.navigatePushReplace(
+                context,
+                NfcWriteScreen(),
+              );
+            } else {
+              AppNavigator.navigatePushReplace(
+                context,
+                PersonalInformationScreen(),
+              );
             }
           },
         );

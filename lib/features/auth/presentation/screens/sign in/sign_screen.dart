@@ -9,6 +9,7 @@ import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/core/utils/validation.dart";
+import "package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart";
 import "package:halla/features/auth/presentation/screens/log%20in/login_screen.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/nfc_write_screen.dart";
@@ -109,22 +110,9 @@ class _SignScreenState extends State<SignScreen> {
                     SizedBox(
                       height: 15.h,
                     ),
-                    BlocListener<SignInCubit, SignInState>(
+                    BlocListener<NfcCubit, NfcState>(
                       listener: (context, state) {
                         state.whenOrNull(
-                          loadingEmail: () => AppShowDialog.loading(context),
-                          error: (String error) {
-                            AppShowDialog.error(context, error);
-                          },
-                          successGetCodeSms: () {
-                            AppNavigator.navigatePopDialog(context);
-                            AppNavigator.navigatePush(
-                              context,
-                              SmsCodeScreen(
-                                phoneNumber: phoneController.text.trim(),
-                              ),
-                            );
-                          },
                           nfcAvailable: (isAvailable) {
                             if (isAvailable == true) {
                               AppNavigator.navigatePushReplace(
@@ -140,136 +128,158 @@ class _SignScreenState extends State<SignScreen> {
                           },
                         );
                       },
-                      child: Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: <Widget>[
-                              CustomTextFormField(
-                                control: emailController,
-                                focusNode: emailFocus,
-                                hintText: S.of(context).email,
-                                prefixIcon: Icons.email_outlined,
-                                keyboardType: TextInputType.emailAddress,
-                                onEditingComplete: () => FocusScope.of(context)
-                                    .requestFocus(phoneFocus),
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              CustomTextFormField(
-                                control: phoneController,
-                                focusNode: phoneFocus,
-                                hintText: S.of(context).phone,
-                                prefixIcon: Icons.phone_outlined,
-                                keyboardType: TextInputType.phone,
-                                fieldType: FieldType.phone,
-                                onEditingComplete: () => FocusScope.of(context)
-                                    .requestFocus(passwordFocus),
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              CustomTextFormField(
-                                control: passwordController,
-                                focusNode: passwordFocus,
-                                hintText: S.of(context).password,
-                                prefixIcon: Icons.lock_outlined,
-                                suffixIcon: Icons.remove_red_eye_outlined,
-                                obscureText: true,
-                                fieldType: FieldType.password,
-                                onEditingComplete: () => FocusScope.of(context)
-                                    .requestFocus(confirmPasswordFocus),
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              CustomTextFormField(
-                                control: confirmPasswordController,
-                                focusNode: confirmPasswordFocus,
-                                hintText: S.of(context).confirmPassword,
-                                prefixIcon: Icons.lock_outlined,
-                                suffixIcon: Icons.remove_red_eye_outlined,
-                                fieldType: FieldType.confPasword,
-                                confirmPassword: passwordController.text,
-                                obscureText: true,
-                                onEditingComplete: () =>
-                                    FocusScope.of(context).unfocus(),
-                                onChanged: (p0) {
-                                  setState(() {});
-                                },
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  if (formKey.currentState!.validate()) {
-                                    context.read<SignInCubit>().authSignUp(
-                                          email: emailController.text.trim(),
-                                          password:
-                                              passwordController.text.trim(),
-                                          pinCode:
-                                              AppConstants.generatePinCode(),
-                                          phoneNumber:
-                                              phoneController.text.trim(),
-                                        );
-                                  }
-                                },
-                                child: Text(S.of(context).register),
-                              ),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              OrWidget(),
-                              SizedBox(
-                                height: 15.h,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: <Widget>[
-                                  FacebookButton(),
-                                  GoogleButton(),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 30.h,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  AppNavigator.navigatePushReplace(
-                                      context, const LoginScreen());
-                                },
-                                child: Center(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
-                                        color: AppColors.gray,
-                                      ),
-                                      children: <InlineSpan>[
-                                        TextSpan(
-                                          text: S
-                                              .of(context)
-                                              .alreadyIHaveAnAcount,
+                      child: BlocListener<SignInCubit, SignInState>(
+                        listener: (context, state) {
+                          state.whenOrNull(
+                            loadingEmail: () => AppShowDialog.loading(context),
+                            error: (String error) {
+                              AppShowDialog.error(context, error);
+                            },
+                            successGetCodeSms: () {
+                              AppNavigator.navigatePopDialog(context);
+                              AppNavigator.navigatePush(
+                                context,
+                                SmsCodeScreen(
+                                  phoneNumber: phoneController.text.trim(),
+                                ),
+                              );
+                            },
+                          );
+                        },
+                        child: Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                CustomTextFormField(
+                                  control: emailController,
+                                  focusNode: emailFocus,
+                                  hintText: S.of(context).email,
+                                  prefixIcon: Icons.email_outlined,
+                                  keyboardType: TextInputType.emailAddress,
+                                  onEditingComplete: () =>
+                                      FocusScope.of(context)
+                                          .requestFocus(phoneFocus),
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                CustomTextFormField(
+                                  control: phoneController,
+                                  focusNode: phoneFocus,
+                                  hintText: S.of(context).phone,
+                                  prefixIcon: Icons.phone_outlined,
+                                  keyboardType: TextInputType.phone,
+                                  fieldType: FieldType.phone,
+                                  onEditingComplete: () =>
+                                      FocusScope.of(context)
+                                          .requestFocus(passwordFocus),
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                CustomTextFormField(
+                                  control: passwordController,
+                                  focusNode: passwordFocus,
+                                  hintText: S.of(context).password,
+                                  prefixIcon: Icons.lock_outlined,
+                                  suffixIcon: Icons.remove_red_eye_outlined,
+                                  obscureText: true,
+                                  fieldType: FieldType.password,
+                                  onEditingComplete: () =>
+                                      FocusScope.of(context)
+                                          .requestFocus(confirmPasswordFocus),
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                CustomTextFormField(
+                                  control: confirmPasswordController,
+                                  focusNode: confirmPasswordFocus,
+                                  hintText: S.of(context).confirmPassword,
+                                  prefixIcon: Icons.lock_outlined,
+                                  suffixIcon: Icons.remove_red_eye_outlined,
+                                  fieldType: FieldType.confPasword,
+                                  confirmPassword: passwordController.text,
+                                  obscureText: true,
+                                  onEditingComplete: () =>
+                                      FocusScope.of(context).unfocus(),
+                                  onChanged: (p0) {
+                                    setState(() {});
+                                  },
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    if (formKey.currentState!.validate()) {
+                                      context.read<SignInCubit>().authSignUp(
+                                            email: emailController.text.trim(),
+                                            password:
+                                                passwordController.text.trim(),
+                                            pinCode:
+                                                AppConstants.generatePinCode(),
+                                            phoneNumber:
+                                                phoneController.text.trim(),
+                                          );
+                                    }
+                                  },
+                                  child: Text(S.of(context).register),
+                                ),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                OrWidget(),
+                                SizedBox(
+                                  height: 15.h,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: <Widget>[
+                                    FacebookButton(),
+                                    GoogleButton(),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 30.h,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    AppNavigator.navigatePushReplace(
+                                        context, const LoginScreen());
+                                  },
+                                  child: Center(
+                                    child: RichText(
+                                      text: TextSpan(
+                                        style: TextStyle(
+                                          fontSize: 16.sp,
+                                          color: AppColors.gray,
                                         ),
-                                        TextSpan(
-                                          text: S.of(context).login,
-                                          style: TextStyle(
-                                            fontSize: 16.sp,
-                                            color: AppColors.primary,
+                                        children: <InlineSpan>[
+                                          TextSpan(
+                                            text: S
+                                                .of(context)
+                                                .alreadyIHaveAnAcount,
                                           ),
-                                        ),
-                                      ],
+                                          TextSpan(
+                                            text: S.of(context).login,
+                                            style: TextStyle(
+                                              fontSize: 16.sp,
+                                              color: AppColors.primary,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 30.h,
-                              ),
-                            ],
+                                SizedBox(
+                                  height: 30.h,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
