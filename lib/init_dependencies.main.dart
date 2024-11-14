@@ -248,6 +248,7 @@ _initAuth() {
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
+        serviceLocator(),
       ),
     )
     ..registerLazySingleton(

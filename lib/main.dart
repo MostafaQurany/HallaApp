@@ -16,11 +16,11 @@ import "package:halla/features/auth/presentation/blocs/login%20cubit/login_cubit
 import "package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/social%20cubit/social_cubit.dart";
+import "package:halla/features/auth/presentation/screens/log%20in/pin_code_screen.dart";
 import "package:halla/features/contacts/data/models/contact_model.dart";
 import "package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart";
 import "package:halla/features/splash/presentation/bloc/brightness%20cubit/brightness_cubit.dart";
 import "package:halla/features/splash/presentation/bloc/language%20cubit/language_cubit.dart";
-import "package:halla/features/splash/presentation/screen/splash_screen.dart";
 import "package:halla/generated/l10n.dart";
 import "package:halla/init_dependencies_map.dart";
 import "package:hive_flutter/hive_flutter.dart";
@@ -100,7 +100,10 @@ class MyApp extends StatelessWidget {
                   theme: themeMode == ThemeMode.light
                       ? AppTheme.lightTheme
                       : AppTheme.darkTheme,
-                  home: const SplashScreen(),
+                  home: PinCodeScreen(
+                    userId: 'QLio37VJZ7UhGXfUw3JxGhkEUfw1',
+                    pinCode: '811955',
+                  ),
                 );
               },
             );

@@ -43,8 +43,13 @@ class _NfcButtonState extends State<NfcButton> {
                   nfcLoading: () => AppShowDialog.loading(context),
                   nfcState: (isOpen) => this.isOpen = isOpen,
                   nfcError: (error) => AppShowDialog.error(context, error),
-                  nfcReadNfc: (nfcMessage) =>
-                      AppNavigator.navigatePush(context, PinCodeScreen()),
+                  nfcReadNfc: (nfcMessage) => AppNavigator.navigatePush(
+                    context,
+                    PinCodeScreen(
+                      userId: nfcMessage.id,
+                      pinCode: nfcMessage.pinCode,
+                    ),
+                  ),
                 );
               },
               builder: (context, state) {

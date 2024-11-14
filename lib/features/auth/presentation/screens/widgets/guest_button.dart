@@ -28,7 +28,12 @@ class GuestButton extends StatelessWidget {
         }
         if (state is LogInGuestSucces) {
           AppNavigator.navigatePopDialog(context);
-          AppNavigator.navigatePush(context, const PinCodeScreen());
+          AppNavigator.navigatePush(
+              context,
+              const PinCodeScreen(
+                userId: '',
+                pinCode: '',
+              ));
         }
         if (state is CreatNewGuestSucces) {
           AppNavigator.navigatePopDialog(context);

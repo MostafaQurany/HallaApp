@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
-import 'package:halla/core/common/domain/entities/nfc_message.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/common/domain/usecase/get_first_time_local_contacts_usecase.dart';
 import 'package:halla/core/common/domain/usecase/upload_user_usecase.dart';
@@ -72,21 +70,6 @@ class SignInCubit extends Cubit<SignInState> {
     // get the otp first
     final res = await _getSmsCodeUsecase.call(
       GetSmsCodeParams(phoneNumber: _phoneNumber ?? ''),
-    );
-    res.fold(
-      (l) {
-        emit(SignInState.error(l.message));
-      },
-      (r) {
-        _verificationId = r;
-        emit(SignInState.successGetCodeSms());
-      },
-    );
-  }
-
-  _getSmsCode(String phoneNumber) async {
-    final res = await _getSmsCodeUsecase.call(
-      GetSmsCodeParams(phoneNumber: phoneNumber),
     );
     res.fold(
       (l) {

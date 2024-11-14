@@ -35,10 +35,10 @@ class LoginState with _$LoginState {
 
   const factory LoginState.forgotPasswordSuccess() = ForgotPasswordSuccess;
 
-// login nfc
-  const factory LoginState.loginNfcLoading() = LoginNfcLoading;
+  // get user
+  const factory LoginState.getUserLoading() = GetUserLoading;
 
-  const factory LoginState.loginNfcError(String message) = LoginNfcError;
+  const factory LoginState.getUserError(String message) = GetUserError;
 
-  const factory LoginState.loginNfcSuccess() = LoginNfcSuccess;
+  const factory LoginState.getUserSuccess() = GetUserSuccess;
 }

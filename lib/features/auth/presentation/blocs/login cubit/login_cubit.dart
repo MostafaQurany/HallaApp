@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:halla/core/common/domain/usecase/get_user_usecase.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/features/auth/domain/usecases/forget_password_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/get_sms_code_usecase.dart';
@@ -18,6 +19,7 @@ class LoginCubit extends Cubit<LoginState> {
   final GetSmsCodeUsecase _getSmsCodeUseCase;
   final LogInWithPhoneUseCase _logInWithPhoneUseCase;
   final ForgetPasswordUsecase _forgetPassword;
+  final GetUserUsecase _getUserUsecase;
 
   LoginCubit(
     this._userCubit,
@@ -25,6 +27,7 @@ class LoginCubit extends Cubit<LoginState> {
     this._logInWithPhoneUseCase,
     this._getSmsCodeUseCase,
     this._forgetPassword,
+    this._getUserUsecase,
   ) : super(const LoginState.initial());
 
 // login Email Password
@@ -84,5 +87,22 @@ class LoginCubit extends Cubit<LoginState> {
     );
   }
 
+  // get user
+  getUser(String userId) async {
+    emit(LoginState.getUserLoading());
+    await _getUserUsecase(GetUserParams(userId: userId)).then(
+      (res) {
+        res.fold(
+          (l) {
+            emit(LoginState.getUserError(l.message));
+          },
+          (r) {
+            _userCubit.updateUser(user: r);
+            emit(LoginState.getUserSuccess());
+          },
+        );
+      },
+    );
+  }
 // forget password
 }

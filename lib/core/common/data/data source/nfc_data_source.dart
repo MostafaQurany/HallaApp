@@ -13,8 +13,11 @@ enum NfcUse {
 
 abstract interface class NfcDataSource {
   Future<bool> getNFCIsAvailable();
+
   Future<bool> getNFCIsOpen();
+
   Future<NfcUse> write(NfcMessageModel nfcMessage);
+
   Future<NfcMessageModel> read();
 }
 
@@ -22,7 +25,6 @@ class NfcDataSourceImpl implements NfcDataSource {
   final String channelName = 'Back_End_Channel';
 
   final NfcManager _nfcManager = NfcManager.instance;
-
 
   final ValueNotifier<dynamic> _result = ValueNotifier<dynamic>(null);
 
@@ -72,6 +74,7 @@ class NfcDataSourceImpl implements NfcDataSource {
           final uint8List = Uint8List.fromList(
               tag.data['ndef']['cachedMessage']['records'][0]['payload']);
           data = String.fromCharCodes(uint8List).substring(3);
+
           completer.complete(NfcMessageModel.fromDecrypt(data ?? ''));
         } catch (error) {
           completer.completeError(ServerException(error.toString()));

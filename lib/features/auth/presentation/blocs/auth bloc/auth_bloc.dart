@@ -200,7 +200,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  String _verificationId = '';
+  final String _verificationId = '';
   bool isLogWithPhone = false;
 
   _onAuthPersonalInfoEvent(
