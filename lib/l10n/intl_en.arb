@@ -97,5 +97,6 @@
   "categorie": "Categorie",
   "typeYourNewFavoriteCategorieToAdd": "Type your new favorite categorie to add.",
   "addNewCategories": "Add New Categories",
-  "thisTitleIsAlreadyAdded": "This title is already added"
+  "thisTitleIsAlreadyAdded": "This title is already added",
+  "scanningQrcode": "Scanning Qr-code"
 }

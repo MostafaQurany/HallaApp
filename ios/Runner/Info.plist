@@ -49,5 +49,7 @@
 		<true/>
 		<key>NSContactsUsageDescription</key>
 		<string>Reason we need access to the contact list</string>
+		<key>NSCameraUsageDescription</key>
+        <string>This app needs camera access to scan QR codes</string>
 	</dict>
 </plist>

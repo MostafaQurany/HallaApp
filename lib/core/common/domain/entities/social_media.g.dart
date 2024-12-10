@@ -1,41 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'company_model.dart';
+part of 'social_media.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CompanyModelAdapter extends TypeAdapter<CompanyModel> {
+class SocialMediaAdapter extends TypeAdapter<SocialMedia> {
   @override
   final int typeId = 2;
 
   @override
-  CompanyModel read(BinaryReader reader) {
+  SocialMedia read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return CompanyModel(
-      nameModel: fields[0] as String,
-      phoneNumberModel: fields[1] as String,
-      websiteModel: fields[2] as String,
-      positionModel: fields[3] as String,
+    return SocialMedia(
+      facebook: fields[0] as String,
+      instagram: fields[1] as String,
+      linkedin: fields[2] as String,
+      twitter: fields[3] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, CompanyModel obj) {
+  void write(BinaryWriter writer, SocialMedia obj) {
     writer
       ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.nameModel)
+      ..write(obj.facebook)
       ..writeByte(1)
-      ..write(obj.phoneNumberModel)
+      ..write(obj.instagram)
       ..writeByte(2)
-      ..write(obj.websiteModel)
+      ..write(obj.linkedin)
       ..writeByte(3)
-      ..write(obj.positionModel);
+      ..write(obj.twitter);
   }
 
   @override
@@ -44,7 +44,7 @@ class CompanyModelAdapter extends TypeAdapter<CompanyModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is CompanyModelAdapter &&
+      other is SocialMediaAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

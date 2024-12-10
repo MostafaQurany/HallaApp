@@ -107,6 +107,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "resendCode": MessageLookupByLibrary.simpleMessage("إعادة إرسال OTP"),
         "scanQrcodeToAddContact":
             MessageLookupByLibrary.simpleMessage("ماسح رمز QR لاضافة اتصال"),
+        "scanningQrcode":
+            MessageLookupByLibrary.simpleMessage("Scanning Qr-code"),
         "search": MessageLookupByLibrary.simpleMessage("بحث"),
         "settings": MessageLookupByLibrary.simpleMessage("إعدادات"),
         "skip": MessageLookupByLibrary.simpleMessage("تخطي"),

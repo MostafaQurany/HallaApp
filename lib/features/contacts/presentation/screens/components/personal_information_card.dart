@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
-import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/features/contacts/presentation/screens/widget/custom_contact_detailes_card.dart';
 import 'package:halla/features/contacts/presentation/screens/widget/custom_contact_detailes_spacer.dart';
 

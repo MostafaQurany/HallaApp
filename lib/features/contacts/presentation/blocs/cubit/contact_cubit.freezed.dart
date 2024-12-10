@@ -20,71 +20,56 @@ mixin _$ContactState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -92,93 +77,70 @@ mixin _$ContactState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -248,25 +210,20 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return initial();
   }
@@ -276,23 +233,18 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return initial?.call();
   }
@@ -302,23 +254,18 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -332,35 +279,26 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return initial(this);
   }
@@ -370,29 +308,22 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return initial?.call(this);
   }
@@ -402,29 +333,22 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -481,25 +405,20 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return addContactSuccess();
   }
@@ -509,23 +428,18 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return addContactSuccess?.call();
   }
@@ -535,23 +449,18 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (addContactSuccess != null) {
@@ -565,35 +474,26 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return addContactSuccess(this);
   }
@@ -603,29 +503,22 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return addContactSuccess?.call(this);
   }
@@ -635,29 +528,22 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (addContactSuccess != null) {
@@ -669,276 +555,6 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
 
 abstract class AddContactSuccess implements ContactState {
   const factory AddContactSuccess() = _$AddContactSuccessImpl;
-}
-
-/// @nodoc
-abstract class _$$AddContactFailureImplCopyWith<$Res> {
-  factory _$$AddContactFailureImplCopyWith(_$AddContactFailureImpl value,
-          $Res Function(_$AddContactFailureImpl) then) =
-      __$$AddContactFailureImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$AddContactFailureImplCopyWithImpl<$Res>
-    extends _$ContactStateCopyWithImpl<$Res, _$AddContactFailureImpl>
-    implements _$$AddContactFailureImplCopyWith<$Res> {
-  __$$AddContactFailureImplCopyWithImpl(_$AddContactFailureImpl _value,
-      $Res Function(_$AddContactFailureImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$AddContactFailureImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AddContactFailureImpl implements AddContactFailure {
-  const _$AddContactFailureImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'ContactState.addContactFailure(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddContactFailureImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddContactFailureImplCopyWith<_$AddContactFailureImpl> get copyWith =>
-      __$$AddContactFailureImplCopyWithImpl<_$AddContactFailureImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
-    required TResult Function() addContactLoading,
-    required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
-    required TResult Function() addContactListLoading,
-    required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
-    required TResult Function() deleteContactLoading,
-    required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
-    required TResult Function(Stream<BoxEvent> streamer)
-        getContactListStreamSuccess,
-    required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
-    required TResult Function(List<Contact> contactList)
-        getContactListSyncSuccess,
-    required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
-    required TResult Function() getContactListLoading,
-  }) {
-    return addContactFailure(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
-    TResult? Function()? addContactLoading,
-    TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
-    TResult? Function()? addContactListLoading,
-    TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
-    TResult? Function()? deleteContactLoading,
-    TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
-    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
-    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
-    TResult? Function()? getContactListLoading,
-  }) {
-    return addContactFailure?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
-    TResult Function()? addContactLoading,
-    TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
-    TResult Function()? addContactListLoading,
-    TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
-    TResult Function()? deleteContactLoading,
-    TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
-    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
-    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
-    TResult Function()? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (addContactFailure != null) {
-      return addContactFailure(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
-    required TResult Function(AddContactLoading value) addContactLoading,
-    required TResult Function(AddContactListSuccess value)
-        addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
-    required TResult Function(AddContactListLoading value)
-        addContactListLoading,
-    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
-    required TResult Function(DeleteContactLoading value) deleteContactLoading,
-    required TResult Function(GetContactListStreamLoading value)
-        getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
-    required TResult Function(GetContactListStreamSuccess value)
-        getContactListStreamSuccess,
-    required TResult Function(GetContactListSyncLoading value)
-        getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
-    required TResult Function(GetContactListSyncSuccess value)
-        getContactListSyncSuccess,
-    required TResult Function(GetContactListSuccess value)
-        getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
-    required TResult Function(GetContactListLoading value)
-        getContactListLoading,
-  }) {
-    return addContactFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
-    TResult? Function(AddContactLoading value)? addContactLoading,
-    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
-    TResult? Function(AddContactListLoading value)? addContactListLoading,
-    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult? Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult? Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult? Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult? Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
-    TResult? Function(GetContactListLoading value)? getContactListLoading,
-  }) {
-    return addContactFailure?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
-    TResult Function(AddContactLoading value)? addContactLoading,
-    TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
-    TResult Function(AddContactListLoading value)? addContactListLoading,
-    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
-    TResult Function(GetContactListLoading value)? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (addContactFailure != null) {
-      return addContactFailure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class AddContactFailure implements ContactState {
-  const factory AddContactFailure(final String message) =
-      _$AddContactFailureImpl;
-
-  String get message;
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddContactFailureImplCopyWith<_$AddContactFailureImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -984,25 +600,20 @@ class _$AddContactLoadingImpl implements AddContactLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return addContactLoading();
   }
@@ -1012,23 +623,18 @@ class _$AddContactLoadingImpl implements AddContactLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return addContactLoading?.call();
   }
@@ -1038,23 +644,18 @@ class _$AddContactLoadingImpl implements AddContactLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (addContactLoading != null) {
@@ -1068,35 +669,26 @@ class _$AddContactLoadingImpl implements AddContactLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return addContactLoading(this);
   }
@@ -1106,29 +698,22 @@ class _$AddContactLoadingImpl implements AddContactLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return addContactLoading?.call(this);
   }
@@ -1138,29 +723,22 @@ class _$AddContactLoadingImpl implements AddContactLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (addContactLoading != null) {
@@ -1219,25 +797,20 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return addContactListSuccess();
   }
@@ -1247,23 +820,18 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return addContactListSuccess?.call();
   }
@@ -1273,23 +841,18 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (addContactListSuccess != null) {
@@ -1303,35 +866,26 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return addContactListSuccess(this);
   }
@@ -1341,29 +895,22 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return addContactListSuccess?.call(this);
   }
@@ -1373,29 +920,22 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (addContactListSuccess != null) {
@@ -1407,277 +947,6 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
 
 abstract class AddContactListSuccess implements ContactState {
   const factory AddContactListSuccess() = _$AddContactListSuccessImpl;
-}
-
-/// @nodoc
-abstract class _$$AddContactListFailureImplCopyWith<$Res> {
-  factory _$$AddContactListFailureImplCopyWith(
-          _$AddContactListFailureImpl value,
-          $Res Function(_$AddContactListFailureImpl) then) =
-      __$$AddContactListFailureImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$AddContactListFailureImplCopyWithImpl<$Res>
-    extends _$ContactStateCopyWithImpl<$Res, _$AddContactListFailureImpl>
-    implements _$$AddContactListFailureImplCopyWith<$Res> {
-  __$$AddContactListFailureImplCopyWithImpl(_$AddContactListFailureImpl _value,
-      $Res Function(_$AddContactListFailureImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$AddContactListFailureImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$AddContactListFailureImpl implements AddContactListFailure {
-  const _$AddContactListFailureImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'ContactState.addContactListFailure(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AddContactListFailureImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AddContactListFailureImplCopyWith<_$AddContactListFailureImpl>
-      get copyWith => __$$AddContactListFailureImplCopyWithImpl<
-          _$AddContactListFailureImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
-    required TResult Function() addContactLoading,
-    required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
-    required TResult Function() addContactListLoading,
-    required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
-    required TResult Function() deleteContactLoading,
-    required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
-    required TResult Function(Stream<BoxEvent> streamer)
-        getContactListStreamSuccess,
-    required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
-    required TResult Function(List<Contact> contactList)
-        getContactListSyncSuccess,
-    required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
-    required TResult Function() getContactListLoading,
-  }) {
-    return addContactListFailure(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
-    TResult? Function()? addContactLoading,
-    TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
-    TResult? Function()? addContactListLoading,
-    TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
-    TResult? Function()? deleteContactLoading,
-    TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
-    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
-    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
-    TResult? Function()? getContactListLoading,
-  }) {
-    return addContactListFailure?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
-    TResult Function()? addContactLoading,
-    TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
-    TResult Function()? addContactListLoading,
-    TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
-    TResult Function()? deleteContactLoading,
-    TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
-    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
-    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
-    TResult Function()? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (addContactListFailure != null) {
-      return addContactListFailure(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
-    required TResult Function(AddContactLoading value) addContactLoading,
-    required TResult Function(AddContactListSuccess value)
-        addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
-    required TResult Function(AddContactListLoading value)
-        addContactListLoading,
-    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
-    required TResult Function(DeleteContactLoading value) deleteContactLoading,
-    required TResult Function(GetContactListStreamLoading value)
-        getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
-    required TResult Function(GetContactListStreamSuccess value)
-        getContactListStreamSuccess,
-    required TResult Function(GetContactListSyncLoading value)
-        getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
-    required TResult Function(GetContactListSyncSuccess value)
-        getContactListSyncSuccess,
-    required TResult Function(GetContactListSuccess value)
-        getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
-    required TResult Function(GetContactListLoading value)
-        getContactListLoading,
-  }) {
-    return addContactListFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
-    TResult? Function(AddContactLoading value)? addContactLoading,
-    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
-    TResult? Function(AddContactListLoading value)? addContactListLoading,
-    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult? Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult? Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult? Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult? Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
-    TResult? Function(GetContactListLoading value)? getContactListLoading,
-  }) {
-    return addContactListFailure?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
-    TResult Function(AddContactLoading value)? addContactLoading,
-    TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
-    TResult Function(AddContactListLoading value)? addContactListLoading,
-    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
-    TResult Function(GetContactListLoading value)? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (addContactListFailure != null) {
-      return addContactListFailure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class AddContactListFailure implements ContactState {
-  const factory AddContactListFailure(final String message) =
-      _$AddContactListFailureImpl;
-
-  String get message;
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$AddContactListFailureImplCopyWith<_$AddContactListFailureImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1725,25 +994,20 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return addContactListLoading();
   }
@@ -1753,23 +1017,18 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return addContactListLoading?.call();
   }
@@ -1779,23 +1038,18 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (addContactListLoading != null) {
@@ -1809,35 +1063,26 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return addContactListLoading(this);
   }
@@ -1847,29 +1092,22 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return addContactListLoading?.call(this);
   }
@@ -1879,29 +1117,22 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (addContactListLoading != null) {
@@ -1959,25 +1190,20 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return deleteContactSuccess();
   }
@@ -1987,23 +1213,18 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return deleteContactSuccess?.call();
   }
@@ -2013,23 +1234,18 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (deleteContactSuccess != null) {
@@ -2043,35 +1259,26 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return deleteContactSuccess(this);
   }
@@ -2081,29 +1288,22 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return deleteContactSuccess?.call(this);
   }
@@ -2113,29 +1313,22 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (deleteContactSuccess != null) {
@@ -2147,277 +1340,6 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
 
 abstract class DeleteContactSuccess implements ContactState {
   const factory DeleteContactSuccess() = _$DeleteContactSuccessImpl;
-}
-
-/// @nodoc
-abstract class _$$DeleteContactFailureImplCopyWith<$Res> {
-  factory _$$DeleteContactFailureImplCopyWith(_$DeleteContactFailureImpl value,
-          $Res Function(_$DeleteContactFailureImpl) then) =
-      __$$DeleteContactFailureImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$DeleteContactFailureImplCopyWithImpl<$Res>
-    extends _$ContactStateCopyWithImpl<$Res, _$DeleteContactFailureImpl>
-    implements _$$DeleteContactFailureImplCopyWith<$Res> {
-  __$$DeleteContactFailureImplCopyWithImpl(_$DeleteContactFailureImpl _value,
-      $Res Function(_$DeleteContactFailureImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$DeleteContactFailureImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DeleteContactFailureImpl implements DeleteContactFailure {
-  const _$DeleteContactFailureImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'ContactState.deleteContactFailure(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteContactFailureImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteContactFailureImplCopyWith<_$DeleteContactFailureImpl>
-      get copyWith =>
-          __$$DeleteContactFailureImplCopyWithImpl<_$DeleteContactFailureImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
-    required TResult Function() addContactLoading,
-    required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
-    required TResult Function() addContactListLoading,
-    required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
-    required TResult Function() deleteContactLoading,
-    required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
-    required TResult Function(Stream<BoxEvent> streamer)
-        getContactListStreamSuccess,
-    required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
-    required TResult Function(List<Contact> contactList)
-        getContactListSyncSuccess,
-    required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
-    required TResult Function() getContactListLoading,
-  }) {
-    return deleteContactFailure(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
-    TResult? Function()? addContactLoading,
-    TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
-    TResult? Function()? addContactListLoading,
-    TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
-    TResult? Function()? deleteContactLoading,
-    TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
-    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
-    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
-    TResult? Function()? getContactListLoading,
-  }) {
-    return deleteContactFailure?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
-    TResult Function()? addContactLoading,
-    TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
-    TResult Function()? addContactListLoading,
-    TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
-    TResult Function()? deleteContactLoading,
-    TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
-    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
-    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
-    TResult Function()? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (deleteContactFailure != null) {
-      return deleteContactFailure(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
-    required TResult Function(AddContactLoading value) addContactLoading,
-    required TResult Function(AddContactListSuccess value)
-        addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
-    required TResult Function(AddContactListLoading value)
-        addContactListLoading,
-    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
-    required TResult Function(DeleteContactLoading value) deleteContactLoading,
-    required TResult Function(GetContactListStreamLoading value)
-        getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
-    required TResult Function(GetContactListStreamSuccess value)
-        getContactListStreamSuccess,
-    required TResult Function(GetContactListSyncLoading value)
-        getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
-    required TResult Function(GetContactListSyncSuccess value)
-        getContactListSyncSuccess,
-    required TResult Function(GetContactListSuccess value)
-        getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
-    required TResult Function(GetContactListLoading value)
-        getContactListLoading,
-  }) {
-    return deleteContactFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
-    TResult? Function(AddContactLoading value)? addContactLoading,
-    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
-    TResult? Function(AddContactListLoading value)? addContactListLoading,
-    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult? Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult? Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult? Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult? Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
-    TResult? Function(GetContactListLoading value)? getContactListLoading,
-  }) {
-    return deleteContactFailure?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
-    TResult Function(AddContactLoading value)? addContactLoading,
-    TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
-    TResult Function(AddContactListLoading value)? addContactListLoading,
-    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
-    TResult Function(GetContactListLoading value)? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (deleteContactFailure != null) {
-      return deleteContactFailure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class DeleteContactFailure implements ContactState {
-  const factory DeleteContactFailure(final String message) =
-      _$DeleteContactFailureImpl;
-
-  String get message;
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$DeleteContactFailureImplCopyWith<_$DeleteContactFailureImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2464,25 +1386,20 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return deleteContactLoading();
   }
@@ -2492,23 +1409,18 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return deleteContactLoading?.call();
   }
@@ -2518,23 +1430,18 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (deleteContactLoading != null) {
@@ -2548,35 +1455,26 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return deleteContactLoading(this);
   }
@@ -2586,29 +1484,22 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return deleteContactLoading?.call(this);
   }
@@ -2618,29 +1509,22 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (deleteContactLoading != null) {
@@ -2700,25 +1584,20 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return getContactListStreamLoading();
   }
@@ -2728,23 +1607,18 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return getContactListStreamLoading?.call();
   }
@@ -2754,23 +1628,18 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListStreamLoading != null) {
@@ -2784,35 +1653,26 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListStreamLoading(this);
   }
@@ -2822,29 +1682,22 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListStreamLoading?.call(this);
   }
@@ -2854,29 +1707,22 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListStreamLoading != null) {
@@ -2889,278 +1735,6 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
 abstract class GetContactListStreamLoading implements ContactState {
   const factory GetContactListStreamLoading() =
       _$GetContactListStreamLoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$GetContactListStreamFailureImplCopyWith<$Res> {
-  factory _$$GetContactListStreamFailureImplCopyWith(
-          _$GetContactListStreamFailureImpl value,
-          $Res Function(_$GetContactListStreamFailureImpl) then) =
-      __$$GetContactListStreamFailureImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$GetContactListStreamFailureImplCopyWithImpl<$Res>
-    extends _$ContactStateCopyWithImpl<$Res, _$GetContactListStreamFailureImpl>
-    implements _$$GetContactListStreamFailureImplCopyWith<$Res> {
-  __$$GetContactListStreamFailureImplCopyWithImpl(
-      _$GetContactListStreamFailureImpl _value,
-      $Res Function(_$GetContactListStreamFailureImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$GetContactListStreamFailureImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetContactListStreamFailureImpl implements GetContactListStreamFailure {
-  const _$GetContactListStreamFailureImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'ContactState.getContactListStreamFailure(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetContactListStreamFailureImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetContactListStreamFailureImplCopyWith<_$GetContactListStreamFailureImpl>
-      get copyWith => __$$GetContactListStreamFailureImplCopyWithImpl<
-          _$GetContactListStreamFailureImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
-    required TResult Function() addContactLoading,
-    required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
-    required TResult Function() addContactListLoading,
-    required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
-    required TResult Function() deleteContactLoading,
-    required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
-    required TResult Function(Stream<BoxEvent> streamer)
-        getContactListStreamSuccess,
-    required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
-    required TResult Function(List<Contact> contactList)
-        getContactListSyncSuccess,
-    required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
-    required TResult Function() getContactListLoading,
-  }) {
-    return getContactListStreamFailure(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
-    TResult? Function()? addContactLoading,
-    TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
-    TResult? Function()? addContactListLoading,
-    TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
-    TResult? Function()? deleteContactLoading,
-    TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
-    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
-    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
-    TResult? Function()? getContactListLoading,
-  }) {
-    return getContactListStreamFailure?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
-    TResult Function()? addContactLoading,
-    TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
-    TResult Function()? addContactListLoading,
-    TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
-    TResult Function()? deleteContactLoading,
-    TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
-    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
-    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
-    TResult Function()? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (getContactListStreamFailure != null) {
-      return getContactListStreamFailure(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
-    required TResult Function(AddContactLoading value) addContactLoading,
-    required TResult Function(AddContactListSuccess value)
-        addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
-    required TResult Function(AddContactListLoading value)
-        addContactListLoading,
-    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
-    required TResult Function(DeleteContactLoading value) deleteContactLoading,
-    required TResult Function(GetContactListStreamLoading value)
-        getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
-    required TResult Function(GetContactListStreamSuccess value)
-        getContactListStreamSuccess,
-    required TResult Function(GetContactListSyncLoading value)
-        getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
-    required TResult Function(GetContactListSyncSuccess value)
-        getContactListSyncSuccess,
-    required TResult Function(GetContactListSuccess value)
-        getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
-    required TResult Function(GetContactListLoading value)
-        getContactListLoading,
-  }) {
-    return getContactListStreamFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
-    TResult? Function(AddContactLoading value)? addContactLoading,
-    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
-    TResult? Function(AddContactListLoading value)? addContactListLoading,
-    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult? Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult? Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult? Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult? Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
-    TResult? Function(GetContactListLoading value)? getContactListLoading,
-  }) {
-    return getContactListStreamFailure?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
-    TResult Function(AddContactLoading value)? addContactLoading,
-    TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
-    TResult Function(AddContactListLoading value)? addContactListLoading,
-    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
-    TResult Function(GetContactListLoading value)? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (getContactListStreamFailure != null) {
-      return getContactListStreamFailure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetContactListStreamFailure implements ContactState {
-  const factory GetContactListStreamFailure(final String message) =
-      _$GetContactListStreamFailureImpl;
-
-  String get message;
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetContactListStreamFailureImplCopyWith<_$GetContactListStreamFailureImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -3237,25 +1811,20 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return getContactListStreamSuccess(streamer);
   }
@@ -3265,23 +1834,18 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return getContactListStreamSuccess?.call(streamer);
   }
@@ -3291,23 +1855,18 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListStreamSuccess != null) {
@@ -3321,35 +1880,26 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListStreamSuccess(this);
   }
@@ -3359,29 +1909,22 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListStreamSuccess?.call(this);
   }
@@ -3391,29 +1934,22 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListStreamSuccess != null) {
@@ -3482,25 +2018,20 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return getContactListSyncLoading();
   }
@@ -3510,23 +2041,18 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return getContactListSyncLoading?.call();
   }
@@ -3536,23 +2062,18 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListSyncLoading != null) {
@@ -3566,35 +2087,26 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListSyncLoading(this);
   }
@@ -3604,29 +2116,22 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListSyncLoading?.call(this);
   }
@@ -3636,29 +2141,22 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListSyncLoading != null) {
@@ -3670,278 +2168,6 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
 
 abstract class GetContactListSyncLoading implements ContactState {
   const factory GetContactListSyncLoading() = _$GetContactListSyncLoadingImpl;
-}
-
-/// @nodoc
-abstract class _$$GetContactListSyncFailureImplCopyWith<$Res> {
-  factory _$$GetContactListSyncFailureImplCopyWith(
-          _$GetContactListSyncFailureImpl value,
-          $Res Function(_$GetContactListSyncFailureImpl) then) =
-      __$$GetContactListSyncFailureImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$GetContactListSyncFailureImplCopyWithImpl<$Res>
-    extends _$ContactStateCopyWithImpl<$Res, _$GetContactListSyncFailureImpl>
-    implements _$$GetContactListSyncFailureImplCopyWith<$Res> {
-  __$$GetContactListSyncFailureImplCopyWithImpl(
-      _$GetContactListSyncFailureImpl _value,
-      $Res Function(_$GetContactListSyncFailureImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$GetContactListSyncFailureImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetContactListSyncFailureImpl implements GetContactListSyncFailure {
-  const _$GetContactListSyncFailureImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'ContactState.getContactListSyncFailure(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetContactListSyncFailureImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetContactListSyncFailureImplCopyWith<_$GetContactListSyncFailureImpl>
-      get copyWith => __$$GetContactListSyncFailureImplCopyWithImpl<
-          _$GetContactListSyncFailureImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
-    required TResult Function() addContactLoading,
-    required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
-    required TResult Function() addContactListLoading,
-    required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
-    required TResult Function() deleteContactLoading,
-    required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
-    required TResult Function(Stream<BoxEvent> streamer)
-        getContactListStreamSuccess,
-    required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
-    required TResult Function(List<Contact> contactList)
-        getContactListSyncSuccess,
-    required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
-    required TResult Function() getContactListLoading,
-  }) {
-    return getContactListSyncFailure(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
-    TResult? Function()? addContactLoading,
-    TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
-    TResult? Function()? addContactListLoading,
-    TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
-    TResult? Function()? deleteContactLoading,
-    TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
-    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
-    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
-    TResult? Function()? getContactListLoading,
-  }) {
-    return getContactListSyncFailure?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
-    TResult Function()? addContactLoading,
-    TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
-    TResult Function()? addContactListLoading,
-    TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
-    TResult Function()? deleteContactLoading,
-    TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
-    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
-    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
-    TResult Function()? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (getContactListSyncFailure != null) {
-      return getContactListSyncFailure(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
-    required TResult Function(AddContactLoading value) addContactLoading,
-    required TResult Function(AddContactListSuccess value)
-        addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
-    required TResult Function(AddContactListLoading value)
-        addContactListLoading,
-    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
-    required TResult Function(DeleteContactLoading value) deleteContactLoading,
-    required TResult Function(GetContactListStreamLoading value)
-        getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
-    required TResult Function(GetContactListStreamSuccess value)
-        getContactListStreamSuccess,
-    required TResult Function(GetContactListSyncLoading value)
-        getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
-    required TResult Function(GetContactListSyncSuccess value)
-        getContactListSyncSuccess,
-    required TResult Function(GetContactListSuccess value)
-        getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
-    required TResult Function(GetContactListLoading value)
-        getContactListLoading,
-  }) {
-    return getContactListSyncFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
-    TResult? Function(AddContactLoading value)? addContactLoading,
-    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
-    TResult? Function(AddContactListLoading value)? addContactListLoading,
-    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult? Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult? Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult? Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult? Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
-    TResult? Function(GetContactListLoading value)? getContactListLoading,
-  }) {
-    return getContactListSyncFailure?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
-    TResult Function(AddContactLoading value)? addContactLoading,
-    TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
-    TResult Function(AddContactListLoading value)? addContactListLoading,
-    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
-    TResult Function(GetContactListLoading value)? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (getContactListSyncFailure != null) {
-      return getContactListSyncFailure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetContactListSyncFailure implements ContactState {
-  const factory GetContactListSyncFailure(final String message) =
-      _$GetContactListSyncFailureImpl;
-
-  String get message;
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetContactListSyncFailureImplCopyWith<_$GetContactListSyncFailureImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -4025,25 +2251,20 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return getContactListSyncSuccess(contactList);
   }
@@ -4053,23 +2274,18 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return getContactListSyncSuccess?.call(contactList);
   }
@@ -4079,23 +2295,18 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListSyncSuccess != null) {
@@ -4109,35 +2320,26 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListSyncSuccess(this);
   }
@@ -4147,29 +2349,22 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListSyncSuccess?.call(this);
   }
@@ -4179,29 +2374,22 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListSyncSuccess != null) {
@@ -4304,25 +2492,20 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return getContactListSuccess(contactList);
   }
@@ -4332,23 +2515,18 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return getContactListSuccess?.call(contactList);
   }
@@ -4358,23 +2536,18 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListSuccess != null) {
@@ -4388,35 +2561,26 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListSuccess(this);
   }
@@ -4426,29 +2590,22 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListSuccess?.call(this);
   }
@@ -4458,29 +2615,22 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListSuccess != null) {
@@ -4500,277 +2650,6 @@ abstract class GetContactListSuccess implements ContactState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetContactListSuccessImplCopyWith<_$GetContactListSuccessImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$GetContactListFailureImplCopyWith<$Res> {
-  factory _$$GetContactListFailureImplCopyWith(
-          _$GetContactListFailureImpl value,
-          $Res Function(_$GetContactListFailureImpl) then) =
-      __$$GetContactListFailureImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$GetContactListFailureImplCopyWithImpl<$Res>
-    extends _$ContactStateCopyWithImpl<$Res, _$GetContactListFailureImpl>
-    implements _$$GetContactListFailureImplCopyWith<$Res> {
-  __$$GetContactListFailureImplCopyWithImpl(_$GetContactListFailureImpl _value,
-      $Res Function(_$GetContactListFailureImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$GetContactListFailureImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetContactListFailureImpl implements GetContactListFailure {
-  const _$GetContactListFailureImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString() {
-    return 'ContactState.getContactListFailure(message: $message)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$GetContactListFailureImpl &&
-            (identical(other.message, message) || other.message == message));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, message);
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$GetContactListFailureImplCopyWith<_$GetContactListFailureImpl>
-      get copyWith => __$$GetContactListFailureImplCopyWithImpl<
-          _$GetContactListFailureImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
-    required TResult Function() addContactLoading,
-    required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
-    required TResult Function() addContactListLoading,
-    required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
-    required TResult Function() deleteContactLoading,
-    required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
-    required TResult Function(Stream<BoxEvent> streamer)
-        getContactListStreamSuccess,
-    required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
-    required TResult Function(List<Contact> contactList)
-        getContactListSyncSuccess,
-    required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
-    required TResult Function() getContactListLoading,
-  }) {
-    return getContactListFailure(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
-    TResult? Function()? addContactLoading,
-    TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
-    TResult? Function()? addContactListLoading,
-    TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
-    TResult? Function()? deleteContactLoading,
-    TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
-    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
-    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
-    TResult? Function()? getContactListLoading,
-  }) {
-    return getContactListFailure?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
-    TResult Function()? addContactLoading,
-    TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
-    TResult Function()? addContactListLoading,
-    TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
-    TResult Function()? deleteContactLoading,
-    TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
-    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
-    TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
-    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
-    TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
-    TResult Function()? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (getContactListFailure != null) {
-      return getContactListFailure(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
-    required TResult Function(AddContactLoading value) addContactLoading,
-    required TResult Function(AddContactListSuccess value)
-        addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
-    required TResult Function(AddContactListLoading value)
-        addContactListLoading,
-    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
-    required TResult Function(DeleteContactLoading value) deleteContactLoading,
-    required TResult Function(GetContactListStreamLoading value)
-        getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
-    required TResult Function(GetContactListStreamSuccess value)
-        getContactListStreamSuccess,
-    required TResult Function(GetContactListSyncLoading value)
-        getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
-    required TResult Function(GetContactListSyncSuccess value)
-        getContactListSyncSuccess,
-    required TResult Function(GetContactListSuccess value)
-        getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
-    required TResult Function(GetContactListLoading value)
-        getContactListLoading,
-  }) {
-    return getContactListFailure(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
-    TResult? Function(AddContactLoading value)? addContactLoading,
-    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
-    TResult? Function(AddContactListLoading value)? addContactListLoading,
-    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult? Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult? Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult? Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult? Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
-    TResult? Function(GetContactListLoading value)? getContactListLoading,
-  }) {
-    return getContactListFailure?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
-    TResult Function(AddContactLoading value)? addContactLoading,
-    TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
-    TResult Function(AddContactListLoading value)? addContactListLoading,
-    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
-    TResult Function(DeleteContactLoading value)? deleteContactLoading,
-    TResult Function(GetContactListStreamLoading value)?
-        getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
-    TResult Function(GetContactListStreamSuccess value)?
-        getContactListStreamSuccess,
-    TResult Function(GetContactListSyncLoading value)?
-        getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
-    TResult Function(GetContactListSyncSuccess value)?
-        getContactListSyncSuccess,
-    TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
-    TResult Function(GetContactListLoading value)? getContactListLoading,
-    required TResult orElse(),
-  }) {
-    if (getContactListFailure != null) {
-      return getContactListFailure(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetContactListFailure implements ContactState {
-  const factory GetContactListFailure(final String message) =
-      _$GetContactListFailureImpl;
-
-  String get message;
-
-  /// Create a copy of ContactState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$GetContactListFailureImplCopyWith<_$GetContactListFailureImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -4819,25 +2698,20 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() addContactSuccess,
-    required TResult Function(String message) addContactFailure,
     required TResult Function() addContactLoading,
     required TResult Function() addContactListSuccess,
-    required TResult Function(String message) addContactListFailure,
     required TResult Function() addContactListLoading,
     required TResult Function() deleteContactSuccess,
-    required TResult Function(String message) deleteContactFailure,
     required TResult Function() deleteContactLoading,
     required TResult Function() getContactListStreamLoading,
-    required TResult Function(String message) getContactListStreamFailure,
     required TResult Function(Stream<BoxEvent> streamer)
         getContactListStreamSuccess,
     required TResult Function() getContactListSyncLoading,
-    required TResult Function(String message) getContactListSyncFailure,
     required TResult Function(List<Contact> contactList)
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
-    required TResult Function(String message) getContactListFailure,
     required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
   }) {
     return getContactListLoading();
   }
@@ -4847,23 +2721,18 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? addContactSuccess,
-    TResult? Function(String message)? addContactFailure,
     TResult? Function()? addContactLoading,
     TResult? Function()? addContactListSuccess,
-    TResult? Function(String message)? addContactListFailure,
     TResult? Function()? addContactListLoading,
     TResult? Function()? deleteContactSuccess,
-    TResult? Function(String message)? deleteContactFailure,
     TResult? Function()? deleteContactLoading,
     TResult? Function()? getContactListStreamLoading,
-    TResult? Function(String message)? getContactListStreamFailure,
     TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult? Function()? getContactListSyncLoading,
-    TResult? Function(String message)? getContactListSyncFailure,
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
-    TResult? Function(String message)? getContactListFailure,
     TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
   }) {
     return getContactListLoading?.call();
   }
@@ -4873,23 +2742,18 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? addContactSuccess,
-    TResult Function(String message)? addContactFailure,
     TResult Function()? addContactLoading,
     TResult Function()? addContactListSuccess,
-    TResult Function(String message)? addContactListFailure,
     TResult Function()? addContactListLoading,
     TResult Function()? deleteContactSuccess,
-    TResult Function(String message)? deleteContactFailure,
     TResult Function()? deleteContactLoading,
     TResult Function()? getContactListStreamLoading,
-    TResult Function(String message)? getContactListStreamFailure,
     TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
     TResult Function()? getContactListSyncLoading,
-    TResult Function(String message)? getContactListSyncFailure,
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
-    TResult Function(String message)? getContactListFailure,
     TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListLoading != null) {
@@ -4903,35 +2767,26 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(AddContactSuccess value) addContactSuccess,
-    required TResult Function(AddContactFailure value) addContactFailure,
     required TResult Function(AddContactLoading value) addContactLoading,
     required TResult Function(AddContactListSuccess value)
         addContactListSuccess,
-    required TResult Function(AddContactListFailure value)
-        addContactListFailure,
     required TResult Function(AddContactListLoading value)
         addContactListLoading,
     required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
-    required TResult Function(DeleteContactFailure value) deleteContactFailure,
     required TResult Function(DeleteContactLoading value) deleteContactLoading,
     required TResult Function(GetContactListStreamLoading value)
         getContactListStreamLoading,
-    required TResult Function(GetContactListStreamFailure value)
-        getContactListStreamFailure,
     required TResult Function(GetContactListStreamSuccess value)
         getContactListStreamSuccess,
     required TResult Function(GetContactListSyncLoading value)
         getContactListSyncLoading,
-    required TResult Function(GetContactListSyncFailure value)
-        getContactListSyncFailure,
     required TResult Function(GetContactListSyncSuccess value)
         getContactListSyncSuccess,
     required TResult Function(GetContactListSuccess value)
         getContactListSuccess,
-    required TResult Function(GetContactListFailure value)
-        getContactListFailure,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListLoading(this);
   }
@@ -4941,29 +2796,22 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(AddContactSuccess value)? addContactSuccess,
-    TResult? Function(AddContactFailure value)? addContactFailure,
     TResult? Function(AddContactLoading value)? addContactLoading,
     TResult? Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult? Function(AddContactListFailure value)? addContactListFailure,
     TResult? Function(AddContactListLoading value)? addContactListLoading,
     TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult? Function(DeleteContactFailure value)? deleteContactFailure,
     TResult? Function(DeleteContactLoading value)? deleteContactLoading,
     TResult? Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult? Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult? Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult? Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult? Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult? Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult? Function(GetContactListFailure value)? getContactListFailure,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListLoading?.call(this);
   }
@@ -4973,29 +2821,22 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(AddContactSuccess value)? addContactSuccess,
-    TResult Function(AddContactFailure value)? addContactFailure,
     TResult Function(AddContactLoading value)? addContactLoading,
     TResult Function(AddContactListSuccess value)? addContactListSuccess,
-    TResult Function(AddContactListFailure value)? addContactListFailure,
     TResult Function(AddContactListLoading value)? addContactListLoading,
     TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
-    TResult Function(DeleteContactFailure value)? deleteContactFailure,
     TResult Function(DeleteContactLoading value)? deleteContactLoading,
     TResult Function(GetContactListStreamLoading value)?
         getContactListStreamLoading,
-    TResult Function(GetContactListStreamFailure value)?
-        getContactListStreamFailure,
     TResult Function(GetContactListStreamSuccess value)?
         getContactListStreamSuccess,
     TResult Function(GetContactListSyncLoading value)?
         getContactListSyncLoading,
-    TResult Function(GetContactListSyncFailure value)?
-        getContactListSyncFailure,
     TResult Function(GetContactListSyncSuccess value)?
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
-    TResult Function(GetContactListFailure value)? getContactListFailure,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
     if (getContactListLoading != null) {
@@ -5007,4 +2848,235 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
 
 abstract class GetContactListLoading implements ContactState {
   const factory GetContactListLoading() = _$GetContactListLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$ContactFailureImplCopyWith<$Res> {
+  factory _$$ContactFailureImplCopyWith(_$ContactFailureImpl value,
+          $Res Function(_$ContactFailureImpl) then) =
+      __$$ContactFailureImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String error});
+}
+
+/// @nodoc
+class __$$ContactFailureImplCopyWithImpl<$Res>
+    extends _$ContactStateCopyWithImpl<$Res, _$ContactFailureImpl>
+    implements _$$ContactFailureImplCopyWith<$Res> {
+  __$$ContactFailureImplCopyWithImpl(
+      _$ContactFailureImpl _value, $Res Function(_$ContactFailureImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? error = null,
+  }) {
+    return _then(_$ContactFailureImpl(
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ContactFailureImpl implements ContactFailure {
+  const _$ContactFailureImpl(this.error);
+
+  @override
+  final String error;
+
+  @override
+  String toString() {
+    return 'ContactState.contactFailure(error: $error)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ContactFailureImpl &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ContactFailureImplCopyWith<_$ContactFailureImpl> get copyWith =>
+      __$$ContactFailureImplCopyWithImpl<_$ContactFailureImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() addContactSuccess,
+    required TResult Function() addContactLoading,
+    required TResult Function() addContactListSuccess,
+    required TResult Function() addContactListLoading,
+    required TResult Function() deleteContactSuccess,
+    required TResult Function() deleteContactLoading,
+    required TResult Function() getContactListStreamLoading,
+    required TResult Function(Stream<BoxEvent> streamer)
+        getContactListStreamSuccess,
+    required TResult Function() getContactListSyncLoading,
+    required TResult Function(List<Contact> contactList)
+        getContactListSyncSuccess,
+    required TResult Function(List<Contact> contactList) getContactListSuccess,
+    required TResult Function() getContactListLoading,
+    required TResult Function(String error) contactFailure,
+  }) {
+    return contactFailure(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? addContactSuccess,
+    TResult? Function()? addContactLoading,
+    TResult? Function()? addContactListSuccess,
+    TResult? Function()? addContactListLoading,
+    TResult? Function()? deleteContactSuccess,
+    TResult? Function()? deleteContactLoading,
+    TResult? Function()? getContactListStreamLoading,
+    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
+    TResult? Function()? getContactListSyncLoading,
+    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
+    TResult? Function(List<Contact> contactList)? getContactListSuccess,
+    TResult? Function()? getContactListLoading,
+    TResult? Function(String error)? contactFailure,
+  }) {
+    return contactFailure?.call(error);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? addContactSuccess,
+    TResult Function()? addContactLoading,
+    TResult Function()? addContactListSuccess,
+    TResult Function()? addContactListLoading,
+    TResult Function()? deleteContactSuccess,
+    TResult Function()? deleteContactLoading,
+    TResult Function()? getContactListStreamLoading,
+    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
+    TResult Function()? getContactListSyncLoading,
+    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
+    TResult Function(List<Contact> contactList)? getContactListSuccess,
+    TResult Function()? getContactListLoading,
+    TResult Function(String error)? contactFailure,
+    required TResult orElse(),
+  }) {
+    if (contactFailure != null) {
+      return contactFailure(error);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(AddContactSuccess value) addContactSuccess,
+    required TResult Function(AddContactLoading value) addContactLoading,
+    required TResult Function(AddContactListSuccess value)
+        addContactListSuccess,
+    required TResult Function(AddContactListLoading value)
+        addContactListLoading,
+    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
+    required TResult Function(DeleteContactLoading value) deleteContactLoading,
+    required TResult Function(GetContactListStreamLoading value)
+        getContactListStreamLoading,
+    required TResult Function(GetContactListStreamSuccess value)
+        getContactListStreamSuccess,
+    required TResult Function(GetContactListSyncLoading value)
+        getContactListSyncLoading,
+    required TResult Function(GetContactListSyncSuccess value)
+        getContactListSyncSuccess,
+    required TResult Function(GetContactListSuccess value)
+        getContactListSuccess,
+    required TResult Function(GetContactListLoading value)
+        getContactListLoading,
+    required TResult Function(ContactFailure value) contactFailure,
+  }) {
+    return contactFailure(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(AddContactSuccess value)? addContactSuccess,
+    TResult? Function(AddContactLoading value)? addContactLoading,
+    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
+    TResult? Function(AddContactListLoading value)? addContactListLoading,
+    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
+    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
+    TResult? Function(GetContactListStreamLoading value)?
+        getContactListStreamLoading,
+    TResult? Function(GetContactListStreamSuccess value)?
+        getContactListStreamSuccess,
+    TResult? Function(GetContactListSyncLoading value)?
+        getContactListSyncLoading,
+    TResult? Function(GetContactListSyncSuccess value)?
+        getContactListSyncSuccess,
+    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
+    TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
+  }) {
+    return contactFailure?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(AddContactSuccess value)? addContactSuccess,
+    TResult Function(AddContactLoading value)? addContactLoading,
+    TResult Function(AddContactListSuccess value)? addContactListSuccess,
+    TResult Function(AddContactListLoading value)? addContactListLoading,
+    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
+    TResult Function(DeleteContactLoading value)? deleteContactLoading,
+    TResult Function(GetContactListStreamLoading value)?
+        getContactListStreamLoading,
+    TResult Function(GetContactListStreamSuccess value)?
+        getContactListStreamSuccess,
+    TResult Function(GetContactListSyncLoading value)?
+        getContactListSyncLoading,
+    TResult Function(GetContactListSyncSuccess value)?
+        getContactListSyncSuccess,
+    TResult Function(GetContactListSuccess value)? getContactListSuccess,
+    TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(ContactFailure value)? contactFailure,
+    required TResult orElse(),
+  }) {
+    if (contactFailure != null) {
+      return contactFailure(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ContactFailure implements ContactState {
+  const factory ContactFailure(final String error) = _$ContactFailureImpl;
+
+  String get error;
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ContactFailureImplCopyWith<_$ContactFailureImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

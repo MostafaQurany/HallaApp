@@ -4,7 +4,7 @@ import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:halla/core/utils/routting.dart';
-import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/features/contacts/presentation/screens/components/contact_favorit_edite_icon.dart';
 import 'package:halla/features/contacts/presentation/screens/contact_details_screen.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_share_contact_icon.dart';
@@ -104,7 +104,7 @@ class _ContactCardState extends State<ContactCard>
                     ),
                   ),
                   ContactFavoritEditeIcon(
-                    selectedKey: widget.contact.favoriteCategory,
+                    selectedKey: widget.contact.favoriteCategory ?? '',
                   ),
                   SizedBox(
                     width: 5.w,

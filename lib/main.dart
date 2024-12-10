@@ -4,10 +4,10 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
-import "package:halla/core/common/data/models/company_model.dart";
-import "package:halla/core/common/data/models/social_media_model.dart";
-import "package:halla/core/common/data/models/time_stamp.g.dart";
-import "package:halla/core/common/data/models/user_model.dart";
+import "package:halla/core/common/domain/entities/company.dart";
+import "package:halla/core/common/domain/entities/contact.dart";
+import "package:halla/core/common/domain/entities/social_media.dart";
+import "package:halla/core/common/domain/entities/user.dart";
 import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/bloc_observer.dart";
@@ -17,7 +17,7 @@ import "package:halla/features/auth/presentation/blocs/login%20cubit/login_cubit
 import "package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/social%20cubit/social_cubit.dart";
-import "package:halla/features/contacts/data/models/contact_model.dart";
+import "package:halla/features/contacts/presentation/blocs/cubit/contact_cubit.dart";
 import "package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart";
 import "package:halla/features/splash/presentation/bloc/brightness%20cubit/brightness_cubit.dart";
 import "package:halla/features/splash/presentation/bloc/language%20cubit/language_cubit.dart";
@@ -39,11 +39,10 @@ void main() async {
   );
   // hive
   await Hive.initFlutter();
-  Hive.registerAdapter(ContactModelAdapter());
-  Hive.registerAdapter(UserModelAdapter());
-  Hive.registerAdapter(CompanyModelAdapter());
-  Hive.registerAdapter(SocialMediaModelAdapter());
-  Hive.registerAdapter(TimestampAdapter());
+  Hive.registerAdapter(UserAdapter());
+  Hive.registerAdapter(SocialMediaAdapter());
+  Hive.registerAdapter(CompanyAdapter());
+  Hive.registerAdapter(ContactAdapter());
   // firebase
   await Firebase.initializeApp();
   // dependencies
@@ -68,6 +67,8 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<NfcCubit>()),
         // guest
         BlocProvider(create: (context) => serviceLocator<GuestCubit>()),
+        // contacts
+        BlocProvider(create: (context) => serviceLocator<ContactCubit>()),
       ],
       child: const MyApp(),
     ),
@@ -89,21 +90,22 @@ class MyApp extends StatelessWidget {
             return BlocBuilder<LanguageCubit, Locale>(
               builder: (context, locale) {
                 return MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    title: "Halla",
-                    locale: locale,
-                    localizationsDelegates: const <LocalizationsDelegate>[
-                      S.delegate,
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                    supportedLocales: S.delegate.supportedLocales,
-                    themeMode: themeMode,
-                    theme: themeMode == ThemeMode.light
-                        ? AppTheme.lightTheme
-                        : AppTheme.darkTheme,
-                    home: SplashScreen());
+                  debugShowCheckedModeBanner: false,
+                  title: "Halla",
+                  locale: locale,
+                  localizationsDelegates: const <LocalizationsDelegate>[
+                    S.delegate,
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                  supportedLocales: S.delegate.supportedLocales,
+                  themeMode: themeMode,
+                  theme: themeMode == ThemeMode.light
+                      ? AppTheme.lightTheme
+                      : AppTheme.darkTheme,
+                  home: SplashScreen(),
+                );
               },
             );
           },

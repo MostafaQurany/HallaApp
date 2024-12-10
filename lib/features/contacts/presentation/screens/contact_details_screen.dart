@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/features/contacts/presentation/screens/components/contact_details_appbar.dart';
 import 'package:halla/features/contacts/presentation/screens/components/personal_information_card.dart';
 import 'package:halla/features/contacts/presentation/screens/components/socail_media_card.dart';

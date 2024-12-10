@@ -1,14 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:halla/core/common/domain/entities/company.dart';
-import 'package:halla/core/common/domain/entities/social_media.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-part 'user.g.dart';
+import 'package:halla/core/common/domain/entities/company.dart';
+import 'package:halla/core/common/domain/entities/social_media.dart';
 
-@HiveType(typeId: 1)
-class User extends HiveObject {
+part 'contact.g.dart';
+
+@HiveType(typeId: 4)
+class Contact extends HiveObject{
   @HiveField(0)
   String id;
   @HiveField(1)
@@ -24,21 +26,16 @@ class User extends HiveObject {
   @HiveField(6)
   String imageUrl;
   @HiveField(7)
-  String pinCode;
-  @HiveField(8)
   List<String> phones;
-  @HiveField(9)
-  List<String> nfcList;
-  @HiveField(10)
+  @HiveField(8)
   SocialMedia socialMedia;
-  @HiveField(11)
+  @HiveField(9)
   Company company;
-  @HiveField(12)
-  bool isGuest;
-  @HiveField(13)
-  List<String> favoriteCategories;
-
-  User({
+  @HiveField(10)
+  Timestamp? timestamp;
+  @HiveField(11)
+  String? favoriteCategory;
+  Contact({
     required this.id,
     required this.email,
     required this.fullName,
@@ -46,13 +43,11 @@ class User extends HiveObject {
     required this.dateOfBirth,
     required this.nationality,
     required this.imageUrl,
-    required this.pinCode,
     required this.phones,
     required this.socialMedia,
     required this.company,
-    this.nfcList = const [],
-    this.favoriteCategories = const [],
-    this.isGuest = false,
+    this.timestamp,
+    this.favoriteCategory,
   });
 
   Map<String, dynamic> toMap() {
@@ -64,18 +59,17 @@ class User extends HiveObject {
       'dateOfBirth': dateOfBirth,
       'nationality': nationality,
       'imageUrl': imageUrl,
-      'pinCode': pinCode,
       'phones': phones,
-      'nfcList': nfcList,
       'socialMedia': socialMedia.toMap(),
       'company': company.toMap(),
-      'isGuest': isGuest,
-      'favoriteCategories': favoriteCategories,
+      'timestamp': timestamp?.millisecondsSinceEpoch ??
+          Timestamp.now().millisecondsSinceEpoch,
+      'favoriteCategory': favoriteCategory,
     };
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
+  factory Contact.fromMap(Map<String, dynamic> map) {
+    return Contact(
       id: map['id'] as String,
       email: map['email'] as String,
       fullName: map['fullName'] as String,
@@ -83,25 +77,21 @@ class User extends HiveObject {
       dateOfBirth: map['dateOfBirth'] as String,
       nationality: map['nationality'] as String,
       imageUrl: map['imageUrl'] as String,
-      pinCode: map['pinCode'] as String,
+      phones: List<String>.from((map['phones'] as List<String>)),
       socialMedia:
           SocialMedia.fromMap(map['socialMedia'] as Map<String, dynamic>),
       company: Company.fromMap(map['company'] as Map<String, dynamic>),
-      isGuest: map['isGuest'] as bool,
-      phones: (map['phones'] as List<dynamic>? ?? [])
-          .map((e) => e as String)
-          .toList(),
-      nfcList: (map['nfcList'] as List<dynamic>? ?? [])
-          .map((e) => e as String)
-          .toList(),
-      favoriteCategories: (map['favoriteCategories'] as List<dynamic>? ?? [])
-          .map((e) => e as String)
-          .toList(),
+      timestamp: map['timestamp'] != null
+          ? Timestamp.fromMillisecondsSinceEpoch(map['timestamp'] as int)
+          : Timestamp.now(),
+      favoriteCategory: map['favoriteCategory'] != null
+          ? map['favoriteCategory'] as String
+          : '',
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory User.fromJson(String source) =>
-      User.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Contact.fromJson(String source) =>
+      Contact.fromMap(json.decode(source) as Map<String, dynamic>);
 }

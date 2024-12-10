@@ -1,8 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
-import 'package:halla/features/contacts/data/models/contact_model.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:halla/core/constants/app_images.dart';
+import 'package:halla/core/utils/app_show_dialog.dart';
+import 'package:halla/core/utils/routting.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
+import 'package:halla/features/contacts/presentation/blocs/cubit/contact_cubit.dart';
+import 'package:halla/features/contacts/presentation/screens/components/header_contact_screen.dart';
+import 'package:halla/features/contacts/presentation/screens/contact_card.dart';
 
 class ContactsScreen extends StatefulWidget {
   const ContactsScreen({super.key});
@@ -13,126 +19,75 @@ class ContactsScreen extends StatefulWidget {
 
 class _ContactsScreenState extends State<ContactsScreen> {
   late String userId;
-  late ValueListenable<Box<Map<String, ContactModel>>> valueListenable;
+  List<Contact> contactList = [];
+  final TextEditingController searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     userId = UserCubit.get(context).user!.id;
+    ContactCubit.get(context).getContactList(userId: userId);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Text("ss"));
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const HeaderContactScreen(),
+          BlocConsumer<ContactCubit, ContactState>(
+            listener: (context, state) {
+              state.whenOrNull(
+                contactFailure: (error) {
+                  AppShowDialog.error(context, error);
+                },
+                getContactListSuccess: (contactList) {
+                  print(contactList);
+                  this.contactList = contactList;
+                },
+                addContactLoading: () {
+                  AppShowDialog.loading(context);
+                },
+                addContactSuccess: () {
+                  AppNavigator.navigatePop(context);
+                },
+              );
+            },
+            builder: (context, state) {
+              if (contactList.isNotEmpty) {
+                return Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: contactList.length, //contactList.length,
+                    itemBuilder: (context, index) {
+                      print(contactList[index]);
+                      return ContactCard(
+                        contact: contactList[index],
+                      );
+                    },
+                  ),
+                );
+              } else {
+                return SizedBox(
+                  height: 0.4.sh,
+                  child: InkWell(
+                    onTap: () {
+                      ContactCubit.get(context).getContactList(userId: userId);
+                    },
+                    child: Image(
+                      image: AssetImage(AppImages.contactListEmpty),
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                );
+              }
+            },
+          ),
+        ],
+      ),
+    );
   }
-
-// _oldboudy (){
-//   BlocListener<ContactsBloc, ContactsState>(
-//     listener: (context, state) {
-//       if (state is AddContactsLoadingState) {
-//         AppShowDialog.loading(context);
-//       }
-//       if (state is AddContactSuccessfully) {
-//         Future.delayed(const Duration(milliseconds: 200)).then(
-//               (value) {
-//             Navigator.pop(context);
-//             context
-//                 .read<ContactsBloc>()
-//                 .add(GetContactsListEvent(userId: userId));
-//           },
-//         );
-//       }
-//       if (state is AddContactsErorrState) {
-//         Future.delayed(const Duration(milliseconds: 200)).then(
-//               (value) {
-//             Navigator.pop(context);
-//             AppShowDialog.error(context, state.message);
-//           },
-//         );
-//       }
-//       if (state is GetContactsErorrState) {
-//         AppShowDialog.error(context, state.message);
-//       }
-//       if (state is GetContactsSuccessfully) {
-//         print(state.contacts);
-//       }
-//     },
-//     child: SingleChildScrollView(
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.center,
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           const HeaderContactScreen(),
-//           // ValueListenableBuilder(
-//           //   valueListenable:
-//           //       Hive.box<Map<String, String>>(AppConstants.contactBox)
-//           //           .listenable(),
-//           //   builder: (context, value, child) {
-//           //     if (value.isNotEmpty &&
-//           //         value.get(userId) != null &&
-//           //         value.get(userId)!.isNotEmpty) {
-//           //       List<Contact> contactList = [];
-//           //       for (var k in value.get(userId)!.keys) {
-//           //         contactList.add(
-//           //             ContactModel.fromJsonHive(value.get(userId)![k]!));
-//           //       }
-//           //       return ListView.builder(
-//           //         shrinkWrap: true,
-//           //         itemCount: value.get(userId)!.keys.length,
-//           //         itemBuilder: (context, index) => Text(
-//           //           index.toString(),
-//           //         ),
-//           //       );
-//           //     }
-//           //     return SizedBox(
-//           //       height: 0.4.sh,
-//           //       child: Image(
-//           //         image: AssetImage(AppImages.contactListEmpty),
-//           //         fit: BoxFit.contain,
-//           //       ),
-//           //     );
-//           //   },
-//           // ),
-//           BlocBuilder<ContactsBloc, ContactsState>(
-//             builder: (context, state) {
-//               if (state is GetContactsLoadingState) {
-//                 return Center(child: Lottie.asset(AppImages.loadingLottie));
-//               }
-//               if (state is GetContactsSuccessfully) {
-//                 if (state.contacts.isEmpty) {
-//                   return SizedBox(
-//                     height: 0.4.sh,
-//                     child: Image(
-//                       image: AssetImage(AppImages.contactListEmpty),
-//                       fit: BoxFit.contain,
-//                     ),
-//                   );
-//                 } else {
-//                   return ListView.builder(
-//                     shrinkWrap: true,
-//                     physics: const NeverScrollableScrollPhysics(),
-//                     itemCount: state.contacts.length,
-//                     itemBuilder: (context, index) {
-//                       return ContactCard(
-//                         contact: state.contacts[index],
-//                       );
-//                     },
-//                   );
-//                 }
-//               }
-//               return SizedBox(
-//                 height: 0.4.sh,
-//                 child: Image(
-//                   image: AssetImage(AppImages.contactListEmpty),
-//                   fit: BoxFit.contain,
-//                 ),
-//               );
-//             },
-//           ),
-//           const EndSpacerSizedBox(),
-//         ],
-//       ),
-//     ),
-//
-//   );
-// }
 }

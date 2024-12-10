@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
-import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 
 class ContactDetailsAppbar extends StatelessWidget {
   final Contact contact;

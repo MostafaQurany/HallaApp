@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ContactModelServer {
+class ContactServer {
   final String id;
   Timestamp? timestamp = Timestamp.now();
   String? favoriteCategories = "";
 
-  ContactModelServer({
+  ContactServer({
     required this.id,
     this.timestamp,
     this.favoriteCategories,
@@ -15,7 +15,7 @@ class ContactModelServer {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      (other is ContactModelServer &&
+      (other is ContactServer &&
           runtimeType == other.runtimeType &&
           id == other.id &&
           timestamp == other.timestamp &&
@@ -30,12 +30,12 @@ class ContactModelServer {
     return 'ContactModelServer{ id: $id, timestamp: $timestamp, favoriteCategories: $favoriteCategories,}';
   }
 
-  ContactModelServer copyWith({
+  ContactServer copyWith({
     String? id,
     Timestamp? timestamp,
     String? favoriteCategories,
   }) {
-    return ContactModelServer(
+    return ContactServer(
       id: id ?? this.id,
       timestamp: timestamp ?? this.timestamp,
       favoriteCategories: favoriteCategories ?? this.favoriteCategories,
@@ -50,8 +50,8 @@ class ContactModelServer {
     };
   }
 
-  factory ContactModelServer.fromMap(Map<String, dynamic> map) {
-    return ContactModelServer(
+  factory ContactServer.fromMap(Map<String, dynamic> map) {
+    return ContactServer(
       id: map['id'] ?? '',
       timestamp: map['timestamp'] ?? Timestamp.now(),
       favoriteCategories: map['favoriteCategories'] ?? '',

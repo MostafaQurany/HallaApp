@@ -13,7 +13,7 @@ import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart';
 import 'package:halla/features/auth/presentation/screens/first%20time%20contacts/widgets/fites_time_contact.dart';
-import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/features/home/presentation/screens/home_layout.dart';
 
 class FirstTimeContactsBody extends StatefulWidget {
@@ -34,31 +34,6 @@ class _FirstTimeContactsBodyState extends State<FirstTimeContactsBody> {
   @override
   void initState() {
     super.initState();
-    contactsList = List.generate(
-      20,
-      (index) => Contact(
-        id: index.toString(),
-        addTime: Timestamp.now(),
-        fullName: index.toString(),
-        primePhone: index.toString(),
-        dateOfBirth: index.toString(),
-        nationality: index.toString(),
-        phones: [],
-        socialMedia: SocialMedia(
-            facebook: index.toString(),
-            instagram: index.toString(),
-            linkedin: index.toString(),
-            twitter: index.toString()),
-        company: Company(
-            name: index.toString(),
-            phoneNumber: index.toString(),
-            website: index.toString(),
-            position: index.toString()),
-        email: index.toString(),
-        imageUrl: '',
-        favoriteCategory: '',
-      ),
-    );
   }
 
   @override
@@ -106,8 +81,7 @@ class _FirstTimeContactsBodyState extends State<FirstTimeContactsBody> {
                   );
                 },
                 getFirstTimeContactSuccess: (contacts) {
-                  // ToDo: remove this comment to make the contact added
-                  // contactsList = contacts;
+                  contactsList = contacts;
                 },
               );
             },

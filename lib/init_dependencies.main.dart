@@ -260,14 +260,14 @@ _initAuth() {
 }
 
 _initContact() async {
-  await Hive.openBox<List<ContactModel>>(AppConstants.contactBox);
+  await Hive.openBox<List<Contact>>(AppConstants.contactBox);
   serviceLocator
     // Data Source
     ..registerFactory<ContactsDataSource>(
       () => ContactsDataSourceNewImpl(),
     )
     ..registerFactory<ContactsLocalDataSource>(
-      () => ContactsLocalDataSourceNewImpl(),
+      () => ContactsLocalDataSourceImpl(),
     )
     // Repository
     ..registerFactory<ContactsRepository>(
@@ -293,11 +293,6 @@ _initContact() async {
       ),
     )
     ..registerFactory(
-      () => GetContactListStreamUseCase(
-        serviceLocator(),
-      ),
-    )
-    ..registerFactory(
       () => GetContactListSyncUseCase(
         serviceLocator(),
       ),
@@ -310,7 +305,6 @@ _initContact() async {
     // bloc
     ..registerLazySingleton(
       () => ContactCubit(
-        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

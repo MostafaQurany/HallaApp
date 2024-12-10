@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/common/domain/usecase/usecase.dart';
 import 'package:halla/core/error/failure.dart';
-import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/features/contacts/domain/repositories/contacts_repository.dart';
 
 class GetContactListUseCase

@@ -9,6 +9,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 class CustomShareContactIcon extends StatefulWidget {
   const CustomShareContactIcon(
       {super.key, required this.userId, this.iconColor});
+
   final String userId;
   final Color? iconColor;
 
@@ -19,6 +20,7 @@ class CustomShareContactIcon extends StatefulWidget {
 class _CustomShareContactIconState extends State<CustomShareContactIcon> {
   final EncryptedBackend encryptedBackend = EncryptedBackendImpl();
   String message = '';
+
   @override
   void initState() {
     super.initState();
@@ -33,21 +35,26 @@ class _CustomShareContactIconState extends State<CustomShareContactIcon> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: SizedBox(
-                width: 230.w,
-                height: 230.w,
-                child: QrImageView(
-                  data: message,
-                  size: 230.w,
-                  backgroundColor: AppTheme.isLight(context)
-                      ? Colors.transparent
-                      : AppColors.white,
-                ),
-              ),
-              content: Text(
-                "Scan Qr-Code",
-                style: Theme.of(context).textTheme.bodyMedium,
-                textAlign: TextAlign.center,
+              content: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Center(
+                    child: QrImageView(
+                      data: message,
+                      size: 250.w,
+                      backgroundColor: AppTheme.isLight(context)
+                          ? Colors.transparent
+                          : AppColors.white,
+                    ),
+                  ),
+                  Text(
+                    "Scan Qr-Code",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
               ),
             );
           },
