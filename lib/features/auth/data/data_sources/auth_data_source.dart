@@ -2,15 +2,14 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:halla/core/common/data/models/company_model.dart';
-import 'package:halla/core/common/data/models/social_media_model.dart';
-import 'package:halla/core/common/data/models/user_model.dart';
-import 'package:halla/core/constants/constants.dart';
+import 'package:halla/core/common/domain/entities/company.dart';
+import 'package:halla/core/common/domain/entities/social_media.dart';
+import 'package:halla/core/common/domain/entities/user.dart' as user;
 import 'package:halla/core/error/server_exception.dart';
 
 abstract interface class AuthDataSource {
   // sign in
-  Future<UserModel> signInWithEmailPassword({
+  Future<user.User> signInWithEmailPassword({
     required String email,
     required String password,
     required String pinCode,
@@ -30,7 +29,7 @@ abstract interface class AuthDataSource {
   });
 
   // login
-  Future<UserModel> logInWithEmailPassword({
+  Future<user.User> logInWithEmailPassword({
     required String email,
     required String password,
   });
@@ -45,10 +44,10 @@ abstract interface class AuthDataSource {
   });
 
   // social
-  Future<UserModel> googleLogIn();
+  Future<user.User> googleLogIn();
 
   Future<void> linkWithEmailPassword({
-    required UserModel user,
+    required user.User user,
   });
 }
 
@@ -56,7 +55,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   final firebaseAuth = FirebaseAuth.instance;
 
   @override
-  Future<UserModel> signInWithEmailPassword({
+  Future<user.User> signInWithEmailPassword({
     required String email,
     required String password,
     required String pinCode,
@@ -67,13 +66,18 @@ class AuthDataSourceImpl implements AuthDataSource {
         email: email,
         password: password,
       );
-      return UserModel(
-        idModel: credential.user!.uid,
-        emailModel: email,
-        pinCodeModel: pinCode,
-        nfcListModel: [],
-        companyModel: CompanyModel(),
-        socialMediaModel: SocialMediaModel(),
+      return user.User(
+        id: credential.user!.uid,
+        email: email,
+        pinCode: pinCode,
+        fullName: '',
+        primePhone: '',
+        dateOfBirth: '',
+        nationality: '',
+        imageUrl: '',
+        phones: [],
+        socialMedia: SocialMedia(),
+        company: Company(),
       );
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
@@ -121,8 +125,7 @@ class AuthDataSourceImpl implements AuthDataSource {
     required PhoneAuthCredential phoneAuthCredential,
   }) async {
     try {
-      final UserCredential credential = await firebaseAuth.currentUser!
-          .linkWithCredential(phoneAuthCredential);
+      await firebaseAuth.currentUser!.linkWithCredential(phoneAuthCredential);
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {
@@ -156,7 +159,7 @@ class AuthDataSourceImpl implements AuthDataSource {
 
   // login
   @override
-  Future<UserModel> logInWithEmailPassword({
+  Future<user.User> logInWithEmailPassword({
     required String email,
     required String password,
   }) async {
@@ -166,12 +169,18 @@ class AuthDataSourceImpl implements AuthDataSource {
         email: email,
         password: password,
       );
-      return UserModel(
-        idModel: credential.user!.uid,
-        emailModel: email,
-        nfcListModel: [],
-        companyModel: CompanyModel(),
-        socialMediaModel: SocialMediaModel(),
+      return user.User(
+        id: credential.user!.uid,
+        email: email,
+        pinCode: '',
+        fullName: '',
+        primePhone: '',
+        dateOfBirth: '',
+        nationality: '',
+        imageUrl: '',
+        phones: [],
+        socialMedia: SocialMedia(),
+        company: Company(),
       );
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
@@ -182,7 +191,7 @@ class AuthDataSourceImpl implements AuthDataSource {
 
   // social
   @override
-  Future<UserModel> googleLogIn() async {
+  Future<user.User> googleLogIn() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication? googleAuth =
@@ -193,15 +202,18 @@ class AuthDataSourceImpl implements AuthDataSource {
       );
       final UserCredential userCredential =
           await firebaseAuth.signInWithCredential(credential);
-      return UserModel(
-        idModel: userCredential.user!.uid,
-        emailModel: userCredential.user!.email!,
-        fullNameModel: userCredential.user!.displayName ?? '',
-        primePhoneModel: userCredential.user!.phoneNumber ?? '',
-        pinCodeModel: AppConstants.generatePinCode(),
-        nfcListModel: [],
-        companyModel: CompanyModel(),
-        socialMediaModel: SocialMediaModel(),
+      return user.User(
+        id: userCredential.user!.uid,
+        email: userCredential.user!.email ?? '',
+        pinCode: '',
+        fullName: '',
+        primePhone: '',
+        dateOfBirth: '',
+        nationality: '',
+        imageUrl: '',
+        phones: [],
+        socialMedia: SocialMedia(),
+        company: Company(),
       );
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
@@ -211,7 +223,7 @@ class AuthDataSourceImpl implements AuthDataSource {
   }
 
   @override
-  Future<void> linkWithEmailPassword({required UserModel user}) async {
+  Future<void> linkWithEmailPassword({required user.User user}) async {
     try {
       final AuthCredential passwordCredential = EmailAuthProvider.credential(
           email: user.email, password: user.pinCode);

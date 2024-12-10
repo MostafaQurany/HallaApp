@@ -1,21 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:halla/core/common/data/models/guest_model.dart';
-import 'package:halla/core/common/data/models/user_model.dart';
+import 'package:halla/core/common/domain/entities/guest.dart';
+import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
 
 abstract interface class DataBaseSource {
   // user
-  Future<bool> isUserExit(UserModel user);
+  Future<bool> isUserExit(User user);
 
-  Future<UserModel> uploadUser(UserModel user);
+  Future<User> uploadUser(User user);
 
-  Future<UserModel> getUser(String userId);
+  Future<User> getUser(String userId);
 
   // guest
-  Future<GuestModel> logInGuest();
+  Future<Guest> logInGuest();
 
-  Future<GuestModel?> getGuest();
+  Future<Guest?> getGuest();
 
   Future<void> forgetGuestPinCode();
 }
@@ -26,18 +26,18 @@ class DataBaseSourceImpl implements DataBaseSource {
 
   // user
   @override
-  Future<UserModel> uploadUser(UserModel user) async {
+  Future<User> uploadUser(User user) async {
     try {
       if (!await _userExists(user.id)) {
         await _firestore
             .collection(_userCollection)
             .doc(user.id)
-            .set(user.toJson());
+            .set(user.toMap());
       } else {
         await _firestore
             .collection(_userCollection)
             .doc(user.id)
-            .update(user.toJson());
+            .update(user.toMap());
       }
       final usern = await getUser(user.id);
       return usern;
@@ -65,14 +65,14 @@ class DataBaseSourceImpl implements DataBaseSource {
   }
 
   @override
-  Future<UserModel> getUser(String userId) async {
+  Future<User> getUser(String userId) async {
     final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
         await _firestore.collection(_userCollection).doc(userId).get();
-    return UserModel.fromJson(documentSnapshot.data()!);
+    return User.fromMap(documentSnapshot.data()!);
   }
 
   @override
-  Future<bool> isUserExit(UserModel user) async {
+  Future<bool> isUserExit(User user) async {
     try {
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await _firestore.collection(_userCollection).doc(user.id).get();
@@ -92,22 +92,22 @@ class DataBaseSourceImpl implements DataBaseSource {
   // guest
 
   @override
-  Future<GuestModel> logInGuest() async {
+  Future<Guest> logInGuest() async {
     return await getGuest().then(
       (guest) async {
         if (guest == null) {
-          GuestModel guestModel = GuestModel(
-            idGuestModel: await AppConstants.getGuestId(),
-            fullNameGuestModel: "Guest",
-            pinCodeGuestModel: AppConstants.generatePinCode(),
+          Guest guest = Guest(
+            idGuest: await AppConstants.getGuestId(),
+            fullNameGuest: "Guest",
+            pinCodeGuest: AppConstants.generatePinCode(),
           );
           await _firestore
               .collection(_userCollection)
               .doc(await AppConstants.getGuestId())
               .set(
-                guestModel.toMap(),
+                guest.toMap(),
               );
-          return guestModel;
+          return guest;
         } else {
           return guest;
         }
@@ -120,7 +120,7 @@ class DataBaseSourceImpl implements DataBaseSource {
   }
 
   @override
-  Future<GuestModel?> getGuest() async {
+  Future<Guest?> getGuest() async {
     try {
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await _firestore
@@ -128,7 +128,7 @@ class DataBaseSourceImpl implements DataBaseSource {
               .doc(await AppConstants.getGuestId())
               .get();
       if (documentSnapshot.exists) {
-        return GuestModel.fromMap(documentSnapshot.data()!);
+        return Guest.fromMap(documentSnapshot.data()!);
       } else {
         return null;
       }

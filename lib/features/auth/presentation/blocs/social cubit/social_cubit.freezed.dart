@@ -26,11 +26,7 @@ mixin _$SocialState {
     required TResult Function(Map<String, dynamic> userState) facebookSuccess,
     required TResult Function(String errorMessage) facebookError,
     required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
+    required TResult Function(String message) nfcError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,11 +39,7 @@ mixin _$SocialState {
     TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult? Function(String errorMessage)? facebookError,
     TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult? Function(String message)? nfcError,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,11 +52,7 @@ mixin _$SocialState {
     TResult Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult Function(String errorMessage)? facebookError,
     TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult Function(String message)? nfcError,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -78,11 +66,7 @@ mixin _$SocialState {
     required TResult Function(FacebookSuccess value) facebookSuccess,
     required TResult Function(FacebookError value) facebookError,
     required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
     required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -95,11 +79,7 @@ mixin _$SocialState {
     TResult? Function(FacebookSuccess value)? facebookSuccess,
     TResult? Function(FacebookError value)? facebookError,
     TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
     TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -112,11 +92,7 @@ mixin _$SocialState {
     TResult Function(FacebookSuccess value)? facebookSuccess,
     TResult Function(FacebookError value)? facebookError,
     TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
     TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -192,11 +168,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(Map<String, dynamic> userState) facebookSuccess,
     required TResult Function(String errorMessage) facebookError,
     required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
+    required TResult Function(String message) nfcError,
   }) {
     return initial();
   }
@@ -212,11 +184,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult? Function(String errorMessage)? facebookError,
     TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult? Function(String message)? nfcError,
   }) {
     return initial?.call();
   }
@@ -232,11 +200,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult Function(String errorMessage)? facebookError,
     TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult Function(String message)? nfcError,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -256,11 +220,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(FacebookSuccess value) facebookSuccess,
     required TResult Function(FacebookError value) facebookError,
     required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
     required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
   }) {
     return initial(this);
   }
@@ -276,11 +236,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(FacebookSuccess value)? facebookSuccess,
     TResult? Function(FacebookError value)? facebookError,
     TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
     TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
   }) {
     return initial?.call(this);
   }
@@ -296,11 +252,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(FacebookSuccess value)? facebookSuccess,
     TResult Function(FacebookError value)? facebookError,
     TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
     TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -363,11 +315,7 @@ class _$GoogleLoadingImpl implements GoogleLoading {
     required TResult Function(Map<String, dynamic> userState) facebookSuccess,
     required TResult Function(String errorMessage) facebookError,
     required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
+    required TResult Function(String message) nfcError,
   }) {
     return googleLoading();
   }
@@ -383,11 +331,7 @@ class _$GoogleLoadingImpl implements GoogleLoading {
     TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult? Function(String errorMessage)? facebookError,
     TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult? Function(String message)? nfcError,
   }) {
     return googleLoading?.call();
   }
@@ -403,11 +347,7 @@ class _$GoogleLoadingImpl implements GoogleLoading {
     TResult Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult Function(String errorMessage)? facebookError,
     TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult Function(String message)? nfcError,
     required TResult orElse(),
   }) {
     if (googleLoading != null) {
@@ -427,11 +367,7 @@ class _$GoogleLoadingImpl implements GoogleLoading {
     required TResult Function(FacebookSuccess value) facebookSuccess,
     required TResult Function(FacebookError value) facebookError,
     required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
     required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
   }) {
     return googleLoading(this);
   }
@@ -447,11 +383,7 @@ class _$GoogleLoadingImpl implements GoogleLoading {
     TResult? Function(FacebookSuccess value)? facebookSuccess,
     TResult? Function(FacebookError value)? facebookError,
     TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
     TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
   }) {
     return googleLoading?.call(this);
   }
@@ -467,11 +399,7 @@ class _$GoogleLoadingImpl implements GoogleLoading {
     TResult Function(FacebookSuccess value)? facebookSuccess,
     TResult Function(FacebookError value)? facebookError,
     TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
     TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
     required TResult orElse(),
   }) {
     if (googleLoading != null) {
@@ -569,11 +497,7 @@ class _$GoogleSuccessImpl implements GoogleSuccess {
     required TResult Function(Map<String, dynamic> userState) facebookSuccess,
     required TResult Function(String errorMessage) facebookError,
     required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
+    required TResult Function(String message) nfcError,
   }) {
     return googleSuccess(userState);
   }
@@ -589,11 +513,7 @@ class _$GoogleSuccessImpl implements GoogleSuccess {
     TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult? Function(String errorMessage)? facebookError,
     TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult? Function(String message)? nfcError,
   }) {
     return googleSuccess?.call(userState);
   }
@@ -609,11 +529,7 @@ class _$GoogleSuccessImpl implements GoogleSuccess {
     TResult Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult Function(String errorMessage)? facebookError,
     TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult Function(String message)? nfcError,
     required TResult orElse(),
   }) {
     if (googleSuccess != null) {
@@ -633,11 +549,7 @@ class _$GoogleSuccessImpl implements GoogleSuccess {
     required TResult Function(FacebookSuccess value) facebookSuccess,
     required TResult Function(FacebookError value) facebookError,
     required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
     required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
   }) {
     return googleSuccess(this);
   }
@@ -653,11 +565,7 @@ class _$GoogleSuccessImpl implements GoogleSuccess {
     TResult? Function(FacebookSuccess value)? facebookSuccess,
     TResult? Function(FacebookError value)? facebookError,
     TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
     TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
   }) {
     return googleSuccess?.call(this);
   }
@@ -673,11 +581,7 @@ class _$GoogleSuccessImpl implements GoogleSuccess {
     TResult Function(FacebookSuccess value)? facebookSuccess,
     TResult Function(FacebookError value)? facebookError,
     TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
     TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
     required TResult orElse(),
   }) {
     if (googleSuccess != null) {
@@ -777,11 +681,7 @@ class _$GoogleErrorImpl implements GoogleError {
     required TResult Function(Map<String, dynamic> userState) facebookSuccess,
     required TResult Function(String errorMessage) facebookError,
     required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
+    required TResult Function(String message) nfcError,
   }) {
     return googleError(errorMessage);
   }
@@ -797,11 +697,7 @@ class _$GoogleErrorImpl implements GoogleError {
     TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult? Function(String errorMessage)? facebookError,
     TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult? Function(String message)? nfcError,
   }) {
     return googleError?.call(errorMessage);
   }
@@ -817,11 +713,7 @@ class _$GoogleErrorImpl implements GoogleError {
     TResult Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult Function(String errorMessage)? facebookError,
     TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult Function(String message)? nfcError,
     required TResult orElse(),
   }) {
     if (googleError != null) {
@@ -841,11 +733,7 @@ class _$GoogleErrorImpl implements GoogleError {
     required TResult Function(FacebookSuccess value) facebookSuccess,
     required TResult Function(FacebookError value) facebookError,
     required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
     required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
   }) {
     return googleError(this);
   }
@@ -861,11 +749,7 @@ class _$GoogleErrorImpl implements GoogleError {
     TResult? Function(FacebookSuccess value)? facebookSuccess,
     TResult? Function(FacebookError value)? facebookError,
     TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
     TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
   }) {
     return googleError?.call(this);
   }
@@ -881,11 +765,7 @@ class _$GoogleErrorImpl implements GoogleError {
     TResult Function(FacebookSuccess value)? facebookSuccess,
     TResult Function(FacebookError value)? facebookError,
     TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
     TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
     required TResult orElse(),
   }) {
     if (googleError != null) {
@@ -956,11 +836,7 @@ class _$FacebookLoadingImpl implements FacebookLoading {
     required TResult Function(Map<String, dynamic> userState) facebookSuccess,
     required TResult Function(String errorMessage) facebookError,
     required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
+    required TResult Function(String message) nfcError,
   }) {
     return facebookLoading();
   }
@@ -976,11 +852,7 @@ class _$FacebookLoadingImpl implements FacebookLoading {
     TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult? Function(String errorMessage)? facebookError,
     TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult? Function(String message)? nfcError,
   }) {
     return facebookLoading?.call();
   }
@@ -996,11 +868,7 @@ class _$FacebookLoadingImpl implements FacebookLoading {
     TResult Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult Function(String errorMessage)? facebookError,
     TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult Function(String message)? nfcError,
     required TResult orElse(),
   }) {
     if (facebookLoading != null) {
@@ -1020,11 +888,7 @@ class _$FacebookLoadingImpl implements FacebookLoading {
     required TResult Function(FacebookSuccess value) facebookSuccess,
     required TResult Function(FacebookError value) facebookError,
     required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
     required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
   }) {
     return facebookLoading(this);
   }
@@ -1040,11 +904,7 @@ class _$FacebookLoadingImpl implements FacebookLoading {
     TResult? Function(FacebookSuccess value)? facebookSuccess,
     TResult? Function(FacebookError value)? facebookError,
     TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
     TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
   }) {
     return facebookLoading?.call(this);
   }
@@ -1060,11 +920,7 @@ class _$FacebookLoadingImpl implements FacebookLoading {
     TResult Function(FacebookSuccess value)? facebookSuccess,
     TResult Function(FacebookError value)? facebookError,
     TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
     TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
     required TResult orElse(),
   }) {
     if (facebookLoading != null) {
@@ -1163,11 +1019,7 @@ class _$FacebookSuccessImpl implements FacebookSuccess {
     required TResult Function(Map<String, dynamic> userState) facebookSuccess,
     required TResult Function(String errorMessage) facebookError,
     required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
+    required TResult Function(String message) nfcError,
   }) {
     return facebookSuccess(userState);
   }
@@ -1183,11 +1035,7 @@ class _$FacebookSuccessImpl implements FacebookSuccess {
     TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult? Function(String errorMessage)? facebookError,
     TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult? Function(String message)? nfcError,
   }) {
     return facebookSuccess?.call(userState);
   }
@@ -1203,11 +1051,7 @@ class _$FacebookSuccessImpl implements FacebookSuccess {
     TResult Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult Function(String errorMessage)? facebookError,
     TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult Function(String message)? nfcError,
     required TResult orElse(),
   }) {
     if (facebookSuccess != null) {
@@ -1227,11 +1071,7 @@ class _$FacebookSuccessImpl implements FacebookSuccess {
     required TResult Function(FacebookSuccess value) facebookSuccess,
     required TResult Function(FacebookError value) facebookError,
     required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
     required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
   }) {
     return facebookSuccess(this);
   }
@@ -1247,11 +1087,7 @@ class _$FacebookSuccessImpl implements FacebookSuccess {
     TResult? Function(FacebookSuccess value)? facebookSuccess,
     TResult? Function(FacebookError value)? facebookError,
     TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
     TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
   }) {
     return facebookSuccess?.call(this);
   }
@@ -1267,11 +1103,7 @@ class _$FacebookSuccessImpl implements FacebookSuccess {
     TResult Function(FacebookSuccess value)? facebookSuccess,
     TResult Function(FacebookError value)? facebookError,
     TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
     TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
     required TResult orElse(),
   }) {
     if (facebookSuccess != null) {
@@ -1371,11 +1203,7 @@ class _$FacebookErrorImpl implements FacebookError {
     required TResult Function(Map<String, dynamic> userState) facebookSuccess,
     required TResult Function(String errorMessage) facebookError,
     required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
+    required TResult Function(String message) nfcError,
   }) {
     return facebookError(errorMessage);
   }
@@ -1391,11 +1219,7 @@ class _$FacebookErrorImpl implements FacebookError {
     TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult? Function(String errorMessage)? facebookError,
     TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult? Function(String message)? nfcError,
   }) {
     return facebookError?.call(errorMessage);
   }
@@ -1411,11 +1235,7 @@ class _$FacebookErrorImpl implements FacebookError {
     TResult Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult Function(String errorMessage)? facebookError,
     TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult Function(String message)? nfcError,
     required TResult orElse(),
   }) {
     if (facebookError != null) {
@@ -1435,11 +1255,7 @@ class _$FacebookErrorImpl implements FacebookError {
     required TResult Function(FacebookSuccess value) facebookSuccess,
     required TResult Function(FacebookError value) facebookError,
     required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
     required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
   }) {
     return facebookError(this);
   }
@@ -1455,11 +1271,7 @@ class _$FacebookErrorImpl implements FacebookError {
     TResult? Function(FacebookSuccess value)? facebookSuccess,
     TResult? Function(FacebookError value)? facebookError,
     TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
     TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
   }) {
     return facebookError?.call(this);
   }
@@ -1475,11 +1287,7 @@ class _$FacebookErrorImpl implements FacebookError {
     TResult Function(FacebookSuccess value)? facebookSuccess,
     TResult Function(FacebookError value)? facebookError,
     TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
     TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
     required TResult orElse(),
   }) {
     if (facebookError != null) {
@@ -1578,11 +1386,7 @@ class _$NFCAvailableImpl implements NFCAvailable {
     required TResult Function(Map<String, dynamic> userState) facebookSuccess,
     required TResult Function(String errorMessage) facebookError,
     required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
+    required TResult Function(String message) nfcError,
   }) {
     return nfcAvailable(isAvailable);
   }
@@ -1598,11 +1402,7 @@ class _$NFCAvailableImpl implements NFCAvailable {
     TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult? Function(String errorMessage)? facebookError,
     TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult? Function(String message)? nfcError,
   }) {
     return nfcAvailable?.call(isAvailable);
   }
@@ -1618,11 +1418,7 @@ class _$NFCAvailableImpl implements NFCAvailable {
     TResult Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult Function(String errorMessage)? facebookError,
     TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult Function(String message)? nfcError,
     required TResult orElse(),
   }) {
     if (nfcAvailable != null) {
@@ -1642,11 +1438,7 @@ class _$NFCAvailableImpl implements NFCAvailable {
     required TResult Function(FacebookSuccess value) facebookSuccess,
     required TResult Function(FacebookError value) facebookError,
     required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
     required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
   }) {
     return nfcAvailable(this);
   }
@@ -1662,11 +1454,7 @@ class _$NFCAvailableImpl implements NFCAvailable {
     TResult? Function(FacebookSuccess value)? facebookSuccess,
     TResult? Function(FacebookError value)? facebookError,
     TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
     TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
   }) {
     return nfcAvailable?.call(this);
   }
@@ -1682,11 +1470,7 @@ class _$NFCAvailableImpl implements NFCAvailable {
     TResult Function(FacebookSuccess value)? facebookSuccess,
     TResult Function(FacebookError value)? facebookError,
     TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
     TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
     required TResult orElse(),
   }) {
     if (nfcAvailable != null) {
@@ -1709,183 +1493,12 @@ abstract class NFCAvailable implements SocialState {
 }
 
 /// @nodoc
-abstract class _$$NfcLoadingImplCopyWith<$Res> {
-  factory _$$NfcLoadingImplCopyWith(
-          _$NfcLoadingImpl value, $Res Function(_$NfcLoadingImpl) then) =
-      __$$NfcLoadingImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$NfcLoadingImplCopyWithImpl<$Res>
-    extends _$SocialStateCopyWithImpl<$Res, _$NfcLoadingImpl>
-    implements _$$NfcLoadingImplCopyWith<$Res> {
-  __$$NfcLoadingImplCopyWithImpl(
-      _$NfcLoadingImpl _value, $Res Function(_$NfcLoadingImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SocialState
-  /// with the given fields replaced by the non-null parameter values.
-}
-
-/// @nodoc
-
-class _$NfcLoadingImpl implements NfcLoading {
-  const _$NfcLoadingImpl();
-
-  @override
-  String toString() {
-    return 'SocialState.nfcLoading()';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NfcLoadingImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() googleLoading,
-    required TResult Function(Map<String, dynamic> userState) googleSuccess,
-    required TResult Function(String errorMessage) googleError,
-    required TResult Function() facebookLoading,
-    required TResult Function(Map<String, dynamic> userState) facebookSuccess,
-    required TResult Function(String errorMessage) facebookError,
-    required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
-  }) {
-    return nfcLoading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? googleLoading,
-    TResult? Function(Map<String, dynamic> userState)? googleSuccess,
-    TResult? Function(String errorMessage)? googleError,
-    TResult? Function()? facebookLoading,
-    TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
-    TResult? Function(String errorMessage)? facebookError,
-    TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
-  }) {
-    return nfcLoading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? googleLoading,
-    TResult Function(Map<String, dynamic> userState)? googleSuccess,
-    TResult Function(String errorMessage)? googleError,
-    TResult Function()? facebookLoading,
-    TResult Function(Map<String, dynamic> userState)? facebookSuccess,
-    TResult Function(String errorMessage)? facebookError,
-    TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
-    required TResult orElse(),
-  }) {
-    if (nfcLoading != null) {
-      return nfcLoading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(GoogleLoading value) googleLoading,
-    required TResult Function(GoogleSuccess value) googleSuccess,
-    required TResult Function(GoogleError value) googleError,
-    required TResult Function(FacebookLoading value) facebookLoading,
-    required TResult Function(FacebookSuccess value) facebookSuccess,
-    required TResult Function(FacebookError value) facebookError,
-    required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
-    required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
-  }) {
-    return nfcLoading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(GoogleLoading value)? googleLoading,
-    TResult? Function(GoogleSuccess value)? googleSuccess,
-    TResult? Function(GoogleError value)? googleError,
-    TResult? Function(FacebookLoading value)? facebookLoading,
-    TResult? Function(FacebookSuccess value)? facebookSuccess,
-    TResult? Function(FacebookError value)? facebookError,
-    TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
-    TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
-  }) {
-    return nfcLoading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(GoogleLoading value)? googleLoading,
-    TResult Function(GoogleSuccess value)? googleSuccess,
-    TResult Function(GoogleError value)? googleError,
-    TResult Function(FacebookLoading value)? facebookLoading,
-    TResult Function(FacebookSuccess value)? facebookSuccess,
-    TResult Function(FacebookError value)? facebookError,
-    TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
-    TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
-    required TResult orElse(),
-  }) {
-    if (nfcLoading != null) {
-      return nfcLoading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class NfcLoading implements SocialState {
-  const factory NfcLoading() = _$NfcLoadingImpl;
-}
-
-/// @nodoc
 abstract class _$$NFCErrorImplCopyWith<$Res> {
   factory _$$NFCErrorImplCopyWith(
           _$NFCErrorImpl value, $Res Function(_$NFCErrorImpl) then) =
       __$$NFCErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String error});
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -1901,12 +1514,12 @@ class __$$NFCErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = null,
+    Object? message = null,
   }) {
     return _then(_$NFCErrorImpl(
-      null == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1915,14 +1528,14 @@ class __$$NFCErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NFCErrorImpl implements NFCError {
-  const _$NFCErrorImpl(this.error);
+  const _$NFCErrorImpl(this.message);
 
   @override
-  final String error;
+  final String message;
 
   @override
   String toString() {
-    return 'SocialState.nfcError(error: $error)';
+    return 'SocialState.nfcError(message: $message)';
   }
 
   @override
@@ -1930,11 +1543,11 @@ class _$NFCErrorImpl implements NFCError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NFCErrorImpl &&
-            (identical(other.error, error) || other.error == error));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
+  int get hashCode => Object.hash(runtimeType, message);
 
   /// Create a copy of SocialState
   /// with the given fields replaced by the non-null parameter values.
@@ -1955,13 +1568,9 @@ class _$NFCErrorImpl implements NFCError {
     required TResult Function(Map<String, dynamic> userState) facebookSuccess,
     required TResult Function(String errorMessage) facebookError,
     required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
+    required TResult Function(String message) nfcError,
   }) {
-    return nfcError(error);
+    return nfcError(message);
   }
 
   @override
@@ -1975,13 +1584,9 @@ class _$NFCErrorImpl implements NFCError {
     TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult? Function(String errorMessage)? facebookError,
     TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult? Function(String message)? nfcError,
   }) {
-    return nfcError?.call(error);
+    return nfcError?.call(message);
   }
 
   @override
@@ -1995,15 +1600,11 @@ class _$NFCErrorImpl implements NFCError {
     TResult Function(Map<String, dynamic> userState)? facebookSuccess,
     TResult Function(String errorMessage)? facebookError,
     TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
+    TResult Function(String message)? nfcError,
     required TResult orElse(),
   }) {
     if (nfcError != null) {
-      return nfcError(error);
+      return nfcError(message);
     }
     return orElse();
   }
@@ -2019,11 +1620,7 @@ class _$NFCErrorImpl implements NFCError {
     required TResult Function(FacebookSuccess value) facebookSuccess,
     required TResult Function(FacebookError value) facebookError,
     required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
     required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
   }) {
     return nfcError(this);
   }
@@ -2039,11 +1636,7 @@ class _$NFCErrorImpl implements NFCError {
     TResult? Function(FacebookSuccess value)? facebookSuccess,
     TResult? Function(FacebookError value)? facebookError,
     TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
     TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
   }) {
     return nfcError?.call(this);
   }
@@ -2059,11 +1652,7 @@ class _$NFCErrorImpl implements NFCError {
     TResult Function(FacebookSuccess value)? facebookSuccess,
     TResult Function(FacebookError value)? facebookError,
     TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
     TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
     required TResult orElse(),
   }) {
     if (nfcError != null) {
@@ -2074,643 +1663,13 @@ class _$NFCErrorImpl implements NFCError {
 }
 
 abstract class NFCError implements SocialState {
-  const factory NFCError(final String error) = _$NFCErrorImpl;
+  const factory NFCError(final String message) = _$NFCErrorImpl;
 
-  String get error;
+  String get message;
 
   /// Create a copy of SocialState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NFCErrorImplCopyWith<_$NFCErrorImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$NFCStateImplCopyWith<$Res> {
-  factory _$$NFCStateImplCopyWith(
-          _$NFCStateImpl value, $Res Function(_$NFCStateImpl) then) =
-      __$$NFCStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isOpen});
-}
-
-/// @nodoc
-class __$$NFCStateImplCopyWithImpl<$Res>
-    extends _$SocialStateCopyWithImpl<$Res, _$NFCStateImpl>
-    implements _$$NFCStateImplCopyWith<$Res> {
-  __$$NFCStateImplCopyWithImpl(
-      _$NFCStateImpl _value, $Res Function(_$NFCStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SocialState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isOpen = null,
-  }) {
-    return _then(_$NFCStateImpl(
-      null == isOpen
-          ? _value.isOpen
-          : isOpen // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$NFCStateImpl implements NFCState {
-  const _$NFCStateImpl(this.isOpen);
-
-  @override
-  final bool isOpen;
-
-  @override
-  String toString() {
-    return 'SocialState.nfcState(isOpen: $isOpen)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$NFCStateImpl &&
-            (identical(other.isOpen, isOpen) || other.isOpen == isOpen));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, isOpen);
-
-  /// Create a copy of SocialState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$NFCStateImplCopyWith<_$NFCStateImpl> get copyWith =>
-      __$$NFCStateImplCopyWithImpl<_$NFCStateImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() googleLoading,
-    required TResult Function(Map<String, dynamic> userState) googleSuccess,
-    required TResult Function(String errorMessage) googleError,
-    required TResult Function() facebookLoading,
-    required TResult Function(Map<String, dynamic> userState) facebookSuccess,
-    required TResult Function(String errorMessage) facebookError,
-    required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
-  }) {
-    return nfcState(isOpen);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? googleLoading,
-    TResult? Function(Map<String, dynamic> userState)? googleSuccess,
-    TResult? Function(String errorMessage)? googleError,
-    TResult? Function()? facebookLoading,
-    TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
-    TResult? Function(String errorMessage)? facebookError,
-    TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
-  }) {
-    return nfcState?.call(isOpen);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? googleLoading,
-    TResult Function(Map<String, dynamic> userState)? googleSuccess,
-    TResult Function(String errorMessage)? googleError,
-    TResult Function()? facebookLoading,
-    TResult Function(Map<String, dynamic> userState)? facebookSuccess,
-    TResult Function(String errorMessage)? facebookError,
-    TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
-    required TResult orElse(),
-  }) {
-    if (nfcState != null) {
-      return nfcState(isOpen);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(GoogleLoading value) googleLoading,
-    required TResult Function(GoogleSuccess value) googleSuccess,
-    required TResult Function(GoogleError value) googleError,
-    required TResult Function(FacebookLoading value) facebookLoading,
-    required TResult Function(FacebookSuccess value) facebookSuccess,
-    required TResult Function(FacebookError value) facebookError,
-    required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
-    required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
-  }) {
-    return nfcState(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(GoogleLoading value)? googleLoading,
-    TResult? Function(GoogleSuccess value)? googleSuccess,
-    TResult? Function(GoogleError value)? googleError,
-    TResult? Function(FacebookLoading value)? facebookLoading,
-    TResult? Function(FacebookSuccess value)? facebookSuccess,
-    TResult? Function(FacebookError value)? facebookError,
-    TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
-    TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
-  }) {
-    return nfcState?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(GoogleLoading value)? googleLoading,
-    TResult Function(GoogleSuccess value)? googleSuccess,
-    TResult Function(GoogleError value)? googleError,
-    TResult Function(FacebookLoading value)? facebookLoading,
-    TResult Function(FacebookSuccess value)? facebookSuccess,
-    TResult Function(FacebookError value)? facebookError,
-    TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
-    TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
-    required TResult orElse(),
-  }) {
-    if (nfcState != null) {
-      return nfcState(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class NFCState implements SocialState {
-  const factory NFCState(final bool isOpen) = _$NFCStateImpl;
-
-  bool get isOpen;
-
-  /// Create a copy of SocialState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NFCStateImplCopyWith<_$NFCStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$NFCUseStateImplCopyWith<$Res> {
-  factory _$$NFCUseStateImplCopyWith(
-          _$NFCUseStateImpl value, $Res Function(_$NFCUseStateImpl) then) =
-      __$$NFCUseStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({NfcUse nfcUseState, String nfcId});
-}
-
-/// @nodoc
-class __$$NFCUseStateImplCopyWithImpl<$Res>
-    extends _$SocialStateCopyWithImpl<$Res, _$NFCUseStateImpl>
-    implements _$$NFCUseStateImplCopyWith<$Res> {
-  __$$NFCUseStateImplCopyWithImpl(
-      _$NFCUseStateImpl _value, $Res Function(_$NFCUseStateImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SocialState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? nfcUseState = null,
-    Object? nfcId = null,
-  }) {
-    return _then(_$NFCUseStateImpl(
-      null == nfcUseState
-          ? _value.nfcUseState
-          : nfcUseState // ignore: cast_nullable_to_non_nullable
-              as NfcUse,
-      null == nfcId
-          ? _value.nfcId
-          : nfcId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$NFCUseStateImpl implements NFCUseState {
-  const _$NFCUseStateImpl(this.nfcUseState, this.nfcId);
-
-  @override
-  final NfcUse nfcUseState;
-  @override
-  final String nfcId;
-
-  @override
-  String toString() {
-    return 'SocialState.nfcUseState(nfcUseState: $nfcUseState, nfcId: $nfcId)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$NFCUseStateImpl &&
-            (identical(other.nfcUseState, nfcUseState) ||
-                other.nfcUseState == nfcUseState) &&
-            (identical(other.nfcId, nfcId) || other.nfcId == nfcId));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, nfcUseState, nfcId);
-
-  /// Create a copy of SocialState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$NFCUseStateImplCopyWith<_$NFCUseStateImpl> get copyWith =>
-      __$$NFCUseStateImplCopyWithImpl<_$NFCUseStateImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() googleLoading,
-    required TResult Function(Map<String, dynamic> userState) googleSuccess,
-    required TResult Function(String errorMessage) googleError,
-    required TResult Function() facebookLoading,
-    required TResult Function(Map<String, dynamic> userState) facebookSuccess,
-    required TResult Function(String errorMessage) facebookError,
-    required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
-  }) {
-    return nfcUseState(this.nfcUseState, nfcId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? googleLoading,
-    TResult? Function(Map<String, dynamic> userState)? googleSuccess,
-    TResult? Function(String errorMessage)? googleError,
-    TResult? Function()? facebookLoading,
-    TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
-    TResult? Function(String errorMessage)? facebookError,
-    TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
-  }) {
-    return nfcUseState?.call(this.nfcUseState, nfcId);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? googleLoading,
-    TResult Function(Map<String, dynamic> userState)? googleSuccess,
-    TResult Function(String errorMessage)? googleError,
-    TResult Function()? facebookLoading,
-    TResult Function(Map<String, dynamic> userState)? facebookSuccess,
-    TResult Function(String errorMessage)? facebookError,
-    TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
-    required TResult orElse(),
-  }) {
-    if (nfcUseState != null) {
-      return nfcUseState(this.nfcUseState, nfcId);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(GoogleLoading value) googleLoading,
-    required TResult Function(GoogleSuccess value) googleSuccess,
-    required TResult Function(GoogleError value) googleError,
-    required TResult Function(FacebookLoading value) facebookLoading,
-    required TResult Function(FacebookSuccess value) facebookSuccess,
-    required TResult Function(FacebookError value) facebookError,
-    required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
-    required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
-  }) {
-    return nfcUseState(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(GoogleLoading value)? googleLoading,
-    TResult? Function(GoogleSuccess value)? googleSuccess,
-    TResult? Function(GoogleError value)? googleError,
-    TResult? Function(FacebookLoading value)? facebookLoading,
-    TResult? Function(FacebookSuccess value)? facebookSuccess,
-    TResult? Function(FacebookError value)? facebookError,
-    TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
-    TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
-  }) {
-    return nfcUseState?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(GoogleLoading value)? googleLoading,
-    TResult Function(GoogleSuccess value)? googleSuccess,
-    TResult Function(GoogleError value)? googleError,
-    TResult Function(FacebookLoading value)? facebookLoading,
-    TResult Function(FacebookSuccess value)? facebookSuccess,
-    TResult Function(FacebookError value)? facebookError,
-    TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
-    TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
-    required TResult orElse(),
-  }) {
-    if (nfcUseState != null) {
-      return nfcUseState(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class NFCUseState implements SocialState {
-  const factory NFCUseState(final NfcUse nfcUseState, final String nfcId) =
-      _$NFCUseStateImpl;
-
-  NfcUse get nfcUseState;
-  String get nfcId;
-
-  /// Create a copy of SocialState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NFCUseStateImplCopyWith<_$NFCUseStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$NFCReadNfcImplCopyWith<$Res> {
-  factory _$$NFCReadNfcImplCopyWith(
-          _$NFCReadNfcImpl value, $Res Function(_$NFCReadNfcImpl) then) =
-      __$$NFCReadNfcImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({NfcMessage nfcMessage});
-}
-
-/// @nodoc
-class __$$NFCReadNfcImplCopyWithImpl<$Res>
-    extends _$SocialStateCopyWithImpl<$Res, _$NFCReadNfcImpl>
-    implements _$$NFCReadNfcImplCopyWith<$Res> {
-  __$$NFCReadNfcImplCopyWithImpl(
-      _$NFCReadNfcImpl _value, $Res Function(_$NFCReadNfcImpl) _then)
-      : super(_value, _then);
-
-  /// Create a copy of SocialState
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? nfcMessage = null,
-  }) {
-    return _then(_$NFCReadNfcImpl(
-      null == nfcMessage
-          ? _value.nfcMessage
-          : nfcMessage // ignore: cast_nullable_to_non_nullable
-              as NfcMessage,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$NFCReadNfcImpl implements NFCReadNfc {
-  const _$NFCReadNfcImpl(this.nfcMessage);
-
-  @override
-  final NfcMessage nfcMessage;
-
-  @override
-  String toString() {
-    return 'SocialState.nfcReadNfc(nfcMessage: $nfcMessage)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$NFCReadNfcImpl &&
-            (identical(other.nfcMessage, nfcMessage) ||
-                other.nfcMessage == nfcMessage));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, nfcMessage);
-
-  /// Create a copy of SocialState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$NFCReadNfcImplCopyWith<_$NFCReadNfcImpl> get copyWith =>
-      __$$NFCReadNfcImplCopyWithImpl<_$NFCReadNfcImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() googleLoading,
-    required TResult Function(Map<String, dynamic> userState) googleSuccess,
-    required TResult Function(String errorMessage) googleError,
-    required TResult Function() facebookLoading,
-    required TResult Function(Map<String, dynamic> userState) facebookSuccess,
-    required TResult Function(String errorMessage) facebookError,
-    required TResult Function(bool isAvailable) nfcAvailable,
-    required TResult Function() nfcLoading,
-    required TResult Function(String error) nfcError,
-    required TResult Function(bool isOpen) nfcState,
-    required TResult Function(NfcUse nfcUseState, String nfcId) nfcUseState,
-    required TResult Function(NfcMessage nfcMessage) nfcReadNfc,
-  }) {
-    return nfcReadNfc(nfcMessage);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? googleLoading,
-    TResult? Function(Map<String, dynamic> userState)? googleSuccess,
-    TResult? Function(String errorMessage)? googleError,
-    TResult? Function()? facebookLoading,
-    TResult? Function(Map<String, dynamic> userState)? facebookSuccess,
-    TResult? Function(String errorMessage)? facebookError,
-    TResult? Function(bool isAvailable)? nfcAvailable,
-    TResult? Function()? nfcLoading,
-    TResult? Function(String error)? nfcError,
-    TResult? Function(bool isOpen)? nfcState,
-    TResult? Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult? Function(NfcMessage nfcMessage)? nfcReadNfc,
-  }) {
-    return nfcReadNfc?.call(nfcMessage);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? googleLoading,
-    TResult Function(Map<String, dynamic> userState)? googleSuccess,
-    TResult Function(String errorMessage)? googleError,
-    TResult Function()? facebookLoading,
-    TResult Function(Map<String, dynamic> userState)? facebookSuccess,
-    TResult Function(String errorMessage)? facebookError,
-    TResult Function(bool isAvailable)? nfcAvailable,
-    TResult Function()? nfcLoading,
-    TResult Function(String error)? nfcError,
-    TResult Function(bool isOpen)? nfcState,
-    TResult Function(NfcUse nfcUseState, String nfcId)? nfcUseState,
-    TResult Function(NfcMessage nfcMessage)? nfcReadNfc,
-    required TResult orElse(),
-  }) {
-    if (nfcReadNfc != null) {
-      return nfcReadNfc(nfcMessage);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initial value) initial,
-    required TResult Function(GoogleLoading value) googleLoading,
-    required TResult Function(GoogleSuccess value) googleSuccess,
-    required TResult Function(GoogleError value) googleError,
-    required TResult Function(FacebookLoading value) facebookLoading,
-    required TResult Function(FacebookSuccess value) facebookSuccess,
-    required TResult Function(FacebookError value) facebookError,
-    required TResult Function(NFCAvailable value) nfcAvailable,
-    required TResult Function(NfcLoading value) nfcLoading,
-    required TResult Function(NFCError value) nfcError,
-    required TResult Function(NFCState value) nfcState,
-    required TResult Function(NFCUseState value) nfcUseState,
-    required TResult Function(NFCReadNfc value) nfcReadNfc,
-  }) {
-    return nfcReadNfc(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Initial value)? initial,
-    TResult? Function(GoogleLoading value)? googleLoading,
-    TResult? Function(GoogleSuccess value)? googleSuccess,
-    TResult? Function(GoogleError value)? googleError,
-    TResult? Function(FacebookLoading value)? facebookLoading,
-    TResult? Function(FacebookSuccess value)? facebookSuccess,
-    TResult? Function(FacebookError value)? facebookError,
-    TResult? Function(NFCAvailable value)? nfcAvailable,
-    TResult? Function(NfcLoading value)? nfcLoading,
-    TResult? Function(NFCError value)? nfcError,
-    TResult? Function(NFCState value)? nfcState,
-    TResult? Function(NFCUseState value)? nfcUseState,
-    TResult? Function(NFCReadNfc value)? nfcReadNfc,
-  }) {
-    return nfcReadNfc?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initial value)? initial,
-    TResult Function(GoogleLoading value)? googleLoading,
-    TResult Function(GoogleSuccess value)? googleSuccess,
-    TResult Function(GoogleError value)? googleError,
-    TResult Function(FacebookLoading value)? facebookLoading,
-    TResult Function(FacebookSuccess value)? facebookSuccess,
-    TResult Function(FacebookError value)? facebookError,
-    TResult Function(NFCAvailable value)? nfcAvailable,
-    TResult Function(NfcLoading value)? nfcLoading,
-    TResult Function(NFCError value)? nfcError,
-    TResult Function(NFCState value)? nfcState,
-    TResult Function(NFCUseState value)? nfcUseState,
-    TResult Function(NFCReadNfc value)? nfcReadNfc,
-    required TResult orElse(),
-  }) {
-    if (nfcReadNfc != null) {
-      return nfcReadNfc(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class NFCReadNfc implements SocialState {
-  const factory NFCReadNfc(final NfcMessage nfcMessage) = _$NFCReadNfcImpl;
-
-  NfcMessage get nfcMessage;
-
-  /// Create a copy of SocialState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$NFCReadNfcImplCopyWith<_$NFCReadNfcImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

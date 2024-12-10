@@ -1,21 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
-import 'package:halla/features/contacts/data/models/contact_model.dart';
-import 'package:halla/features/contacts/data/models/contact_model_server.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
+import 'package:halla/core/common/domain/entities/contact_server.dart';
 
 abstract class ContactsDataSource {
-  Future<ContactModel> addContact({
+  Future<Contact> addContact({
     required String userId,
     required String contactId,
   });
 
-  Future<List<ContactModel>> addContactList({
+  Future<List<Contact>> addContactList({
     required String userId,
     required List<String> contactIdList,
   });
 
-  Future<List<ContactModel>> getContactList({
+  Future<List<Contact>> getContactList({
     required String userId,
   });
 
@@ -29,7 +29,7 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
   @override
-  Future<ContactModel> addContact({
+  Future<Contact> addContact({
     required String userId,
     required String contactId,
   }) async {
@@ -47,12 +47,11 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
       } else {
         List<Map<String, dynamic>> contactList =
             List.from(snapshotUser.data()?["contacts"] ?? []);
-        // ToDo: remove this comment to add the check if the user is existing
-        // if (contactList.any((contact) => contact['id'] == contactId)) {
-        //   throw ServerException("User already exists.");
-        // }
+        if (contactList.any((contact) => contact['id'] == contactId)) {
+          throw ServerException("User already exists.");
+        }
 
-        ContactModelServer contactModelServer = ContactModelServer(
+        ContactServer contactServer = ContactServer(
           id: snapshotContact.data()!['id'],
           timestamp: Timestamp.now(),
           favoriteCategories: '',
@@ -63,11 +62,11 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
             .update({
           'contacts': FieldValue.arrayUnion(
             [
-              contactModelServer.toMap(),
+              contactServer.toMap(),
             ],
           ),
         });
-        return ContactModel.fromMap(snapshotContact.data()!);
+        return Contact.fromMap(snapshotContact.data()!);
       }
     } on FirebaseException catch (e) {
       throw ServerException(e.message?.toString() ?? "Something is wrong");
@@ -77,10 +76,10 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
   }
 
   @override
-  Future<List<ContactModel>> addContactList(
+  Future<List<Contact>> addContactList(
       {required String userId, required List<String> contactIdList}) async {
     try {
-      List<ContactModel> contactListMy = [];
+      List<Contact> contactListMy = [];
       for (String contactId in contactIdList) {
         contactListMy
             .add(await addContact(userId: userId, contactId: contactId));
@@ -129,7 +128,7 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
   }
 
   @override
-  Future<List<ContactModel>> getContactList({required String userId}) async {
+  Future<List<Contact>> getContactList({required String userId}) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> snapshotUser = await _fireStore
           .collection(AppConstants.userCollection)
@@ -140,14 +139,13 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
       } else {
         List<Map<String, dynamic>> contactList =
             snapshotUser.data()?["contacts"] ?? [];
-        List<ContactModelServer> contactModelServerList =
-            contactList.map((e) => ContactModelServer.fromMap(e)).toList();
-        List<ContactModel> contactModel = [];
-        for (ContactModelServer contactModelServer in contactModelServerList) {
-          contactModel.add(
-              await _getContactModel(contactModelServer: contactModelServer));
+        List<ContactServer> contactServerList =
+            contactList.map((e) => ContactServer.fromMap(e)).toList();
+        List<Contact> contact = [];
+        for (ContactServer contactServer in contactServerList) {
+          contact.add(await _getContact(contactServer: contactServer));
         }
-        return contactModel;
+        return contact;
       }
     } on FirebaseException catch (e) {
       throw ServerException(e.message?.toString() ?? "Something is wrong");
@@ -156,24 +154,22 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
     }
   }
 
-  Future<ContactModel> _getContactModel({
-    required ContactModelServer contactModelServer,
+  Future<Contact> _getContact({
+    required ContactServer contactServer,
   }) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> snapshotUser = await _fireStore
           .collection(AppConstants.userCollection)
-          .doc(contactModelServer.id)
+          .doc(contactServer.id)
           .get();
       if (snapshotUser.data() == null) {
         throw ServerException("Something is wrong");
       } else {
         Map<String, dynamic> map = snapshotUser.data()!;
-        ContactModel contactModel = ContactModel.fromMap(map);
-        contactModel.addTimeModel =
-            contactModelServer.timestamp ?? Timestamp.now();
-        contactModel.favoriteCategoryModel =
-            contactModelServer.favoriteCategories ?? '';
-        return contactModel;
+        Contact contact = Contact.fromMap(map);
+        contact.timestamp = contactServer.timestamp ?? Timestamp.now();
+        contact.favoriteCategory = contactServer.favoriteCategories ?? '';
+        return contact;
       }
     } on FirebaseException catch (e) {
       throw ServerException(e.message?.toString() ?? "Something is wrong");

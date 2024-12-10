@@ -12,7 +12,7 @@ import 'package:halla/features/auth/domain/usecases/get_phone_auth_credentials.d
 import 'package:halla/features/auth/domain/usecases/get_sms_code_usecase.dart';
 import 'package:halla/features/auth/domain/usecases/link_phone_with_phone_auth_credential_use_case.dart';
 import 'package:halla/features/auth/domain/usecases/sign_in_with_email_password_usecase.dart';
-import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/features/contacts/domain/usecases/add_contact_list_usecase.dart';
 
 part 'sign_in_cubit.freezed.dart';
@@ -147,9 +147,7 @@ class SignInCubit extends Cubit<SignInState> {
           LinkPhoneWithPhoneAuthCredentialUseCaseParams(
               phoneAuthCredential: phoneAuthCredential!),
         );
-        print(
-            " _email  + _password + _pinCode ${phoneAuthCredential?.providerId ?? "ss"}");
-
+    
         res.fold(
           (l) {
             emit(SignInState.errorOtp(l.message));

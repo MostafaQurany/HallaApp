@@ -1,7 +1,6 @@
 import "package:firebase_auth_platform_interface/src/providers/phone_auth.dart";
 import "package:fpdart/fpdart.dart";
-import "package:halla/core/common/data/data%20source/data_base_source.dart";
-import "package:halla/core/common/data/models/user_model.dart";
+import "package:halla/core/common/data/data_base_source.dart";
 import "package:halla/core/common/domain/entities/user.dart";
 import "package:halla/core/error/failure.dart";
 import "package:halla/core/error/server_exception.dart";
@@ -89,7 +88,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }) async {
     try {
       // login in
-      UserModel userModel = await authDataSource.logInWithEmailPassword(
+      User userModel = await authDataSource.logInWithEmailPassword(
           email: email, password: password);
       // get user
       final res = await dataBaseSource.getUser(userModel.id);
@@ -103,11 +102,11 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, Map<String, dynamic>>> googleLogIn() async {
     try {
       // get the google email
-      UserModel userModel = await authDataSource.googleLogIn();
+      User userModel = await authDataSource.googleLogIn();
       // see if there is in data base
       final isUserExit = await dataBaseSource.isUserExit(userModel);
       print(isUserExit);
-      UserModel res;
+      User res;
       // == get user
       if (isUserExit) {
         res = await dataBaseSource.getUser(userModel.id);
@@ -128,8 +127,7 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, void>> linkWlinkWithEmailPassword(User user) async {
     try {
-      UserModel userModel = UserModel.fromUser(user);
-      final res = await authDataSource.linkWithEmailPassword(user: userModel);
+      final res = await authDataSource.linkWithEmailPassword(user: user);
       return right(res);
     } on ServerException catch (e) {
       return left(Failure(e.message));

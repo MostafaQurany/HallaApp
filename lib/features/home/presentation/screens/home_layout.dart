@@ -1,3 +1,4 @@
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/constants/app_images.dart';
@@ -16,6 +17,9 @@ class HomeLayout extends StatefulWidget {
 }
 
 class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
+  int _currentIndex = 0;
+  late PageController _pageController;
+
   int _selectedIndex = 0;
   final List<Widget> _screens = [
     const HomeScreen(),
@@ -23,25 +27,15 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
     const ProfileScreen(),
   ];
 
-  late AnimationController _iconAnimationController;
-  late Tween<double> _iconTween;
-  late Animation<double> _iconAnimation;
-
   @override
   void initState() {
     super.initState();
-
-    _iconAnimationController = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-    _iconTween = Tween<double>(begin: 20, end: 24);
-    _iconAnimation = _iconTween.animate(_iconAnimationController);
+    _pageController = PageController();
   }
 
   @override
   void dispose() {
-    _iconAnimationController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -49,89 +43,67 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.transparent,
-      body: Stack(
-        children: [
-          IndexedStack(
-            index: _selectedIndex,
-            children: _screens,
-          ),
-          Positioned(
-            bottom: 0,
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(25.0),
-                  topRight: Radius.circular(25.0),
-                ),
-                color: AppTheme.isLight(context)
-                    ? AppColors.white
-                    : AppColors.blackLight,
-              ),
-              width: 1.sw,
-              height: 70.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  _bottomNavigationItem(
-                    icon: AppImages.homeBNBIcon,
-                    name: S.of(context).home,
-                    index: 0,
-                  ),
-                  _bottomNavigationItem(
-                    icon: AppImages.contactBNBIcon,
-                    name: S.of(context).contact,
-                    index: 1,
-                  ),
-                  _bottomNavigationItem(
-                    icon: AppImages.profileBNBIcon,
-                    name: S.of(context).profile,
-                    index: 2,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
+      body: SizedBox.expand(
+        child: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() => _currentIndex = index);
+          },
+          children: _screens,
+        ),
       ),
-    );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      _iconAnimationController.forward();
-    });
-  }
-
-  _bottomNavigationItem({
-    required String icon,
-    required String name,
-    required int index,
-  }) {
-    return GestureDetector(
-      onTap: () => _onItemTapped(index),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          AnimatedBuilder(
-            animation: _iconAnimation,
-            builder: (context, child) {
-              return ImageIcon(
-                AssetImage(icon),
-                color: _selectedIndex == index ? AppColors.primary : null,
-                size: _selectedIndex == index ? _iconAnimation.value : 20,
-              );
-            },
-          ),
-          if (_selectedIndex == index)
-            Text(
-              name,
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  color: _selectedIndex == index
-                      ? AppColors.primary
-                      : AppColors.black),
+      bottomNavigationBar: BottomNavyBar(
+        selectedIndex: _selectedIndex,
+        showElevation: false,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        backgroundColor:
+            AppTheme.isLight(context) ? AppColors.white : AppColors.blackLight,
+        onItemSelected: (index) => setState(
+          () {
+            _selectedIndex = index;
+            _pageController.animateToPage(
+              index,
+              duration: Duration(milliseconds: 150),
+              curve: Curves.easeInOutCirc,
+            );
+          },
+        ),
+        items: [
+          BottomNavyBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                AppImages.homeBNBIcon,
+              ),
+              size: 23.sp,
             ),
+            title: Text(S.of(context).home),
+            activeColor: AppColors.primary,
+            inactiveColor: AppColors.grayLight,
+          ),
+          BottomNavyBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                AppImages.contactBNBIcon,
+              ),
+              size: 23.sp,
+            ),
+            title: Text(S.of(context).contact),
+            activeColor: AppColors.primary,
+            inactiveColor: AppColors.grayLight,
+          ),
+          BottomNavyBarItem(
+            icon: ImageIcon(
+              AssetImage(
+                AppImages.profileBNBIcon,
+              ),
+              size: 23.sp,
+            ),
+            title: Text(
+              S.of(context).profile,
+            ),
+            activeColor: AppColors.primary,
+            inactiveColor: AppColors.grayLight,
+          ),
         ],
       ),
     );

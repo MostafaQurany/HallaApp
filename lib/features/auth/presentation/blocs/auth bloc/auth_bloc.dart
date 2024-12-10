@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:halla/core/common/data/data%20source/nfc_data_source.dart';
+import 'package:halla/core/common/data/nfc_data_source.dart';
 import 'package:halla/core/common/domain/entities/guest.dart';
 import 'package:halla/core/common/domain/entities/nfc_message.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
@@ -23,7 +23,7 @@ import 'package:halla/features/auth/domain/usecases/link_with_email_pincode.dart
 import 'package:halla/features/auth/domain/usecases/log_in_with_email_password.dart';
 import 'package:halla/features/auth/domain/usecases/log_in_with_phone_use_case.dart';
 import 'package:halla/features/auth/domain/usecases/sign_in_with_email_password_usecase.dart';
-import 'package:halla/features/contacts/domain/entities/contact.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:meta/meta.dart';
 
 part 'auth_event.dart';

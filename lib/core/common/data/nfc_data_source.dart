@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:halla/core/common/data/models/nfc_message_model.dart';
+import 'package:halla/core/common/domain/entities/nfc_message.dart';
 import 'package:halla/core/error/server_exception.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 
@@ -16,9 +16,9 @@ abstract interface class NfcDataSource {
 
   Future<bool> getNFCIsOpen();
 
-  Future<NfcUse> write(NfcMessageModel nfcMessage);
+  Future<NfcUse> write(NfcMessage nfcMessage);
 
-  Future<NfcMessageModel> read();
+  Future<NfcMessage> read();
 }
 
 class NfcDataSourceImpl implements NfcDataSource {
@@ -44,7 +44,7 @@ class NfcDataSourceImpl implements NfcDataSource {
   }
 
   @override
-  Future<NfcUse> write(NfcMessageModel nfcMessage) async {
+  Future<NfcUse> write(NfcMessage nfcMessage) async {
     final completer = Completer<NfcUse>();
     final messageEncrypted = nfcMessage.toDecrypt();
     final records = <NdefRecord>[
@@ -66,8 +66,8 @@ class NfcDataSourceImpl implements NfcDataSource {
   }
 
   @override
-  Future<NfcMessageModel> read() async {
-    final Completer<NfcMessageModel> completer = Completer<NfcMessageModel>();
+  Future<NfcMessage> read() async {
+    final Completer<NfcMessage> completer = Completer<NfcMessage>();
     try {
       await _nfcManager.startSession(onDiscovered: (NfcTag tag) async {
         try {
@@ -75,7 +75,7 @@ class NfcDataSourceImpl implements NfcDataSource {
               tag.data['ndef']['cachedMessage']['records'][0]['payload']);
           data = String.fromCharCodes(uint8List).substring(3);
 
-          completer.complete(NfcMessageModel.fromDecrypt(data ?? ''));
+          completer.complete(NfcMessage.fromDecrypt(data ?? ''));
         } catch (error) {
           completer.completeError(ServerException(error.toString()));
         } finally {

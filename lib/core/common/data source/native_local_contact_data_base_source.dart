@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as mobilecontact;
-import 'package:halla/core/common/data/models/company_model.dart';
-import 'package:halla/core/common/data/models/social_media_model.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
-import 'package:halla/features/contacts/data/models/contact_model.dart';
 
 abstract interface class NativeLocalContactDataBaseSource {
-  Future<List<ContactModel>> getFirstTimeLocalContacts();
+  Future<List<Contact>> getFirstTimeLocalContacts();
 }
 
 class NativeLocalContactDataBaseSourceImpl
@@ -16,7 +14,7 @@ class NativeLocalContactDataBaseSourceImpl
   final _firestore = FirebaseFirestore.instance;
 // local Contacts
   @override
-  Future<List<ContactModel>> getFirstTimeLocalContacts() async {
+  Future<List<Contact>> getFirstTimeLocalContacts() async {
     try {
       // get the number
       Map<String, Set<String>> localContat = await getLocalContacts();
@@ -71,10 +69,10 @@ class NativeLocalContactDataBaseSourceImpl
     }
   }
 
-  Future<List<ContactModel>> getMuchContacts(
+  Future<List<Contact>> getMuchContacts(
       Map<String, Set<String>> localContat) async {
     try {
-      List<ContactModel> contactModelList = [];
+      List<Contact> contactList = [];
       QuerySnapshot<Map<String, dynamic>> allSnapShots =
           await _firestore.collection(_userCollection).get();
       List<DocumentSnapshot> documents = allSnapShots.docs;
@@ -86,28 +84,14 @@ class NativeLocalContactDataBaseSourceImpl
           for (var key in localContat.keys) {
             for (var phone in localContat[key]!) {
               if (phonesField.contains(phone)) {
-                ContactModel contactModel = ContactModel(
-                  primePhoneModel: data['primePhone'] ?? '',
-                  nationalityModel: data['nationality'] ?? '',
-                  imageUrlModel: data['imageUrl'] ?? '',
-                  emailModel: data['email'] ?? '',
-                  phonesModel: List<String>.from(data['phones']),
-                  fullNameModel: data['fullName'] ?? '',
-                  companyModel: CompanyModel.fromMap(data['company']),
-                  dateOfBirthModel: data['dateOfBirth'] ?? '',
-                  idModel: data['id'] ?? '',
-                  socialMediaModel:
-                      SocialMediaModel.fromMap(data['socialMedia']),
-                  addTimeModel: Timestamp.now(),
-                  favoriteCategoryModel: '',
-                );
-                contactModelList.add(contactModel);
+                Contact contact = Contact.fromMap(data);
+                contactList.add(contact);
               }
             }
           }
         }
       }
-      return contactModelList;
+      return contactList;
     } on FirebaseException catch (e) {
       throw ServerException(e.message.toString());
     } catch (e) {
