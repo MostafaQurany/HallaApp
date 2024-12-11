@@ -1,11 +1,9 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:halla/core/error/failure.dart';
 import 'package:halla/core/common/domain/entities/contact.dart';
-import 'package:halla/core/common/domain/entities/contact_server.dart';
+import 'package:halla/core/error/failure.dart';
 import 'package:halla/core/error/server_exception.dart';
 import 'package:halla/features/contacts/data/data_sources/contacts_data_source.dart';
 import 'package:halla/features/contacts/data/data_sources/contacts_local_data_source.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class ContactsRepository {
   // add local and server
@@ -33,6 +31,7 @@ abstract class ContactsRepository {
   Future<Either<Failure, void>> deleteContact(
       {required String userId, required String contactId});
 }
+
 class ContactsRepositoryImpl implements ContactsRepository {
   final ContactsDataSource server;
   final ContactsLocalDataSource local;
@@ -90,11 +89,15 @@ class ContactsRepositoryImpl implements ContactsRepository {
   Future<Either<Failure, List<Contact>>> getContactListSync(
       {required String userId}) async {
     try {
-      List<Contact> contactModel =
-          await server.getContactList(userId: userId);
-      final r =
-          await local.addContactList(userId: userId, contactList: contactModel);
-      return Right(contactModel);
+      List<Contact> contactModel = await server.getContactList(userId: userId);
+      return await local
+          .contactSync(userId: userId, contactList: contactModel)
+          .then(
+        (value) async {
+          List<Contact> r = await local.getContactList(userId: userId);
+          return Right(r);
+        },
+      );
     } on ServerException catch (e) {
       return Left(Failure(e.message));
     }

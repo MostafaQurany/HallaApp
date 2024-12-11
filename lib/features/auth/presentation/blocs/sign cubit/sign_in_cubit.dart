@@ -147,7 +147,7 @@ class SignInCubit extends Cubit<SignInState> {
           LinkPhoneWithPhoneAuthCredentialUseCaseParams(
               phoneAuthCredential: phoneAuthCredential!),
         );
-    
+
         res.fold(
           (l) {
             emit(SignInState.errorOtp(l.message));
@@ -221,13 +221,13 @@ class SignInCubit extends Cubit<SignInState> {
 
   addFirstTimeContactList({
     required String userId,
-    required List<String> contact,
+    required List<String> contactIdsList,
   }) async {
     emit(SignInState.firstTimeContactLoading());
 
     final res = await _addContactListUseCase(AddContactListPram(
       userId: userId,
-      contactIdList: contact,
+      contactIdList: contactIdsList,
     ));
 
     res.fold(

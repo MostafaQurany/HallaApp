@@ -14,6 +14,11 @@ abstract class ContactsLocalDataSource {
     required List<Contact> contactList,
   });
 
+  Future<void> contactSync({
+    required String userId,
+    required List<Contact> contactList,
+  });
+
   Future<List<Contact>> getContactList({
     required String userId,
   });
@@ -72,6 +77,25 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
   }
 
   @override
+  Future<void> contactSync({
+    required String userId,
+    required List<Contact> contactList,
+  }) async {
+    try {
+      Box<List<Map>> contactBox = await Hive.openBox('Ccontacts');
+      List<Map> contactListMap = contactList
+          .map(
+            (e) => e.toMap(),
+          )
+          .toList();
+
+      contactBox.put(userId, contactListMap);
+    } catch (e) {
+      throw ServerException('Failed to sync contact to local storage');
+    }
+  }
+
+  @override
   Future<void> deleteContact({
     required String userId,
     required String contactId,
@@ -95,10 +119,31 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
     required String userId,
   }) async {
     try {
-      var contactList = _contactBox.get(userId);
-      contactList ??= [];
+      Box<List<Map>> contactBox = await Hive.openBox('Ccontacts');
+      var contactListMap = contactBox.get(userId, defaultValue: []) ?? [];
+      List<Contact> contactList = contactListMap
+          .map((item) => Contact.fromMap(item.map(
+                (key, value) => MapEntry(key as String, value),
+              )))
+          .toList();
+      print(contactBox.values);
       return contactList;
+      /*
+     //await _contactBox.clear();
+      final rawData2 = _contactBox.get(userId);
+      print('Raw Data: $rawData2');
+      final dynamic rawData = _contactBox.get(userId);
+
+      if (rawData is List<Contact>) {
+        return rawData; // If it's already the correct type
+      } else if (rawData is List<dynamic>) {
+        // Map dynamic items to Contact
+        return rawData.map((item) => item as Contact).toList();
+      } else {
+        return []; // Return an empty list if the data is invalid
+      } */
     } catch (e) {
+      print(e);
       throw ServerException('Failed to get contact list from local storage');
     }
   }

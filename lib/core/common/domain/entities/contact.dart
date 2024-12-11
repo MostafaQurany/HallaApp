@@ -2,15 +2,14 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-
 import 'package:halla/core/common/domain/entities/company.dart';
 import 'package:halla/core/common/domain/entities/social_media.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 part 'contact.g.dart';
 
 @HiveType(typeId: 4)
-class Contact extends HiveObject{
+class Contact extends HiveObject {
   @HiveField(0)
   String id;
   @HiveField(1)
@@ -77,7 +76,7 @@ class Contact extends HiveObject{
       dateOfBirth: map['dateOfBirth'] as String,
       nationality: map['nationality'] as String,
       imageUrl: map['imageUrl'] as String,
-      phones: List<String>.from((map['phones'] as List<String>)),
+      phones: List<String>.from(map['phones'] ?? [] as List<String>),
       socialMedia:
           SocialMedia.fromMap(map['socialMedia'] as Map<String, dynamic>),
       company: Company.fromMap(map['company'] as Map<String, dynamic>),
@@ -94,4 +93,12 @@ class Contact extends HiveObject{
 
   factory Contact.fromJson(String source) =>
       Contact.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Contact && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }

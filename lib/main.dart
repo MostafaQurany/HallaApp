@@ -7,6 +7,7 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import "package:halla/core/common/domain/entities/company.dart";
 import "package:halla/core/common/domain/entities/contact.dart";
 import "package:halla/core/common/domain/entities/social_media.dart";
+import "package:halla/core/common/domain/entities/timestamp_adapter.g.dart";
 import "package:halla/core/common/domain/entities/user.dart";
 import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
 import "package:halla/core/theme/theme.dart";
@@ -43,6 +44,7 @@ void main() async {
   Hive.registerAdapter(SocialMediaAdapter());
   Hive.registerAdapter(CompanyAdapter());
   Hive.registerAdapter(ContactAdapter());
+  Hive.registerAdapter(TimestampAdapter());
   // firebase
   await Firebase.initializeApp();
   // dependencies
