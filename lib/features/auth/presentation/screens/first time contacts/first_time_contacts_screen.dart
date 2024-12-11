@@ -39,7 +39,7 @@ class _FirstTimeContactsScreenState extends State<FirstTimeContactsScreen> {
 
   void _onSearchChanged() {
     setState(() {
-      searchText = searchController.text;
+    searchText = searchController.text;
     });
   }
 

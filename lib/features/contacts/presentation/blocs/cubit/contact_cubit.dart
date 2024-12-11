@@ -104,7 +104,6 @@ class ContactCubit extends Cubit<ContactState> {
     required String userId,
   }) async {
     emit(ContactState.getContactListLoading());
-
     final res = await getContactListUseCase(GetContactListPram(
       userId: userId,
     ));
@@ -113,6 +112,7 @@ class ContactCubit extends Cubit<ContactState> {
         emit(ContactState.contactFailure(l.message));
       },
       (r) {
+        print(r);
         emit(ContactState.getContactListSuccess(r));
       },
     );

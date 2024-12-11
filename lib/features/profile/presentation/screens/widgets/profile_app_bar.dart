@@ -20,6 +20,7 @@ class ProfileAppBar extends StatefulWidget {
 class _ProfileAppBarState extends State<ProfileAppBar> {
   bool showPinCode = false;
   late User user;
+
   @override
   void initState() {
     super.initState();
@@ -46,7 +47,9 @@ class _ProfileAppBarState extends State<ProfileAppBar> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    user.isGuest.toString(),
+                    user.fullName.isEmpty
+                        ? user.email.toString()
+                        : user.fullName.toString(),
                     style: Theme.of(context).textTheme.bodyMedium,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:halla/core/constants/constants.dart';
-import 'package:halla/core/error/server_exception.dart';
 import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/core/common/domain/entities/contact_server.dart';
+import 'package:halla/core/constants/constants.dart';
+import 'package:halla/core/error/server_exception.dart';
 
 abstract class ContactsDataSource {
   Future<Contact> addContact({
@@ -138,7 +138,8 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
         throw ServerException("Something is wrong");
       } else {
         List<Map<String, dynamic>> contactList =
-            snapshotUser.data()?["contacts"] ?? [];
+            List<Map<String, dynamic>>.from(
+                snapshotUser.data()?["contacts"] ?? []);
         List<ContactServer> contactServerList =
             contactList.map((e) => ContactServer.fromMap(e)).toList();
         List<Contact> contact = [];

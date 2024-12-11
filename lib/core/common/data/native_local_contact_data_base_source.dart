@@ -81,10 +81,16 @@ class NativeLocalContactDataBaseSourceImpl
       for (var document in documents) {
         final Map<String, dynamic> data =
             document.data() as Map<String, dynamic>;
-        final List<dynamic> phonesField = data['phones'] ?? [];
+
+        final List<String> phonesField =
+            List<String>.from(data['phones'] ?? []);
+        print(phonesField);
         if (phonesField.isNotEmpty) {
           for (var key in localContat.keys) {
             for (var phone in localContat[key]!) {
+              print(phonesField.contains(phone));
+              print(phonesField);
+              print(phone);
               if (phonesField.contains(phone)) {
                 Contact contact = Contact.fromMap(data);
                 contactList.add(contact);
