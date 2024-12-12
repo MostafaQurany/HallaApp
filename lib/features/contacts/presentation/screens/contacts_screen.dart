@@ -1,14 +1,18 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/core/constants/app_images.dart';
+import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/contacts/presentation/blocs/cubit/contact_cubit.dart';
 import 'package:halla/features/contacts/presentation/screens/components/header_contact_screen.dart';
 import 'package:halla/features/contacts/presentation/screens/contact_card.dart';
+import 'package:halla/features/contacts/presentation/screens/widget/contact_card_shimer_widget.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class ContactsScreen extends StatefulWidget {
   const ContactsScreen({super.key});
@@ -42,15 +46,11 @@ class _ContactsScreenState extends State<ContactsScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const HeaderContactScreen(),
-          BlocConsumer<ContactCubit, ContactState>(
+          BlocListener<ContactCubit, ContactState>(
             listener: (context, state) {
               state.whenOrNull(
                 contactFailure: (error) {
                   AppShowDialog.error(context, error);
-                },
-                getContactListSuccess: (contactList) {
-                  print(contactList);
-                  this.contactList = contactList;
                 },
                 addContactLoading: () {
                   AppShowDialog.loading(context);
@@ -63,43 +63,94 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 },
                 getContactListSyncSuccess: (contactList) {
                   AppNavigator.navigatePop(context);
-                  this.contactList = contactList;
                 },
               );
             },
-            builder: (context, state) {
-              if (contactList != null && contactList!.isNotEmpty) {
-                return Expanded(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: contactList!.length, //contactList.length,
-                    itemBuilder: (context, index) {
-                      print(contactList![index]);
-                      return ContactCard(
-                        contact: contactList![index],
-                      );
-                    },
-                  ),
-                );
-              } else {
-                return SizedBox(
-                  height: 0.4.sh,
-                  child: InkWell(
-                    onTap: () {
-                      ContactCubit.get(context).getContactList(userId: userId);
-                    },
-                    child: Image(
-                      image: AssetImage(AppImages.contactListEmpty),
-                      fit: BoxFit.contain,
+            child: FutureBuilder(
+              future: getBox(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return getCardShimmer();
+                } else if (snapshot.hasError) {
+                  return SizedBox(
+                    height: 0.4.sh,
+                    child: InkWell(
+                      onTap: () {
+                        ContactCubit.get(context)
+                            .getContactList(userId: userId);
+                      },
+                      child: Image(
+                        image: AssetImage(AppImages.contactListEmpty),
+                        fit: BoxFit.contain,
+                      ),
                     ),
-                  ),
-                );
-              }
-            },
+                  );
+                } else if (snapshot.data == null) {
+                  return SizedBox(
+                    height: 0.4.sh,
+                    child: InkWell(
+                      onTap: () {
+                        ContactCubit.get(context)
+                            .getContactList(userId: userId);
+                      },
+                      child: Image(
+                        image: AssetImage(AppImages.contactListEmpty),
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  );
+                } else {
+                  return ValueListenableBuilder(
+                    valueListenable: snapshot.data!,
+                    builder: (context, value, child) {
+                      contactList = value.get(userId)?.cast<Contact>() ?? [];
+                      if (contactList!.isNotEmpty) {
+                        return Expanded(
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: contactList!.length,
+                            //contactList.length,
+                            itemBuilder: (context, index) {
+                              return ContactCard(
+                                contact: contactList![index],
+                              );
+                            },
+                          ),
+                        );
+                      } else {
+                        return SizedBox(
+                          height: 0.4.sh,
+                          child: InkWell(
+                            onTap: () {
+                              ContactCubit.get(context)
+                                  .getContactList(userId: userId);
+                            },
+                            child: Image(
+                              image: AssetImage(AppImages.contactListEmpty),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  );
+                }
+              },
+            ),
           ),
         ],
       ),
     );
   }
+
+  Future<ValueListenable<Box<List<dynamic>>>> getBox() async {
+    return Hive.box<List>(AppConstants.contactBox).listenable();
+  }
+
+  Widget getCardShimmer() => Expanded(
+        child: ListView.builder(
+          itemCount: 6,
+          itemBuilder: (context, index) => ContactCardShimmer(),
+        ),
+      );
 }

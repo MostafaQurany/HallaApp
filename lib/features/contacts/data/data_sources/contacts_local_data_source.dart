@@ -30,8 +30,8 @@ abstract class ContactsLocalDataSource {
 }
 
 class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
-  final Box<List<Contact>> _contactBox =
-      Hive.box<List<Contact>>(AppConstants.contactBox);
+  Future<Box<List>> get _contactBox async =>
+      await Hive.openBox(AppConstants.contactBox);
 
   @override
   Future<void> addContact({
@@ -39,13 +39,13 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
     required Contact contactModel,
   }) async {
     try {
-      var contactList = _contactBox.get(userId);
-      contactList ??= [];
+      Box<List> contactBox = await _contactBox;
+      List<Contact> contactList = contactBox.get(userId)?.cast<Contact>() ?? [];
       if (contactList.any((c) => c.id == contactModel.id)) {
         throw ServerException('Contact already exists in local storage');
       }
       contactList.add(contactModel);
-      _contactBox.put(userId, contactList);
+      await contactBox.put(userId, contactList);
     } catch (e) {
       throw ServerException('Failed to add contact to local storage');
     }
@@ -57,20 +57,15 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
     required List<Contact> contactList,
   }) async {
     try {
-      var contactListBox = _contactBox.get(userId);
-
-      if (contactListBox == null ||
-          contactListBox == [] ||
-          contactListBox.isEmpty) {
-        contactListBox = [];
-      }
-      for (var element in contactListBox) {
+      Box<List> contactBox = await _contactBox;
+      List<Contact> contactListBox =
+          contactBox.get(userId)?.cast<Contact>() ?? [];
+      for (var element in contactList) {
         if (contactListBox.any((c) => c.id != element.id)) {
           contactListBox.add(element);
         }
       }
-      contactListBox.addAll(contactList);
-      _contactBox.put(userId, contactListBox);
+      contactBox.put(userId, contactListBox);
     } catch (e) {
       throw ServerException('Failed to add contact list to local storage');
     }
@@ -82,15 +77,10 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
     required List<Contact> contactList,
   }) async {
     try {
-      Box<List<Map>> contactBox = await Hive.openBox('Ccontacts');
-      List<Map> contactListMap = contactList
-          .map(
-            (e) => e.toMap(),
-          )
-          .toList();
-
-      contactBox.put(userId, contactListMap);
+      Box<List> contactBox = await _contactBox;
+      contactBox.put(userId, contactList);
     } catch (e) {
+      print(e);
       throw ServerException('Failed to sync contact to local storage');
     }
   }
@@ -101,14 +91,14 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
     required String contactId,
   }) async {
     try {
-      var contactListBox = _contactBox.get(userId);
-      contactListBox ??= [];
-      contactListBox.removeWhere(
+      Box<List> contactBox = await _contactBox;
+      List<Contact> contactList = contactBox.get(userId)?.cast<Contact>() ?? [];
+      contactList.removeWhere(
         (element) {
           return element.id == contactId;
         },
       );
-      _contactBox.put(userId, contactListBox);
+      contactBox.put(userId, contactList);
     } catch (e) {
       throw ServerException('Failed to delete contact list from local storage');
     }
@@ -119,32 +109,34 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
     required String userId,
   }) async {
     try {
-      Box<List<Map>> contactBox = await Hive.openBox('Ccontacts');
-      var contactListMap = contactBox.get(userId, defaultValue: []) ?? [];
-      List<Contact> contactList = contactListMap
-          .map((item) => Contact.fromMap(item.map(
-                (key, value) => MapEntry(key as String, value),
-              )))
-          .toList();
-      print(contactBox.values);
+      Box<List> contactBox = await _contactBox;
+      List<Contact> contactList = contactBox.get(userId)?.cast<Contact>() ?? [];
       return contactList;
-      /*
-     //await _contactBox.clear();
-      final rawData2 = _contactBox.get(userId);
-      print('Raw Data: $rawData2');
-      final dynamic rawData = _contactBox.get(userId);
-
-      if (rawData is List<Contact>) {
-        return rawData; // If it's already the correct type
-      } else if (rawData is List<dynamic>) {
-        // Map dynamic items to Contact
-        return rawData.map((item) => item as Contact).toList();
-      } else {
-        return []; // Return an empty list if the data is invalid
-      } */
     } catch (e) {
       print(e);
       throw ServerException('Failed to get contact list from local storage');
     }
+  }
+
+  List<Contact> _convertFromMapToContact(
+      List<Map<String, dynamic>> contactListMap) {
+    return contactListMap.map(
+      (e) {
+        return Contact.fromMap(e);
+      },
+    ).toList();
+  }
+
+  List<Map<String, dynamic>> _convertFromContactToMap(
+      List<Contact> contactList) {
+    return contactList.map(
+      (e) {
+        return e.toMap();
+      },
+    ).toList();
+  }
+
+  List<Map<String, dynamic>> _convertToMap(List<Contact> contactList) {
+    return contactList.map((e) => e.toMap()).toList();
   }
 }
