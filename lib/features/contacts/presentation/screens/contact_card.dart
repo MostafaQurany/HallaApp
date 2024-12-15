@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:halla/core/utils/routting.dart';
-import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/features/contacts/presentation/screens/components/contact_favorit_edite_icon.dart';
 import 'package:halla/features/contacts/presentation/screens/contact_details_screen.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_share_contact_icon.dart';
 
 class ContactCard extends StatefulWidget {
   final Contact contact;
+
   const ContactCard({
     super.key,
     required this.contact,
@@ -59,6 +60,7 @@ class _ContactCardState extends State<ContactCard>
     return GestureDetector(
       onTap: _toggleExpanded,
       child: Card(
+        margin: EdgeInsets.only(bottom: 15.h),
         color: Theme.of(context).inputDecorationTheme.fillColor,
         shape: RoundedRectangleBorder(
           side: BorderSide(

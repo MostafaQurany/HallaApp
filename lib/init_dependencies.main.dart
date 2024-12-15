@@ -260,7 +260,7 @@ _initAuth() {
 }
 
 _initContact() async {
-  await Hive.openBox<List<Contact>>(AppConstants.contactBox);
+  await Hive.openBox<List>(AppConstants.contactBox);
   serviceLocator
     // Data Source
     ..registerFactory<ContactsDataSource>(
