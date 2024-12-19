@@ -34,6 +34,9 @@ mixin _$LoginState {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +57,9 @@ mixin _$LoginState {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -74,6 +80,9 @@ mixin _$LoginState {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -97,6 +106,9 @@ mixin _$LoginState {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -117,6 +129,9 @@ mixin _$LoginState {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -137,6 +152,9 @@ mixin _$LoginState {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -220,6 +238,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return initial();
   }
@@ -243,6 +264,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return initial?.call();
   }
@@ -266,6 +290,9 @@ class _$InitialImpl implements _Initial {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -295,6 +322,9 @@ class _$InitialImpl implements _Initial {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return initial(this);
   }
@@ -318,6 +348,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return initial?.call(this);
   }
@@ -341,6 +374,9 @@ class _$InitialImpl implements _Initial {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -411,6 +447,9 @@ class _$LoginEmailLoadingImpl implements LoginEmailLoading {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return loginEmailLoading();
   }
@@ -434,6 +473,9 @@ class _$LoginEmailLoadingImpl implements LoginEmailLoading {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return loginEmailLoading?.call();
   }
@@ -457,6 +499,9 @@ class _$LoginEmailLoadingImpl implements LoginEmailLoading {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginEmailLoading != null) {
@@ -486,6 +531,9 @@ class _$LoginEmailLoadingImpl implements LoginEmailLoading {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return loginEmailLoading(this);
   }
@@ -509,6 +557,9 @@ class _$LoginEmailLoadingImpl implements LoginEmailLoading {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return loginEmailLoading?.call(this);
   }
@@ -532,6 +583,9 @@ class _$LoginEmailLoadingImpl implements LoginEmailLoading {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginEmailLoading != null) {
@@ -630,6 +684,9 @@ class _$LoginEmailErrorImpl implements LoginEmailError {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return loginEmailError(message);
   }
@@ -653,6 +710,9 @@ class _$LoginEmailErrorImpl implements LoginEmailError {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return loginEmailError?.call(message);
   }
@@ -676,6 +736,9 @@ class _$LoginEmailErrorImpl implements LoginEmailError {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginEmailError != null) {
@@ -705,6 +768,9 @@ class _$LoginEmailErrorImpl implements LoginEmailError {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return loginEmailError(this);
   }
@@ -728,6 +794,9 @@ class _$LoginEmailErrorImpl implements LoginEmailError {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return loginEmailError?.call(this);
   }
@@ -751,6 +820,9 @@ class _$LoginEmailErrorImpl implements LoginEmailError {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginEmailError != null) {
@@ -829,6 +901,9 @@ class _$LoginEmailSuccessImpl implements LoginEmailSuccess {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return loginEmailSuccess();
   }
@@ -852,6 +927,9 @@ class _$LoginEmailSuccessImpl implements LoginEmailSuccess {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return loginEmailSuccess?.call();
   }
@@ -875,6 +953,9 @@ class _$LoginEmailSuccessImpl implements LoginEmailSuccess {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginEmailSuccess != null) {
@@ -904,6 +985,9 @@ class _$LoginEmailSuccessImpl implements LoginEmailSuccess {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return loginEmailSuccess(this);
   }
@@ -927,6 +1011,9 @@ class _$LoginEmailSuccessImpl implements LoginEmailSuccess {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return loginEmailSuccess?.call(this);
   }
@@ -950,6 +1037,9 @@ class _$LoginEmailSuccessImpl implements LoginEmailSuccess {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginEmailSuccess != null) {
@@ -1020,6 +1110,9 @@ class _$LoginGetOTPLoadingImpl implements LoginGetOTPLoading {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return loginGetOTPLoading();
   }
@@ -1043,6 +1136,9 @@ class _$LoginGetOTPLoadingImpl implements LoginGetOTPLoading {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return loginGetOTPLoading?.call();
   }
@@ -1066,6 +1162,9 @@ class _$LoginGetOTPLoadingImpl implements LoginGetOTPLoading {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginGetOTPLoading != null) {
@@ -1095,6 +1194,9 @@ class _$LoginGetOTPLoadingImpl implements LoginGetOTPLoading {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return loginGetOTPLoading(this);
   }
@@ -1118,6 +1220,9 @@ class _$LoginGetOTPLoadingImpl implements LoginGetOTPLoading {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return loginGetOTPLoading?.call(this);
   }
@@ -1141,6 +1246,9 @@ class _$LoginGetOTPLoadingImpl implements LoginGetOTPLoading {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginGetOTPLoading != null) {
@@ -1239,6 +1347,9 @@ class _$LoginGetOTPErrorImpl implements LoginGetOTPError {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return loginGetOTPError(message);
   }
@@ -1262,6 +1373,9 @@ class _$LoginGetOTPErrorImpl implements LoginGetOTPError {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return loginGetOTPError?.call(message);
   }
@@ -1285,6 +1399,9 @@ class _$LoginGetOTPErrorImpl implements LoginGetOTPError {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginGetOTPError != null) {
@@ -1314,6 +1431,9 @@ class _$LoginGetOTPErrorImpl implements LoginGetOTPError {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return loginGetOTPError(this);
   }
@@ -1337,6 +1457,9 @@ class _$LoginGetOTPErrorImpl implements LoginGetOTPError {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return loginGetOTPError?.call(this);
   }
@@ -1360,6 +1483,9 @@ class _$LoginGetOTPErrorImpl implements LoginGetOTPError {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginGetOTPError != null) {
@@ -1467,6 +1593,9 @@ class _$LoginGetOTPSuccessImpl implements LoginGetOTPSuccess {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return loginGetOTPSuccess(verificationId);
   }
@@ -1490,6 +1619,9 @@ class _$LoginGetOTPSuccessImpl implements LoginGetOTPSuccess {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return loginGetOTPSuccess?.call(verificationId);
   }
@@ -1513,6 +1645,9 @@ class _$LoginGetOTPSuccessImpl implements LoginGetOTPSuccess {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginGetOTPSuccess != null) {
@@ -1542,6 +1677,9 @@ class _$LoginGetOTPSuccessImpl implements LoginGetOTPSuccess {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return loginGetOTPSuccess(this);
   }
@@ -1565,6 +1703,9 @@ class _$LoginGetOTPSuccessImpl implements LoginGetOTPSuccess {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return loginGetOTPSuccess?.call(this);
   }
@@ -1588,6 +1729,9 @@ class _$LoginGetOTPSuccessImpl implements LoginGetOTPSuccess {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginGetOTPSuccess != null) {
@@ -1667,6 +1811,9 @@ class _$LoginPhoneLoadingImpl implements LoginPhoneLoading {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return loginPhoneLoading();
   }
@@ -1690,6 +1837,9 @@ class _$LoginPhoneLoadingImpl implements LoginPhoneLoading {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return loginPhoneLoading?.call();
   }
@@ -1713,6 +1863,9 @@ class _$LoginPhoneLoadingImpl implements LoginPhoneLoading {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginPhoneLoading != null) {
@@ -1742,6 +1895,9 @@ class _$LoginPhoneLoadingImpl implements LoginPhoneLoading {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return loginPhoneLoading(this);
   }
@@ -1765,6 +1921,9 @@ class _$LoginPhoneLoadingImpl implements LoginPhoneLoading {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return loginPhoneLoading?.call(this);
   }
@@ -1788,6 +1947,9 @@ class _$LoginPhoneLoadingImpl implements LoginPhoneLoading {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginPhoneLoading != null) {
@@ -1886,6 +2048,9 @@ class _$LoginPhoneErrorImpl implements LoginPhoneError {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return loginPhoneError(message);
   }
@@ -1909,6 +2074,9 @@ class _$LoginPhoneErrorImpl implements LoginPhoneError {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return loginPhoneError?.call(message);
   }
@@ -1932,6 +2100,9 @@ class _$LoginPhoneErrorImpl implements LoginPhoneError {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginPhoneError != null) {
@@ -1961,6 +2132,9 @@ class _$LoginPhoneErrorImpl implements LoginPhoneError {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return loginPhoneError(this);
   }
@@ -1984,6 +2158,9 @@ class _$LoginPhoneErrorImpl implements LoginPhoneError {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return loginPhoneError?.call(this);
   }
@@ -2007,6 +2184,9 @@ class _$LoginPhoneErrorImpl implements LoginPhoneError {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginPhoneError != null) {
@@ -2085,6 +2265,9 @@ class _$LoginPhoneSuccessImpl implements LoginPhoneSuccess {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return loginPhoneSuccess();
   }
@@ -2108,6 +2291,9 @@ class _$LoginPhoneSuccessImpl implements LoginPhoneSuccess {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return loginPhoneSuccess?.call();
   }
@@ -2131,6 +2317,9 @@ class _$LoginPhoneSuccessImpl implements LoginPhoneSuccess {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginPhoneSuccess != null) {
@@ -2160,6 +2349,9 @@ class _$LoginPhoneSuccessImpl implements LoginPhoneSuccess {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return loginPhoneSuccess(this);
   }
@@ -2183,6 +2375,9 @@ class _$LoginPhoneSuccessImpl implements LoginPhoneSuccess {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return loginPhoneSuccess?.call(this);
   }
@@ -2206,6 +2401,9 @@ class _$LoginPhoneSuccessImpl implements LoginPhoneSuccess {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (loginPhoneSuccess != null) {
@@ -2278,6 +2476,9 @@ class _$ForgotPasswordLoadingImpl implements ForgotPasswordLoading {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return forgotPasswordLoading();
   }
@@ -2301,6 +2502,9 @@ class _$ForgotPasswordLoadingImpl implements ForgotPasswordLoading {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return forgotPasswordLoading?.call();
   }
@@ -2324,6 +2528,9 @@ class _$ForgotPasswordLoadingImpl implements ForgotPasswordLoading {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (forgotPasswordLoading != null) {
@@ -2353,6 +2560,9 @@ class _$ForgotPasswordLoadingImpl implements ForgotPasswordLoading {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return forgotPasswordLoading(this);
   }
@@ -2376,6 +2586,9 @@ class _$ForgotPasswordLoadingImpl implements ForgotPasswordLoading {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return forgotPasswordLoading?.call(this);
   }
@@ -2399,6 +2612,9 @@ class _$ForgotPasswordLoadingImpl implements ForgotPasswordLoading {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (forgotPasswordLoading != null) {
@@ -2497,6 +2713,9 @@ class _$ForgotPasswordErrorImpl implements ForgotPasswordError {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return forgotPasswordError(message);
   }
@@ -2520,6 +2739,9 @@ class _$ForgotPasswordErrorImpl implements ForgotPasswordError {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return forgotPasswordError?.call(message);
   }
@@ -2543,6 +2765,9 @@ class _$ForgotPasswordErrorImpl implements ForgotPasswordError {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (forgotPasswordError != null) {
@@ -2572,6 +2797,9 @@ class _$ForgotPasswordErrorImpl implements ForgotPasswordError {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return forgotPasswordError(this);
   }
@@ -2595,6 +2823,9 @@ class _$ForgotPasswordErrorImpl implements ForgotPasswordError {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return forgotPasswordError?.call(this);
   }
@@ -2618,6 +2849,9 @@ class _$ForgotPasswordErrorImpl implements ForgotPasswordError {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (forgotPasswordError != null) {
@@ -2699,6 +2933,9 @@ class _$ForgotPasswordSuccessImpl implements ForgotPasswordSuccess {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return forgotPasswordSuccess();
   }
@@ -2722,6 +2959,9 @@ class _$ForgotPasswordSuccessImpl implements ForgotPasswordSuccess {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return forgotPasswordSuccess?.call();
   }
@@ -2745,6 +2985,9 @@ class _$ForgotPasswordSuccessImpl implements ForgotPasswordSuccess {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (forgotPasswordSuccess != null) {
@@ -2774,6 +3017,9 @@ class _$ForgotPasswordSuccessImpl implements ForgotPasswordSuccess {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return forgotPasswordSuccess(this);
   }
@@ -2797,6 +3043,9 @@ class _$ForgotPasswordSuccessImpl implements ForgotPasswordSuccess {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return forgotPasswordSuccess?.call(this);
   }
@@ -2820,6 +3069,9 @@ class _$ForgotPasswordSuccessImpl implements ForgotPasswordSuccess {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (forgotPasswordSuccess != null) {
@@ -2890,6 +3142,9 @@ class _$GetUserLoadingImpl implements GetUserLoading {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return getUserLoading();
   }
@@ -2913,6 +3168,9 @@ class _$GetUserLoadingImpl implements GetUserLoading {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return getUserLoading?.call();
   }
@@ -2936,6 +3194,9 @@ class _$GetUserLoadingImpl implements GetUserLoading {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (getUserLoading != null) {
@@ -2965,6 +3226,9 @@ class _$GetUserLoadingImpl implements GetUserLoading {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return getUserLoading(this);
   }
@@ -2988,6 +3252,9 @@ class _$GetUserLoadingImpl implements GetUserLoading {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return getUserLoading?.call(this);
   }
@@ -3011,6 +3278,9 @@ class _$GetUserLoadingImpl implements GetUserLoading {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (getUserLoading != null) {
@@ -3108,6 +3378,9 @@ class _$GetUserErrorImpl implements GetUserError {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return getUserError(message);
   }
@@ -3131,6 +3404,9 @@ class _$GetUserErrorImpl implements GetUserError {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return getUserError?.call(message);
   }
@@ -3154,6 +3430,9 @@ class _$GetUserErrorImpl implements GetUserError {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (getUserError != null) {
@@ -3183,6 +3462,9 @@ class _$GetUserErrorImpl implements GetUserError {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return getUserError(this);
   }
@@ -3206,6 +3488,9 @@ class _$GetUserErrorImpl implements GetUserError {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return getUserError?.call(this);
   }
@@ -3229,6 +3514,9 @@ class _$GetUserErrorImpl implements GetUserError {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (getUserError != null) {
@@ -3307,6 +3595,9 @@ class _$GetUserSuccessImpl implements GetUserSuccess {
     required TResult Function() getUserLoading,
     required TResult Function(String message) getUserError,
     required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
   }) {
     return getUserSuccess();
   }
@@ -3330,6 +3621,9 @@ class _$GetUserSuccessImpl implements GetUserSuccess {
     TResult? Function()? getUserLoading,
     TResult? Function(String message)? getUserError,
     TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
   }) {
     return getUserSuccess?.call();
   }
@@ -3353,6 +3647,9 @@ class _$GetUserSuccessImpl implements GetUserSuccess {
     TResult Function()? getUserLoading,
     TResult Function(String message)? getUserError,
     TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (getUserSuccess != null) {
@@ -3382,6 +3679,9 @@ class _$GetUserSuccessImpl implements GetUserSuccess {
     required TResult Function(GetUserLoading value) getUserLoading,
     required TResult Function(GetUserError value) getUserError,
     required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
   }) {
     return getUserSuccess(this);
   }
@@ -3405,6 +3705,9 @@ class _$GetUserSuccessImpl implements GetUserSuccess {
     TResult? Function(GetUserLoading value)? getUserLoading,
     TResult? Function(GetUserError value)? getUserError,
     TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
   }) {
     return getUserSuccess?.call(this);
   }
@@ -3428,6 +3731,9 @@ class _$GetUserSuccessImpl implements GetUserSuccess {
     TResult Function(GetUserLoading value)? getUserLoading,
     TResult Function(GetUserError value)? getUserError,
     TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
     required TResult orElse(),
   }) {
     if (getUserSuccess != null) {
@@ -3439,4 +3745,667 @@ class _$GetUserSuccessImpl implements GetUserSuccess {
 
 abstract class GetUserSuccess implements LoginState {
   const factory GetUserSuccess() = _$GetUserSuccessImpl;
+}
+
+/// @nodoc
+abstract class _$$SendMessageLoadingImplCopyWith<$Res> {
+  factory _$$SendMessageLoadingImplCopyWith(_$SendMessageLoadingImpl value,
+          $Res Function(_$SendMessageLoadingImpl) then) =
+      __$$SendMessageLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendMessageLoadingImplCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res, _$SendMessageLoadingImpl>
+    implements _$$SendMessageLoadingImplCopyWith<$Res> {
+  __$$SendMessageLoadingImplCopyWithImpl(_$SendMessageLoadingImpl _value,
+      $Res Function(_$SendMessageLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of LoginState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SendMessageLoadingImpl implements SendMessageLoading {
+  const _$SendMessageLoadingImpl();
+
+  @override
+  String toString() {
+    return 'LoginState.sendMessageLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SendMessageLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loginEmailLoading,
+    required TResult Function(String message) loginEmailError,
+    required TResult Function() loginEmailSuccess,
+    required TResult Function() loginGetOTPLoading,
+    required TResult Function(String message) loginGetOTPError,
+    required TResult Function(String verificationId) loginGetOTPSuccess,
+    required TResult Function() loginPhoneLoading,
+    required TResult Function(String message) loginPhoneError,
+    required TResult Function() loginPhoneSuccess,
+    required TResult Function() forgotPasswordLoading,
+    required TResult Function(String message) forgotPasswordError,
+    required TResult Function() forgotPasswordSuccess,
+    required TResult Function() getUserLoading,
+    required TResult Function(String message) getUserError,
+    required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
+  }) {
+    return sendMessageLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loginEmailLoading,
+    TResult? Function(String message)? loginEmailError,
+    TResult? Function()? loginEmailSuccess,
+    TResult? Function()? loginGetOTPLoading,
+    TResult? Function(String message)? loginGetOTPError,
+    TResult? Function(String verificationId)? loginGetOTPSuccess,
+    TResult? Function()? loginPhoneLoading,
+    TResult? Function(String message)? loginPhoneError,
+    TResult? Function()? loginPhoneSuccess,
+    TResult? Function()? forgotPasswordLoading,
+    TResult? Function(String message)? forgotPasswordError,
+    TResult? Function()? forgotPasswordSuccess,
+    TResult? Function()? getUserLoading,
+    TResult? Function(String message)? getUserError,
+    TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
+  }) {
+    return sendMessageLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loginEmailLoading,
+    TResult Function(String message)? loginEmailError,
+    TResult Function()? loginEmailSuccess,
+    TResult Function()? loginGetOTPLoading,
+    TResult Function(String message)? loginGetOTPError,
+    TResult Function(String verificationId)? loginGetOTPSuccess,
+    TResult Function()? loginPhoneLoading,
+    TResult Function(String message)? loginPhoneError,
+    TResult Function()? loginPhoneSuccess,
+    TResult Function()? forgotPasswordLoading,
+    TResult Function(String message)? forgotPasswordError,
+    TResult Function()? forgotPasswordSuccess,
+    TResult Function()? getUserLoading,
+    TResult Function(String message)? getUserError,
+    TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
+    required TResult orElse(),
+  }) {
+    if (sendMessageLoading != null) {
+      return sendMessageLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(LoginEmailLoading value) loginEmailLoading,
+    required TResult Function(LoginEmailError value) loginEmailError,
+    required TResult Function(LoginEmailSuccess value) loginEmailSuccess,
+    required TResult Function(LoginGetOTPLoading value) loginGetOTPLoading,
+    required TResult Function(LoginGetOTPError value) loginGetOTPError,
+    required TResult Function(LoginGetOTPSuccess value) loginGetOTPSuccess,
+    required TResult Function(LoginPhoneLoading value) loginPhoneLoading,
+    required TResult Function(LoginPhoneError value) loginPhoneError,
+    required TResult Function(LoginPhoneSuccess value) loginPhoneSuccess,
+    required TResult Function(ForgotPasswordLoading value)
+        forgotPasswordLoading,
+    required TResult Function(ForgotPasswordError value) forgotPasswordError,
+    required TResult Function(ForgotPasswordSuccess value)
+        forgotPasswordSuccess,
+    required TResult Function(GetUserLoading value) getUserLoading,
+    required TResult Function(GetUserError value) getUserError,
+    required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
+  }) {
+    return sendMessageLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(LoginEmailLoading value)? loginEmailLoading,
+    TResult? Function(LoginEmailError value)? loginEmailError,
+    TResult? Function(LoginEmailSuccess value)? loginEmailSuccess,
+    TResult? Function(LoginGetOTPLoading value)? loginGetOTPLoading,
+    TResult? Function(LoginGetOTPError value)? loginGetOTPError,
+    TResult? Function(LoginGetOTPSuccess value)? loginGetOTPSuccess,
+    TResult? Function(LoginPhoneLoading value)? loginPhoneLoading,
+    TResult? Function(LoginPhoneError value)? loginPhoneError,
+    TResult? Function(LoginPhoneSuccess value)? loginPhoneSuccess,
+    TResult? Function(ForgotPasswordLoading value)? forgotPasswordLoading,
+    TResult? Function(ForgotPasswordError value)? forgotPasswordError,
+    TResult? Function(ForgotPasswordSuccess value)? forgotPasswordSuccess,
+    TResult? Function(GetUserLoading value)? getUserLoading,
+    TResult? Function(GetUserError value)? getUserError,
+    TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
+  }) {
+    return sendMessageLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(LoginEmailLoading value)? loginEmailLoading,
+    TResult Function(LoginEmailError value)? loginEmailError,
+    TResult Function(LoginEmailSuccess value)? loginEmailSuccess,
+    TResult Function(LoginGetOTPLoading value)? loginGetOTPLoading,
+    TResult Function(LoginGetOTPError value)? loginGetOTPError,
+    TResult Function(LoginGetOTPSuccess value)? loginGetOTPSuccess,
+    TResult Function(LoginPhoneLoading value)? loginPhoneLoading,
+    TResult Function(LoginPhoneError value)? loginPhoneError,
+    TResult Function(LoginPhoneSuccess value)? loginPhoneSuccess,
+    TResult Function(ForgotPasswordLoading value)? forgotPasswordLoading,
+    TResult Function(ForgotPasswordError value)? forgotPasswordError,
+    TResult Function(ForgotPasswordSuccess value)? forgotPasswordSuccess,
+    TResult Function(GetUserLoading value)? getUserLoading,
+    TResult Function(GetUserError value)? getUserError,
+    TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
+    required TResult orElse(),
+  }) {
+    if (sendMessageLoading != null) {
+      return sendMessageLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendMessageLoading implements LoginState {
+  const factory SendMessageLoading() = _$SendMessageLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$SendMessageErrorImplCopyWith<$Res> {
+  factory _$$SendMessageErrorImplCopyWith(_$SendMessageErrorImpl value,
+          $Res Function(_$SendMessageErrorImpl) then) =
+      __$$SendMessageErrorImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$SendMessageErrorImplCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res, _$SendMessageErrorImpl>
+    implements _$$SendMessageErrorImplCopyWith<$Res> {
+  __$$SendMessageErrorImplCopyWithImpl(_$SendMessageErrorImpl _value,
+      $Res Function(_$SendMessageErrorImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of LoginState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$SendMessageErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SendMessageErrorImpl implements SendMessageError {
+  const _$SendMessageErrorImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'LoginState.sendMessageError(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SendMessageErrorImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  /// Create a copy of LoginState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SendMessageErrorImplCopyWith<_$SendMessageErrorImpl> get copyWith =>
+      __$$SendMessageErrorImplCopyWithImpl<_$SendMessageErrorImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loginEmailLoading,
+    required TResult Function(String message) loginEmailError,
+    required TResult Function() loginEmailSuccess,
+    required TResult Function() loginGetOTPLoading,
+    required TResult Function(String message) loginGetOTPError,
+    required TResult Function(String verificationId) loginGetOTPSuccess,
+    required TResult Function() loginPhoneLoading,
+    required TResult Function(String message) loginPhoneError,
+    required TResult Function() loginPhoneSuccess,
+    required TResult Function() forgotPasswordLoading,
+    required TResult Function(String message) forgotPasswordError,
+    required TResult Function() forgotPasswordSuccess,
+    required TResult Function() getUserLoading,
+    required TResult Function(String message) getUserError,
+    required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
+  }) {
+    return sendMessageError(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loginEmailLoading,
+    TResult? Function(String message)? loginEmailError,
+    TResult? Function()? loginEmailSuccess,
+    TResult? Function()? loginGetOTPLoading,
+    TResult? Function(String message)? loginGetOTPError,
+    TResult? Function(String verificationId)? loginGetOTPSuccess,
+    TResult? Function()? loginPhoneLoading,
+    TResult? Function(String message)? loginPhoneError,
+    TResult? Function()? loginPhoneSuccess,
+    TResult? Function()? forgotPasswordLoading,
+    TResult? Function(String message)? forgotPasswordError,
+    TResult? Function()? forgotPasswordSuccess,
+    TResult? Function()? getUserLoading,
+    TResult? Function(String message)? getUserError,
+    TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
+  }) {
+    return sendMessageError?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loginEmailLoading,
+    TResult Function(String message)? loginEmailError,
+    TResult Function()? loginEmailSuccess,
+    TResult Function()? loginGetOTPLoading,
+    TResult Function(String message)? loginGetOTPError,
+    TResult Function(String verificationId)? loginGetOTPSuccess,
+    TResult Function()? loginPhoneLoading,
+    TResult Function(String message)? loginPhoneError,
+    TResult Function()? loginPhoneSuccess,
+    TResult Function()? forgotPasswordLoading,
+    TResult Function(String message)? forgotPasswordError,
+    TResult Function()? forgotPasswordSuccess,
+    TResult Function()? getUserLoading,
+    TResult Function(String message)? getUserError,
+    TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
+    required TResult orElse(),
+  }) {
+    if (sendMessageError != null) {
+      return sendMessageError(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(LoginEmailLoading value) loginEmailLoading,
+    required TResult Function(LoginEmailError value) loginEmailError,
+    required TResult Function(LoginEmailSuccess value) loginEmailSuccess,
+    required TResult Function(LoginGetOTPLoading value) loginGetOTPLoading,
+    required TResult Function(LoginGetOTPError value) loginGetOTPError,
+    required TResult Function(LoginGetOTPSuccess value) loginGetOTPSuccess,
+    required TResult Function(LoginPhoneLoading value) loginPhoneLoading,
+    required TResult Function(LoginPhoneError value) loginPhoneError,
+    required TResult Function(LoginPhoneSuccess value) loginPhoneSuccess,
+    required TResult Function(ForgotPasswordLoading value)
+        forgotPasswordLoading,
+    required TResult Function(ForgotPasswordError value) forgotPasswordError,
+    required TResult Function(ForgotPasswordSuccess value)
+        forgotPasswordSuccess,
+    required TResult Function(GetUserLoading value) getUserLoading,
+    required TResult Function(GetUserError value) getUserError,
+    required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
+  }) {
+    return sendMessageError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(LoginEmailLoading value)? loginEmailLoading,
+    TResult? Function(LoginEmailError value)? loginEmailError,
+    TResult? Function(LoginEmailSuccess value)? loginEmailSuccess,
+    TResult? Function(LoginGetOTPLoading value)? loginGetOTPLoading,
+    TResult? Function(LoginGetOTPError value)? loginGetOTPError,
+    TResult? Function(LoginGetOTPSuccess value)? loginGetOTPSuccess,
+    TResult? Function(LoginPhoneLoading value)? loginPhoneLoading,
+    TResult? Function(LoginPhoneError value)? loginPhoneError,
+    TResult? Function(LoginPhoneSuccess value)? loginPhoneSuccess,
+    TResult? Function(ForgotPasswordLoading value)? forgotPasswordLoading,
+    TResult? Function(ForgotPasswordError value)? forgotPasswordError,
+    TResult? Function(ForgotPasswordSuccess value)? forgotPasswordSuccess,
+    TResult? Function(GetUserLoading value)? getUserLoading,
+    TResult? Function(GetUserError value)? getUserError,
+    TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
+  }) {
+    return sendMessageError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(LoginEmailLoading value)? loginEmailLoading,
+    TResult Function(LoginEmailError value)? loginEmailError,
+    TResult Function(LoginEmailSuccess value)? loginEmailSuccess,
+    TResult Function(LoginGetOTPLoading value)? loginGetOTPLoading,
+    TResult Function(LoginGetOTPError value)? loginGetOTPError,
+    TResult Function(LoginGetOTPSuccess value)? loginGetOTPSuccess,
+    TResult Function(LoginPhoneLoading value)? loginPhoneLoading,
+    TResult Function(LoginPhoneError value)? loginPhoneError,
+    TResult Function(LoginPhoneSuccess value)? loginPhoneSuccess,
+    TResult Function(ForgotPasswordLoading value)? forgotPasswordLoading,
+    TResult Function(ForgotPasswordError value)? forgotPasswordError,
+    TResult Function(ForgotPasswordSuccess value)? forgotPasswordSuccess,
+    TResult Function(GetUserLoading value)? getUserLoading,
+    TResult Function(GetUserError value)? getUserError,
+    TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
+    required TResult orElse(),
+  }) {
+    if (sendMessageError != null) {
+      return sendMessageError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendMessageError implements LoginState {
+  const factory SendMessageError(final String message) = _$SendMessageErrorImpl;
+
+  String get message;
+
+  /// Create a copy of LoginState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SendMessageErrorImplCopyWith<_$SendMessageErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SendMessageSuccessImplCopyWith<$Res> {
+  factory _$$SendMessageSuccessImplCopyWith(_$SendMessageSuccessImpl value,
+          $Res Function(_$SendMessageSuccessImpl) then) =
+      __$$SendMessageSuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SendMessageSuccessImplCopyWithImpl<$Res>
+    extends _$LoginStateCopyWithImpl<$Res, _$SendMessageSuccessImpl>
+    implements _$$SendMessageSuccessImplCopyWith<$Res> {
+  __$$SendMessageSuccessImplCopyWithImpl(_$SendMessageSuccessImpl _value,
+      $Res Function(_$SendMessageSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of LoginState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$SendMessageSuccessImpl implements SendMessageSuccess {
+  const _$SendMessageSuccessImpl();
+
+  @override
+  String toString() {
+    return 'LoginState.sendMessageSuccess()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$SendMessageSuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loginEmailLoading,
+    required TResult Function(String message) loginEmailError,
+    required TResult Function() loginEmailSuccess,
+    required TResult Function() loginGetOTPLoading,
+    required TResult Function(String message) loginGetOTPError,
+    required TResult Function(String verificationId) loginGetOTPSuccess,
+    required TResult Function() loginPhoneLoading,
+    required TResult Function(String message) loginPhoneError,
+    required TResult Function() loginPhoneSuccess,
+    required TResult Function() forgotPasswordLoading,
+    required TResult Function(String message) forgotPasswordError,
+    required TResult Function() forgotPasswordSuccess,
+    required TResult Function() getUserLoading,
+    required TResult Function(String message) getUserError,
+    required TResult Function() getUserSuccess,
+    required TResult Function() sendMessageLoading,
+    required TResult Function(String message) sendMessageError,
+    required TResult Function() sendMessageSuccess,
+  }) {
+    return sendMessageSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loginEmailLoading,
+    TResult? Function(String message)? loginEmailError,
+    TResult? Function()? loginEmailSuccess,
+    TResult? Function()? loginGetOTPLoading,
+    TResult? Function(String message)? loginGetOTPError,
+    TResult? Function(String verificationId)? loginGetOTPSuccess,
+    TResult? Function()? loginPhoneLoading,
+    TResult? Function(String message)? loginPhoneError,
+    TResult? Function()? loginPhoneSuccess,
+    TResult? Function()? forgotPasswordLoading,
+    TResult? Function(String message)? forgotPasswordError,
+    TResult? Function()? forgotPasswordSuccess,
+    TResult? Function()? getUserLoading,
+    TResult? Function(String message)? getUserError,
+    TResult? Function()? getUserSuccess,
+    TResult? Function()? sendMessageLoading,
+    TResult? Function(String message)? sendMessageError,
+    TResult? Function()? sendMessageSuccess,
+  }) {
+    return sendMessageSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loginEmailLoading,
+    TResult Function(String message)? loginEmailError,
+    TResult Function()? loginEmailSuccess,
+    TResult Function()? loginGetOTPLoading,
+    TResult Function(String message)? loginGetOTPError,
+    TResult Function(String verificationId)? loginGetOTPSuccess,
+    TResult Function()? loginPhoneLoading,
+    TResult Function(String message)? loginPhoneError,
+    TResult Function()? loginPhoneSuccess,
+    TResult Function()? forgotPasswordLoading,
+    TResult Function(String message)? forgotPasswordError,
+    TResult Function()? forgotPasswordSuccess,
+    TResult Function()? getUserLoading,
+    TResult Function(String message)? getUserError,
+    TResult Function()? getUserSuccess,
+    TResult Function()? sendMessageLoading,
+    TResult Function(String message)? sendMessageError,
+    TResult Function()? sendMessageSuccess,
+    required TResult orElse(),
+  }) {
+    if (sendMessageSuccess != null) {
+      return sendMessageSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(LoginEmailLoading value) loginEmailLoading,
+    required TResult Function(LoginEmailError value) loginEmailError,
+    required TResult Function(LoginEmailSuccess value) loginEmailSuccess,
+    required TResult Function(LoginGetOTPLoading value) loginGetOTPLoading,
+    required TResult Function(LoginGetOTPError value) loginGetOTPError,
+    required TResult Function(LoginGetOTPSuccess value) loginGetOTPSuccess,
+    required TResult Function(LoginPhoneLoading value) loginPhoneLoading,
+    required TResult Function(LoginPhoneError value) loginPhoneError,
+    required TResult Function(LoginPhoneSuccess value) loginPhoneSuccess,
+    required TResult Function(ForgotPasswordLoading value)
+        forgotPasswordLoading,
+    required TResult Function(ForgotPasswordError value) forgotPasswordError,
+    required TResult Function(ForgotPasswordSuccess value)
+        forgotPasswordSuccess,
+    required TResult Function(GetUserLoading value) getUserLoading,
+    required TResult Function(GetUserError value) getUserError,
+    required TResult Function(GetUserSuccess value) getUserSuccess,
+    required TResult Function(SendMessageLoading value) sendMessageLoading,
+    required TResult Function(SendMessageError value) sendMessageError,
+    required TResult Function(SendMessageSuccess value) sendMessageSuccess,
+  }) {
+    return sendMessageSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(LoginEmailLoading value)? loginEmailLoading,
+    TResult? Function(LoginEmailError value)? loginEmailError,
+    TResult? Function(LoginEmailSuccess value)? loginEmailSuccess,
+    TResult? Function(LoginGetOTPLoading value)? loginGetOTPLoading,
+    TResult? Function(LoginGetOTPError value)? loginGetOTPError,
+    TResult? Function(LoginGetOTPSuccess value)? loginGetOTPSuccess,
+    TResult? Function(LoginPhoneLoading value)? loginPhoneLoading,
+    TResult? Function(LoginPhoneError value)? loginPhoneError,
+    TResult? Function(LoginPhoneSuccess value)? loginPhoneSuccess,
+    TResult? Function(ForgotPasswordLoading value)? forgotPasswordLoading,
+    TResult? Function(ForgotPasswordError value)? forgotPasswordError,
+    TResult? Function(ForgotPasswordSuccess value)? forgotPasswordSuccess,
+    TResult? Function(GetUserLoading value)? getUserLoading,
+    TResult? Function(GetUserError value)? getUserError,
+    TResult? Function(GetUserSuccess value)? getUserSuccess,
+    TResult? Function(SendMessageLoading value)? sendMessageLoading,
+    TResult? Function(SendMessageError value)? sendMessageError,
+    TResult? Function(SendMessageSuccess value)? sendMessageSuccess,
+  }) {
+    return sendMessageSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(LoginEmailLoading value)? loginEmailLoading,
+    TResult Function(LoginEmailError value)? loginEmailError,
+    TResult Function(LoginEmailSuccess value)? loginEmailSuccess,
+    TResult Function(LoginGetOTPLoading value)? loginGetOTPLoading,
+    TResult Function(LoginGetOTPError value)? loginGetOTPError,
+    TResult Function(LoginGetOTPSuccess value)? loginGetOTPSuccess,
+    TResult Function(LoginPhoneLoading value)? loginPhoneLoading,
+    TResult Function(LoginPhoneError value)? loginPhoneError,
+    TResult Function(LoginPhoneSuccess value)? loginPhoneSuccess,
+    TResult Function(ForgotPasswordLoading value)? forgotPasswordLoading,
+    TResult Function(ForgotPasswordError value)? forgotPasswordError,
+    TResult Function(ForgotPasswordSuccess value)? forgotPasswordSuccess,
+    TResult Function(GetUserLoading value)? getUserLoading,
+    TResult Function(GetUserError value)? getUserError,
+    TResult Function(GetUserSuccess value)? getUserSuccess,
+    TResult Function(SendMessageLoading value)? sendMessageLoading,
+    TResult Function(SendMessageError value)? sendMessageError,
+    TResult Function(SendMessageSuccess value)? sendMessageSuccess,
+    required TResult orElse(),
+  }) {
+    if (sendMessageSuccess != null) {
+      return sendMessageSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SendMessageSuccess implements LoginState {
+  const factory SendMessageSuccess() = _$SendMessageSuccessImpl;
 }

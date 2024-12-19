@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppConstants {
   static String guest = "Guest";
+  static String firstTimeOpen = "FirstTimeOpen";
   static List<String> nationalities = <String>[
     "Afghan",
     "Albanian",
@@ -211,6 +212,7 @@ class AppConstants {
       EdgeInsets.symmetric(horizontal: 18.w, vertical: 15.h);
 
   static const Duration durationSlide = Duration(milliseconds: 350);
+
   static String generatePinCode() {
     final random = Random();
     String pinCode = '';
