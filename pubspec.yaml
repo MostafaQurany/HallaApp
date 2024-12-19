@@ -81,7 +81,9 @@ dependencies:
   bottom_navy_bar: ^6.1.0
   mobile_scanner: ^6.0.2
   shimmer:
-  connectivity_plus: ^6.1.0
+  internet_connection_checker: ^3.0.1
+
+
 
 
 
