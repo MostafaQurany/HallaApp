@@ -20,6 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
   final LogInWithPhoneUseCase _logInWithPhoneUseCase;
   final ForgetPasswordUsecase _forgetPassword;
   final GetUserUsecase _getUserUsecase;
+  final ForgetPasswordUsecase _forgetPasswordUsecase;
 
   LoginCubit(
     this._userCubit,
@@ -28,6 +29,7 @@ class LoginCubit extends Cubit<LoginState> {
     this._getSmsCodeUseCase,
     this._forgetPassword,
     this._getUserUsecase,
+    this._forgetPasswordUsecase,
   ) : super(const LoginState.initial());
 
 // login Email Password
@@ -106,5 +108,19 @@ class LoginCubit extends Cubit<LoginState> {
       },
     );
   }
+
 // forget password
+
+  forgetPassword(String email) async {
+    emit(LoginState.sendMessageLoading());
+    final res = await _forgetPasswordUsecase(
+      ForgetPasswordPrams(
+        email: email,
+      ),
+    );
+    res.fold(
+      (l) => emit(LoginState.sendMessageError(l.message)),
+      (r) => emit(LoginState.sendMessageSuccess()),
+    );
+  }
 }

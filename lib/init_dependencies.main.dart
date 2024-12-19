@@ -112,6 +112,11 @@ _initCommon() {
     )
     ..registerLazySingleton(
       () => LanguageCubit(),
+    )
+    ..registerLazySingleton(
+      () => NetworkCubit(
+        serviceLocator(),
+      ),
     );
 }
 
@@ -189,27 +194,7 @@ _initAuth() {
     )
 
     // bloc
-    ..registerLazySingleton(
-      () => AuthBloc(
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-        serviceLocator(),
-      ),
-    )
+
     ..registerLazySingleton(
       () => SignInCubit(
         serviceLocator(),
@@ -231,6 +216,7 @@ _initAuth() {
     )
     ..registerLazySingleton(
       () => LoginCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

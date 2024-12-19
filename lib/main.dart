@@ -9,10 +9,10 @@ import "package:halla/core/common/domain/entities/contact.dart";
 import "package:halla/core/common/domain/entities/social_media.dart";
 import "package:halla/core/common/domain/entities/timestamp_adapter.g.dart";
 import "package:halla/core/common/domain/entities/user.dart";
+import "package:halla/core/common/presentation/cubit/connection/network_cubit.dart";
 import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/bloc_observer.dart";
-import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/blocs/guest%20cubit/guest_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/login%20cubit/login_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dart";
@@ -22,7 +22,7 @@ import "package:halla/features/contacts/presentation/blocs/cubit/contact_cubit.d
 import "package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart";
 import "package:halla/features/splash/presentation/bloc/brightness%20cubit/brightness_cubit.dart";
 import "package:halla/features/splash/presentation/bloc/language%20cubit/language_cubit.dart";
-import "package:halla/features/splash/presentation/screen/splash_screen.dart";
+import "package:halla/features/splash/presentation/screens/splash_screen.dart";
 import "package:halla/generated/l10n.dart";
 import "package:halla/init_dependencies_map.dart";
 import "package:hive_flutter/hive_flutter.dart";
@@ -57,7 +57,6 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<UserCubit>()),
         BlocProvider(create: (context) => serviceLocator<BrightnessCubit>()),
         BlocProvider(create: (context) => serviceLocator<LanguageCubit>()),
-        BlocProvider(create: (context) => serviceLocator<AuthBloc>()),
         BlocProvider(create: (context) => serviceLocator<ProfileBloc>()),
         // sign in
         BlocProvider(create: (context) => serviceLocator<SignInCubit>()),
@@ -71,6 +70,8 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<GuestCubit>()),
         // contacts
         BlocProvider(create: (context) => serviceLocator<ContactCubit>()),
+        // connection
+        BlocProvider(create: (context) => serviceLocator<NetworkCubit>()),
       ],
       child: const MyApp(),
     ),
@@ -88,7 +89,6 @@ class MyApp extends StatelessWidget {
         designSize: const Size(390, 679),
         builder: (_, Widget? child) => BlocBuilder<BrightnessCubit, ThemeMode>(
           builder: (context, themeMode) {
-            print(themeMode.name);
             return BlocBuilder<LanguageCubit, Locale>(
               builder: (context, locale) {
                 return MaterialApp(

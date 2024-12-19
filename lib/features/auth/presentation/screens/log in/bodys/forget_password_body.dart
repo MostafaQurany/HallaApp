@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/utils/validation.dart';
-import 'package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart';
+import 'package:halla/features/auth/presentation/blocs/login%20cubit/login_cubit.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
 import 'package:halla/generated/l10n.dart';
 
@@ -72,8 +72,9 @@ class _ForgetPasswordBodyState extends State<ForgetPasswordBody> {
               ElevatedButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
-                    context.read<AuthBloc>().add(
-                        AuthForgetPassword(email: emailController.text.trim()));
+                    context
+                        .read<LoginCubit>()
+                        .forgetPassword(emailController.text.trim());
                   }
                 },
                 child: Text(

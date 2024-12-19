@@ -41,4 +41,11 @@ class LoginState with _$LoginState {
   const factory LoginState.getUserError(String message) = GetUserError;
 
   const factory LoginState.getUserSuccess() = GetUserSuccess;
+
+  // send message forget password
+  const factory LoginState.sendMessageLoading() = SendMessageLoading;
+
+  const factory LoginState.sendMessageError(String message) = SendMessageError;
+
+  const factory LoginState.sendMessageSuccess() = SendMessageSuccess;
 }
