@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/common/domain/usecase/add_user_to_local_usecase.dart';
 import 'package:halla/core/common/domain/usecase/delete_user_from_local_usecase.dart';
@@ -68,6 +67,18 @@ class UserCubit extends Cubit<UserState> {
     res.fold(
       (l) => updateUser(user: null),
       (r) => updateUser(user: null),
+    );
+  }
+
+  Future<bool> isUserLogIn() async {
+    final res = await getUserFromLocalUsecase(NoParams());
+    return res.fold(
+      (l) {
+        return false;
+      },
+      (r) {
+        return true;
+      },
     );
   }
 }

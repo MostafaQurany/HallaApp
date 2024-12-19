@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_contacts/flutter_contacts.dart' as mobilecontact;
-import 'package:halla/core/common/domain/entities/company.dart';
 import 'package:halla/core/common/domain/entities/contact.dart';
-import 'package:halla/core/common/domain/entities/social_media.dart';
 import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
 
@@ -14,6 +12,7 @@ class NativeLocalContactDataBaseSourceImpl
     extends NativeLocalContactDataBaseSource {
   final String _userCollection = AppConstants.userCollection;
   final _firestore = FirebaseFirestore.instance;
+
 // local Contacts
   @override
   Future<List<Contact>> getFirstTimeLocalContacts() async {

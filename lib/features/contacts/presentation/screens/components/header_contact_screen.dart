@@ -31,67 +31,57 @@ class _HeaderContactScreenState extends State<HeaderContactScreen> {
         color:
             AppTheme.isLight(context) ? AppColors.white : AppColors.blackLight,
       ),
-      padding: EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 16),
-      child: SafeArea(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 33.h,
+      padding: EdgeInsets.symmetric(horizontal: 8.0.w, vertical: 8.h),
+      child: Column(
+        spacing: 15.h,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const DownloadContactIcon(),
+              Text(
+                S.of(context).contactList,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontSize: 24.sp,
+                    ),
+              ),
+              const Spacer(),
+            ],
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 8.0.w,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Row(
               children: [
-                const DownloadContactIcon(),
-                Text(
-                  S.of(context).contactList,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontSize: 24.sp,
-                      ),
+                Expanded(
+                  child: OpenContainer(
+                    useRootNavigator: true,
+                    transitionDuration: const Duration(milliseconds: 200),
+                    transitionType: ContainerTransitionType.fade,
+                    closedColor: Colors.transparent,
+                    closedElevation: 0,
+                    openColor: Colors.transparent,
+                    openElevation: 0,
+                    closedBuilder: (context, action) => SearchField(
+                      searchController: searchController,
+                      ignorePointers: true,
+                    ),
+                    openBuilder: (BuildContext context, VoidCallback _) {
+                      return SearchScreen(searchController: searchController);
+                    },
+                  ),
                 ),
-                const Spacer(),
+                SizedBox(
+                  width: 9.w,
+                ),
+                const AddContactButton(),
               ],
             ),
-            SizedBox(
-              height: 30.h,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 8.0.w,
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: OpenContainer(
-                      useRootNavigator: true,
-                      transitionDuration: const Duration(milliseconds: 200),
-                      transitionType: ContainerTransitionType.fade,
-                      closedColor: Colors.transparent,
-                      closedElevation: 0,
-                      openColor: Colors.transparent,
-                      openElevation: 0,
-                      closedBuilder: (context, action) => SearchField(
-                        searchController: searchController,
-                        ignorePointers: true,
-                      ),
-                      openBuilder: (BuildContext context, VoidCallback _) {
-                        return SearchScreen(searchController: searchController);
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: 9.w,
-                  ),
-                  const AddContactButton(),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            const CatogeryListWidget(),
-          ],
-        ),
+          ),
+          const CatogeryListWidget(),
+        ],
       ),
     );
   }

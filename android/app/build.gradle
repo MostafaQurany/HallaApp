@@ -28,8 +28,8 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.example.halla_ca"
-    compileSdk = 34
-    ndkVersion = "28.0.12433566"
+    compileSdk = 35
+    ndkVersion = "28.0.12674087"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

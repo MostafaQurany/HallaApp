@@ -8,7 +8,6 @@ import "package:halla/core/theme/app_colors.dart";
 import "package:halla/core/utils/app_show_dialog.dart";
 import "package:halla/core/utils/routting.dart";
 import "package:halla/core/utils/validation.dart";
-import "package:halla/features/auth/presentation/blocs/auth%20bloc/auth_bloc.dart";
 import "package:halla/features/auth/presentation/blocs/login%20cubit/login_cubit.dart";
 import "package:halla/features/auth/presentation/screens/log%20in/widgets/nfc_button.dart";
 import "package:halla/features/auth/presentation/screens/sign%20in/sign_screen.dart";
@@ -92,199 +91,192 @@ class _LoginBodyState extends State<LoginBody> {
           loginPhoneError: (message) => AppShowDialog.error(context, message),
           loginPhoneSuccess: () =>
               AppNavigator.navigatePushReplaceRemoveAll(context, HomeLayout()),
-        );
-      },
-      child: BlocConsumer<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthSentMessageSuccess) {
-            AppNavigator.navigatePopDialog(context);
-            AppNavigator.navigatePopDialog(context);
+          // send message forget password
+          sendMessageLoading: () => AppShowDialog.loading(context),
+          sendMessageError: (message) => AppShowDialog.error(context, message),
+          sendMessageSuccess: () {
             AppNavigator.navigatePopDialog(context);
             AppShowDialog.showHelpSnckPar(
               context,
               S.of(context).checkYourEmail(5),
             );
-          }
-        },
-        builder: (context, state) {
-          return Form(
-            key: formKey,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 40.h,
-                    ),
-                    SvgPicture.asset(
-                      AppImages.loginVectorSvg,
-                      height: 200.h,
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    CustomTextFormField(
-                      control: emailController,
-                      hintText: S.of(context).emailOrPhoneNumber01,
-                      prefixIcon: _isPhone
-                          ? Icons.phone_outlined
-                          : Icons.email_outlined,
-                      keyboardType: _isPhone
-                          ? TextInputType.phone
-                          : TextInputType.emailAddress,
-                      focusNode: emailFocus,
-                      fieldType: _isPhone ? FieldType.phone : FieldType.email,
-                      onEditingComplete: () => _isPhone
-                          ? FocusScope.of(context).unfocus()
-                          : FocusScope.of(context).requestFocus(passwordFocus),
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    AnimatedSwitcher(
-                      duration: AppConstants.durationSlide,
-                      switchInCurve: Curves.easeInOut,
-                      switchOutCurve: Curves.easeInOut,
-                      transitionBuilder:
-                          (Widget child, Animation<double> animation) {
-                        final offsetAnimation = Tween<Offset>(
-                          begin: const Offset(2.0, 0.0),
-                          end: const Offset(0.0, 0.0),
-                        ).animate(animation);
+          },
+        );
+      },
+      child: Form(
+        key: formKey,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  height: 40.h,
+                ),
+                SvgPicture.asset(
+                  AppImages.loginVectorSvg,
+                  height: 200.h,
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                CustomTextFormField(
+                  control: emailController,
+                  hintText: S.of(context).emailOrPhoneNumber01,
+                  prefixIcon:
+                      _isPhone ? Icons.phone_outlined : Icons.email_outlined,
+                  keyboardType: _isPhone
+                      ? TextInputType.phone
+                      : TextInputType.emailAddress,
+                  focusNode: emailFocus,
+                  fieldType: _isPhone ? FieldType.phone : FieldType.email,
+                  onEditingComplete: () => _isPhone
+                      ? FocusScope.of(context).unfocus()
+                      : FocusScope.of(context).requestFocus(passwordFocus),
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                AnimatedSwitcher(
+                  duration: AppConstants.durationSlide,
+                  switchInCurve: Curves.easeInOut,
+                  switchOutCurve: Curves.easeInOut,
+                  transitionBuilder:
+                      (Widget child, Animation<double> animation) {
+                    final offsetAnimation = Tween<Offset>(
+                      begin: const Offset(2.0, 0.0),
+                      end: const Offset(0.0, 0.0),
+                    ).animate(animation);
 
-                        return SlideTransition(
-                            position: offsetAnimation, child: child);
-                      },
-                      child: !_isPhone
-                          ? Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                CustomTextFormField(
-                                  control: passwordController,
-                                  hintText: S.of(context).password,
-                                  prefixIcon: Icons.lock_outlined,
-                                  suffixIcon: Icons.remove_red_eye_outlined,
-                                  obscureText: true,
-                                  focusNode: passwordFocus,
-                                  fieldType: _isPhone
-                                      ? FieldType.none
-                                      : FieldType.password,
-                                  onEditingComplete: () =>
-                                      FocusScope.of(context).unfocus(),
-                                ),
-                                SizedBox(
-                                  height: 10.h,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    AppShowDialog.forgetPassword(context);
-                                  },
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      border: Border(
-                                        bottom: BorderSide(
-                                          color: AppColors.primary,
-                                        ),
-                                      ),
-                                    ),
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 5.0),
-                                      child: Text(
-                                        S.of(context).forgetPassword,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall!
-                                            .copyWith(
-                                              color: AppColors.primary,
-                                              fontSize: 12.sp,
-                                            ),
-                                      ),
+                    return SlideTransition(
+                        position: offsetAnimation, child: child);
+                  },
+                  child: !_isPhone
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            CustomTextFormField(
+                              control: passwordController,
+                              hintText: S.of(context).password,
+                              prefixIcon: Icons.lock_outlined,
+                              suffixIcon: Icons.remove_red_eye_outlined,
+                              obscureText: true,
+                              focusNode: passwordFocus,
+                              fieldType: _isPhone
+                                  ? FieldType.none
+                                  : FieldType.password,
+                              onEditingComplete: () =>
+                                  FocusScope.of(context).unfocus(),
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                AppShowDialog.forgetPassword(context);
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: AppColors.primary,
                                     ),
                                   ),
                                 ),
-                              ],
-                            )
-                          : const SizedBox.shrink(),
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
-                          if (_isPhone) {
-                            context.read<LoginCubit>().loginGetSmsCode(
-                                  phoneNumber: emailController.text.trim(),
-                                );
-                          } else {
-                            context.read<LoginCubit>().loginEmailPassword(
-                                  emailController.text.trim(),
-                                  passwordController.text.trim(),
-                                );
-                          }
-                        }
-                      },
-                      child: Text(S.of(context).login),
-                    ),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    OrWidget(),
-                    SizedBox(
-                      height: 15.h,
-                    ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        FacebookButton(),
-                        GoogleButton(),
-                        NfcButton(),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          S.of(context).iDontHaveAnAccount,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: AppColors.gray,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            AppNavigator.navigatePushReplace(
-                              context,
-                              const SignScreen(),
-                            );
-                          },
-                          child: Text(
-                            S.of(context).register,
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              color: AppColors.primary,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 5.0),
+                                  child: Text(
+                                    S.of(context).forgetPassword,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall!
+                                        .copyWith(
+                                          color: AppColors.primary,
+                                          fontSize: 12.sp,
+                                        ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30.h,
-                    ),
+                      : const SizedBox.shrink(),
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      if (_isPhone) {
+                        context.read<LoginCubit>().loginGetSmsCode(
+                              phoneNumber: emailController.text.trim(),
+                            );
+                      } else {
+                        context.read<LoginCubit>().loginEmailPassword(
+                              emailController.text.trim(),
+                              passwordController.text.trim(),
+                            );
+                      }
+                    }
+                  },
+                  child: Text(S.of(context).login),
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
+                OrWidget(),
+                SizedBox(
+                  height: 15.h,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    FacebookButton(),
+                    GoogleButton(),
+                    NfcButton(),
                   ],
                 ),
-              ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      S.of(context).iDontHaveAnAccount,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: AppColors.gray,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        AppNavigator.navigatePushReplace(
+                          context,
+                          const SignScreen(),
+                        );
+                      },
+                      child: Text(
+                        S.of(context).register,
+                        style: TextStyle(
+                          fontSize: 16.sp,
+                          color: AppColors.primary,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+              ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

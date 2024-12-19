@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
+import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/auth/presentation/screens/log%20in/bodys/forget_password_body.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/delete_guest_dialog_body.dart';
+import 'package:halla/features/splash/presentation/screens/splash_screen.dart';
 import 'package:lottie/lottie.dart';
 
 class AppShowDialog {
@@ -177,5 +179,38 @@ class AppShowDialog {
         pageBuilder: (context, animation1, animation2) {
           return Container();
         });
+  }
+
+  static noInternetConnection(BuildContext context) {
+    showGeneralDialog(
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: const Duration(milliseconds: 200),
+      barrierDismissible: true,
+      barrierLabel: '',
+      context: context,
+      transitionBuilder: (context, a1, a2, widget) {
+        return Transform.scale(
+          scale: a1.value,
+          child: Opacity(
+            opacity: a1.value,
+            child: widget,
+          ),
+        );
+      },
+      pageBuilder: (context, animation1, animation2) {
+        return AlertDialog(
+          title: Text("No Internet connection"),
+          content: Text("Please connect to the Internet and try again"),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  AppNavigator.navigatePushReplaceRemoveAll(
+                      context, SplashScreen());
+                },
+                child: Text("Try again,"))
+          ],
+        );
+      },
+    );
   }
 }

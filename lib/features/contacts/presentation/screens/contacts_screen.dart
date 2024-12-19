@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/domain/entities/contact.dart';
+import 'package:halla/core/common/presentation/cubit/connection/network_cubit.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
+import 'package:halla/core/common/presentation/widgets/error_banner.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/utils/app_show_dialog.dart';
@@ -26,12 +28,14 @@ class _ContactsScreenState extends State<ContactsScreen> {
   List<Contact>? contactList;
 
   final TextEditingController searchController = TextEditingController();
+  late ValueListenable<Box<List<dynamic>>> contactBoxValueListenable;
 
   @override
   void initState() {
     super.initState();
     userId = UserCubit.get(context).user!.id;
-    // ContactCubit.get(context).getContactList(userId: userId);
+    contactBoxValueListenable =
+        Hive.box<List>(AppConstants.contactBox).listenable();
   }
 
   @override
@@ -42,66 +46,42 @@ class _ContactsScreenState extends State<ContactsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const HeaderContactScreen(),
-          BlocListener<ContactCubit, ContactState>(
-            listener: (context, state) {
-              state.whenOrNull(
-                contactFailure: (error) {
-                  AppShowDialog.error(context, error);
-                },
-                addContactLoading: () {
-                  AppShowDialog.loading(context);
-                },
-                addContactSuccess: () {
-                  AppNavigator.navigatePop(context);
-                },
-                getContactListSyncLoading: () {
-                  AppShowDialog.loading(context);
-                },
-                getContactListSyncSuccess: (contactList) {
-                  AppNavigator.navigatePop(context);
-                },
-              );
-            },
-            child: FutureBuilder(
-              future: getBox(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return getCardShimmer();
-                } else if (snapshot.hasError) {
-                  return SizedBox(
-                    height: 0.4.sh,
-                    child: InkWell(
-                      onTap: () {
-                        ContactCubit.get(context)
-                            .getContactList(userId: userId);
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                AnimatedContainer(
+                  duration: Duration(milliseconds: 200),
+                  height:
+                      context.watch<NetworkCubit>().currentConnection ?? false
+                          ? 0
+                          : 30.h,
+                ),
+                const HeaderContactScreen(),
+                BlocListener<ContactCubit, ContactState>(
+                  listener: (context, state) {
+                    state.whenOrNull(
+                      contactFailure: (error) {
+                        AppShowDialog.error(context, error);
                       },
-                      child: Image(
-                        image: AssetImage(AppImages.contactListEmpty),
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  );
-                } else if (snapshot.data == null) {
-                  return SizedBox(
-                    height: 0.4.sh,
-                    child: InkWell(
-                      onTap: () {
-                        ContactCubit.get(context)
-                            .getContactList(userId: userId);
+                      addContactLoading: () {
+                        AppShowDialog.loading(context);
                       },
-                      child: Image(
-                        image: AssetImage(AppImages.contactListEmpty),
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  );
-                } else {
-                  return ValueListenableBuilder(
-                    valueListenable: snapshot.data!,
+                      addContactSuccess: () {
+                        AppNavigator.navigatePop(context);
+                      },
+                      getContactListSyncLoading: () {
+                        AppShowDialog.loading(context);
+                      },
+                      getContactListSyncSuccess: (contactList) {
+                        AppNavigator.navigatePop(context);
+                      },
+                    );
+                  },
+                  child: ValueListenableBuilder(
+                    valueListenable: contactBoxValueListenable,
                     builder: (context, value, child) {
                       contactList = value.get(userId)?.cast<Contact>() ?? [];
                       if (contactList!.isNotEmpty) {
@@ -133,18 +113,17 @@ class _ContactsScreenState extends State<ContactsScreen> {
                         );
                       }
                     },
-                  );
-                }
-              },
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
+            OfflineBanner(
+                isOffline:
+                    context.watch<NetworkCubit>().currentConnection ?? false),
+          ],
+        ),
       ),
     );
-  }
-
-  Future<ValueListenable<Box<List<dynamic>>>> getBox() async {
-    return Hive.box<List>(AppConstants.contactBox).listenable();
   }
 
   Widget getCardShimmer() => Expanded(

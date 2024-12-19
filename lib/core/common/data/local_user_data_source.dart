@@ -5,8 +5,11 @@ import 'package:hive/hive.dart';
 
 abstract interface class LocalUserDataSource {
   Future<bool> isUserSavedLocal();
+
   Future<void> addUserToLocal(User user);
+
   Future<User> getUserFromLocal();
+
   Future<void> deleteUserFromLocal();
 }
 
@@ -17,7 +20,7 @@ class LocalUserDataSourceImpl implements LocalUserDataSource {
   @override
   Future<void> addUserToLocal(User user) async {
     try {
-      final box = await _getBoxContact();
+      final box = await _getBoxUser();
       await box.put(_keyName, user);
     } catch (e) {
       throw ServerException(e.toString());
@@ -27,7 +30,7 @@ class LocalUserDataSourceImpl implements LocalUserDataSource {
   @override
   Future<void> deleteUserFromLocal() async {
     try {
-      final box = await _getBoxContact();
+      final box = await _getBoxUser();
       await box.delete(_keyName);
     } catch (e) {
       throw ServerException(e.toString());
@@ -37,7 +40,7 @@ class LocalUserDataSourceImpl implements LocalUserDataSource {
   @override
   Future<User> getUserFromLocal() async {
     try {
-      final box = await _getBoxContact();
+      final box = await _getBoxUser();
       final User user = box.get(_keyName)!;
       return user;
     } catch (e) {
@@ -48,7 +51,7 @@ class LocalUserDataSourceImpl implements LocalUserDataSource {
   @override
   Future<bool> isUserSavedLocal() async {
     try {
-      final box = await _getBoxContact();
+      final box = await _getBoxUser();
       if (box.get(_keyName) != null) {
         return true;
       } else {
@@ -59,7 +62,7 @@ class LocalUserDataSourceImpl implements LocalUserDataSource {
     }
   }
 
-  Future<Box<User>> _getBoxContact() async {
+  Future<Box<User>> _getBoxUser() async {
     if (Hive.isBoxOpen(_boxName)) {
       return Hive.box<User>(_boxName);
     } else {

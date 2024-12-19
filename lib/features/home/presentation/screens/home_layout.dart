@@ -1,6 +1,8 @@
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:halla/core/common/presentation/cubit/connection/network_cubit.dart';
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
@@ -17,7 +19,6 @@ class HomeLayout extends StatefulWidget {
 }
 
 class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
-  int _currentIndex = 0;
   late PageController _pageController;
 
   int _selectedIndex = 0;
@@ -30,7 +31,12 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController();
+    _pageController = PageController(
+      initialPage:
+          context.read<NetworkCubit>().currentConnection ?? false ? 0 : 1,
+    );
+    _selectedIndex =
+        context.read<NetworkCubit>().currentConnection ?? false ? 0 : 1;
   }
 
   @override
@@ -43,68 +49,95 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.transparent,
-      body: SizedBox.expand(
-        child: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() => _currentIndex = index);
-          },
-          children: _screens,
-        ),
-      ),
-      bottomNavigationBar: BottomNavyBar(
-        selectedIndex: _selectedIndex,
-        showElevation: false,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        backgroundColor:
-            AppTheme.isLight(context) ? AppColors.white : AppColors.blackLight,
-        onItemSelected: (index) => setState(
-          () {
-            _selectedIndex = index;
-            _pageController.animateToPage(
-              index,
-              duration: Duration(milliseconds: 150),
-              curve: Curves.easeInOutCirc,
+      body: SafeArea(
+        child: BlocListener<NetworkCubit, NetworkState>(
+          listener: (context, state) {
+            state.whenOrNull(
+              disconnected: () {
+                if (_selectedIndex != 1) {
+                  setState(() {
+                    _selectedIndex = 1;
+                    _pageController.jumpToPage(1);
+                  });
+                }
+              },
+              connected: () {},
             );
           },
+          child: PageView(
+            controller: _pageController,
+            physics: context.watch<NetworkCubit>().currentConnection ?? false
+                ? null
+                : NeverScrollableScrollPhysics(),
+            onPageChanged: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+            children: _screens,
+          ),
         ),
-        items: [
-          BottomNavyBarItem(
-            icon: ImageIcon(
-              AssetImage(
-                AppImages.homeBNBIcon,
-              ),
-              size: 23.sp,
-            ),
-            title: Text(S.of(context).home),
-            activeColor: AppColors.primary,
-            inactiveColor: AppColors.grayLight,
+      ),
+      bottomNavigationBar: AnimatedSlide(
+        duration: Duration(milliseconds: 500),
+        offset: context.watch<NetworkCubit>().currentConnection ?? false
+            ? Offset.zero
+            : Offset(0, 1),
+        child: BottomNavyBar(
+          selectedIndex: _selectedIndex,
+          showElevation: false,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          backgroundColor: AppTheme.isLight(context)
+              ? AppColors.white
+              : AppColors.blackLight,
+          onItemSelected: (index) => setState(
+            () {
+              _selectedIndex = index;
+              _pageController.animateToPage(
+                index,
+                duration: Duration(milliseconds: 150),
+                curve: Curves.easeInOutCirc,
+              );
+            },
           ),
-          BottomNavyBarItem(
-            icon: ImageIcon(
-              AssetImage(
-                AppImages.contactBNBIcon,
+          items: [
+            BottomNavyBarItem(
+              icon: ImageIcon(
+                AssetImage(
+                  AppImages.homeBNBIcon,
+                ),
+                size: 23.sp,
               ),
-              size: 23.sp,
+              title: Text(S.of(context).home),
+              activeColor: AppColors.primary,
+              inactiveColor: AppColors.grayLight,
             ),
-            title: Text(S.of(context).contact),
-            activeColor: AppColors.primary,
-            inactiveColor: AppColors.grayLight,
-          ),
-          BottomNavyBarItem(
-            icon: ImageIcon(
-              AssetImage(
-                AppImages.profileBNBIcon,
+            BottomNavyBarItem(
+              icon: ImageIcon(
+                AssetImage(
+                  AppImages.contactBNBIcon,
+                ),
+                size: 23.sp,
               ),
-              size: 23.sp,
+              title: Text(S.of(context).contact),
+              activeColor: AppColors.primary,
+              inactiveColor: AppColors.grayLight,
             ),
-            title: Text(
-              S.of(context).profile,
+            BottomNavyBarItem(
+              icon: ImageIcon(
+                AssetImage(
+                  AppImages.profileBNBIcon,
+                ),
+                size: 23.sp,
+              ),
+              title: Text(
+                S.of(context).profile,
+              ),
+              activeColor: AppColors.primary,
+              inactiveColor: AppColors.grayLight,
             ),
-            activeColor: AppColors.primary,
-            inactiveColor: AppColors.grayLight,
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
