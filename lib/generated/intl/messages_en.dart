@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "addContact": MessageLookupByLibrary.simpleMessage("Add contact"),
         "addNewCategories":
             MessageLookupByLibrary.simpleMessage("Add New Categories"),
         "alreadyIHaveAnAcount":
@@ -105,6 +106,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "register": MessageLookupByLibrary.simpleMessage("Register"),
         "registerNow": MessageLookupByLibrary.simpleMessage("Register Now"),
         "resendCode": MessageLookupByLibrary.simpleMessage("Resend Code"),
+        "saveOfflineContacts":
+            MessageLookupByLibrary.simpleMessage("Save offline contacts"),
+        "scanQrcode": MessageLookupByLibrary.simpleMessage("Scan Qr-Code"),
         "scanQrcodeToAddContact":
             MessageLookupByLibrary.simpleMessage("Scan Qr-Code to add contact"),
         "scanningQrcode":
@@ -115,6 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "socialMedia": MessageLookupByLibrary.simpleMessage("Social Media"),
         "submit": MessageLookupByLibrary.simpleMessage("Submit"),
         "success": MessageLookupByLibrary.simpleMessage("Success"),
+        "syncContact": MessageLookupByLibrary.simpleMessage("Sync contact"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "thisTitleIsAlreadyAdded":
             MessageLookupByLibrary.simpleMessage("This title is already added"),

@@ -26,7 +26,7 @@ class ContactsScreen extends StatefulWidget {
 class _ContactsScreenState extends State<ContactsScreen> {
   late String userId;
   List<Contact>? contactList;
-
+  List<String> offlineContactListIds = [];
   final TextEditingController searchController = TextEditingController();
   late ValueListenable<Box<List<dynamic>>> contactBoxValueListenable;
 
@@ -36,6 +36,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
     userId = UserCubit.get(context).user!.id;
     contactBoxValueListenable =
         Hive.box<List>(AppConstants.contactBox).listenable();
+    ContactCubit.get(context).getOfflineContact(userId: userId);
   }
 
   @override
@@ -57,9 +58,14 @@ class _ContactsScreenState extends State<ContactsScreen> {
                   height:
                       context.watch<NetworkCubit>().currentConnection ?? false
                           ? 0
-                          : 30.h,
+                          : 50.h,
                 ),
-                const HeaderContactScreen(),
+                HeaderContactScreen(
+                  offlineContactListIds: offlineContactListIds,
+                ),
+                SizedBox(
+                  height: 15.h,
+                ),
                 BlocListener<ContactCubit, ContactState>(
                   listener: (context, state) {
                     state.whenOrNull(
@@ -70,13 +76,36 @@ class _ContactsScreenState extends State<ContactsScreen> {
                         AppShowDialog.loading(context);
                       },
                       addContactSuccess: () {
-                        AppNavigator.navigatePop(context);
+                        AppNavigator.navigatePopDialog(context);
                       },
                       getContactListSyncLoading: () {
                         AppShowDialog.loading(context);
                       },
                       getContactListSyncSuccess: (contactList) {
-                        AppNavigator.navigatePop(context);
+                        AppNavigator.navigatePopDialog(context);
+                      },
+                      getContactListFromOfflineSuccess: (contactIdsList) {
+                        offlineContactListIds = contactIdsList;
+                        setState(() {});
+                      },
+                      addContactListToOfflineSuccess: (contactIdsList) {
+                        AppNavigator.navigatePopDialog(context);
+                        offlineContactListIds = contactIdsList;
+                        setState(() {});
+                      },
+                      addContactListSuccess: () {
+                        context
+                            .read<ContactCubit>()
+                            .clearOfflineContactList(userId: userId);
+                      },
+                      offlineLoading: () {
+                        AppShowDialog.loading(context);
+                      },
+                      clearOfflineContactListSuccess: () {
+                        AppNavigator.navigatePopDialog(context);
+                        setState(() {
+                          offlineContactListIds = [];
+                        });
                       },
                     );
                   },
@@ -89,8 +118,10 @@ class _ContactsScreenState extends State<ContactsScreen> {
                           child: ListView.builder(
                             shrinkWrap: true,
                             itemCount: contactList!.length,
-                            //contactList.length,
                             itemBuilder: (context, index) {
+                              if (contactList![index].id == userId) {
+                                return SizedBox.shrink();
+                              }
                               return ContactCard(
                                 contact: contactList![index],
                               );

@@ -30,6 +30,20 @@ abstract class ContactsRepository {
   // delete contact local and server
   Future<Either<Failure, void>> deleteContact(
       {required String userId, required String contactId});
+
+  // offline (addStrings to local , getContactList from local )
+  Future<Either<Failure, List<String>>> getContactIdListFromLocal({
+    required String userId,
+  });
+
+  Future<Either<Failure, List<String>>> addContactIdToLocal({
+    required String userId,
+    required String contactId,
+  });
+
+  Future<Either<Failure, void>> clearContactIdToLocal({
+    required String userId,
+  });
 }
 
 class ContactsRepositoryImpl implements ContactsRepository {
@@ -74,6 +88,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
   // get list local and server
 
+  //local.getContactList
   @override
   Future<Either<Failure, List<Contact>>> getContactList(
       {required String userId}) async {
@@ -85,6 +100,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
     }
   }
 
+  //local and server
   @override
   Future<Either<Failure, List<Contact>>> getContactListSync(
       {required String userId}) async {
@@ -110,6 +126,43 @@ class ContactsRepositoryImpl implements ContactsRepository {
     try {
       await server.deleteContact(userId: userId, contactId: contactId);
       final r = await local.deleteContact(userId: userId, contactId: contactId);
+      return Right(r);
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
+
+  // offline add
+  @override
+  Future<Either<Failure, List<String>>> addContactIdToLocal(
+      {required String userId, required String contactId}) async {
+    try {
+      final r =
+          await local.addIdToOfflineList(userId: userId, contactId: contactId);
+      return Right(r);
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
+
+  // offline get
+  @override
+  Future<Either<Failure, List<String>>> getContactIdListFromLocal(
+      {required String userId}) async {
+    try {
+      final r = await local.getIdFromOfflineList(userId: userId);
+      return Right(r);
+    } on ServerException catch (e) {
+      return Left(Failure(e.message));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> clearContactIdToLocal({
+    required String userId,
+  }) async {
+    try {
+      final r = await local.clearOfflineContact(userId: userId);
       return Right(r);
     } on ServerException catch (e) {
       return Left(Failure(e.message));

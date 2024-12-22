@@ -27,11 +27,27 @@ abstract class ContactsLocalDataSource {
     required String userId,
     required String contactId,
   });
+
+  Future<List<String>> addIdToOfflineList({
+    required String userId,
+    required String contactId,
+  });
+
+  Future<List<String>> getIdFromOfflineList({
+    required String userId,
+  });
+
+  Future<void> clearOfflineContact({
+    required String userId,
+  });
 }
 
 class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
   Future<Box<List>> get _contactBox async =>
       await Hive.openBox(AppConstants.contactBox);
+
+  Future<Box<List>> get _contactOfflineBox async =>
+      await Hive.openBox(AppConstants.contactOfflineBox);
 
   @override
   Future<void> addContact({
@@ -138,5 +154,45 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
 
   List<Map<String, dynamic>> _convertToMap(List<Contact> contactList) {
     return contactList.map((e) => e.toMap()).toList();
+  }
+
+  @override
+  Future<List<String>> addIdToOfflineList(
+      {required String userId, required String contactId}) async {
+    try {
+      Box<List> contactBox = await _contactOfflineBox;
+      List<String> contactIdList = contactBox.get(userId)?.cast<String>() ?? [];
+      contactIdList.toSet();
+      contactIdList.add(contactId);
+      contactIdList.toList();
+      contactBox.put(userId, contactIdList);
+      return contactIdList;
+    } catch (e) {
+      print(e);
+      throw ServerException('Failed to add contact offline');
+    }
+  }
+
+  @override
+  Future<List<String>> getIdFromOfflineList({required String userId}) async {
+    try {
+      Box<List> contactBox = await _contactOfflineBox;
+      List<String> contactIdList = contactBox.get(userId)?.cast<String>() ?? [];
+      return contactIdList;
+    } catch (e) {
+      print(e);
+      throw ServerException('Failed to get contact offline');
+    }
+  }
+
+  @override
+  Future<void> clearOfflineContact({required String userId}) async {
+    try {
+      Box<List> contactBox = await _contactOfflineBox;
+      contactBox.put(userId, []);
+    } catch (e) {
+      print(e);
+      throw ServerException('Failed to clear contact offline');
+    }
   }
 }

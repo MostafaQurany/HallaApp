@@ -39,6 +39,18 @@ class ContactState with _$ContactState {
 
   const factory ContactState.getContactListLoading() = GetContactListLoading;
 
+  // offline contacts states add and get list
+  const factory ContactState.addContactListToOfflineSuccess(
+      List<String> contactIdsList) = AddContactListToOfflineSuccess;
+
+  const factory ContactState.getContactListFromOfflineSuccess(
+      List<String> contactIdsList) = GetContactListFromOfflineSuccess;
+
+  const factory ContactState.clearOfflineContactListSuccess() =
+      ClearOfflineContactListSuccess;
+
+  const factory ContactState.offlineLoading() = OfflineLoading;
+
   // failure
   const factory ContactState.contactFailure(String error) = ContactFailure;
 }

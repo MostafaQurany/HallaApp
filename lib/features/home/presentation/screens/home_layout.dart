@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/presentation/cubit/connection/network_cubit.dart';
 import 'package:halla/core/constants/app_images.dart';
+import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:halla/features/contacts/presentation/screens/contacts_screen.dart';
@@ -79,7 +80,7 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
         ),
       ),
       bottomNavigationBar: AnimatedSlide(
-        duration: Duration(milliseconds: 500),
+        duration: AppConstants.bottomNavigationBarDuration,
         offset: context.watch<NetworkCubit>().currentConnection ?? false
             ? Offset.zero
             : Offset(0, 1),
@@ -96,7 +97,7 @@ class _HomeLayoutState extends State<HomeLayout> with TickerProviderStateMixin {
               _pageController.animateToPage(
                 index,
                 duration: Duration(milliseconds: 150),
-                curve: Curves.easeInOutCirc,
+                curve: Curves.easeInOut,
               );
             },
           ),

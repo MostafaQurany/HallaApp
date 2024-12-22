@@ -780,6 +780,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Scan Qr-Code`
+  String get scanQrcode {
+    return Intl.message(
+      'Scan Qr-Code',
+      name: 'scanQrcode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add contact`
+  String get addContact {
+    return Intl.message(
+      'Add contact',
+      name: 'addContact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sync contact`
+  String get syncContact {
+    return Intl.message(
+      'Sync contact',
+      name: 'syncContact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save offline contacts`
+  String get saveOfflineContacts {
+    return Intl.message(
+      'Save offline contacts',
+      name: 'saveOfflineContacts',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

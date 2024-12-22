@@ -62,8 +62,6 @@ class _SplashScreenState extends State<SplashScreen> {
         .then(
       (value) {
         if (value == true) {
-          // set first time open to false
-          // show dialog with first time open with no in
           // TODO: Open the onBoarding Screens
           AppNavigator.navigatePushReplace(
               context,

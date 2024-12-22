@@ -203,6 +203,7 @@ class AppConstants {
   ];
   static String userCollection = 'users';
   static String contactBox = "ContactsBox";
+  static String contactOfflineBox = "ContactsOfflineBox";
   static String userLocalBox = "UserLocalBox";
   static String userLocalKey = "UserLocalKey";
   static String userBox = "UserBox";
@@ -228,5 +229,6 @@ class AppConstants {
     return "$guest${returnValue ?? ''}";
   }
 
-  var contacts = [];
+  static Duration contactScreenErrorDuration = Duration(seconds: 1);
+  static Duration bottomNavigationBarDuration = Duration(seconds: 1);
 }

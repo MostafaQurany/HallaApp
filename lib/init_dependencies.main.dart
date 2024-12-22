@@ -288,9 +288,27 @@ _initContact() async {
         serviceLocator(),
       ),
     )
+    ..registerFactory(
+      () => GetOfflineListContactUseCase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => AddOfflineContactUseCase(
+        serviceLocator(),
+      ),
+    )
+    ..registerFactory(
+      () => ClearOfflineContactUseCase(
+        serviceLocator(),
+      ),
+    )
     // bloc
     ..registerLazySingleton(
       () => ContactCubit(
+        serviceLocator(),
+        serviceLocator(),
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),

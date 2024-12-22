@@ -5,7 +5,9 @@ import 'package:halla/core/theme/app_colors.dart';
 import 'package:lottie/lottie.dart';
 
 class DownloadContactIcon extends StatefulWidget {
-  const DownloadContactIcon({super.key});
+  int listLength;
+
+  DownloadContactIcon({this.listLength = 0, super.key});
 
   @override
   State<DownloadContactIcon> createState() => _DownloadContactIconState();
@@ -14,6 +16,7 @@ class DownloadContactIcon extends StatefulWidget {
 class _DownloadContactIconState extends State<DownloadContactIcon>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+
   @override
   void initState() {
     super.initState();
@@ -44,7 +47,7 @@ class _DownloadContactIconState extends State<DownloadContactIcon>
           height: 60.h,
         ),
         Text(
-          '111',
+          widget.listLength.toString(),
           style: Theme.of(context).textTheme.bodySmall!.copyWith(
                 color: AppColors.primary,
                 fontSize: 9.sp,
