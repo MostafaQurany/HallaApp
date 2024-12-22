@@ -43,9 +43,12 @@ import 'package:halla/features/contacts/data/data_sources/contacts_local_data_so
 import 'package:halla/features/contacts/domain/repositories/contacts_repository.dart';
 import 'package:halla/features/contacts/domain/usecases/add_contact_list_usecase.dart';
 import 'package:halla/features/contacts/domain/usecases/add_contact_usecase.dart';
+import 'package:halla/features/contacts/domain/usecases/add_offline_contact_use_case.dart';
+import 'package:halla/features/contacts/domain/usecases/clear_offline_contact_use_case.dart';
 import 'package:halla/features/contacts/domain/usecases/delete_contact_use_case.dart';
 import 'package:halla/features/contacts/domain/usecases/get_contact_list_sync_usecase.dart';
 import 'package:halla/features/contacts/domain/usecases/get_contact_list_use_case.dart';
+import 'package:halla/features/contacts/domain/usecases/get_offline_list_contact_use_case.dart';
 import 'package:halla/features/contacts/presentation/blocs/cubit/contact_cubit.dart';
 import 'package:halla/features/profile/data/datasources/profile_data_source.dart';
 import 'package:halla/features/profile/data/repositories/profile_repository_impl.dart';

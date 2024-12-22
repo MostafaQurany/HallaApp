@@ -98,5 +98,9 @@
   "typeYourNewFavoriteCategorieToAdd": "Type your new favorite categorie to add.",
   "addNewCategories": "Add New Categories",
   "thisTitleIsAlreadyAdded": "This title is already added",
-  "scanningQrcode": "Scanning Qr-code"
+  "scanningQrcode": "Scanning Qr-code",
+  "scanQrcode": "Scan Qr-Code",
+  "addContact": "Add contact",
+  "syncContact": "Sync contact",
+  "saveOfflineContacts": "Save offline contacts"
 }

@@ -11,9 +11,9 @@ import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart
 import 'package:halla/features/profile/presentation/screens/favorite%20contacts%20setting/favorite_contacts_settings.dart';
 import 'package:halla/features/profile/presentation/screens/settings/settings_screen.dart';
 import 'package:halla/features/profile/presentation/screens/update%20profile/update_profile_screen.dart';
-import 'package:halla/features/profile/presentation/screens/widgets/profile_app_bar.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_profile_buttom.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_profile_log_out_buttom.dart';
+import 'package:halla/features/profile/presentation/screens/widgets/profile_app_bar.dart';
 import 'package:halla/generated/l10n.dart';
 
 class ProfileScreen extends StatefulWidget {
