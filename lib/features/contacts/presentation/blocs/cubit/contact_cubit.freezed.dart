@@ -33,6 +33,12 @@ mixin _$ContactState {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +57,12 @@ mixin _$ContactState {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -69,6 +81,12 @@ mixin _$ContactState {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) =>
@@ -96,6 +114,13 @@ mixin _$ContactState {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -118,6 +143,13 @@ mixin _$ContactState {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) =>
       throw _privateConstructorUsedError;
@@ -140,6 +172,13 @@ mixin _$ContactState {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) =>
@@ -223,6 +262,12 @@ class _$InitialImpl implements _Initial {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return initial();
@@ -244,6 +289,12 @@ class _$InitialImpl implements _Initial {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return initial?.call();
@@ -265,6 +316,12 @@ class _$InitialImpl implements _Initial {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -298,6 +355,13 @@ class _$InitialImpl implements _Initial {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return initial(this);
@@ -323,6 +387,13 @@ class _$InitialImpl implements _Initial {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return initial?.call(this);
@@ -348,6 +419,13 @@ class _$InitialImpl implements _Initial {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -418,6 +496,12 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return addContactSuccess();
@@ -439,6 +523,12 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return addContactSuccess?.call();
@@ -460,6 +550,12 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -493,6 +589,13 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return addContactSuccess(this);
@@ -518,6 +621,13 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return addContactSuccess?.call(this);
@@ -543,6 +653,13 @@ class _$AddContactSuccessImpl implements AddContactSuccess {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -613,6 +730,12 @@ class _$AddContactLoadingImpl implements AddContactLoading {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return addContactLoading();
@@ -634,6 +757,12 @@ class _$AddContactLoadingImpl implements AddContactLoading {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return addContactLoading?.call();
@@ -655,6 +784,12 @@ class _$AddContactLoadingImpl implements AddContactLoading {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -688,6 +823,13 @@ class _$AddContactLoadingImpl implements AddContactLoading {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return addContactLoading(this);
@@ -713,6 +855,13 @@ class _$AddContactLoadingImpl implements AddContactLoading {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return addContactLoading?.call(this);
@@ -738,6 +887,13 @@ class _$AddContactLoadingImpl implements AddContactLoading {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -810,6 +966,12 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return addContactListSuccess();
@@ -831,6 +993,12 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return addContactListSuccess?.call();
@@ -852,6 +1020,12 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -885,6 +1059,13 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return addContactListSuccess(this);
@@ -910,6 +1091,13 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return addContactListSuccess?.call(this);
@@ -935,6 +1123,13 @@ class _$AddContactListSuccessImpl implements AddContactListSuccess {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -1007,6 +1202,12 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return addContactListLoading();
@@ -1028,6 +1229,12 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return addContactListLoading?.call();
@@ -1049,6 +1256,12 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -1082,6 +1295,13 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return addContactListLoading(this);
@@ -1107,6 +1327,13 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return addContactListLoading?.call(this);
@@ -1132,6 +1359,13 @@ class _$AddContactListLoadingImpl implements AddContactListLoading {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -1203,6 +1437,12 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return deleteContactSuccess();
@@ -1224,6 +1464,12 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return deleteContactSuccess?.call();
@@ -1245,6 +1491,12 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -1278,6 +1530,13 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return deleteContactSuccess(this);
@@ -1303,6 +1562,13 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return deleteContactSuccess?.call(this);
@@ -1328,6 +1594,13 @@ class _$DeleteContactSuccessImpl implements DeleteContactSuccess {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -1399,6 +1672,12 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return deleteContactLoading();
@@ -1420,6 +1699,12 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return deleteContactLoading?.call();
@@ -1441,6 +1726,12 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -1474,6 +1765,13 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return deleteContactLoading(this);
@@ -1499,6 +1797,13 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return deleteContactLoading?.call(this);
@@ -1524,6 +1829,13 @@ class _$DeleteContactLoadingImpl implements DeleteContactLoading {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -1597,6 +1909,12 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return getContactListStreamLoading();
@@ -1618,6 +1936,12 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return getContactListStreamLoading?.call();
@@ -1639,6 +1963,12 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -1672,6 +2002,13 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListStreamLoading(this);
@@ -1697,6 +2034,13 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListStreamLoading?.call(this);
@@ -1722,6 +2066,13 @@ class _$GetContactListStreamLoadingImpl implements GetContactListStreamLoading {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -1824,6 +2175,12 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return getContactListStreamSuccess(streamer);
@@ -1845,6 +2202,12 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return getContactListStreamSuccess?.call(streamer);
@@ -1866,6 +2229,12 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -1899,6 +2268,13 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListStreamSuccess(this);
@@ -1924,6 +2300,13 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListStreamSuccess?.call(this);
@@ -1949,6 +2332,13 @@ class _$GetContactListStreamSuccessImpl implements GetContactListStreamSuccess {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -2031,6 +2421,12 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return getContactListSyncLoading();
@@ -2052,6 +2448,12 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return getContactListSyncLoading?.call();
@@ -2073,6 +2475,12 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -2106,6 +2514,13 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListSyncLoading(this);
@@ -2131,6 +2546,13 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListSyncLoading?.call(this);
@@ -2156,6 +2578,13 @@ class _$GetContactListSyncLoadingImpl implements GetContactListSyncLoading {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -2264,6 +2693,12 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return getContactListSyncSuccess(contactList);
@@ -2285,6 +2720,12 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return getContactListSyncSuccess?.call(contactList);
@@ -2306,6 +2747,12 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -2339,6 +2786,13 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListSyncSuccess(this);
@@ -2364,6 +2818,13 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListSyncSuccess?.call(this);
@@ -2389,6 +2850,13 @@ class _$GetContactListSyncSuccessImpl implements GetContactListSyncSuccess {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -2505,6 +2973,12 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return getContactListSuccess(contactList);
@@ -2526,6 +3000,12 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return getContactListSuccess?.call(contactList);
@@ -2547,6 +3027,12 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -2580,6 +3066,13 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListSuccess(this);
@@ -2605,6 +3098,13 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListSuccess?.call(this);
@@ -2630,6 +3130,13 @@ class _$GetContactListSuccessImpl implements GetContactListSuccess {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -2711,6 +3218,12 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return getContactListLoading();
@@ -2732,6 +3245,12 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return getContactListLoading?.call();
@@ -2753,6 +3272,12 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -2786,6 +3311,13 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return getContactListLoading(this);
@@ -2811,6 +3343,13 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return getContactListLoading?.call(this);
@@ -2836,6 +3375,13 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
@@ -2848,6 +3394,1052 @@ class _$GetContactListLoadingImpl implements GetContactListLoading {
 
 abstract class GetContactListLoading implements ContactState {
   const factory GetContactListLoading() = _$GetContactListLoadingImpl;
+}
+
+/// @nodoc
+abstract class _$$AddContactListToOfflineSuccessImplCopyWith<$Res> {
+  factory _$$AddContactListToOfflineSuccessImplCopyWith(
+          _$AddContactListToOfflineSuccessImpl value,
+          $Res Function(_$AddContactListToOfflineSuccessImpl) then) =
+      __$$AddContactListToOfflineSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> contactIdsList});
+}
+
+/// @nodoc
+class __$$AddContactListToOfflineSuccessImplCopyWithImpl<$Res>
+    extends _$ContactStateCopyWithImpl<$Res,
+        _$AddContactListToOfflineSuccessImpl>
+    implements _$$AddContactListToOfflineSuccessImplCopyWith<$Res> {
+  __$$AddContactListToOfflineSuccessImplCopyWithImpl(
+      _$AddContactListToOfflineSuccessImpl _value,
+      $Res Function(_$AddContactListToOfflineSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? contactIdsList = null,
+  }) {
+    return _then(_$AddContactListToOfflineSuccessImpl(
+      null == contactIdsList
+          ? _value._contactIdsList
+          : contactIdsList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddContactListToOfflineSuccessImpl
+    implements AddContactListToOfflineSuccess {
+  const _$AddContactListToOfflineSuccessImpl(final List<String> contactIdsList)
+      : _contactIdsList = contactIdsList;
+
+  final List<String> _contactIdsList;
+  @override
+  List<String> get contactIdsList {
+    if (_contactIdsList is EqualUnmodifiableListView) return _contactIdsList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_contactIdsList);
+  }
+
+  @override
+  String toString() {
+    return 'ContactState.addContactListToOfflineSuccess(contactIdsList: $contactIdsList)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddContactListToOfflineSuccessImpl &&
+            const DeepCollectionEquality()
+                .equals(other._contactIdsList, _contactIdsList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_contactIdsList));
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddContactListToOfflineSuccessImplCopyWith<
+          _$AddContactListToOfflineSuccessImpl>
+      get copyWith => __$$AddContactListToOfflineSuccessImplCopyWithImpl<
+          _$AddContactListToOfflineSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() addContactSuccess,
+    required TResult Function() addContactLoading,
+    required TResult Function() addContactListSuccess,
+    required TResult Function() addContactListLoading,
+    required TResult Function() deleteContactSuccess,
+    required TResult Function() deleteContactLoading,
+    required TResult Function() getContactListStreamLoading,
+    required TResult Function(Stream<BoxEvent> streamer)
+        getContactListStreamSuccess,
+    required TResult Function() getContactListSyncLoading,
+    required TResult Function(List<Contact> contactList)
+        getContactListSyncSuccess,
+    required TResult Function(List<Contact> contactList) getContactListSuccess,
+    required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
+    required TResult Function(String error) contactFailure,
+  }) {
+    return addContactListToOfflineSuccess(contactIdsList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? addContactSuccess,
+    TResult? Function()? addContactLoading,
+    TResult? Function()? addContactListSuccess,
+    TResult? Function()? addContactListLoading,
+    TResult? Function()? deleteContactSuccess,
+    TResult? Function()? deleteContactLoading,
+    TResult? Function()? getContactListStreamLoading,
+    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
+    TResult? Function()? getContactListSyncLoading,
+    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
+    TResult? Function(List<Contact> contactList)? getContactListSuccess,
+    TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
+    TResult? Function(String error)? contactFailure,
+  }) {
+    return addContactListToOfflineSuccess?.call(contactIdsList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? addContactSuccess,
+    TResult Function()? addContactLoading,
+    TResult Function()? addContactListSuccess,
+    TResult Function()? addContactListLoading,
+    TResult Function()? deleteContactSuccess,
+    TResult Function()? deleteContactLoading,
+    TResult Function()? getContactListStreamLoading,
+    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
+    TResult Function()? getContactListSyncLoading,
+    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
+    TResult Function(List<Contact> contactList)? getContactListSuccess,
+    TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
+    TResult Function(String error)? contactFailure,
+    required TResult orElse(),
+  }) {
+    if (addContactListToOfflineSuccess != null) {
+      return addContactListToOfflineSuccess(contactIdsList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(AddContactSuccess value) addContactSuccess,
+    required TResult Function(AddContactLoading value) addContactLoading,
+    required TResult Function(AddContactListSuccess value)
+        addContactListSuccess,
+    required TResult Function(AddContactListLoading value)
+        addContactListLoading,
+    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
+    required TResult Function(DeleteContactLoading value) deleteContactLoading,
+    required TResult Function(GetContactListStreamLoading value)
+        getContactListStreamLoading,
+    required TResult Function(GetContactListStreamSuccess value)
+        getContactListStreamSuccess,
+    required TResult Function(GetContactListSyncLoading value)
+        getContactListSyncLoading,
+    required TResult Function(GetContactListSyncSuccess value)
+        getContactListSyncSuccess,
+    required TResult Function(GetContactListSuccess value)
+        getContactListSuccess,
+    required TResult Function(GetContactListLoading value)
+        getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
+    required TResult Function(ContactFailure value) contactFailure,
+  }) {
+    return addContactListToOfflineSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(AddContactSuccess value)? addContactSuccess,
+    TResult? Function(AddContactLoading value)? addContactLoading,
+    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
+    TResult? Function(AddContactListLoading value)? addContactListLoading,
+    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
+    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
+    TResult? Function(GetContactListStreamLoading value)?
+        getContactListStreamLoading,
+    TResult? Function(GetContactListStreamSuccess value)?
+        getContactListStreamSuccess,
+    TResult? Function(GetContactListSyncLoading value)?
+        getContactListSyncLoading,
+    TResult? Function(GetContactListSyncSuccess value)?
+        getContactListSyncSuccess,
+    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
+    TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
+  }) {
+    return addContactListToOfflineSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(AddContactSuccess value)? addContactSuccess,
+    TResult Function(AddContactLoading value)? addContactLoading,
+    TResult Function(AddContactListSuccess value)? addContactListSuccess,
+    TResult Function(AddContactListLoading value)? addContactListLoading,
+    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
+    TResult Function(DeleteContactLoading value)? deleteContactLoading,
+    TResult Function(GetContactListStreamLoading value)?
+        getContactListStreamLoading,
+    TResult Function(GetContactListStreamSuccess value)?
+        getContactListStreamSuccess,
+    TResult Function(GetContactListSyncLoading value)?
+        getContactListSyncLoading,
+    TResult Function(GetContactListSyncSuccess value)?
+        getContactListSyncSuccess,
+    TResult Function(GetContactListSuccess value)? getContactListSuccess,
+    TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
+    TResult Function(ContactFailure value)? contactFailure,
+    required TResult orElse(),
+  }) {
+    if (addContactListToOfflineSuccess != null) {
+      return addContactListToOfflineSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddContactListToOfflineSuccess implements ContactState {
+  const factory AddContactListToOfflineSuccess(
+      final List<String> contactIdsList) = _$AddContactListToOfflineSuccessImpl;
+
+  List<String> get contactIdsList;
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$AddContactListToOfflineSuccessImplCopyWith<
+          _$AddContactListToOfflineSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetContactListFromOfflineSuccessImplCopyWith<$Res> {
+  factory _$$GetContactListFromOfflineSuccessImplCopyWith(
+          _$GetContactListFromOfflineSuccessImpl value,
+          $Res Function(_$GetContactListFromOfflineSuccessImpl) then) =
+      __$$GetContactListFromOfflineSuccessImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<String> contactIdsList});
+}
+
+/// @nodoc
+class __$$GetContactListFromOfflineSuccessImplCopyWithImpl<$Res>
+    extends _$ContactStateCopyWithImpl<$Res,
+        _$GetContactListFromOfflineSuccessImpl>
+    implements _$$GetContactListFromOfflineSuccessImplCopyWith<$Res> {
+  __$$GetContactListFromOfflineSuccessImplCopyWithImpl(
+      _$GetContactListFromOfflineSuccessImpl _value,
+      $Res Function(_$GetContactListFromOfflineSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? contactIdsList = null,
+  }) {
+    return _then(_$GetContactListFromOfflineSuccessImpl(
+      null == contactIdsList
+          ? _value._contactIdsList
+          : contactIdsList // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetContactListFromOfflineSuccessImpl
+    implements GetContactListFromOfflineSuccess {
+  const _$GetContactListFromOfflineSuccessImpl(
+      final List<String> contactIdsList)
+      : _contactIdsList = contactIdsList;
+
+  final List<String> _contactIdsList;
+  @override
+  List<String> get contactIdsList {
+    if (_contactIdsList is EqualUnmodifiableListView) return _contactIdsList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_contactIdsList);
+  }
+
+  @override
+  String toString() {
+    return 'ContactState.getContactListFromOfflineSuccess(contactIdsList: $contactIdsList)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetContactListFromOfflineSuccessImpl &&
+            const DeepCollectionEquality()
+                .equals(other._contactIdsList, _contactIdsList));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_contactIdsList));
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetContactListFromOfflineSuccessImplCopyWith<
+          _$GetContactListFromOfflineSuccessImpl>
+      get copyWith => __$$GetContactListFromOfflineSuccessImplCopyWithImpl<
+          _$GetContactListFromOfflineSuccessImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() addContactSuccess,
+    required TResult Function() addContactLoading,
+    required TResult Function() addContactListSuccess,
+    required TResult Function() addContactListLoading,
+    required TResult Function() deleteContactSuccess,
+    required TResult Function() deleteContactLoading,
+    required TResult Function() getContactListStreamLoading,
+    required TResult Function(Stream<BoxEvent> streamer)
+        getContactListStreamSuccess,
+    required TResult Function() getContactListSyncLoading,
+    required TResult Function(List<Contact> contactList)
+        getContactListSyncSuccess,
+    required TResult Function(List<Contact> contactList) getContactListSuccess,
+    required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
+    required TResult Function(String error) contactFailure,
+  }) {
+    return getContactListFromOfflineSuccess(contactIdsList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? addContactSuccess,
+    TResult? Function()? addContactLoading,
+    TResult? Function()? addContactListSuccess,
+    TResult? Function()? addContactListLoading,
+    TResult? Function()? deleteContactSuccess,
+    TResult? Function()? deleteContactLoading,
+    TResult? Function()? getContactListStreamLoading,
+    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
+    TResult? Function()? getContactListSyncLoading,
+    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
+    TResult? Function(List<Contact> contactList)? getContactListSuccess,
+    TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
+    TResult? Function(String error)? contactFailure,
+  }) {
+    return getContactListFromOfflineSuccess?.call(contactIdsList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? addContactSuccess,
+    TResult Function()? addContactLoading,
+    TResult Function()? addContactListSuccess,
+    TResult Function()? addContactListLoading,
+    TResult Function()? deleteContactSuccess,
+    TResult Function()? deleteContactLoading,
+    TResult Function()? getContactListStreamLoading,
+    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
+    TResult Function()? getContactListSyncLoading,
+    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
+    TResult Function(List<Contact> contactList)? getContactListSuccess,
+    TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
+    TResult Function(String error)? contactFailure,
+    required TResult orElse(),
+  }) {
+    if (getContactListFromOfflineSuccess != null) {
+      return getContactListFromOfflineSuccess(contactIdsList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(AddContactSuccess value) addContactSuccess,
+    required TResult Function(AddContactLoading value) addContactLoading,
+    required TResult Function(AddContactListSuccess value)
+        addContactListSuccess,
+    required TResult Function(AddContactListLoading value)
+        addContactListLoading,
+    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
+    required TResult Function(DeleteContactLoading value) deleteContactLoading,
+    required TResult Function(GetContactListStreamLoading value)
+        getContactListStreamLoading,
+    required TResult Function(GetContactListStreamSuccess value)
+        getContactListStreamSuccess,
+    required TResult Function(GetContactListSyncLoading value)
+        getContactListSyncLoading,
+    required TResult Function(GetContactListSyncSuccess value)
+        getContactListSyncSuccess,
+    required TResult Function(GetContactListSuccess value)
+        getContactListSuccess,
+    required TResult Function(GetContactListLoading value)
+        getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
+    required TResult Function(ContactFailure value) contactFailure,
+  }) {
+    return getContactListFromOfflineSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(AddContactSuccess value)? addContactSuccess,
+    TResult? Function(AddContactLoading value)? addContactLoading,
+    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
+    TResult? Function(AddContactListLoading value)? addContactListLoading,
+    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
+    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
+    TResult? Function(GetContactListStreamLoading value)?
+        getContactListStreamLoading,
+    TResult? Function(GetContactListStreamSuccess value)?
+        getContactListStreamSuccess,
+    TResult? Function(GetContactListSyncLoading value)?
+        getContactListSyncLoading,
+    TResult? Function(GetContactListSyncSuccess value)?
+        getContactListSyncSuccess,
+    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
+    TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
+  }) {
+    return getContactListFromOfflineSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(AddContactSuccess value)? addContactSuccess,
+    TResult Function(AddContactLoading value)? addContactLoading,
+    TResult Function(AddContactListSuccess value)? addContactListSuccess,
+    TResult Function(AddContactListLoading value)? addContactListLoading,
+    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
+    TResult Function(DeleteContactLoading value)? deleteContactLoading,
+    TResult Function(GetContactListStreamLoading value)?
+        getContactListStreamLoading,
+    TResult Function(GetContactListStreamSuccess value)?
+        getContactListStreamSuccess,
+    TResult Function(GetContactListSyncLoading value)?
+        getContactListSyncLoading,
+    TResult Function(GetContactListSyncSuccess value)?
+        getContactListSyncSuccess,
+    TResult Function(GetContactListSuccess value)? getContactListSuccess,
+    TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
+    TResult Function(ContactFailure value)? contactFailure,
+    required TResult orElse(),
+  }) {
+    if (getContactListFromOfflineSuccess != null) {
+      return getContactListFromOfflineSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetContactListFromOfflineSuccess implements ContactState {
+  const factory GetContactListFromOfflineSuccess(
+          final List<String> contactIdsList) =
+      _$GetContactListFromOfflineSuccessImpl;
+
+  List<String> get contactIdsList;
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$GetContactListFromOfflineSuccessImplCopyWith<
+          _$GetContactListFromOfflineSuccessImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ClearOfflineContactListSuccessImplCopyWith<$Res> {
+  factory _$$ClearOfflineContactListSuccessImplCopyWith(
+          _$ClearOfflineContactListSuccessImpl value,
+          $Res Function(_$ClearOfflineContactListSuccessImpl) then) =
+      __$$ClearOfflineContactListSuccessImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ClearOfflineContactListSuccessImplCopyWithImpl<$Res>
+    extends _$ContactStateCopyWithImpl<$Res,
+        _$ClearOfflineContactListSuccessImpl>
+    implements _$$ClearOfflineContactListSuccessImplCopyWith<$Res> {
+  __$$ClearOfflineContactListSuccessImplCopyWithImpl(
+      _$ClearOfflineContactListSuccessImpl _value,
+      $Res Function(_$ClearOfflineContactListSuccessImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$ClearOfflineContactListSuccessImpl
+    implements ClearOfflineContactListSuccess {
+  const _$ClearOfflineContactListSuccessImpl();
+
+  @override
+  String toString() {
+    return 'ContactState.clearOfflineContactListSuccess()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClearOfflineContactListSuccessImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() addContactSuccess,
+    required TResult Function() addContactLoading,
+    required TResult Function() addContactListSuccess,
+    required TResult Function() addContactListLoading,
+    required TResult Function() deleteContactSuccess,
+    required TResult Function() deleteContactLoading,
+    required TResult Function() getContactListStreamLoading,
+    required TResult Function(Stream<BoxEvent> streamer)
+        getContactListStreamSuccess,
+    required TResult Function() getContactListSyncLoading,
+    required TResult Function(List<Contact> contactList)
+        getContactListSyncSuccess,
+    required TResult Function(List<Contact> contactList) getContactListSuccess,
+    required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
+    required TResult Function(String error) contactFailure,
+  }) {
+    return clearOfflineContactListSuccess();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? addContactSuccess,
+    TResult? Function()? addContactLoading,
+    TResult? Function()? addContactListSuccess,
+    TResult? Function()? addContactListLoading,
+    TResult? Function()? deleteContactSuccess,
+    TResult? Function()? deleteContactLoading,
+    TResult? Function()? getContactListStreamLoading,
+    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
+    TResult? Function()? getContactListSyncLoading,
+    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
+    TResult? Function(List<Contact> contactList)? getContactListSuccess,
+    TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
+    TResult? Function(String error)? contactFailure,
+  }) {
+    return clearOfflineContactListSuccess?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? addContactSuccess,
+    TResult Function()? addContactLoading,
+    TResult Function()? addContactListSuccess,
+    TResult Function()? addContactListLoading,
+    TResult Function()? deleteContactSuccess,
+    TResult Function()? deleteContactLoading,
+    TResult Function()? getContactListStreamLoading,
+    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
+    TResult Function()? getContactListSyncLoading,
+    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
+    TResult Function(List<Contact> contactList)? getContactListSuccess,
+    TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
+    TResult Function(String error)? contactFailure,
+    required TResult orElse(),
+  }) {
+    if (clearOfflineContactListSuccess != null) {
+      return clearOfflineContactListSuccess();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(AddContactSuccess value) addContactSuccess,
+    required TResult Function(AddContactLoading value) addContactLoading,
+    required TResult Function(AddContactListSuccess value)
+        addContactListSuccess,
+    required TResult Function(AddContactListLoading value)
+        addContactListLoading,
+    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
+    required TResult Function(DeleteContactLoading value) deleteContactLoading,
+    required TResult Function(GetContactListStreamLoading value)
+        getContactListStreamLoading,
+    required TResult Function(GetContactListStreamSuccess value)
+        getContactListStreamSuccess,
+    required TResult Function(GetContactListSyncLoading value)
+        getContactListSyncLoading,
+    required TResult Function(GetContactListSyncSuccess value)
+        getContactListSyncSuccess,
+    required TResult Function(GetContactListSuccess value)
+        getContactListSuccess,
+    required TResult Function(GetContactListLoading value)
+        getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
+    required TResult Function(ContactFailure value) contactFailure,
+  }) {
+    return clearOfflineContactListSuccess(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(AddContactSuccess value)? addContactSuccess,
+    TResult? Function(AddContactLoading value)? addContactLoading,
+    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
+    TResult? Function(AddContactListLoading value)? addContactListLoading,
+    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
+    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
+    TResult? Function(GetContactListStreamLoading value)?
+        getContactListStreamLoading,
+    TResult? Function(GetContactListStreamSuccess value)?
+        getContactListStreamSuccess,
+    TResult? Function(GetContactListSyncLoading value)?
+        getContactListSyncLoading,
+    TResult? Function(GetContactListSyncSuccess value)?
+        getContactListSyncSuccess,
+    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
+    TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
+  }) {
+    return clearOfflineContactListSuccess?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(AddContactSuccess value)? addContactSuccess,
+    TResult Function(AddContactLoading value)? addContactLoading,
+    TResult Function(AddContactListSuccess value)? addContactListSuccess,
+    TResult Function(AddContactListLoading value)? addContactListLoading,
+    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
+    TResult Function(DeleteContactLoading value)? deleteContactLoading,
+    TResult Function(GetContactListStreamLoading value)?
+        getContactListStreamLoading,
+    TResult Function(GetContactListStreamSuccess value)?
+        getContactListStreamSuccess,
+    TResult Function(GetContactListSyncLoading value)?
+        getContactListSyncLoading,
+    TResult Function(GetContactListSyncSuccess value)?
+        getContactListSyncSuccess,
+    TResult Function(GetContactListSuccess value)? getContactListSuccess,
+    TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
+    TResult Function(ContactFailure value)? contactFailure,
+    required TResult orElse(),
+  }) {
+    if (clearOfflineContactListSuccess != null) {
+      return clearOfflineContactListSuccess(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ClearOfflineContactListSuccess implements ContactState {
+  const factory ClearOfflineContactListSuccess() =
+      _$ClearOfflineContactListSuccessImpl;
+}
+
+/// @nodoc
+abstract class _$$OfflineLoadingImplCopyWith<$Res> {
+  factory _$$OfflineLoadingImplCopyWith(_$OfflineLoadingImpl value,
+          $Res Function(_$OfflineLoadingImpl) then) =
+      __$$OfflineLoadingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$OfflineLoadingImplCopyWithImpl<$Res>
+    extends _$ContactStateCopyWithImpl<$Res, _$OfflineLoadingImpl>
+    implements _$$OfflineLoadingImplCopyWith<$Res> {
+  __$$OfflineLoadingImplCopyWithImpl(
+      _$OfflineLoadingImpl _value, $Res Function(_$OfflineLoadingImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ContactState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$OfflineLoadingImpl implements OfflineLoading {
+  const _$OfflineLoadingImpl();
+
+  @override
+  String toString() {
+    return 'ContactState.offlineLoading()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$OfflineLoadingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() addContactSuccess,
+    required TResult Function() addContactLoading,
+    required TResult Function() addContactListSuccess,
+    required TResult Function() addContactListLoading,
+    required TResult Function() deleteContactSuccess,
+    required TResult Function() deleteContactLoading,
+    required TResult Function() getContactListStreamLoading,
+    required TResult Function(Stream<BoxEvent> streamer)
+        getContactListStreamSuccess,
+    required TResult Function() getContactListSyncLoading,
+    required TResult Function(List<Contact> contactList)
+        getContactListSyncSuccess,
+    required TResult Function(List<Contact> contactList) getContactListSuccess,
+    required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
+    required TResult Function(String error) contactFailure,
+  }) {
+    return offlineLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? addContactSuccess,
+    TResult? Function()? addContactLoading,
+    TResult? Function()? addContactListSuccess,
+    TResult? Function()? addContactListLoading,
+    TResult? Function()? deleteContactSuccess,
+    TResult? Function()? deleteContactLoading,
+    TResult? Function()? getContactListStreamLoading,
+    TResult? Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
+    TResult? Function()? getContactListSyncLoading,
+    TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
+    TResult? Function(List<Contact> contactList)? getContactListSuccess,
+    TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
+    TResult? Function(String error)? contactFailure,
+  }) {
+    return offlineLoading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? addContactSuccess,
+    TResult Function()? addContactLoading,
+    TResult Function()? addContactListSuccess,
+    TResult Function()? addContactListLoading,
+    TResult Function()? deleteContactSuccess,
+    TResult Function()? deleteContactLoading,
+    TResult Function()? getContactListStreamLoading,
+    TResult Function(Stream<BoxEvent> streamer)? getContactListStreamSuccess,
+    TResult Function()? getContactListSyncLoading,
+    TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
+    TResult Function(List<Contact> contactList)? getContactListSuccess,
+    TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
+    TResult Function(String error)? contactFailure,
+    required TResult orElse(),
+  }) {
+    if (offlineLoading != null) {
+      return offlineLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(AddContactSuccess value) addContactSuccess,
+    required TResult Function(AddContactLoading value) addContactLoading,
+    required TResult Function(AddContactListSuccess value)
+        addContactListSuccess,
+    required TResult Function(AddContactListLoading value)
+        addContactListLoading,
+    required TResult Function(DeleteContactSuccess value) deleteContactSuccess,
+    required TResult Function(DeleteContactLoading value) deleteContactLoading,
+    required TResult Function(GetContactListStreamLoading value)
+        getContactListStreamLoading,
+    required TResult Function(GetContactListStreamSuccess value)
+        getContactListStreamSuccess,
+    required TResult Function(GetContactListSyncLoading value)
+        getContactListSyncLoading,
+    required TResult Function(GetContactListSyncSuccess value)
+        getContactListSyncSuccess,
+    required TResult Function(GetContactListSuccess value)
+        getContactListSuccess,
+    required TResult Function(GetContactListLoading value)
+        getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
+    required TResult Function(ContactFailure value) contactFailure,
+  }) {
+    return offlineLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(AddContactSuccess value)? addContactSuccess,
+    TResult? Function(AddContactLoading value)? addContactLoading,
+    TResult? Function(AddContactListSuccess value)? addContactListSuccess,
+    TResult? Function(AddContactListLoading value)? addContactListLoading,
+    TResult? Function(DeleteContactSuccess value)? deleteContactSuccess,
+    TResult? Function(DeleteContactLoading value)? deleteContactLoading,
+    TResult? Function(GetContactListStreamLoading value)?
+        getContactListStreamLoading,
+    TResult? Function(GetContactListStreamSuccess value)?
+        getContactListStreamSuccess,
+    TResult? Function(GetContactListSyncLoading value)?
+        getContactListSyncLoading,
+    TResult? Function(GetContactListSyncSuccess value)?
+        getContactListSyncSuccess,
+    TResult? Function(GetContactListSuccess value)? getContactListSuccess,
+    TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
+    TResult? Function(ContactFailure value)? contactFailure,
+  }) {
+    return offlineLoading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(AddContactSuccess value)? addContactSuccess,
+    TResult Function(AddContactLoading value)? addContactLoading,
+    TResult Function(AddContactListSuccess value)? addContactListSuccess,
+    TResult Function(AddContactListLoading value)? addContactListLoading,
+    TResult Function(DeleteContactSuccess value)? deleteContactSuccess,
+    TResult Function(DeleteContactLoading value)? deleteContactLoading,
+    TResult Function(GetContactListStreamLoading value)?
+        getContactListStreamLoading,
+    TResult Function(GetContactListStreamSuccess value)?
+        getContactListStreamSuccess,
+    TResult Function(GetContactListSyncLoading value)?
+        getContactListSyncLoading,
+    TResult Function(GetContactListSyncSuccess value)?
+        getContactListSyncSuccess,
+    TResult Function(GetContactListSuccess value)? getContactListSuccess,
+    TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
+    TResult Function(ContactFailure value)? contactFailure,
+    required TResult orElse(),
+  }) {
+    if (offlineLoading != null) {
+      return offlineLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OfflineLoading implements ContactState {
+  const factory OfflineLoading() = _$OfflineLoadingImpl;
 }
 
 /// @nodoc
@@ -2934,6 +4526,12 @@ class _$ContactFailureImpl implements ContactFailure {
         getContactListSyncSuccess,
     required TResult Function(List<Contact> contactList) getContactListSuccess,
     required TResult Function() getContactListLoading,
+    required TResult Function(List<String> contactIdsList)
+        addContactListToOfflineSuccess,
+    required TResult Function(List<String> contactIdsList)
+        getContactListFromOfflineSuccess,
+    required TResult Function() clearOfflineContactListSuccess,
+    required TResult Function() offlineLoading,
     required TResult Function(String error) contactFailure,
   }) {
     return contactFailure(error);
@@ -2955,6 +4553,12 @@ class _$ContactFailureImpl implements ContactFailure {
     TResult? Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult? Function(List<Contact> contactList)? getContactListSuccess,
     TResult? Function()? getContactListLoading,
+    TResult? Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult? Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult? Function()? clearOfflineContactListSuccess,
+    TResult? Function()? offlineLoading,
     TResult? Function(String error)? contactFailure,
   }) {
     return contactFailure?.call(error);
@@ -2976,6 +4580,12 @@ class _$ContactFailureImpl implements ContactFailure {
     TResult Function(List<Contact> contactList)? getContactListSyncSuccess,
     TResult Function(List<Contact> contactList)? getContactListSuccess,
     TResult Function()? getContactListLoading,
+    TResult Function(List<String> contactIdsList)?
+        addContactListToOfflineSuccess,
+    TResult Function(List<String> contactIdsList)?
+        getContactListFromOfflineSuccess,
+    TResult Function()? clearOfflineContactListSuccess,
+    TResult Function()? offlineLoading,
     TResult Function(String error)? contactFailure,
     required TResult orElse(),
   }) {
@@ -3009,6 +4619,13 @@ class _$ContactFailureImpl implements ContactFailure {
         getContactListSuccess,
     required TResult Function(GetContactListLoading value)
         getContactListLoading,
+    required TResult Function(AddContactListToOfflineSuccess value)
+        addContactListToOfflineSuccess,
+    required TResult Function(GetContactListFromOfflineSuccess value)
+        getContactListFromOfflineSuccess,
+    required TResult Function(ClearOfflineContactListSuccess value)
+        clearOfflineContactListSuccess,
+    required TResult Function(OfflineLoading value) offlineLoading,
     required TResult Function(ContactFailure value) contactFailure,
   }) {
     return contactFailure(this);
@@ -3034,6 +4651,13 @@ class _$ContactFailureImpl implements ContactFailure {
         getContactListSyncSuccess,
     TResult? Function(GetContactListSuccess value)? getContactListSuccess,
     TResult? Function(GetContactListLoading value)? getContactListLoading,
+    TResult? Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult? Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult? Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult? Function(OfflineLoading value)? offlineLoading,
     TResult? Function(ContactFailure value)? contactFailure,
   }) {
     return contactFailure?.call(this);
@@ -3059,6 +4683,13 @@ class _$ContactFailureImpl implements ContactFailure {
         getContactListSyncSuccess,
     TResult Function(GetContactListSuccess value)? getContactListSuccess,
     TResult Function(GetContactListLoading value)? getContactListLoading,
+    TResult Function(AddContactListToOfflineSuccess value)?
+        addContactListToOfflineSuccess,
+    TResult Function(GetContactListFromOfflineSuccess value)?
+        getContactListFromOfflineSuccess,
+    TResult Function(ClearOfflineContactListSuccess value)?
+        clearOfflineContactListSuccess,
+    TResult Function(OfflineLoading value)? offlineLoading,
     TResult Function(ContactFailure value)? contactFailure,
     required TResult orElse(),
   }) {
