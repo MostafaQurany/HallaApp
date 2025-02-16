@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:halla/core/common/domain/entities/contact.dart';
+import 'package:halla/features/contacts/domain/repositories/contacts_repository.dart';
 import 'package:halla/features/contacts/domain/usecases/add_contact_list_usecase.dart';
 import 'package:halla/features/contacts/domain/usecases/add_contact_usecase.dart';
 import 'package:halla/features/contacts/domain/usecases/add_offline_contact_use_case.dart';
@@ -16,6 +17,7 @@ part 'contact_state.dart';
 
 class ContactCubit extends Cubit<ContactState> {
   static ContactCubit get(context) => BlocProvider.of(context);
+  ContactsRepository contactsRepository;
 
   // done
   AddContactUseCase addContactUseCase;
@@ -36,6 +38,7 @@ class ContactCubit extends Cubit<ContactState> {
     this.getContactListUseCase,
     this.addOfflineContactUseCase,
     this.clearofflineContactUseCase,
+    this.contactsRepository,
   ) : super(const ContactState.initial());
 
   addContact({

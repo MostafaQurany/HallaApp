@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/domain/entities/contact.dart';
+import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/core/constants/app_images.dart';
+import 'package:halla/core/native%20contact/cubit/native_contacts_cubit.dart';
+import 'package:halla/core/notification/cubit/cubit/notification_cubit.dart';
+import 'package:halla/core/notification/entites/my_notification.dart';
+import 'package:halla/core/notification/entites/notification_type_enum.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/contacts/presentation/screens/components/contact_favorit_edite_icon.dart';
 import 'package:halla/features/contacts/presentation/screens/contact_details_screen.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/custom_share_contact_icon.dart';
+import 'package:uuid/uuid.dart';
 
 class ContactCard extends StatefulWidget {
   final Contact contact;
@@ -84,7 +91,7 @@ class _ContactCardState extends State<ContactCard>
                     ),
                   ),
                   SizedBox(
-                    width: 145.w,
+                    width: 60.w,
                     child: Text(
                       widget.contact.fullName,
                       style: Theme.of(context).textTheme.bodyMedium!,
@@ -92,7 +99,27 @@ class _ContactCardState extends State<ContactCard>
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  const Spacer(),
+                  IconButton(
+                    icon: Icon(
+                      Icons.send,
+                      size: 22.sp,
+                    ),
+                    onPressed: () {
+                      context.read<NotificationCubit>().sendNotification(
+                            MyNotification(
+                              title: "Halla",
+                              message: "Sending contacts",
+                              timestamp: DateTime.now(),
+                              data: NotificationData(
+                                notificationId: Uuid().v4(),
+                                receiverId: widget.contact.id,
+                                senderId: context.read<UserCubit>().user!.id,
+                                type: MyNotificationType.notification,
+                              ),
+                            ),
+                          );
+                    },
+                  ),
                   IconButton(
                     icon: Icon(
                       Icons.info_outline_rounded,
@@ -108,10 +135,17 @@ class _ContactCardState extends State<ContactCard>
                   ContactFavoritEditeIcon(
                     selectedKey: widget.contact.favoriteCategory ?? '',
                   ),
-                  SizedBox(
-                    width: 5.w,
-                  ),
                   CustomShareContactIcon(userId: widget.contact.id),
+                  IconButton(
+                      icon: Icon(
+                        Icons.download,
+                        size: 22.sp,
+                      ),
+                      onPressed: () {
+                        context
+                            .read<NativeContactsCubit>()
+                            .addContactToLocal(widget.contact);
+                      }),
                 ],
               ),
               DecoratedBox(

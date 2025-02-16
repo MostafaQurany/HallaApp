@@ -34,30 +34,32 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
     required String contactId,
   }) async {
     try {
-      DocumentSnapshot<Map<String, dynamic>> snapshotUser = await _fireStore
-          .collection(AppConstants.userCollection)
-          .doc(userId)
-          .get();
+      DocumentSnapshot<Map<String, dynamic>> snapshotUserContacts =
+          await _fireStore
+              .collection(AppConstants.contactsCollection)
+              .doc(userId)
+              .get();
       DocumentSnapshot<Map<String, dynamic>> snapshotContact = await _fireStore
           .collection(AppConstants.userCollection)
           .doc(contactId)
           .get();
-      if (snapshotUser.data() == null || snapshotContact.data() == null) {
+
+      List<Map<String, dynamic>> contactList = [];
+      if (snapshotContact.data() == null) {
         throw ServerException("Something is wrong");
-      } else {
-        List<Map<String, dynamic>> contactList =
-            List.from(snapshotUser.data()?["contacts"] ?? []);
+      }
+      ContactServer contactServer = ContactServer(
+        id: snapshotContact.data()!['id'],
+        timestamp: Timestamp.now(),
+        favoriteCategories: '',
+      );
+      if (snapshotUserContacts.data() != null) {
+        contactList = List.from(snapshotUserContacts.data()?["contacts"] ?? []);
         if (contactList.any((contact) => contact['id'] == contactId)) {
           throw ServerException("User already exists.");
         }
-
-        ContactServer contactServer = ContactServer(
-          id: snapshotContact.data()!['id'],
-          timestamp: Timestamp.now(),
-          favoriteCategories: '',
-        );
         await _fireStore
-            .collection(AppConstants.userCollection)
+            .collection(AppConstants.contactsCollection)
             .doc(userId)
             .update({
           'contacts': FieldValue.arrayUnion(
@@ -66,8 +68,17 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
             ],
           ),
         });
-        return Contact.fromMap(snapshotContact.data()!);
+      } else {
+        await _fireStore
+            .collection(AppConstants.contactsCollection)
+            .doc(userId)
+            .set({
+          'contacts': [
+            contactServer.toMap(),
+          ],
+        });
       }
+      return Contact.fromMap(snapshotContact.data()!);
     } on FirebaseException catch (e) {
       throw ServerException(e.message?.toString() ?? "Something is wrong");
     } catch (e) {
@@ -99,7 +110,7 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
   }) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> snapshotUser = await _fireStore
-          .collection(AppConstants.userCollection)
+          .collection(AppConstants.contactsCollection)
           .doc(userId)
           .get();
       if (snapshotUser.data() == null) {
@@ -114,7 +125,7 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
         }
         contactList.removeAt(index);
         await _fireStore
-            .collection(AppConstants.userCollection)
+            .collection(AppConstants.contactsCollection)
             .doc(userId)
             .update({
           'contacts': contactList,
@@ -131,7 +142,7 @@ class ContactsDataSourceNewImpl implements ContactsDataSource {
   Future<List<Contact>> getContactList({required String userId}) async {
     try {
       DocumentSnapshot<Map<String, dynamic>> snapshotUser = await _fireStore
-          .collection(AppConstants.userCollection)
+          .collection(AppConstants.contactsCollection)
           .doc(userId)
           .get();
       if (snapshotUser.data() == null) {

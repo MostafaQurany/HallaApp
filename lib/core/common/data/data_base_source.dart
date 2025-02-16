@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:halla/core/common/domain/entities/guest.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
@@ -18,23 +20,24 @@ abstract interface class DataBaseSource {
   Future<Guest?> getGuest();
 
   Future<void> forgetGuestPinCode();
+
 }
 
 class DataBaseSourceImpl implements DataBaseSource {
   final String _userCollection = AppConstants.userCollection;
-  final _firestore = FirebaseFirestore.instance;
+  final _fireStore = FirebaseFirestore.instance;
 
   // user
   @override
   Future<User> uploadUser(User user) async {
     try {
       if (!await _userExists(user.id)) {
-        await _firestore
+        await _fireStore
             .collection(_userCollection)
             .doc(user.id)
             .set(user.toMap());
       } else {
-        await _firestore
+        await _fireStore
             .collection(_userCollection)
             .doc(user.id)
             .update(user.toMap());
@@ -51,7 +54,7 @@ class DataBaseSourceImpl implements DataBaseSource {
   Future<bool> _userExists(String userId) async {
     try {
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-          await _firestore.collection(_userCollection).doc(userId).get();
+          await _fireStore.collection(_userCollection).doc(userId).get();
       if (documentSnapshot.exists) {
         return true;
       } else {
@@ -67,7 +70,7 @@ class DataBaseSourceImpl implements DataBaseSource {
   @override
   Future<User> getUser(String userId) async {
     final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-        await _firestore.collection(_userCollection).doc(userId).get();
+        await _fireStore.collection(_userCollection).doc(userId).get();
     return User.fromMap(documentSnapshot.data()!);
   }
 
@@ -75,7 +78,7 @@ class DataBaseSourceImpl implements DataBaseSource {
   Future<bool> isUserExit(User user) async {
     try {
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-          await _firestore.collection(_userCollection).doc(user.id).get();
+          await _fireStore.collection(_userCollection).doc(user.id).get();
 
       if (documentSnapshot.exists) {
         return true;
@@ -101,7 +104,7 @@ class DataBaseSourceImpl implements DataBaseSource {
             fullNameGuest: "Guest",
             pinCodeGuest: AppConstants.generatePinCode(),
           );
-          await _firestore
+          await _fireStore
               .collection(_userCollection)
               .doc(await AppConstants.getGuestId())
               .set(
@@ -123,7 +126,7 @@ class DataBaseSourceImpl implements DataBaseSource {
   Future<Guest?> getGuest() async {
     try {
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-          await _firestore
+          await _fireStore
               .collection(_userCollection)
               .doc(await AppConstants.getGuestId())
               .get();
@@ -142,7 +145,7 @@ class DataBaseSourceImpl implements DataBaseSource {
   @override
   Future<void> forgetGuestPinCode() async {
     try {
-      await _firestore
+      await _fireStore
           .collection(_userCollection)
           .doc(await AppConstants.getGuestId())
           .delete();
@@ -152,4 +155,5 @@ class DataBaseSourceImpl implements DataBaseSource {
       throw ServerException(e.toString());
     }
   }
-}
+
+ }

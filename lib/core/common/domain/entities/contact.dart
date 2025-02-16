@@ -2,9 +2,11 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_contacts/flutter_contacts.dart' as mobile_contact;
 import 'package:halla/core/common/domain/entities/company.dart';
 import 'package:halla/core/common/domain/entities/social_media.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 part 'contact.g.dart';
 
@@ -34,6 +36,7 @@ class Contact extends HiveObject {
   Timestamp? timestamp;
   @HiveField(11)
   String? favoriteCategory;
+
   Contact({
     required this.id,
     required this.email,
@@ -93,6 +96,21 @@ class Contact extends HiveObject {
 
   factory Contact.fromJson(String source) =>
       Contact.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  factory Contact.fromMobileContact(mobile_contact.Contact contact) {
+    return Contact(
+        id: Uuid().v4(),
+        email: contact.emails.isNotEmpty ? contact.emails.first.address : '',
+        fullName: contact.displayName,
+        primePhone:
+            contact.phones.isNotEmpty ? contact.phones.first.number : '',
+        dateOfBirth: '',
+        nationality: '',
+        imageUrl: '',
+        phones: [],
+        socialMedia: SocialMedia(),
+        company: Company());
+  }
 
   @override
   bool operator ==(Object other) =>

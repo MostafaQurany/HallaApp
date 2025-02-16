@@ -3,17 +3,19 @@ part of 'init_dependencies_map.dart';
 final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
-  // core
   _initCommon();
 
-  // featuers
   _initAuth();
-
-  // contacts
 
   await _initContact();
 
   _initProfile();
+
+  _notification();
+
+  _nativeContact();
+
+  _ai();
 }
 
 _initCommon() {
@@ -24,9 +26,6 @@ _initCommon() {
     )
     ..registerLazySingleton<LocalUserDataSource>(
       () => LocalUserDataSourceImpl(),
-    )
-    ..registerLazySingleton<NativeLocalContactDataBaseSource>(
-      () => NativeLocalContactDataBaseSourceImpl(),
     )
     // Repository
     ..registerFactory<CommonRepositories>(
@@ -98,9 +97,11 @@ _initCommon() {
         serviceLocator(),
       ),
     )
+
     // bloc
     ..registerLazySingleton(
       () => UserCubit(
+        serviceLocator(),
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
@@ -314,6 +315,7 @@ _initContact() async {
         serviceLocator(),
         serviceLocator(),
         serviceLocator(),
+        serviceLocator(),
       ),
     );
 }
@@ -350,5 +352,52 @@ _initProfile() {
         serviceLocator(),
         serviceLocator(),
       ),
+    );
+}
+
+_notification() {
+  serviceLocator
+    ..registerFactory<NotificationDatabase>(
+      () => NotificationDatabaseImpl(),
+    ) // Repository
+    ..registerFactory<NotificationRepository>(
+      () => NotificationRepositoriesImp(
+        serviceLocator(),
+      ),
+    ) // bloc
+    ..registerLazySingleton(
+      () => NotificationCubit(
+        serviceLocator(),
+      ),
+    );
+}
+
+_nativeContact() {
+  serviceLocator
+    // dataSource
+    ..registerLazySingleton<NativeLocalContactDataBaseSource>(
+      () => NativeLocalContactDataBaseSourceImpl(),
+    )
+    //repository
+    ..registerFactory<NativeContactsRepository>(
+      () => NativeContactsRepositoryImpl(serviceLocator()),
+    )
+    // bloc
+    ..registerFactory(
+      () => NativeContactsCubit(serviceLocator()),
+    );
+}
+
+_ai() {
+  // data source
+  serviceLocator
+    ..registerFactory<GoogleAiDataSource>(
+      () => GoogleAiDataSourceImpl(),
+    ) // repo
+    ..registerFactory<AIRepo>(
+      () => AIRepoImpl(serviceLocator()),
+    ) // bloc
+    ..registerLazySingleton(
+      () => AiCubit(serviceLocator()),
     );
 }

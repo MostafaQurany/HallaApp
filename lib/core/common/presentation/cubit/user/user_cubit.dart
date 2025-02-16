@@ -7,6 +7,8 @@ import 'package:halla/core/common/domain/usecase/delete_user_from_local_usecase.
 import 'package:halla/core/common/domain/usecase/get_user_from_local_usecase.dart';
 import 'package:halla/core/common/domain/usecase/is_user_saved_local_usecase.dart';
 import 'package:halla/core/common/domain/usecase/usecase.dart';
+import 'package:halla/core/notification/data/notification_messaging.dart';
+import 'package:halla/core/notification/repositories/notification_repositories.dart';
 
 part 'user_state.dart';
 
@@ -15,11 +17,14 @@ class UserCubit extends Cubit<UserState> {
   GetUserFromLocalUsecase getUserFromLocalUsecase;
   IsUserSavedLocalUsecase isUserSavedLocalUsecase;
   DeleteUserFromLocalUsecase deleteUserFromLocalUsecase;
+  NotificationRepository notificationRepository;
+
   UserCubit(
     this.addUserToLocalUsecase,
     this.getUserFromLocalUsecase,
     this.isUserSavedLocalUsecase,
     this.deleteUserFromLocalUsecase,
+    this.notificationRepository,
   ) : super(UserInitial());
 
   User? user;
@@ -28,11 +33,13 @@ class UserCubit extends Cubit<UserState> {
 
   void updateUser({
     User? user,
-  }) {
+  }) async {
     if (user == null) {
       emit(UserInitial());
     } else {
       this.user = user;
+      NotificationMessaging.initialize();
+      notificationRepository.updateUserFCMToken(user.id);
       if (!user.isGuest) addUserToLocal();
       emit(UserLoggedIn(
         user: user,
@@ -58,11 +65,14 @@ class UserCubit extends Cubit<UserState> {
       (l) {
         updateUser(user: null);
       },
-      (r) => updateUser(user: r),
+      (r) {
+        updateUser(user: r);
+      },
     );
   }
 
-  Future<void> deletUserFromLocal() async {
+  Future<void> deleteUserFromLocal() async {
+    notificationRepository.deleteUserFCMToken(user!.id);
     final res = await deleteUserFromLocalUsecase(NoParams());
     res.fold(
       (l) => updateUser(user: null),
