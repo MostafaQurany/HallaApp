@@ -31,13 +31,14 @@ class UserAdapter extends TypeAdapter<User> {
       nfcList: (fields[9] as List).cast<String>(),
       favoriteCategories: (fields[13] as List).cast<String>(),
       isGuest: fields[12] as bool,
+      ratingAverage: fields[14] as DocumentReference<Object>?,
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -65,7 +66,9 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(12)
       ..write(obj.isGuest)
       ..writeByte(13)
-      ..write(obj.favoriteCategories);
+      ..write(obj.favoriteCategories)
+      ..writeByte(14)
+      ..write(obj.ratingAverage);
   }
 
   @override

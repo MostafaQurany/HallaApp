@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:halla/core/common/domain/entities/company.dart';
 import 'package:halla/core/common/domain/entities/social_media.dart';
 import 'package:halla/core/common/domain/entities/user.dart' as user;
+import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/error/server_exception.dart';
 
 abstract interface class AuthDataSource {
@@ -205,9 +206,9 @@ class AuthDataSourceImpl implements AuthDataSource {
       return user.User(
         id: userCredential.user!.uid,
         email: userCredential.user!.email ?? '',
-        pinCode: '',
-        fullName: '',
-        primePhone: '',
+        pinCode: AppConstants.generatePinCode(),
+        fullName: userCredential.user?.displayName ?? '',
+        primePhone: userCredential.user?.phoneNumber ?? '',
         dateOfBirth: '',
         nationality: '',
         imageUrl: '',

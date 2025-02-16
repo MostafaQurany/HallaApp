@@ -5,8 +5,28 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppConstants {
+  // collection
+  static String userCollection = 'users';
+  static String contactsCollection = 'users_contacts';
+  static String userNotificationCollection = 'user_notifications';
+  static String notificationsContact = 'notifications_contact';
+  static String notification = 'notifications';
+  static String unActiveUserCollection = "unActiveUserCollection";
+  static String ratingUserCollection = "ratingUser";
+
+  // hive
+  static String contactOfflineBox = "ContactsOfflineBox";
+  static String userLocalBox = "UserLocalBox";
+  static String userLocalKey = "UserLocalKey";
+  static String contactBox = "ContactsBox";
+  static String userBox = "UserBox";
+
+  // shared preferences
   static String guest = "Guest";
   static String firstTimeOpen = "FirstTimeOpen";
+  static String userLoginId = "UserLoginId";
+
+  // constants
   static List<String> nationalities = <String>[
     "Afghan",
     "Albanian",
@@ -201,13 +221,6 @@ class AppConstants {
     "Zambian",
     "Zimbabwean",
   ];
-  static String userCollection = 'users';
-  static String contactBox = "ContactsBox";
-  static String contactOfflineBox = "ContactsOfflineBox";
-  static String userLocalBox = "UserLocalBox";
-  static String userLocalKey = "UserLocalKey";
-  static String userBox = "UserBox";
-  static String userLoginId = "UserLoginId";
 
   static final paddingScreen =
       EdgeInsets.symmetric(horizontal: 18.w, vertical: 15.h);
@@ -227,6 +240,12 @@ class AppConstants {
     const channel = MethodChannel('Back_End_Channel');
     final returnValue = await channel.invokeMethod<String>('getMacAddress');
     return "$guest${returnValue ?? ''}";
+  }
+
+  static Future<String> getMacAddress() async {
+    const channel = MethodChannel('Back_End_Channel');
+    final returnValue = await channel.invokeMethod<String>('getMacAddress');
+    return returnValue ?? '';
   }
 
   static Duration contactScreenErrorDuration = Duration(seconds: 1);

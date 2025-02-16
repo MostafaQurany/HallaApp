@@ -40,6 +40,8 @@ abstract class ContactsLocalDataSource {
   Future<void> clearOfflineContact({
     required String userId,
   });
+
+  
 }
 
 class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
@@ -110,7 +112,7 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
       Box<List> contactBox = await _contactBox;
       List<Contact> contactList = contactBox.get(userId)?.cast<Contact>() ?? [];
       contactList.removeWhere(
-        (element) {
+            (element) {
           return element.id == contactId;
         },
       );
@@ -137,7 +139,7 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
   List<Contact> _convertFromMapToContact(
       List<Map<String, dynamic>> contactListMap) {
     return contactListMap.map(
-      (e) {
+          (e) {
         return Contact.fromMap(e);
       },
     ).toList();
@@ -146,7 +148,7 @@ class ContactsLocalDataSourceImpl extends ContactsLocalDataSource {
   List<Map<String, dynamic>> _convertFromContactToMap(
       List<Contact> contactList) {
     return contactList.map(
-      (e) {
+          (e) {
         return e.toMap();
       },
     ).toList();

@@ -1,14 +1,14 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:halla/core/common/data/data_base_source.dart';
 import 'package:halla/core/common/data/local_user_data_source.dart';
-import 'package:halla/core/common/data/native_local_contact_data_base_source.dart';
 import 'package:halla/core/common/data/nfc_data_source.dart';
+import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/core/common/domain/entities/guest.dart';
 import 'package:halla/core/common/domain/entities/nfc_message.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/error/failure.dart';
-import 'package:halla/core/common/domain/entities/contact.dart';
 import 'package:halla/core/error/server_exception.dart';
+import 'package:halla/core/native%20contact/data/native_local_contact_data_base_source.dart';
 
 abstract interface class CommonRepositories {
   Future<Either<Failure, User>> uploadUser({required User user});
@@ -39,8 +39,6 @@ abstract interface class CommonRepositories {
 
   Future<Either<Failure, List<Contact>>> getFirstTimeLocalContacts();
 }
-
-
 
 class CommonRepositoriesImpl implements CommonRepositories {
   final NfcDataSource nfcDataSource;
@@ -169,8 +167,7 @@ class CommonRepositoriesImpl implements CommonRepositories {
   @override
   Future<Either<Failure, void>> addUserToLocal(User user) async {
     try {
-      final res =
-          await localUserDataSource.addUserToLocal(user);
+      final res = await localUserDataSource.addUserToLocal(user);
       return Right(res);
     } on ServerException catch (e) {
       return Left(

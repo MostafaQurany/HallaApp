@@ -102,5 +102,7 @@
   "scanQrcode": "Scan Qr-Code",
   "addContact": "Add contact",
   "syncContact": "Sync contact",
-  "saveOfflineContacts": "Save offline contacts"
+  "saveOfflineContacts": "Save offline contacts",
+  "shareContact" :"Share contact"
+
 }

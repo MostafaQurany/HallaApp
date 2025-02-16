@@ -2,10 +2,8 @@
 import "package:flutter/material.dart";
 import "package:halla/generated/l10n.dart";
 import "package:pinput/pinput.dart";
-import "package:smart_auth/smart_auth.dart";
 
 import "package:halla/core/theme/app_colors.dart";
-import "package:halla/features/auth/presentation/screens/sign%20in/bodys/sms_retriever_impl.dart";
 
 class CustomPinCodeField extends StatefulWidget {
   final TextEditingController pinController;
@@ -21,16 +19,12 @@ class CustomPinCodeField extends StatefulWidget {
 }
 
 class _CustomPinCodeFieldState extends State<CustomPinCodeField> {
-  late final SmsRetriever smsRetriever;
   late final FocusNode focusNode;
 
   @override
   void initState() {
     super.initState();
     focusNode = FocusNode();
-    smsRetriever = SmsRetrieverImpl(
-      SmartAuth(),
-    );
   }
 
   @override
@@ -61,7 +55,6 @@ class _CustomPinCodeFieldState extends State<CustomPinCodeField> {
     return Directionality(
       textDirection: TextDirection.ltr,
       child: Pinput(
-        smsRetriever: smsRetriever,
         controller: widget.pinController,
         focusNode: focusNode,
         defaultPinTheme: defaultPinTheme,

@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/presentation/cubit/connection/network_cubit.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
+import 'package:halla/core/utils/routting.dart';
+import 'package:halla/features/contacts/presentation/screens/notification/notification_screen.dart';
 import 'package:halla/features/contacts/presentation/screens/search_screen.dart';
 import 'package:halla/features/contacts/presentation/screens/widget/catogery_list_widget.dart';
 import 'package:halla/features/contacts/presentation/screens/widget/download_contact_icon.dart';
@@ -23,6 +25,11 @@ class HeaderContactScreen extends StatefulWidget {
 
 class _HeaderContactScreenState extends State<HeaderContactScreen> {
   final TextEditingController searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +68,11 @@ class _HeaderContactScreenState extends State<HeaderContactScreen> {
                   listLength: widget.offlineContactListIds.length,
                 ),
               ),
+              IconButton(
+                  onPressed: () {
+                    AppNavigator.navigatePush(context, NotificationsScreen());
+                  },
+                  icon: Icon(Icons.notifications)),
             ],
           ),
           Padding(

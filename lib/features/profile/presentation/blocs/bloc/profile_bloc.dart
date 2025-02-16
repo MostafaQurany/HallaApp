@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:halla/core/common/domain/entities/user.dart' as MyUser;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:halla/core/common/domain/entities/user.dart' as MyUser;
 import 'package:halla/core/common/domain/usecase/upload_user_usecase.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
+import 'package:halla/core/notification/repositories/notification_repositories.dart';
 import 'package:halla/features/profile/domain/usecases/get_image_url_usecase.dart';
 import 'package:halla/features/profile/domain/usecases/set_image_url_usecase.dart';
 import 'package:meta/meta.dart';
@@ -14,15 +15,16 @@ part 'profile_event.dart';
 part 'profile_state.dart';
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  final SetImageUrlUsecase setImageUrlUsecase;
-  final GetImageUrlUsecase getImageUrlUsecase;
-  final UploadUserUsecase uploadUserUsecase;
+  final SetImageUrlUsecase setImageUrlUseCase;
+  final GetImageUrlUsecase getImageUrlUseCase;
+  final UploadUserUsecase uploadUserUseCase;
   final UserCubit userCubit;
   bool isLoading = false;
+
   ProfileBloc(
-    this.setImageUrlUsecase,
-    this.getImageUrlUsecase,
-    this.uploadUserUsecase,
+    this.setImageUrlUseCase,
+    this.getImageUrlUseCase,
+    this.uploadUserUseCase,
     this.userCubit,
   ) : super(ProfileInitial()) {
     on<ProfileEvent>((event, emit) {});
@@ -31,7 +33,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       (event, emit) {
         FirebaseAuth.instance.signOut();
         GoogleSignIn().signOut();
-        userCubit.deletUserFromLocal();
+        userCubit.deleteUserFromLocal();
         emit(LogOutSuccesState());
       },
     );
@@ -50,7 +52,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   _onSetImageEvent(SetImageEvent event, Emitter<ProfileState> emit) async {
     _loading(emit);
 
-    final res = await setImageUrlUsecase(
+    final res = await setImageUrlUseCase(
         SetImageUrlParams(userId: event.userId, image: event.image));
     res.fold(
       (l) {
@@ -71,7 +73,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     _loading(emit);
-    final res = await uploadUserUsecase(
+    final res = await uploadUserUseCase(
       UploadUserParams(user: event.user),
     );
     res.fold(

@@ -3,7 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/core/common/presentation/cubit/connection/network_cubit.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
+import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/contacts/presentation/blocs/cubit/contact_cubit.dart';
+import 'package:halla/features/contacts/presentation/screens/native%20contacts/native_contacts_screen.dart';
+import 'package:halla/features/contacts/presentation/screens/notification/share_multi_contact_screen.dart';
 import 'package:halla/features/contacts/presentation/screens/widget/qr_code_scan_test.dart';
 import 'package:halla/generated/l10n.dart';
 
@@ -29,9 +32,23 @@ class _MenuContactButtonState extends State<MenuContactButton> {
           onSelected: (value) => _onMenuItemSelected(value),
           itemBuilder: (ctx) => [
             _buildPopupMenuItem(
-                title: S.of(context).addContact, iconData: Icons.add),
+              title: S.of(context).addContact,
+              iconData: Icons.add,
+            ),
             _buildPopupMenuItem(
-                title: S.of(context).syncContact, iconData: Icons.sync),
+              title: S.of(context).syncContact,
+              iconData: Icons.sync,
+            ),
+            _buildPopupMenuItem(
+              title: "Local Contacts",
+              iconData: Icons.contacts_rounded,
+            ),
+            if (!widget.offlineContactList.isNotEmpty &&
+                (context.read<NetworkCubit>().currentConnection ?? false))
+              _buildPopupMenuItem(
+                title: S.of(context).shareContact,
+                iconData: Icons.share,
+              ),
             if (widget.offlineContactList.isNotEmpty &&
                 (context.read<NetworkCubit>().currentConnection ?? false))
               _buildPopupMenuSaveOfflineContacts(),
@@ -91,8 +108,12 @@ class _MenuContactButtonState extends State<MenuContactButton> {
       _addContact();
     } else if (value == S.of(context).syncContact) {
       _syncContacts();
+    } else if (value == S.of(context).shareContact) {
+      _shareContact();
     } else if (value == S.of(context).saveOfflineContacts) {
       _saveOfflineContacts();
+    } else if (value == "Local Contacts") {
+      _nativeContact();
     }
   }
 
@@ -158,5 +179,13 @@ class _MenuContactButtonState extends State<MenuContactButton> {
           userId: UserCubit.get(context).user?.id ?? '',
           contactIdList: widget.offlineContactList,
         );
+  }
+
+  _shareContact() async {
+    AppNavigator.navigatePush(context, ShareMultiContactScreen());
+  }
+
+  _nativeContact() async {
+    AppNavigator.navigatePush(context, NativeContactsScreen());
   }
 }

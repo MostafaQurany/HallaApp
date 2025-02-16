@@ -4,6 +4,7 @@ import "package:flutter/material.dart";
 import "package:flutter_bloc/flutter_bloc.dart";
 import "package:flutter_localizations/flutter_localizations.dart";
 import "package:flutter_screenutil/flutter_screenutil.dart";
+import "package:halla/core/ai/cubit/ai_cubit.dart";
 import "package:halla/core/common/domain/entities/company.dart";
 import "package:halla/core/common/domain/entities/contact.dart";
 import "package:halla/core/common/domain/entities/social_media.dart";
@@ -11,6 +12,9 @@ import "package:halla/core/common/domain/entities/timestamp_adapter.g.dart";
 import "package:halla/core/common/domain/entities/user.dart";
 import "package:halla/core/common/presentation/cubit/connection/network_cubit.dart";
 import "package:halla/core/common/presentation/cubit/user/user_cubit.dart";
+import "package:halla/core/di/init_dependencies_map.dart";
+import "package:halla/core/native%20contact/cubit/native_contacts_cubit.dart";
+import "package:halla/core/notification/cubit/cubit/notification_cubit.dart";
 import "package:halla/core/theme/theme.dart";
 import "package:halla/core/utils/bloc_observer.dart";
 import "package:halla/features/auth/presentation/blocs/guest%20cubit/guest_cubit.dart";
@@ -24,7 +28,6 @@ import "package:halla/features/splash/presentation/bloc/brightness%20cubit/brigh
 import "package:halla/features/splash/presentation/bloc/language%20cubit/language_cubit.dart";
 import "package:halla/features/splash/presentation/screens/splash_screen.dart";
 import "package:halla/generated/l10n.dart";
-import "package:halla/init_dependencies_map.dart";
 import "package:hive_flutter/hive_flutter.dart";
 import "package:hydrated_bloc/hydrated_bloc.dart";
 import 'package:path_provider/path_provider.dart';
@@ -35,8 +38,8 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
-        ? HydratedStorage.webStorageDirectory
-        : await getApplicationDocumentsDirectory(),
+        ? HydratedStorageDirectory.web
+        : HydratedStorageDirectory((await getTemporaryDirectory()).path),
   );
   // hive
   await Hive.initFlutter();
@@ -72,6 +75,16 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<ContactCubit>()),
         // connection
         BlocProvider(create: (context) => serviceLocator<NetworkCubit>()),
+        // notification
+        BlocProvider(create: (context) => serviceLocator<NotificationCubit>()),
+        // local notifications
+        BlocProvider(
+          create: (context) => serviceLocator<NativeContactsCubit>(),
+        ),
+        //AI
+        BlocProvider(
+          create: (context) => serviceLocator<AiCubit>(),
+        ),
       ],
       child: const MyApp(),
     ),
