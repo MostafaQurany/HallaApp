@@ -41,6 +41,8 @@ class User extends HiveObject {
   List<String> favoriteCategories;
   @HiveField(14)
   DocumentReference? ratingAverage;
+  @HiveField(15)
+  List<String>? jobTitles;
 
   User({
     required this.id,
@@ -58,6 +60,7 @@ class User extends HiveObject {
     this.favoriteCategories = const [],
     this.isGuest = false,
     this.ratingAverage,
+    this.jobTitles,
   });
 
   Map<String, dynamic> toMap() {
@@ -79,33 +82,38 @@ class User extends HiveObject {
       'ratingAverage': FirebaseFirestore.instance
           .collection(AppConstants.ratingUserCollection)
           .doc(id),
+      'jobTitles': jobTitles?.toList() ?? [],
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-        id: map['id'] as String,
-        email: map['email'] as String,
-        fullName: map['fullName'] as String,
-        primePhone: map['primePhone'] as String,
-        dateOfBirth: map['dateOfBirth'] as String,
-        nationality: map['nationality'] as String,
-        imageUrl: map['imageUrl'] as String,
-        pinCode: map['pinCode'] as String,
-        socialMedia:
-            SocialMedia.fromMap(map['socialMedia'] as Map<String, dynamic>),
-        company: Company.fromMap(map['company'] as Map<String, dynamic>),
-        isGuest: map['isGuest'] as bool,
-        phones: (map['phones'] as List<dynamic>? ?? [])
-            .map((e) => e as String)
-            .toList(),
-        nfcList: (map['nfcList'] as List<dynamic>? ?? [])
-            .map((e) => e as String)
-            .toList(),
-        favoriteCategories: (map['favoriteCategories'] as List<dynamic>? ?? [])
-            .map((e) => e as String)
-            .toList(),
-        ratingAverage: map['ratingAverage']);
+      id: map['id'] as String,
+      email: map['email'] as String,
+      fullName: map['fullName'] as String,
+      primePhone: map['primePhone'] as String,
+      dateOfBirth: map['dateOfBirth'] as String,
+      nationality: map['nationality'] as String,
+      imageUrl: map['imageUrl'] as String,
+      pinCode: map['pinCode'] as String,
+      socialMedia:
+          SocialMedia.fromMap(map['socialMedia'] as Map<String, dynamic>),
+      company: Company.fromMap(map['company'] as Map<String, dynamic>),
+      isGuest: map['isGuest'] as bool,
+      phones: (map['phones'] as List<dynamic>? ?? [])
+          .map((e) => e as String)
+          .toList(),
+      nfcList: (map['nfcList'] as List<dynamic>? ?? [])
+          .map((e) => e as String)
+          .toList(),
+      favoriteCategories: (map['favoriteCategories'] as List<dynamic>? ?? [])
+          .map((e) => e as String)
+          .toList(),
+      ratingAverage: map['ratingAverage'],
+      jobTitles: (map['favoriteCategories'] as List<dynamic>? ?? [])
+          .map((e) => e as String)
+          .toList(),
+    );
   }
 
   String toJson() => json.encode(toMap());

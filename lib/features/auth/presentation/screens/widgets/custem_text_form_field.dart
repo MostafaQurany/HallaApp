@@ -19,6 +19,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool? ignorePointers;
   final void Function(String)? onChanged;
   final String? Function(String?)? validate;
+  final int? maxLine;
 
   const CustomTextFormField({
     required this.control,
@@ -37,6 +38,7 @@ class CustomTextFormField extends StatefulWidget {
     this.confirmPassword = '',
     this.onChanged,
     this.validate,
+    this.maxLine,
   });
 
   @override
@@ -84,50 +86,67 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     final InputDecorationTheme theme = Theme.of(context).inputDecorationTheme;
-    return TextFormField(
-      controller: widget.control,
-      focusNode: widget.focusNode,
-      ignorePointers: widget.ignorePointers,
-      style: Theme.of(context).textTheme.bodyMedium,
-      obscureText: obscureText,
-      keyboardType: widget.keyboardType,
-      onEditingComplete: widget.onEditingComplete,
-      decoration: InputDecoration(
-        hintText: widget.hintText,
-        filled: true,
-        fillColor: theme.fillColor,
-        prefixIcon: widget.prefixIconIsImage
-            ? Container(
-                padding: EdgeInsets.all(10.0.w),
-                child: ImageIcon(
-                  AssetImage(widget.prefixIcon!),
-                  color: theme.prefixIconColor,
-                ),
-              )
-            : Icon(
-                widget.prefixIcon,
-                color: theme.prefixIconColor,
+
+    return Stack(
+      children: [
+        TextFormField(
+          controller: widget.control,
+          focusNode: widget.focusNode,
+          style: Theme.of(context).textTheme.bodyMedium,
+          obscureText: obscureText,
+          keyboardType: widget.keyboardType,
+          onEditingComplete: widget.onEditingComplete,
+          maxLines: widget.maxLine ?? 1,
+          decoration: InputDecoration(
+            hintText: widget.hintText,
+            filled: true,
+            fillColor: theme.fillColor,
+            suffixIcon: IconButton(
+              onPressed: widget.suffixIcon == Icons.remove_red_eye_outlined
+                  ? () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    }
+                  : widget.suffixOnTap,
+              icon: Icon(
+                widget.suffixIcon == Icons.remove_red_eye_outlined
+                    ? obscureText
+                        ? Icons.remove_red_eye_outlined
+                        : Icons.remove_red_eye
+                    : widget.suffixIcon,
               ),
-        suffixIcon: IconButton(
-          onPressed: widget.suffixIcon == Icons.remove_red_eye_outlined
-              ? () {
-                  setState(() {
-                    obscureText = !obscureText;
-                  });
-                }
-              : widget.suffixOnTap,
-          icon: Icon(
-            widget.suffixIcon == Icons.remove_red_eye_outlined
-                ? obscureText
-                    ? Icons.remove_red_eye_outlined
-                    : Icons.remove_red_eye
-                : widget.suffixIcon,
+              color:
+                  !widget.obscureText ? theme.iconColor : theme.suffixIconColor,
+            ),
+            contentPadding: EdgeInsets.only(
+              left: widget.prefixIcon != null ? 40.0.w : 16.0.w,
+              top: 16.0.h,
+              bottom: 16.0.h,
+              right: 16.0.w,
+            ),
           ),
-          color: !widget.obscureText ? theme.iconColor : theme.suffixIconColor,
+          validator: widget.validate ?? validate,
+          onChanged: widget.onChanged,
         ),
-      ),
-      validator: widget.validate ?? validate,
-      onChanged: widget.onChanged,
+        if (widget.prefixIcon != null)
+          Positioned(
+            left: 8.0.w,
+            top: 16.0.h,
+            child: widget.prefixIconIsImage
+                ? Container(
+                    padding: EdgeInsets.all(10.0.w),
+                    child: ImageIcon(
+                      AssetImage(widget.prefixIcon!),
+                      color: theme.prefixIconColor,
+                    ),
+                  )
+                : Icon(
+                    widget.prefixIcon,
+                    color: theme.prefixIconColor,
+                  ),
+          ),
+      ],
     );
   }
 }

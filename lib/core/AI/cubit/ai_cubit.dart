@@ -17,7 +17,7 @@ class AiCubit extends Cubit<AiState> {
     final tags = await aiRepo.getTags(description);
     tags.fold(
       (l) => emit(AiState.error(l.message)),
-      (r) => emit(AiState<String>.loaded(r)),
+      (r) => emit(AiState<Map<String, dynamic>>.loaded(r)),
     );
   }
 }

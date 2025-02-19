@@ -14,6 +14,8 @@ import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custo
 import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_social_media_field.dart';
 import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/phones_widget.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
+import 'package:halla/features/jop/ui/profile_jop_card_builder.dart';
+import 'package:halla/features/jop/ui/profile_jop_description.dart';
 import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/profile_image_editing.dart';
 import 'package:halla/generated/l10n.dart';
@@ -29,7 +31,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   final GlobalKey<PhonesWidgetState> phonesWidgetKey = GlobalKey();
+
   final GlobalKey<ProfileImageEditingState> imageWidgetKey = GlobalKey();
+
+  final GlobalKey<ProfileJopCardBuilderState> jopCardBuilderWidgetKey =
+      GlobalKey();
 
   final TextEditingController nameController = TextEditingController();
 
@@ -57,6 +63,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       TextEditingController();
 
   final TextEditingController socialTwitterController = TextEditingController();
+
+  final TextEditingController descriptionController = TextEditingController();
 
   @override
   void initState() {
@@ -118,6 +126,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     padding:
                         EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomTextFormField(
                           control: nameController,
@@ -157,6 +166,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           companyPhoneController: companyPhoneController,
                           companyWebsiteController: companyWebsiteController,
                           companyPositonController: companyPositonController,
+                        ),
+                        SizedBox(
+                          height: 5.h,
+                        ),
+                        ProfileJopDescription(
+                          descriptionController: descriptionController,
+                        ),
+                        SizedBox(
+                          height: 20.h,
+                        ),
+                        ProfileJopCardBuilder(
+                          key: jopCardBuilderWidgetKey,
                         ),
                         SizedBox(
                           height: 20.h,
@@ -210,6 +231,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     socialInstagramController.text = user.socialMedia.instagram;
     socialLinkedinController.text = user.socialMedia.linkedin;
     socialTwitterController.text = user.socialMedia.twitter;
+    jopCardBuilderWidgetKey.currentState?.innerJopTitles = user.jobTitles ?? [];
   }
 
   User _fetchDataToUser(User user) {

@@ -32,13 +32,14 @@ class UserAdapter extends TypeAdapter<User> {
       favoriteCategories: (fields[13] as List).cast<String>(),
       isGuest: fields[12] as bool,
       ratingAverage: fields[14] as DocumentReference<Object>?,
+      jobTitles: (fields[15] as List?)?.cast<String>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(15)
+      ..writeByte(16)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -68,7 +69,9 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(13)
       ..write(obj.favoriteCategories)
       ..writeByte(14)
-      ..write(obj.ratingAverage);
+      ..write(obj.ratingAverage)
+      ..writeByte(15)
+      ..write(obj.jobTitles?.toList());
   }
 
   @override

@@ -20,7 +20,6 @@ abstract interface class DataBaseSource {
   Future<Guest?> getGuest();
 
   Future<void> forgetGuestPinCode();
-
 }
 
 class DataBaseSourceImpl implements DataBaseSource {
@@ -156,4 +155,5 @@ class DataBaseSourceImpl implements DataBaseSource {
     }
   }
 
- }
+  Future<void> getMatchJopUsers() async {}
+}
