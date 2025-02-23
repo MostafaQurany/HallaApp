@@ -397,7 +397,7 @@ _ai() {
     ..registerFactory<AIRepo>(
       () => AIRepoImpl(serviceLocator()),
     ) // bloc
-    ..registerFactory<AiCubit>(
+    ..registerLazySingleton(
       () => AiCubit(serviceLocator()),
     );
 }

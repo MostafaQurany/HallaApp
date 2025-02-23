@@ -254,10 +254,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         twitter: socialTwitterController.text,
       ),
       company: Company(
-          name: companyNameController.text,
-          phoneNumber: companyPhoneController.text,
-          website: companyWebsiteController.text,
-          position: companyPositonController.text),
+        name: companyNameController.text,
+        phoneNumber: companyPhoneController.text,
+        website: companyWebsiteController.text,
+        position: companyPositonController.text,
+      ),
+      jobTitles: jopCardBuilderWidgetKey.currentState!.innerJopTitles,
     );
     return newUser;
   }
