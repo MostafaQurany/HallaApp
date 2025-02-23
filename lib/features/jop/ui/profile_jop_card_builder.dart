@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:halla/core/AI/cubit/ai_cubit.dart';
 import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/utils/routting.dart';
@@ -61,34 +63,57 @@ class ProfileJopCardBuilderState extends State<ProfileJopCardBuilder> {
                 ))
           ],
         ),
-        innerJopTitles.isEmpty
-            ? Text(
-                "No Job Title added ",
-              )
-            : Wrap(
-                direction: Axis.vertical,
-                alignment: WrapAlignment.start,
-                crossAxisAlignment: WrapCrossAlignment.start,
-                runAlignment: WrapAlignment.start,
-                runSpacing: 16,
-                spacing: 16,
-                children: innerJopTitles.map(
-                  (e) {
-                    return ProfileTagCard(
-                      jobTitle: e,
-                      removeJobTitle: () {
-                        setState(() {
-                          innerJopTitles.removeWhere(
-                            (element) {
-                              return element == e;
-                            },
-                          );
-                        });
+        BlocConsumer<AiCubit, AiState>(
+          listener: (context, state) {
+            state.whenOrNull(
+              loaded: (data) {
+                if (data is Map<String, dynamic>) {
+                  data.forEach(
+                    (key, value) {
+                      List<dynamic> data = value as List<dynamic>;
+
+                      innerJopTitles.addAll(data
+                          .map(
+                            (e) => e.toString(),
+                          )
+                          .toList());
+                    },
+                  );
+                }
+              },
+            );
+          },
+          builder: (context, state) {
+            return innerJopTitles.isEmpty
+                ? Text(
+                    "No Job Title added ",
+                  )
+                : Wrap(
+                    direction: Axis.vertical,
+                    alignment: WrapAlignment.start,
+                    crossAxisAlignment: WrapCrossAlignment.start,
+                    runAlignment: WrapAlignment.start,
+                    runSpacing: 16,
+                    spacing: 16,
+                    children: innerJopTitles.map(
+                      (e) {
+                        return ProfileTagCard(
+                          jobTitle: e,
+                          removeJobTitle: () {
+                            setState(() {
+                              innerJopTitles.removeWhere(
+                                (element) {
+                                  return element == e;
+                                },
+                              );
+                            });
+                          },
+                        );
                       },
-                    );
-                  },
-                ).toList(),
-              )
+                    ).toList(),
+                  );
+          },
+        )
       ],
     );
   }

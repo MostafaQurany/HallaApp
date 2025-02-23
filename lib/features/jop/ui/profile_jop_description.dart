@@ -52,24 +52,34 @@ class _ProfileJopDescriptionState extends State<ProfileJopDescription> {
               ),
             ),
             padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 10.w),
-            child: BlocBuilder<AiCubit, AiState>(
+            child: BlocConsumer<AiCubit, AiState>(
+              listener: (context, state) {
+                state.whenOrNull(
+                  loaded: (data) {
+                    print(data);
+                  },
+                );
+              },
               builder: (context, state) {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    IconButton(
-                      onPressed:
-                          widget.descriptionController.text.trim().isEmpty
-                              ? null
-                              : () {
-                                  context.read<AiCubit>().getTags(
-                                      widget.descriptionController.text.trim());
-                                },
-                      icon: Icon(
-                        Icons.refresh,
-                        size: 32.sp,
-                      ),
-                    ),
+                    state is Loading
+                        ? CircularProgressIndicator()
+                        : IconButton(
+                            onPressed:
+                                widget.descriptionController.text.trim().isEmpty
+                                    ? null
+                                    : () {
+                                        context.read<AiCubit>().getTags(widget
+                                            .descriptionController.text
+                                            .trim());
+                                      },
+                            icon: Icon(
+                              Icons.refresh,
+                              size: 32.sp,
+                            ),
+                          ),
                     Text(
                       "Generate Job Tags",
                       style: Theme.of(context).textTheme.bodySmall,
