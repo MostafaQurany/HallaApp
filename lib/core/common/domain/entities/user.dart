@@ -110,7 +110,7 @@ class User extends HiveObject {
           .map((e) => e as String)
           .toList(),
       ratingAverage: map['ratingAverage'],
-      jobTitles: (map['favoriteCategories'] as List<dynamic>? ?? [])
+      jobTitles: (map['jobTitles'] as List<dynamic>? ?? [])
           .map((e) => e as String)
           .toList(),
     );

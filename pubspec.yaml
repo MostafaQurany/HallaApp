@@ -67,7 +67,8 @@ dependencies:
   firebase_messaging:
   googleapis_auth:
   google_generative_ai: ^0.4.6
-  
+  string_similarity: ^2.1.1
+
 
 
 

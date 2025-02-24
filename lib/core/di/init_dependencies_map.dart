@@ -32,6 +32,9 @@ import 'package:halla/features/contacts/domain/usecases/get_contact_list_use_cas
 import 'package:halla/features/contacts/domain/usecases/get_offline_list_contact_use_case.dart';
 import 'package:halla/features/profile/domain/usecases/get_image_url_usecase.dart';
 import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
+import 'package:halla/features/searching/cubit/searching_for_job_cubit.dart';
+import 'package:halla/features/searching/data/searching_data_source.dart';
+import 'package:halla/features/searching/repo/searching_repo.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../../features/auth/data/data_sources/auth_data_source.dart';

@@ -71,7 +71,7 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(14)
       ..write(obj.ratingAverage)
       ..writeByte(15)
-      ..write(obj.jobTitles?.toList());
+      ..write(obj.jobTitles);
   }
 
   @override
