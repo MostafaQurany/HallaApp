@@ -16,8 +16,9 @@ import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custo
 import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_social_media_field.dart';
 import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/phones_widget.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
-import 'package:halla/features/jop/ui/profile_jop_card_builder.dart';
-import 'package:halla/features/jop/ui/profile_jop_description.dart';
+import 'package:halla/features/jop with location//ui/profile_jop_card_builder.dart';
+import 'package:halla/features/jop with location//ui/profile_jop_description.dart';
+import 'package:halla/features/jop with location//ui/profile_location_work_range.dart';
 import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/profile_image_editing.dart';
 import 'package:halla/generated/l10n.dart';
@@ -37,6 +38,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final GlobalKey<ProfileImageEditingState> imageWidgetKey = GlobalKey();
 
   final GlobalKey<ProfileJopCardBuilderState> jopCardBuilderWidgetKey =
+      GlobalKey();
+  final GlobalKey<ProfileLocationWorkRangeState> profileLocationWorkRangeKey =
       GlobalKey();
 
   final TextEditingController nameController = TextEditingController();
@@ -176,6 +179,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           SizedBox(
                             height: 5.h,
                           ),
+                          ProfileLocationWorkRange(
+                            key: profileLocationWorkRangeKey,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
                           ProfileJopDescription(
                             descriptionController: descriptionController,
                           ),
@@ -269,6 +278,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         position: companyPositonController.text,
       ),
       jobTitles: jopCardBuilderWidgetKey.currentState!.innerJopTitles,
+      latitude: profileLocationWorkRangeKey
+          .currentState!.locationController.text
+          .split("+")[0],
+      longitude: profileLocationWorkRangeKey
+          .currentState!.locationController.text
+          .split("+")[1],
     );
     return newUser;
   }

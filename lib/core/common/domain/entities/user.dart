@@ -43,6 +43,10 @@ class User extends HiveObject {
   DocumentReference? ratingAverage;
   @HiveField(15)
   List<String>? jobTitles;
+  @HiveField(16)
+  String? latitude;
+  @HiveField(17)
+  String? longitude;
 
   User({
     required this.id,
@@ -61,6 +65,8 @@ class User extends HiveObject {
     this.isGuest = false,
     this.ratingAverage,
     this.jobTitles,
+    this.latitude,
+    this.longitude,
   });
 
   Map<String, dynamic> toMap() {
@@ -83,6 +89,8 @@ class User extends HiveObject {
           .collection(AppConstants.ratingUserCollection)
           .doc(id),
       'jobTitles': jobTitles?.toList() ?? [],
+      'latitude': latitude,
+      'longitude': longitude,
     };
   }
 
@@ -113,6 +121,8 @@ class User extends HiveObject {
       jobTitles: (map['jobTitles'] as List<dynamic>? ?? [])
           .map((e) => e as String)
           .toList(),
+      latitude: map['latitude'],
+      longitude: map['longitude'],
     );
   }
 

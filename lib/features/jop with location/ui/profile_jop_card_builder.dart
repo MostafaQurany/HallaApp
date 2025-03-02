@@ -6,7 +6,7 @@ import 'package:halla/core/constants/constants.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/utils/routting.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
-import 'package:halla/features/jop/ui/profile_tag_card.dart';
+import 'package:halla/features/jop with location//ui/profile_tag_card.dart';
 
 class ProfileJopCardBuilder extends StatefulWidget {
   final List<String>? jopTitles;

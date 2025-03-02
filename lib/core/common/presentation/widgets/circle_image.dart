@@ -1,16 +1,15 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-
 import 'package:halla/core/constants/app_images.dart';
 import 'package:halla/core/theme/app_colors.dart';
 import 'package:halla/core/theme/theme.dart';
+import 'package:lottie/lottie.dart';
 
 class CircleImage extends StatelessWidget {
   final String imageUrl;
   final double height;
   final double width;
+
   const CircleImage({
     super.key,
     required this.imageUrl,

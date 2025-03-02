@@ -18,6 +18,8 @@ Future<void> initDependencies() async {
   _ai();
 
   _search();
+
+  _jobLocation();
 }
 
 _initCommon() {
@@ -414,5 +416,18 @@ _search() {
     ) // bloc
     ..registerLazySingleton(
       () => SearchingForJobCubit(serviceLocator()),
+    );
+}
+
+_jobLocation() {
+  serviceLocator
+    ..registerFactory<JobLocationDataSource>(
+      () => JobLocationDataSourceImpl(),
+    ) // repo
+    ..registerFactory<JobLocationRepo>(
+      () => JopLocationRepoImpl(jobLocationDataSource: serviceLocator()),
+    ) // bloc
+    ..registerLazySingleton(
+      () => JobLocationCubit(serviceLocator()),
     );
 }
