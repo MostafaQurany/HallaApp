@@ -48,6 +48,9 @@ class User extends HiveObject {
   @HiveField(17)
   String? longitude;
 
+  @HiveField(18)
+  double? workRangeLocation;
+
   User({
     required this.id,
     required this.email,
@@ -67,6 +70,7 @@ class User extends HiveObject {
     this.jobTitles,
     this.latitude,
     this.longitude,
+    this.workRangeLocation,
   });
 
   Map<String, dynamic> toMap() {
@@ -91,6 +95,7 @@ class User extends HiveObject {
       'jobTitles': jobTitles?.toList() ?? [],
       'latitude': latitude,
       'longitude': longitude,
+      'workRangeLocation': workRangeLocation,
     };
   }
 
@@ -123,6 +128,7 @@ class User extends HiveObject {
           .toList(),
       latitude: map['latitude'],
       longitude: map['longitude'],
+      workRangeLocation: map['workRangeLocation'],
     );
   }
 

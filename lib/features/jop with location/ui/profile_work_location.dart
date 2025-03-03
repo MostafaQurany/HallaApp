@@ -4,19 +4,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
 import 'package:halla/features/jop%20with%20location/cubit/job_location_cubit.dart';
 
-class ProfileLocationWorkRange extends StatefulWidget {
-  const ProfileLocationWorkRange({super.key});
+class ProfileWorkLocation extends StatefulWidget {
+  const ProfileWorkLocation({super.key});
 
   @override
-  State<ProfileLocationWorkRange> createState() =>
-      ProfileLocationWorkRangeState();
+  State<ProfileWorkLocation> createState() => ProfileWorkLocationState();
 }
 
-class ProfileLocationWorkRangeState extends State<ProfileLocationWorkRange> {
+class ProfileWorkLocationState extends State<ProfileWorkLocation> {
   TextEditingController locationController = TextEditingController();
 
   @override
   void initState() {
+    locationController.text = "latitude+longitude";
     super.initState();
   }
 
