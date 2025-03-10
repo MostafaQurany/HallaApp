@@ -23,7 +23,9 @@ import "package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dar
 import "package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/social%20cubit/social_cubit.dart";
 import "package:halla/features/contacts/presentation/blocs/cubit/contact_cubit.dart";
+import "package:halla/features/jop_with_location/logic/job_location_cubit.dart";
 import "package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart";
+import "package:halla/features/searching/cubit/searching_for_job_cubit.dart";
 import "package:halla/features/splash/presentation/bloc/brightness%20cubit/brightness_cubit.dart";
 import "package:halla/features/splash/presentation/bloc/language%20cubit/language_cubit.dart";
 import "package:halla/features/splash/presentation/screens/splash_screen.dart";
@@ -63,6 +65,8 @@ void main() async {
         BlocProvider(create: (context) => serviceLocator<ProfileBloc>()),
         // sign in
         BlocProvider(create: (context) => serviceLocator<SignInCubit>()),
+        //AI
+        BlocProvider(create: (context) => serviceLocator<AiCubit>()),
         // social
         BlocProvider(create: (context) => serviceLocator<SocialCubit>()),
         // login
@@ -81,9 +85,12 @@ void main() async {
         BlocProvider(
           create: (context) => serviceLocator<NativeContactsCubit>(),
         ),
-        //AI
+        //search for job
         BlocProvider(
-          create: (context) => serviceLocator<AiCubit>(),
+          create: (context) => serviceLocator<SearchingForJobCubit>(),
+        ),
+        BlocProvider(
+          create: (context) => serviceLocator<JobLocationCubit>(),
         ),
       ],
       child: const MyApp(),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:halla/core/ai/cubit/ai_cubit.dart';
-import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:halla/core/utils/random_fake_data.dart';
+import 'package:halla/features/jop_with_location/ui/job_search.dart';
+import 'package:halla/features/searching/cubit/searching_for_job_cubit.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,23 +25,33 @@ class _HomeScreenState extends State<HomeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 0.6.sh, child: JobSearch()),
             if (loading) CircularProgressIndicator(),
             Text(test ?? ''),
-            ElevatedButton(
-                onPressed: () {
-                  context.read<AiCubit>().getTags(
-                      "انا بعرف في الادويه و في التركيب الادويه و كيفيه صنعها و درست صيدله في كليه الصبدله. ");
-                },
-                child: const Text("Click")),
-            ElevatedButton(
-              onPressed: () {
-                print(context.read<UserCubit>().user!.ratingAverage);
+            BlocConsumer<SearchingForJobCubit, SearchingForJobState>(
+              listener: (context, state) {
+                state.whenOrNull(
+                  loaded: (data) {
+                    setState(() {
+                      test = data.toString();
+                      loading = false;
+                    });
+                  },
+                  loading: () {
+                    setState(() {
+                      loading = true;
+                    });
+                  },
+                );
               },
-              child: Text("User"),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("Update"),
+              builder: (context, state) {
+                return ElevatedButton(
+                  onPressed: () async {
+                    await RandomFakData.addToFirebase();
+                  },
+                  child: Text('Fetch Data'),
+                );
+              },
             ),
           ],
         ),

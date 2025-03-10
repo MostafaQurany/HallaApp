@@ -105,7 +105,7 @@ class AuthRepositoryImpl implements AuthRepository {
       User userModel = await authDataSource.googleLogIn();
       // see if there is in data base
       final isUserExit = await dataBaseSource.isUserExit(userModel);
-      print(isUserExit);
+      print("isUserExit -==== $isUserExit");
       User res;
       // == get user
       if (isUserExit) {

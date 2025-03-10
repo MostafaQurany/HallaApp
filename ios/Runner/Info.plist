@@ -51,5 +51,12 @@
 		<string>Reason we need access to the contact list</string>
 		<key>NSCameraUsageDescription</key>
         <string>This app needs camera access to scan QR codes</string>
+        <key>NSLocationWhenInUseUsageDescription</key>
+        <string>We need your location to find jobs near you.</string>
+        <key>NSLocationAlwaysUsageDescription</key>
+        <string>We need your location to find jobs near you.</string>
+        <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        <string>We need your location to find jobs near you.</string>
+
 	</dict>
 </plist>

@@ -16,6 +16,10 @@ Future<void> initDependencies() async {
   _nativeContact();
 
   _ai();
+
+  _search();
+
+  _jobLocation();
 }
 
 _initCommon() {
@@ -399,5 +403,31 @@ _ai() {
     ) // bloc
     ..registerLazySingleton(
       () => AiCubit(serviceLocator()),
+    );
+}
+
+_search() {
+  serviceLocator
+    ..registerFactory<SearchingDataSource>(
+      () => SearchingDataSourceImpl(),
+    ) // repo
+    ..registerFactory<SearchingRepo>(
+      () => SearchingRepoImpl(serviceLocator()),
+    ) // bloc
+    ..registerLazySingleton(
+      () => SearchingForJobCubit(serviceLocator()),
+    );
+}
+
+_jobLocation() {
+  serviceLocator
+    ..registerFactory<JobLocationDataSource>(
+      () => JobLocationDataSourceImpl(),
+    ) // repo
+    ..registerFactory<JobLocationRepo>(
+      () => JopLocationRepoImpl(jobLocationDataSource: serviceLocator()),
+    ) // bloc
+    ..registerLazySingleton(
+      () => JobLocationCubit(serviceLocator()),
     );
 }

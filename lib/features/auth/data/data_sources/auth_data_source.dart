@@ -195,30 +195,48 @@ class AuthDataSourceImpl implements AuthDataSource {
   Future<user.User> googleLogIn() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
+
+      if (googleUser == null) {
+        print("Google sign-in was canceled by the user.");
+        throw "Google sign-in was canceled by the user."; // Return null if the user cancels sign-in
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
       );
+
       final UserCredential userCredential =
           await firebaseAuth.signInWithCredential(credential);
+
+      final firebaseUser = userCredential.user;
+
+      if (firebaseUser == null) {
+        print("Error: Firebase user is null after sign-in.");
+        throw "Error: Firebase user is null after sign-in."; // Return null if the user cancels sign-in
+      }
+
       return user.User(
-        id: userCredential.user!.uid,
-        email: userCredential.user!.email ?? '',
+        id: firebaseUser.uid,
+        email: firebaseUser.email ?? '',
         pinCode: AppConstants.generatePinCode(),
-        fullName: userCredential.user?.displayName ?? '',
-        primePhone: userCredential.user?.phoneNumber ?? '',
+        fullName: firebaseUser.displayName ?? '',
+        primePhone: firebaseUser.phoneNumber ?? '',
         dateOfBirth: '',
         nationality: '',
-        imageUrl: '',
+        imageUrl: firebaseUser.photoURL ?? '',
         phones: [],
         socialMedia: SocialMedia(),
         company: Company(),
       );
-    } on FirebaseException catch (e) {
-      throw ServerException(e.message.toString());
+    } on FirebaseAuthException catch (e) {
+      print("Firebase Authentication Error: ${e.message}");
+      throw ServerException(e.message ?? "Unknown Firebase error");
     } catch (e) {
+      print("General Error: ${e.toString()}");
       throw ServerException(e.toString());
     }
   }

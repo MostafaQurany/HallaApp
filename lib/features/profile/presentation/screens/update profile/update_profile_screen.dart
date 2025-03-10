@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:halla/core/AI/cubit/ai_cubit.dart';
 import 'package:halla/core/common/domain/entities/company.dart';
 import 'package:halla/core/common/domain/entities/social_media.dart';
 import 'package:halla/core/common/domain/entities/user.dart';
 import 'package:halla/core/common/presentation/cubit/user/user_cubit.dart';
 import 'package:halla/core/constants/app_images.dart';
+import 'package:halla/core/di/init_dependencies_map.dart';
 import 'package:halla/core/theme/theme.dart';
 import 'package:halla/core/utils/app_show_dialog.dart';
 import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_birthday_field.dart';
@@ -14,8 +16,10 @@ import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custo
 import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_social_media_field.dart';
 import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/phones_widget.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
-import 'package:halla/features/jop/ui/profile_jop_card_builder.dart';
-import 'package:halla/features/jop/ui/profile_jop_description.dart';
+import 'package:halla/features/jop_with_location//ui/profile_jop_card_builder.dart';
+import 'package:halla/features/jop_with_location//ui/profile_jop_description.dart';
+import 'package:halla/features/jop_with_location//ui/profile_work_location.dart';
+import 'package:halla/features/jop_with_location/ui/profile_work_location_range.dart';
 import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/profile_image_editing.dart';
 import 'package:halla/generated/l10n.dart';
@@ -35,6 +39,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   final GlobalKey<ProfileImageEditingState> imageWidgetKey = GlobalKey();
 
   final GlobalKey<ProfileJopCardBuilderState> jopCardBuilderWidgetKey =
+      GlobalKey();
+  final GlobalKey<ProfileWorkLocationState> profileWorkLocationKey =
+      GlobalKey();
+  final GlobalKey<ProfileWorkLocationRangeState> profileWorkLocationRangeKey =
       GlobalKey();
 
   final TextEditingController nameController = TextEditingController();
@@ -74,143 +82,162 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ProfileBloc, ProfileState>(
-      listener: (context, state) {
-        if (state is ProfileLoading) {
-          AppShowDialog.loading(context);
-        }
-        if (state is ProfileImageUpdateSuccessfully) {
-          UserCubit.get(context).user!.imageUrl = state.imageUrl;
-          imageWidgetKey.currentState!.image = null;
-          UserCubit.get(context).updateUser(user: UserCubit.get(context).user!);
-          Navigator.pop(context);
-        }
-        if (state is ProfileUpdateUserSuccessfully) {
-          UserCubit.get(context).updateUser(user: state.user);
-          Navigator.pop(context);
-        }
-        if (state is ProfileError) {
-          Navigator.pop(context);
-          AppShowDialog.error(context, state.message);
-        }
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: Form(
-            key: formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Stack(
-                    children: [
-                      Image.asset(
-                        AppTheme.isLight(context)
-                            ? AppImages.updateProfileBackgroundLight
-                            : AppImages.updateProfileBackgroundDark,
-                      ),
-                      IconButton(
-                        onPressed: () => Navigator.pop(context),
-                        icon: const Icon(Icons.arrow_back_ios_outlined),
-                      ),
-                      Positioned(
-                        top: 0.1.sh,
-                        left: 0.25.sw,
-                        child: ProfileImageEditing(
-                          key: imageWidgetKey,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+    return BlocProvider(
+      create: (context) => AiCubit(serviceLocator()),
+      child: BlocListener<ProfileBloc, ProfileState>(
+        listener: (context, state) {
+          if (state is ProfileLoading) {
+            AppShowDialog.loading(context);
+          }
+          if (state is ProfileImageUpdateSuccessfully) {
+            UserCubit.get(context).user!.imageUrl = state.imageUrl;
+            imageWidgetKey.currentState!.image = null;
+            UserCubit.get(context)
+                .updateUser(user: UserCubit.get(context).user!);
+            Navigator.pop(context);
+          }
+          if (state is ProfileUpdateUserSuccessfully) {
+            UserCubit.get(context).updateUser(user: state.user);
+            Navigator.pop(context);
+          }
+          if (state is ProfileError) {
+            Navigator.pop(context);
+            AppShowDialog.error(context, state.message);
+          }
+        },
+        child: Scaffold(
+          body: SafeArea(
+            child: Form(
+              key: formKey,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Stack(
                       children: [
-                        CustomTextFormField(
-                          control: nameController,
-                          hintText: S.of(context).fullName,
-                          prefixIcon: Icons.person_2_outlined,
-                          keyboardType: TextInputType.name,
+                        Image.asset(
+                          AppTheme.isLight(context)
+                              ? AppImages.updateProfileBackgroundLight
+                              : AppImages.updateProfileBackgroundDark,
                         ),
-                        SizedBox(
-                          height: 20.h,
+                        IconButton(
+                          onPressed: () => Navigator.pop(context),
+                          icon: const Icon(Icons.arrow_back_ios_outlined),
                         ),
-                        PhonesWidget(
-                          key: phonesWidgetKey,
-                        ),
-                        BirthdayPickerTextField(
-                          controller: dateOfBirthController,
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        CustomNationalityField(
-                          controller: nationalityController,
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        CustomSocialMediaField(
-                          socialFacebookController: socialFacebookController,
-                          socialInstagramController: socialInstagramController,
-                          socialLinkedinController: socialLinkedinController,
-                          socialTwitterController: socialTwitterController,
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        CustomCompanyField(
-                          companyNameController: companyNameController,
-                          companyPhoneController: companyPhoneController,
-                          companyWebsiteController: companyWebsiteController,
-                          companyPositonController: companyPositonController,
-                        ),
-                        SizedBox(
-                          height: 5.h,
-                        ),
-                        ProfileJopDescription(
-                          descriptionController: descriptionController,
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        ProfileJopCardBuilder(
-                          key: jopCardBuilderWidgetKey,
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        SizedBox(
-                          width: double.maxFinite,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (imageWidgetKey.currentState!.image != null) {
-                                context.read<ProfileBloc>().add(
-                                      SetImageEvent(
-                                        userId: UserCubit.get(context).user!.id,
-                                        image:
-                                            imageWidgetKey.currentState!.image!,
-                                      ),
-                                    );
-                              }
-                              if (formKey.currentState!.validate()) {
-                                context.read<ProfileBloc>().add(
-                                      UpdateUserEvent(
-                                        user: _fetchDataToUser(
-                                            UserCubit.get(context).user!),
-                                      ),
-                                    );
-                              }
-                            },
-                            child: const Text("Update"),
+                        Positioned(
+                          top: 0.1.sh,
+                          left: 0.25.sw,
+                          child: ProfileImageEditing(
+                            key: imageWidgetKey,
                           ),
-                        )
+                        ),
                       ],
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 16.w, vertical: 16.h),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomTextFormField(
+                            control: nameController,
+                            hintText: S.of(context).fullName,
+                            prefixIcon: Icons.person_2_outlined,
+                            keyboardType: TextInputType.name,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          PhonesWidget(
+                            key: phonesWidgetKey,
+                          ),
+                          BirthdayPickerTextField(
+                            controller: dateOfBirthController,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          CustomNationalityField(
+                            controller: nationalityController,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          CustomSocialMediaField(
+                            socialFacebookController: socialFacebookController,
+                            socialInstagramController:
+                                socialInstagramController,
+                            socialLinkedinController: socialLinkedinController,
+                            socialTwitterController: socialTwitterController,
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          CustomCompanyField(
+                            companyNameController: companyNameController,
+                            companyPhoneController: companyPhoneController,
+                            companyWebsiteController: companyWebsiteController,
+                            companyPositonController: companyPositonController,
+                          ),
+                          SizedBox(
+                            height: 5.h,
+                          ),
+                          ProfileWorkLocation(
+                            key: profileWorkLocationKey,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          ProfileWorkLocationRange(
+                            key: profileWorkLocationRangeKey,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          ProfileJopDescription(
+                            descriptionController: descriptionController,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          ProfileJopCardBuilder(
+                            key: jopCardBuilderWidgetKey,
+                          ),
+                          SizedBox(
+                            height: 20.h,
+                          ),
+                          SizedBox(
+                            width: double.maxFinite,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (imageWidgetKey.currentState!.image !=
+                                    null) {
+                                  context.read<ProfileBloc>().add(
+                                        SetImageEvent(
+                                          userId:
+                                              UserCubit.get(context).user!.id,
+                                          image: imageWidgetKey
+                                              .currentState!.image!,
+                                        ),
+                                      );
+                                }
+                                if (formKey.currentState!.validate()) {
+                                  context.read<ProfileBloc>().add(
+                                        UpdateUserEvent(
+                                          user: _fetchDataToUser(
+                                              UserCubit.get(context).user!),
+                                        ),
+                                      );
+                                }
+                              },
+                              child: const Text("Update"),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -260,6 +287,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         position: companyPositonController.text,
       ),
       jobTitles: jopCardBuilderWidgetKey.currentState!.innerJopTitles,
+      location: profileWorkLocationKey.currentState!.userLocation,
+      workRangeLocation: profileWorkLocationRangeKey.currentState!.value,
     );
     return newUser;
   }

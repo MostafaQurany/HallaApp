@@ -7,7 +7,7 @@ abstract class GoogleAiDataSource {
 }
 
 class GoogleAiDataSourceImpl extends GoogleAiDataSource {
-  final String _apiKey = 'AIzaSyDgUR6Jtq3UPTeB0T2FoEqm3pLPl4chE74';
+  final String _apiKey = 'AIzaSyDxCEdz5RcxxGk_lnAyS0Bx1F3bPCEdbbI';
 
   @override
   Future<Map<String, dynamic>> getTags(String description) async {

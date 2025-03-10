@@ -1,7 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'intl/messages_all.dart';
 
 // **************************************************************************
@@ -672,16 +671,6 @@ class S {
     );
   }
 
-  /// 'Share contact'
-  String get shareContact {
-    return Intl.message(
-      'Share Contact',
-      name: 'shareContact',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Language`
   String get language {
     return Intl.message(
@@ -831,6 +820,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Share contact`
+  String get shareContact {
+    return Intl.message(
+      'Share contact',
+      name: 'shareContact',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -845,10 +844,8 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
 
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
-
   @override
   Future<S> load(Locale locale) => S.load(locale);
-
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

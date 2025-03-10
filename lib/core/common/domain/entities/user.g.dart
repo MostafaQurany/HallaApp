@@ -33,13 +33,15 @@ class UserAdapter extends TypeAdapter<User> {
       isGuest: fields[12] as bool,
       ratingAverage: fields[14] as DocumentReference<Object>?,
       jobTitles: (fields[15] as List?)?.cast<String>(),
+      location: fields[16] as GeoPoint?,
+      workRangeLocation: fields[17] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, User obj) {
     writer
-      ..writeByte(16)
+      ..writeByte(18)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -71,7 +73,11 @@ class UserAdapter extends TypeAdapter<User> {
       ..writeByte(14)
       ..write(obj.ratingAverage)
       ..writeByte(15)
-      ..write(obj.jobTitles?.toList());
+      ..write(obj.jobTitles)
+      ..writeByte(16)
+      ..write(obj.location)
+      ..writeByte(17)
+      ..write(obj.workRangeLocation);
   }
 
   @override

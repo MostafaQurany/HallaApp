@@ -20,6 +20,7 @@ class CustomTextFormField extends StatefulWidget {
   final void Function(String)? onChanged;
   final String? Function(String?)? validate;
   final int? maxLine;
+  final void Function()? onTap;
 
   const CustomTextFormField({
     required this.control,
@@ -39,6 +40,7 @@ class CustomTextFormField extends StatefulWidget {
     this.onChanged,
     this.validate,
     this.maxLine,
+    this.onTap,
   });
 
   @override
@@ -97,6 +99,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           keyboardType: widget.keyboardType,
           onEditingComplete: widget.onEditingComplete,
           maxLines: widget.maxLine ?? 1,
+          ignorePointers: widget.ignorePointers,
+          onTap: widget.onTap,
           decoration: InputDecoration(
             hintText: widget.hintText,
             filled: true,
