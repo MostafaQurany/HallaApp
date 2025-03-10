@@ -44,12 +44,9 @@ class User extends HiveObject {
   @HiveField(15)
   List<String>? jobTitles;
   @HiveField(16)
-  String? latitude;
+  GeoPoint? location;
   @HiveField(17)
-  String? longitude;
-
-  @HiveField(18)
-  double? workRangeLocation;
+  int? workRangeLocation;
 
   User({
     required this.id,
@@ -68,8 +65,7 @@ class User extends HiveObject {
     this.isGuest = false,
     this.ratingAverage,
     this.jobTitles,
-    this.latitude,
-    this.longitude,
+    this.location,
     this.workRangeLocation,
   });
 
@@ -93,8 +89,8 @@ class User extends HiveObject {
           .collection(AppConstants.ratingUserCollection)
           .doc(id),
       'jobTitles': jobTitles?.toList() ?? [],
-      'latitude': latitude,
-      'longitude': longitude,
+      'longitude': location?.longitude ?? 0.0,
+      'latitude': location?.latitude ?? 0.0,
       'workRangeLocation': workRangeLocation,
     };
   }
@@ -126,8 +122,7 @@ class User extends HiveObject {
       jobTitles: (map['jobTitles'] as List<dynamic>? ?? [])
           .map((e) => e as String)
           .toList(),
-      latitude: map['latitude'],
-      longitude: map['longitude'],
+      location: GeoPoint(map['latitude'], map['longitude']),
       workRangeLocation: map['workRangeLocation'],
     );
   }

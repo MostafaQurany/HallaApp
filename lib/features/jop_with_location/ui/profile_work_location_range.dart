@@ -11,7 +11,7 @@ class ProfileWorkLocationRange extends StatefulWidget {
 }
 
 class ProfileWorkLocationRangeState extends State<ProfileWorkLocationRange> {
-  double value = 0;
+  int value = 0;
 
   String _label = '0 kms';
 
@@ -39,13 +39,13 @@ class ProfileWorkLocationRangeState extends State<ProfileWorkLocationRange> {
             min: 0,
             max: 200,
             divisions: 4,
-            value: value,
+            value: value.toDouble(),
             label: _label,
             activeColor: AppColors.primary,
             inactiveColor: AppColors.primary.withOpacity(0.2),
             onChanged: (double value) {
               setState(() {
-                this.value = value;
+                this.value = value.toInt();
                 _label = '${value.toInt().toString()} kms';
               });
             },

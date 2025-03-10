@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
-import 'package:halla/features/jop%20with%20location/cubit/job_location_cubit.dart';
+import 'package:halla/features/jop_with_location/logic/job_location_cubit.dart';
 
 class ProfileWorkLocation extends StatefulWidget {
   const ProfileWorkLocation({super.key});
@@ -12,11 +13,12 @@ class ProfileWorkLocation extends StatefulWidget {
 }
 
 class ProfileWorkLocationState extends State<ProfileWorkLocation> {
-  TextEditingController locationController = TextEditingController();
+  late GeoPoint userLocation;
+  TextEditingController locationController = new TextEditingController();
 
   @override
   void initState() {
-    locationController.text = "latitude+longitude";
+    userLocation = GeoPoint(0, 0);
     super.initState();
   }
 
@@ -38,8 +40,10 @@ class ProfileWorkLocationState extends State<ProfileWorkLocation> {
           current is GetCurrentLocationError,
       listener: (context, state) {
         if (state is GetCurrentLocationSuccess) {
+          userLocation =
+              GeoPoint(state.position.latitude, state.position.longitude);
           locationController.text =
-              "${state.position.latitude}+${state.position.longitude}";
+              "${state.position.latitude},${state.position.longitude}";
         }
       },
       builder: (context, state) {

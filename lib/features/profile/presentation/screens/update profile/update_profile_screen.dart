@@ -16,10 +16,10 @@ import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custo
 import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/custom_social_media_field.dart';
 import 'package:halla/features/auth/presentation/screens/sign%20in/widgets/phones_widget.dart';
 import 'package:halla/features/auth/presentation/screens/widgets/custem_text_form_field.dart';
-import 'package:halla/features/jop with location//ui/profile_jop_card_builder.dart';
-import 'package:halla/features/jop with location//ui/profile_jop_description.dart';
-import 'package:halla/features/jop with location//ui/profile_work_location.dart';
-import 'package:halla/features/jop%20with%20location/ui/profile_work_location_range.dart';
+import 'package:halla/features/jop_with_location//ui/profile_jop_card_builder.dart';
+import 'package:halla/features/jop_with_location//ui/profile_jop_description.dart';
+import 'package:halla/features/jop_with_location//ui/profile_work_location.dart';
+import 'package:halla/features/jop_with_location/ui/profile_work_location_range.dart';
 import 'package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart';
 import 'package:halla/features/profile/presentation/screens/widgets/profile_image_editing.dart';
 import 'package:halla/generated/l10n.dart';
@@ -287,10 +287,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         position: companyPositonController.text,
       ),
       jobTitles: jopCardBuilderWidgetKey.currentState!.innerJopTitles,
-      latitude: profileWorkLocationKey.currentState!.locationController.text
-          .split("+")[0],
-      longitude: profileWorkLocationKey.currentState!.locationController.text
-          .split("+")[1],
+      location: profileWorkLocationKey.currentState!.userLocation,
       workRangeLocation: profileWorkLocationRangeKey.currentState!.value,
     );
     return newUser;

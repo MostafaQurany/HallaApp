@@ -23,7 +23,7 @@ import "package:halla/features/auth/presentation/blocs/nfc%20cubit/nfc_cubit.dar
 import "package:halla/features/auth/presentation/blocs/sign%20cubit/sign_in_cubit.dart";
 import "package:halla/features/auth/presentation/blocs/social%20cubit/social_cubit.dart";
 import "package:halla/features/contacts/presentation/blocs/cubit/contact_cubit.dart";
-import "package:halla/features/jop%20with%20location/cubit/job_location_cubit.dart";
+import "package:halla/features/jop_with_location/logic/job_location_cubit.dart";
 import "package:halla/features/profile/presentation/blocs/bloc/profile_bloc.dart";
 import "package:halla/features/searching/cubit/searching_for_job_cubit.dart";
 import "package:halla/features/splash/presentation/bloc/brightness%20cubit/brightness_cubit.dart";
